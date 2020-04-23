@@ -28,7 +28,7 @@ export function validateAngularVersion() {
   const { min, max } = SUPPORTED_ANGULAR_VERSIONS
   if (version < min) {
     throw new BeagleCliError(
-      `You're using Angular ${version}. Minimum supported version is ${min}.`
+      `You're using Angular ${version}. Minimum supported version is ${min}.`,
     )
   }
   if (version > max) {

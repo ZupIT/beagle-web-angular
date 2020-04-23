@@ -49,7 +49,7 @@ function logTable(headers: string[], rows: string[][]) {
 
   function fillWith(stringToFill: string, charToFillWith: string, desiredLength: number) {
     let newStr = stringToFill
-    while(newStr.length < desiredLength) newStr = `${newStr}${charToFillWith}`
+    while (newStr.length < desiredLength) newStr = `${newStr}${charToFillWith}`
     return newStr
   }
 
@@ -70,7 +70,7 @@ function logOptions(options?: CliOperation['options']) {
   if (!options) return
   log({ text: 'Options:', color: TITLES_COLOR })
   const headers = ['Name', 'Description', 'Example']
-  const rows = options.map(({ name, description, example}) => [name, description, example || ''])
+  const rows = options.map(({ name, description, example }) => [name, description, example || ''])
   logTable(headers, rows)
 }
 
