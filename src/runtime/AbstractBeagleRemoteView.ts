@@ -24,8 +24,8 @@ import {
   TemplateRef,
 } from '@angular/core'
 import { LoadParams, BeagleView, IdentifiableBeagleUIElement } from '@zup-it/beagle-web'
-import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { BeagleContext } from '@zup-it/beagle-web'
+import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
 

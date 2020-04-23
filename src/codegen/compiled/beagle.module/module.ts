@@ -14,8 +14,8 @@
   * limitations under the License.
 */
 
-import { originalBeagleModuleName } from './imports'
 import { removeExtraIndentation } from '../../utils/formatting'
+import { originalBeagleModuleName } from './imports'
 
 interface Params {
   componentsModuleName: string,

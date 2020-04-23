@@ -61,7 +61,7 @@ function getConfigFromFile() {
 }
 
 function getConfigFromEnvVariables() {
-  let envConfig: ViewEngineConfig = {}
+  const envConfig: ViewEngineConfig = {}
   if (getEnv('input')) envConfig.beagleModulePath = getEnv('input')
   if (getEnv('output')) envConfig.outputPath = getEnv('output')
   return envConfig

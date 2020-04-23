@@ -14,8 +14,6 @@
   * limitations under the License.
 */
 
-import { createConfigurationFile, removeConfigurationFile } from './configuration'
-import { createAngularJsonEntries } from './angular'
 import { defaultViewEngineConfig } from '../view-engine/config'
 import { InitApplicationData } from '../../types'
 import { addToGitIgnore } from '../../utils/git'
@@ -27,6 +25,8 @@ import {
 } from '../../utils/packages'
 import { logSuccess, logWarning, logInfo, log } from '../../utils/styledLogger'
 import { getBeagleModuleCopyPath } from '../view-engine/config'
+import { createAngularJsonEntries } from './angular'
+import { createConfigurationFile, removeConfigurationFile } from './configuration'
 
 const dependencies = {
   'ts-node': 'latest',

@@ -14,8 +14,8 @@
   * limitations under the License.
 */
 
-import { contextSelector } from '../../constants'
 import { ComponentFactory } from '@angular/core'
+import { contextSelector } from '../../constants'
 
 interface ComponentInfo {
   beagleType: string,
@@ -61,7 +61,7 @@ export function createRemoteViewTemplate(components: ComponentInfo[]) {
   const fullTemplate = `${componentTemplates.join('')}${containerTemplate}`
   const ngTemplateIds = components.reduce((result, component) => ({
     ...result,
-    [component.beagleType]: kebabToCamelCase(component.selector)
+    [component.beagleType]: kebabToCamelCase(component.selector),
   }), {})
 
   return { fullTemplate, ngTemplateIds, componentTemplates, containerTemplate }

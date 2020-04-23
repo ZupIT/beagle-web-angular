@@ -14,16 +14,16 @@
   * limitations under the License.
 */
 
+import { BeagleAngularConfig } from '../../../types'
 import { createCommentaryString } from './commentary'
 import { createImportsString } from './imports'
 import { createTemplateString } from './template'
 import { createProviderString } from './provider'
 import { createComponentString } from './component'
 import { createModuleString } from './module'
-import { BeagleAngularConfig } from '../../../types'
 
 interface CodeGenerationParams {
-  config: BeagleAngularConfig<any>
+  config: BeagleAngularConfig<any>,
   beagleModuleCopyPath: string,
   beagleModuleName: string,
   angularVersion: number,
