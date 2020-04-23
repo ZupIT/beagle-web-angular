@@ -18,7 +18,6 @@ import { writeFileSync, copyFileSync } from 'fs'
 import { dirname } from 'path'
 import 'amd-loader'
 import 'reflect-metadata'
-import { getViewEngineConfig, getBeagleModuleCopyPath } from './config'
 import BeagleCliError, { isBeagleCliError } from '../../errors'
 import { ensureDirectoryExistence, getImportFilePath } from '../../utils/filesystem'
 import { logError, logSuccess } from '../../utils/styledLogger'
@@ -26,6 +25,7 @@ import { getPackageVersion } from '../../utils/packages'
 import BeagleCodeGenerationError from '../../../codegen/errors'
 import { generateViewEngineCode } from '../../../codegen/compiled/beagle.module'
 import { BeagleAngularConfig } from '../../../types'
+import { getViewEngineConfig, getBeagleModuleCopyPath } from './config'
 
 function getBeagleMetadataFromExports(allExports: Record<string, any>) {
   const keys = Object.keys(allExports)

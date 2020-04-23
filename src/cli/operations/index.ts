@@ -14,10 +14,10 @@
   * limitations under the License.
 */
 
+import { CliOperation } from '../types'
 import runInit from './init'
 import runViewEngine from './view-engine'
 import runHelp from './help'
-import { CliOperation } from '../types'
 
 const cliOperations: Record<string, CliOperation> = {
   init: {
@@ -34,17 +34,17 @@ const cliOperations: Record<string, CliOperation> = {
       {
         name: '--config',
         description: 'optional. Path (relative to the project\'s root) to the view engine configuration file.',
-        example: '--config=path/to/config'
+        example: '--config=path/to/config',
       },
       {
         name: '--input',
         description: 'optional. Path (relative to the project\'s root) to the file with the beagle module.',
-        example: '--input=path/to/beagle_module'
+        example: '--input=path/to/beagle_module',
       },
       {
         name: '--output',
         description: 'optional. Path (relative to the project\'s root) to write the generated file.',
-        example: '--output=path/to/output'
+        example: '--output=path/to/output',
       },
     ],
     run: runViewEngine,
@@ -52,7 +52,7 @@ const cliOperations: Record<string, CliOperation> = {
   help: {
     description: 'shows every command you can run with the beagle-cli',
     run: () => runHelp(cliOperations),
-  }
+  },
 }
 
 export default cliOperations

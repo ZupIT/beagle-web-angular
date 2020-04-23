@@ -18,7 +18,7 @@ export function kebabToCamelCase(str: string) {
   return str.replace(/-\w/g, ([_, letter]) => letter.toUpperCase())
 }
 
-export function removeExtraIndentation(code:string, numberOfExtraSpaces: number) {
+export function removeExtraIndentation(code: string, numberOfExtraSpaces: number) {
   return code
     .replace(new RegExp(`\\n\\s{${numberOfExtraSpaces}}`, 'g'), '\n')
     .replace(/^\n/, '')

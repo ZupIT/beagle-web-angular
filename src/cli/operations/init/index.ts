@@ -14,12 +14,12 @@
   * limitations under the License.
 */
 
+import { InitApplicationData } from '../../types'
 import { getAngularEngine, validateAngularVersion } from './angular'
 import askUserForApplicationData from './questions'
 import createBoilerplate from './boilerplate'
 import handleIvy from './ivy'
 import handleViewEngine from './view-engine'
-import { InitApplicationData } from '../../types'
 
 async function runInit() {
   validateAngularVersion()

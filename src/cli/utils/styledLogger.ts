@@ -92,7 +92,7 @@ export function log(...toLog: (string | StyledLog)[]) {
     const { prefix, suffix } = codesForStyling.reduce(({ prefix, suffix }, codes) => ({
       prefix: `${prefix}\x1b[${codes[0]}m`,
       suffix: `\x1b[${codes[1]}m${suffix}`,
-    }), { prefix: '', suffix: ''})
+    }), { prefix: '', suffix: '' })
 
     return `${prefix}%s${suffix}\x1b[0m`
   })

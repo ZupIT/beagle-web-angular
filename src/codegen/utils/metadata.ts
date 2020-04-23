@@ -41,7 +41,7 @@ export function getComponentInputs(component: Type<any>): ComponentFactory<any>[
       {
         propName: name,
         templateName: prop.bindingPropertyName ? prop.bindingPropertyName : name,
-      }
+      },
     ]
   }, [])
 }

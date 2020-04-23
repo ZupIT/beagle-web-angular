@@ -35,7 +35,7 @@ export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
 }
 
 export interface BeagleAngularUIService<Schema = DefaultSchema> extends BeagleUIService<Schema> {
-  getConfig: () => BeagleAngularConfig<Schema>
+  getConfig: () => BeagleAngularConfig<Schema>,
 }
 
 export interface BeagleContext<T = any> {
