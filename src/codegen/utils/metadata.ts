@@ -33,9 +33,11 @@ export function getComponentInputs(component: Type<any>): ComponentFactory<any>[
   const props = reflection.propMetadata(component)
   const propNames = Object.keys(props)
   return propNames.reduce((result, name) => {
-    const prop = props[name][0]
-    const decoratorPrototype: any = Reflect.getPrototypeOf(prop)
-    if (decoratorPrototype.ngMetadataName !== 'Input') return result
+    const prop = props[name].find((prop) => {
+      const decoratorPrototype: any = Reflect.getPrototypeOf(prop)
+      return decoratorPrototype.ngMetadataName === 'Input'
+    })
+    if (!prop) return result
     return [
       ...result,
       {
