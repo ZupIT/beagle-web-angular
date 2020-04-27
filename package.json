@@ -1,6 +1,6 @@
 {
   "name": "@zup-it/beagle-angular",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "license": "Apache-2.0",
   "licenses": [
     {
@@ -28,7 +28,7 @@
   "sideEffects": false,
   "private": false,
   "dependencies": {
-    "@zup-it/beagle-web": "0.0.10"
+    "@zup-it/beagle-web": "0.0.13"
   },
   "peerDependencies": {
     "@angular/common": ">= 6 < 10",
