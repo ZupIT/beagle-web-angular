@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *

@@ -16,9 +16,9 @@
 
 import { dirname } from 'path'
 import { execSync } from 'child_process'
-import { envVariables } from './config'
 import BeagleCliError, { BEAGLE_EXIT_CODE } from '../../errors'
 import { Option } from '../../types'
+import { envVariables } from './config'
 
 function runViewEngine(options: Option[]) {
   const pathToCli = dirname((require as any).main.filename)

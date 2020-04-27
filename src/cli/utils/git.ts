@@ -36,7 +36,7 @@ function getGitIgnoreSection(gitignore: string, section: string) {
       if (match) return gitignore.replace(sectionRegex, newContent)
       const lineBreak = gitignore.endsWith('\n') ? '\n' : '\n\n'
       return `${gitignore}${lineBreak}# ${section}${newContent}\n`
-    }
+    },
   }
 }
 

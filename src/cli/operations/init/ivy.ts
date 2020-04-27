@@ -14,8 +14,8 @@
   * limitations under the License.
 */
 
-import { undoViewEngineConfiguration } from './view-engine'
 import { logSuccess } from '../../utils/styledLogger'
+import { undoViewEngineConfiguration } from './view-engine'
 
 function handleIvy(isNpm: boolean) {
   const runCmd = isNpm ? 'npx' : 'yarn'
