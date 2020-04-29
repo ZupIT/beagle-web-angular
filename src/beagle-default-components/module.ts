@@ -14,10 +14,10 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+import { NgModule } from '@angular/core'
+
+@NgModule({
+  declarations: [],
+  exports: [],
+})
+export class BeagleDefaultComponentsModule {}
