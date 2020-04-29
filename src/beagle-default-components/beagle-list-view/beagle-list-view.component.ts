@@ -14,12 +14,22 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './beagle-default-components/module'
-export * from './beagle-default-components'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { Direction } from '../../types'
+
+@Component({
+  selector: 'beagle-list-view',
+  templateUrl: './beagle-list-view.component.html',
+  styleUrls: ['./beagle-list-view.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleListViewComponent implements OnInit {
+  @Input() direction?: 'VERTICAL' | 'HORIZONTAL'
+  parsedDirection: 'vertical' | 'horizontal'
+  
+  ngOnInit(){
+    if (this.direction) {
+      this.parsedDirection = Direction[this.direction]
+    }
+  }
+}

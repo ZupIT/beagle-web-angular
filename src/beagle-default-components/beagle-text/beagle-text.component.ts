@@ -14,12 +14,19 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './beagle-default-components/module'
-export * from './beagle-default-components'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+import { Component, Input } from '@angular/core'
+import { TextAlignment } from '../../types'
+
+@Component({
+  selector: 'beagle-text',
+  templateUrl: './beagle-text.component.html',
+  styleUrls: ['./beagle-text.component.less'],
+})
+export class BeagleTextComponent {
+
+  @Input() text: string
+  @Input() theme?: string
+  @Input() textColor: string
+  @Input() alignment?: TextAlignment
+  
+}

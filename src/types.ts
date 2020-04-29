@@ -47,3 +47,28 @@ export interface BeagleContext<T = any> {
   getElement: () => IdentifiableBeagleUIElement<T> | null,
   getView: () => BeagleView<T>,
 }
+
+export type actionType = 'PRESENT_VIEW';
+
+export interface Action {
+  '_beagleType_': string,
+  'type': actionType,
+  'shouldPrefetch': boolean,
+  'path': string,
+}
+
+export enum TextAlignment {
+  LEFT = 'left',
+  CENTER = 'center',
+  RIGHT = 'right',
+}
+
+export enum Direction {
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal'
+}
+
+export interface TabItem {
+  title: string,
+  icon: string,
+}
