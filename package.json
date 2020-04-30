@@ -1,6 +1,6 @@
 {
   "name": "@zup-it/beagle-angular",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "license": "Apache-2.0",
   "licenses": [
     {
@@ -16,6 +16,11 @@
     "test": "ng test",
     "lint": "eslint src/**/*.ts"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sh ./bin/check-license.sh"
+    }
+  },
   "main": "dist/bundles/beagle-angular.umd.js",
   "module": "dist/fesm5/beagle-angular.js",
   "es2015": "dist/fesm2015/beagle-angular.js",
@@ -28,7 +33,7 @@
   "sideEffects": false,
   "private": false,
   "dependencies": {
-    "@zup-it/beagle-web": "0.0.10"
+    "@zup-it/beagle-web": "0.0.13"
   },
   "peerDependencies": {
     "@angular/common": ">= 6 < 10",
@@ -59,6 +64,7 @@
     "copy-dir": "^1.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.3.0",
