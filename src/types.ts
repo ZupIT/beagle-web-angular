@@ -48,14 +48,36 @@ export interface BeagleContext<T = any> {
   getView: () => BeagleView<T>,
 }
 
-export type actionType = 'PRESENT_VIEW';
-
-export interface Action {
-  '_beagleType_': string,
-  'type': actionType,
-  'shouldPrefetch': boolean,
-  'path': string,
+enum NavigationType {
+  OPEN_DEEP_LINK,
+  ADD_VIEW,
+  SWAP_VIEW,
+  FINISH_VIEW,
+  POP_VIEW,
+  POP_TO_VIEW,
+  PRESENT_VIEW
 }
+
+type NavigateAction = {
+  type: NavigationType,
+  shouldPrefetch?: boolean,
+  path?: string,
+  data?: Record<string, string>,
+  screen?: any,
+}
+
+type ShowNativeDialog =  {
+  title: string,
+  message: string,
+  buttonText: string,
+}
+
+type CustomAction = {
+  name: string,
+  data: Record<string, string>,
+}
+
+export type Action = NavigateAction | ShowNativeDialog | CustomAction
 
 export enum TextAlignment {
   LEFT = 'left',
