@@ -24,7 +24,7 @@ import { Direction } from '../../types'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent implements OnInit {
-  @Input() direction?: Direction
+  @Input() direction: Direction
   parsedDirection: Direction
   
   ngOnInit() {

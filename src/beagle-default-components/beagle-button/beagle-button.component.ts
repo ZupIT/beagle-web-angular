@@ -26,7 +26,7 @@ import { Action } from '../../types'
 export class BeagleButtonComponent {
 
   @Input() text: string
-  @Input() action?: Action
   @Input() theme?: string
+  @Input() action?: Action
 
 }

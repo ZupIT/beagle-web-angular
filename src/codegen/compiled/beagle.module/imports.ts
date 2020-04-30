@@ -29,9 +29,10 @@ export function createImportsString({
   componentsModulePath,
   beagleModuleName,
   beagleModuleCopyPath,
-}: Params) {
+}: Params, hasDefaultModule: boolean) {
   const componentModuleImport = `import { ${componentsModuleName} } from '${componentsModulePath}'`
   const originalBeagleModuleImport = `import { ${beagleModuleName} as ${originalBeagleModuleName} } from '${beagleModuleCopyPath}'`
+  const defaultModuleImport = `import { BeagleDefaultComponentsModule } from '@zup-it/beagle-angular'`
 
   const importString = `
     import {
@@ -51,6 +52,7 @@ export function createImportsString({
     import { CommonModule } from '@angular/common'
     ${componentModuleImport}
     ${originalBeagleModuleImport}
+    ${hasDefaultModule ? defaultModuleImport : ''}
   `
 
   return removeExtraIndentation(importString, 4)
