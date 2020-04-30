@@ -32,7 +32,7 @@ export function createImportsString({
 }: Params, hasDefaultModule: boolean) {
   const componentModuleImport = `import { ${componentsModuleName} } from '${componentsModulePath}'`
   const originalBeagleModuleImport = `import { ${beagleModuleName} as ${originalBeagleModuleName} } from '${beagleModuleCopyPath}'`
-  const defaultModuleImport = `import { BeagleDefaultComponentsModule } from '@zup-it/beagle-angular'`
+  const defaultModuleImport = 'import { BeagleDefaultComponentsModule } from \'@zup-it/beagle-angular\''
 
   const importString = `
     import {

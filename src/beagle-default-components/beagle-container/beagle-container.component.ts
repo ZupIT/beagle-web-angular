@@ -14,7 +14,13 @@
   * limitations under the License.
 */
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
+import { Component, ViewEncapsulation } from '@angular/core'
+
+@Component({
+  selector: 'beagle-container',
+  templateUrl: './beagle-container.component.html',
+  styleUrls: ['./beagle-container.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleContainerComponent {
+}

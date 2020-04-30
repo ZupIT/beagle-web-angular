@@ -19,12 +19,14 @@ import {
     BeagleButtonComponent, 
     BeagleTextComponent, 
     BeagleListViewComponent,
+    BeagleContainerComponent,
 } from '../../../beagle-default-components'
 
 const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:button': BeagleButtonComponent,
     'beagle:component:text': BeagleTextComponent,
     'beagle:component:listview': BeagleListViewComponent,
+    'beagle:component:container': BeagleContainerComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
