@@ -17,5 +17,5 @@
 export class BeagleImageComponent {
   // The default location for the images is /src/assets, assuming
   // the root path of the aplication is /src.
-  public static defaultLocation = '/assets/'
+  public static imagesLocation = '/assets/'
 }

@@ -33,7 +33,7 @@ export class BeagleScreenComponent implements OnInit {
     if (this.navigationBar && this.navigationBar.navigationBarItems) {
       this.navigationBar.navigationBarItems.forEach((item) => {
         if (item && item.image) {
-          item.image = BeagleImageComponent.defaultLocation + item.image
+          item.image = BeagleImageComponent.imagesLocation + item.image
         }
       })
     }
