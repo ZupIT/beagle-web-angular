@@ -38,7 +38,6 @@ export function createModuleString({ componentsModuleName, beagleModuleName }: P
       }
     }
   `
-  console.log('moduleString', moduleString)
 
   return removeExtraIndentation(moduleString, 4)
 }
