@@ -14,13 +14,8 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageComponent'
-export * from './beagle-default-components/module'
-export * from './beagle-default-components'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+export class BeagleImageComponent {
+  // The default location for the images is /src/assets, assuming
+  // the root path of the aplication is /src.
+  public static defaultLocation = '/assets/'
+}

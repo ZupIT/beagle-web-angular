@@ -16,6 +16,7 @@
 
 beagle-screen {
   display: flex;
+
   .default-navbar {
     a {
       box-sizing: border-box;
@@ -35,8 +36,23 @@ beagle-screen {
       padding: 0 16px;
 
       &:hover {
-        background-color:rgba(0, 0, 0, .12);
+        background-color: rgba(0, 0, 0, .12);
       }
     }
+  }
+
+  figure {
+    display: inline;
+    margin: 0 5px 0 0;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+
+  figure,
+  img {
+    max-width: 55px;
+    max-height: 55px;
   }
 }

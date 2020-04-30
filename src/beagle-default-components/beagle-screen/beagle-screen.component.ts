@@ -15,6 +15,7 @@
 */
 
 import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core'
+import { BeagleImageComponent } from '../../runtime/BeagleImageComponent'
 import { NavigationBar } from '../../types'
 
 @Component({
@@ -23,10 +24,21 @@ import { NavigationBar } from '../../types'
   styleUrls: ['./beagle-screen.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleScreenComponent {
+export class BeagleScreenComponent implements OnInit {
 
   @Input() identifier?: string
   @Input() navigationBar?: NavigationBar
+
+  ngOnInit() {
+    if (this.navigationBar && this.navigationBar.navigationBarItems) {
+      this.navigationBar.navigationBarItems.forEach((item) => {
+        if (item && item.image) {
+          item.image = BeagleImageComponent.defaultLocation + item.image
+        }
+      })
+    }
+  }
+
 
   handleClick(index: number) {
     //TODO: depois de definir comunicação entre componentes
