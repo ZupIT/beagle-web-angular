@@ -14,27 +14,22 @@
   * limitations under the License.
 */
 
-beagle-button {
-    .default-theme {
-        border: 1px solid currentColor;
-        line-height: 34px;
-        color: inherit;
-        background: transparent;
-        border-color: rgba(0, 0, 0, .12);
-        box-sizing: border-box;
-        position: relative;
-        cursor: pointer;
-        outline: none;
-        display: inline-block;
-        white-space: nowrap;
-        text-decoration: none;
-        vertical-align: baseline;
-        text-align: center;
-        margin: 0;
-        min-width: 70px;
-        line-height: 36px;
-        padding: 0 16px;
-        border-radius: 5px;
-        overflow: visible;
-    }
+import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core'
+import { NavigationBar } from '../../types'
+
+@Component({
+  selector: 'beagle-screen',
+  templateUrl: './beagle-screen.component.html',
+  styleUrls: ['./beagle-screen.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleScreenComponent {
+
+  @Input() identifier?: string
+  @Input() navigationBar?: NavigationBar
+
+  handleClick(index: number) {
+    //TODO: depois de definir comunicação entre componentes
+    // tratar o click com a action associada nesta função
+  }
 }

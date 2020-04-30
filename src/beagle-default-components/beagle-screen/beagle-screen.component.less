@@ -14,27 +14,29 @@
   * limitations under the License.
 */
 
-beagle-button {
-    .default-theme {
-        border: 1px solid currentColor;
-        line-height: 34px;
-        color: inherit;
-        background: transparent;
-        border-color: rgba(0, 0, 0, .12);
-        box-sizing: border-box;
-        position: relative;
-        cursor: pointer;
-        outline: none;
-        display: inline-block;
-        white-space: nowrap;
-        text-decoration: none;
-        vertical-align: baseline;
-        text-align: center;
-        margin: 0;
-        min-width: 70px;
-        line-height: 36px;
-        padding: 0 16px;
-        border-radius: 5px;
-        overflow: visible;
+beagle-screen {
+  display: flex;
+  .default-navbar {
+    a {
+      box-sizing: border-box;
+      position: relative;
+      user-select: none;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      display: inline-block;
+      white-space: nowrap;
+      text-decoration: none;
+      vertical-align: baseline;
+      text-align: center;
+      margin: 0;
+      min-width: 70px;
+      line-height: 36px;
+      padding: 0 16px;
+
+      &:hover {
+        background-color:rgba(0, 0, 0, .12);
+      }
     }
+  }
 }

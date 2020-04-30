@@ -1,4 +1,4 @@
-/*
+<!-- 
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,11 +11,15 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License.
-*/
+  * limitations under the License. 
+-->
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
-export * from './beagle-screen/beagle-screen.component'
+<nav [ngClass]="navigationBar && navigationBar.theme ? navigationBar.theme : 'default-navbar'" >
+  <ng-container *ngIf='navigationBar && navigationBar.navigationBarItems'>
+    <a *ngFor="let item of navigationBar.navigationBarItems; let i = index" 
+      (click)="handleClick(i)"
+    >
+      {{item.text}}
+    </a>
+  </ng-container>
+</nav>

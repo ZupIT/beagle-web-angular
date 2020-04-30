@@ -90,3 +90,16 @@ export enum Direction {
   HORIZONTAL = 'horizontal'
 }
 
+export interface NavigationBarItem {
+  text: string,
+  image?: string,
+  action: Action,
+}
+
+export interface NavigationBar {
+  title: string,
+  showBackButton: boolean,
+  theme?: string,
+  navigationBarItems?: NavigationBarItem[],
+}
+
