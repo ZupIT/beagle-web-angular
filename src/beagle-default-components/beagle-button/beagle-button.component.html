@@ -1,4 +1,4 @@
-/*
+<!-- 
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,15 +11,9 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License.
-*/
+  * limitations under the License. 
+-->
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './beagle-default-components/module'
-export * from './beagle-default-components'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+<button [ngClass]="theme ? theme : 'default-theme'">
+    {{text}}
+</button>

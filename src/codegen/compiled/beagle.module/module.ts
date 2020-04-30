@@ -22,12 +22,13 @@ interface Params {
   beagleModuleName: string,
 }
 
-export function createModuleString({ componentsModuleName, beagleModuleName }: Params) {
+export function createModuleString({ componentsModuleName, beagleModuleName }: Params, hasDefaultModule: boolean) {
+  const defaultModule = hasDefaultModule ? ', BeagleDefaultComponentsModule' : ''
   const moduleString = `
     @NgModule({
       declarations: [BeagleRemoteView],
-      exports: [BeagleRemoteView],
-      imports: [CommonModule, BeagleContextModule, ${componentsModuleName}],
+      exports: [BeagleRemoteView${defaultModule}],
+      imports: [CommonModule, BeagleContextModule, ${componentsModuleName} ${defaultModule}],
       providers: [BeagleProvider],
     })
     export class ${beagleModuleName} {

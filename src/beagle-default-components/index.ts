@@ -14,12 +14,6 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './beagle-default-components/module'
-export * from './beagle-default-components'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+export * from './beagle-button/beagle-button.component'
+export * from './beagle-list-view/beagle-list-view.component'
+export * from './beagle-text/beagle-text.component'

@@ -15,9 +15,20 @@
 */
 
 import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { BeagleButtonComponent } from './beagle-button/beagle-button.component'
+import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.component'
+import { BeagleTextComponent } from './beagle-text/beagle-text.component'
+
+const components = [
+  BeagleButtonComponent,
+  BeagleListViewComponent,
+  BeagleTextComponent,
+]
 
 @NgModule({
-  declarations: [],
-  exports: [],
+  declarations: components,
+  exports: components,
+  imports: [CommonModule],
 })
-export class BeagleDefaultComponentsModule {}
+export class BeagleDefaultComponentsModule { }
