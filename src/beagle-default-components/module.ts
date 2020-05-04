@@ -19,11 +19,15 @@ import { CommonModule } from '@angular/common'
 import { BeagleButtonComponent } from './beagle-button/beagle-button.component'
 import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.component'
 import { BeagleTextComponent } from './beagle-text/beagle-text.component'
+import { BeagleContainerComponent } from './beagle-container/beagle-container.component'
+import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 
 const components = [
   BeagleButtonComponent,
   BeagleListViewComponent,
   BeagleTextComponent,
+  BeagleContainerComponent,
+  BeagleScreenComponent,
 ]
 
 @NgModule({

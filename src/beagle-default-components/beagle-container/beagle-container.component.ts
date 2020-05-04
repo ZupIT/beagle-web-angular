@@ -14,13 +14,13 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageComponent'
-export * from './beagle-default-components/module'
-export * from './beagle-default-components'
-export * from './runtime/BeagleComponent'
-export * from './beagle-default-components/module'
-export * from './types'
-export * from './decorator'
+import { Component, ViewEncapsulation } from '@angular/core'
+
+@Component({
+  selector: 'beagle-container',
+  templateUrl: './beagle-container.component.html',
+  styleUrls: ['./beagle-container.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleContainerComponent {
+}

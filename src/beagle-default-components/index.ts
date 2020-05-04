@@ -17,3 +17,5 @@
 export * from './beagle-button/beagle-button.component'
 export * from './beagle-list-view/beagle-list-view.component'
 export * from './beagle-text/beagle-text.component'
+export * from './beagle-container/beagle-container.component'
+export * from './beagle-screen/beagle-screen.component'
