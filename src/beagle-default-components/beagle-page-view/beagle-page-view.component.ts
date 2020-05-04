@@ -14,9 +14,11 @@
   * limitations under the License.
 */
 
-import { Component, ViewEncapsulation,
+import {
+    Component, ViewEncapsulation,
     Input, OnInit, ViewChild,
-    Renderer2, ElementRef } from '@angular/core'
+    Renderer2,
+} from '@angular/core'
 import { PageIndicator } from '../../types'
 
 @Component({
@@ -27,24 +29,47 @@ import { PageIndicator } from '../../types'
 })
 export class BeaglePageViewComponent implements OnInit {
     @Input() pageIndicator: PageIndicator
-    @Input() children: any[]
     @ViewChild('contentItens') contentItens;
-    totalPages = 0
+    totalPages: number[] = []
     selected = 0
 
-    constructor(private renderer: Renderer2, 
-        private element: ElementRef) {
+    constructor(private renderer: Renderer2) {
     }
 
     ngOnInit() {
-        this.totalPages = this.children.length
+        this.addLink()
+    }
+
+    ngAfterViewInit() {
+        if (this.contentItens) {
+            const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
+            this.totalPages = elements.map((item, index) => {
+                this.renderer.addClass(item, 'page-item')
+                return index
+            })
+            this.changeSlide(0)
+        }
     }
 
     changeSlide(index: number) {
         const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
         elements.forEach((element, pos) => {
-            this.renderer.addClass(element, pos === index ? 'active' : 'inactive')
+            if (pos === index) {
+                this.renderer.addClass(element, 'active')
+                this.selected = index
+            } else {
+                this.renderer.removeClass(element, 'active')
+            }
         })
-       
+    }
+
+    addLink() {
+        const head = document.getElementsByTagName('head')
+        if (head && head[0]) {
+            const link: HTMLLinkElement = document.createElement('link')
+            link.setAttribute('rel', 'stylesheet')
+            link.setAttribute('href', 'https://fonts.googleapis.com/icon?family=Material+Icons')
+            head[0].appendChild(link)
+        }
     }
 }

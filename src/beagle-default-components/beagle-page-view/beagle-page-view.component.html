@@ -14,13 +14,20 @@
   * limitations under the License. 
 -->
 
-<div>
+<div class="page-view">
+  <span class="material-icons left-arrow">
+    keyboard_arrow_left
+  </span>
   <div class="content-itens" #contentItens>
-    <ng-content class="teste"></ng-content>
+    <ng-content></ng-content>
   </div>
+  <span class="material-icons right-arrow">
+    keyboard_arrow_right
+  </span>
   <div class="page-indicator">
     <ol>
-      <li *ngFor="let item of children; let i = index" (click)="changeSlide(i)"></li>
+      <li *ngFor="let item of totalPages" (click)="changeSlide(item)"
+        [ngStyle]="{'background-color': item === selected ? pageIndicator.selectedColor : pageIndicator.unselectedColor}">
     </ol>
   </div>
 </div>

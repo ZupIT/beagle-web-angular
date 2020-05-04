@@ -14,29 +14,62 @@
   * limitations under the License.
 */
 
-.page-indicator {
-  ol {
-    list-style: none;
+.page-view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+
+  .left-arrow,
+  .right-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
   }
 
-  li {
-    width: .625rem;
-    height: .625rem;
-    cursor: pointer;
-    border-radius: 50%;
-    margin: 10px;
-    background-color: #242A31;
+  .right-arrow {
+    right: 0;
   }
-}
 
-.content-itens {
+  .left-arrow {
+    left: 0;
+  }
+
+  .page-item {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .page-indicator {
+    ol {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      width: .625rem;
+      height: .625rem;
+      cursor: pointer;
+      border-radius: 50%;
+      margin: 10px;
+    }
+  }
+
+  .content-itens {
     > :not(.active) {
-      opacity: 0;
+      display: none;
     }
 
-    > .active {
-      opacity: 1;
+    >.active {
+      display: flex;
     }
-
+  }
 }
