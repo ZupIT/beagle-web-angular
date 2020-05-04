@@ -25,8 +25,8 @@ import { TextAlignment } from '../../types'
 export class BeagleTextComponent implements OnInit {
 
   @Input() text: string
-  @Input() theme?: string
-  @Input() textColor?: string
+  @Input() theme?: string = ''
+  @Input() textColor?: string = ''
   @Input() alignment?: TextAlignment
   parsedAlignment: TextAlignment
 
