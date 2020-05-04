@@ -31,11 +31,11 @@
 }
 
 .content-itens {
-    :first-child:not(.active) {
+    > :not(.active) {
       opacity: 0;
     }
 
-    :first-child.active {
+    > .active {
       opacity: 1;
     }
 

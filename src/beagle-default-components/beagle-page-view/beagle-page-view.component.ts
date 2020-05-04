@@ -37,16 +37,12 @@ export class BeaglePageViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        debugger
         this.totalPages = this.children.length
     }
 
     changeSlide(index: number) {
-        debugger
-
         const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
         elements.forEach((element, pos) => {
-            debugger
             this.renderer.addClass(element, pos === index ? 'active' : 'inactive')
         })
        
