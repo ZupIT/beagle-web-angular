@@ -103,3 +103,7 @@ export interface NavigationBar {
   navigationBarItems?: NavigationBarItem[],
 }
 
+export interface PageIndicator {
+  selectedColor: string,
+  unselectedColor: string,
+}

@@ -1,0 +1,54 @@
+/*
+  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at
+  *
+  *  http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+*/
+
+import { Component, ViewEncapsulation,
+    Input, OnInit, ViewChild,
+    Renderer2, ElementRef } from '@angular/core'
+import { PageIndicator } from '../../types'
+
+@Component({
+    selector: 'beagle-page-view',
+    templateUrl: './beagle-page-view.component.html',
+    styleUrls: ['./beagle-page-view.component.less'],
+    encapsulation: ViewEncapsulation.None,
+})
+export class BeaglePageViewComponent implements OnInit {
+    @Input() pageIndicator: PageIndicator
+    @Input() children: any[]
+    @ViewChild('contentItens') contentItens;
+    totalPages = 0
+    selected = 0
+
+    constructor(private renderer: Renderer2, 
+        private element: ElementRef) {
+    }
+
+    ngOnInit() {
+        debugger
+        this.totalPages = this.children.length
+    }
+
+    changeSlide(index: number) {
+        debugger
+
+        const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
+        elements.forEach((element, pos) => {
+            debugger
+            this.renderer.addClass(element, pos === index ? 'active' : 'inactive')
+        })
+       
+    }
+}

@@ -21,6 +21,7 @@ import {
     BeagleListViewComponent,
     BeagleContainerComponent,
     BeagleScreenComponent,
+    BeaglePageViewComponent,
 } from '../../../beagle-default-components'
 
 const defaultComponents: Record<string, Type<any>> = {
@@ -29,6 +30,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:listview': BeagleListViewComponent,
     'beagle:component:container': BeagleContainerComponent,
     'beagle:component:screen': BeagleScreenComponent,
+    'beagle:component:pageview': BeaglePageViewComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
