@@ -21,6 +21,7 @@ import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.com
 import { BeagleTextComponent } from './beagle-text/beagle-text.component'
 import { BeagleContainerComponent } from './beagle-container/beagle-container.component'
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
+import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 
 const components = [
   BeagleButtonComponent,
@@ -28,6 +29,7 @@ const components = [
   BeagleTextComponent,
   BeagleContainerComponent,
   BeagleScreenComponent,
+  BeagleImageComponent
 ]
 
 @NgModule({
