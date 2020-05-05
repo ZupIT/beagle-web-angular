@@ -20,11 +20,12 @@ import { getComponentAnnotations, getComponentInputs } from '../../utils/metadat
 import { createRemoteViewTemplate } from '../../utils/template-builder'
 
 export function createTemplateString(components: Type<any>[]) {
-  const beagleTypes = Object.keys(components)
+  const uniqueComponents = [...new Set(components)]
+  const beagleTypes = Object.keys(uniqueComponents)
   const infos = beagleTypes.map(beagleType => ({
     beagleType,
-    selector: getComponentAnnotations(components[beagleType]).selector,
-    inputs: getComponentInputs(components[beagleType]),
+    selector: getComponentAnnotations(uniqueComponents[beagleType]).selector,
+    inputs: getComponentInputs(uniqueComponents[beagleType]),
   }))
 
   const { componentTemplates, containerTemplate } = createRemoteViewTemplate(infos)

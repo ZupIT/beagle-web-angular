@@ -16,12 +16,13 @@
 
 import { Type } from '@angular/core'
 import {
-    BeagleButtonComponent, 
-    BeagleTextComponent, 
+    BeagleButtonComponent,
+    BeagleTextComponent,
     BeagleListViewComponent,
     BeagleContainerComponent,
     BeagleScreenComponent,
     BeaglePageViewComponent,
+    BeagleImageComponent,
 } from '../../../beagle-default-components'
 
 const defaultComponents: Record<string, Type<any>> = {
@@ -31,6 +32,8 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:container': BeagleContainerComponent,
     'beagle:component:screen': BeagleScreenComponent,
     'beagle:component:pageview': BeaglePageViewComponent,
+    'beagle:component:networkimage': BeagleImageComponent,
+    'beagle:component:image': BeagleImageComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {

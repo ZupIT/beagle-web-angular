@@ -15,7 +15,7 @@
 */
 
 import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core'
-import { BeagleImageComponent } from '../../runtime/BeagleImageComponent'
+import { BeagleImageConfig } from '../../runtime/BeagleImageConfig'
 import { NavigationBar } from '../../types'
 
 @Component({
@@ -33,7 +33,7 @@ export class BeagleScreenComponent implements OnInit {
     if (this.navigationBar && this.navigationBar.navigationBarItems) {
       this.navigationBar.navigationBarItems.forEach((item) => {
         if (item && item.image) {
-          item.image = BeagleImageComponent.imagesLocation + item.image
+          item.image = BeagleImageConfig.imagesLocation + item.image
         }
       })
     }
