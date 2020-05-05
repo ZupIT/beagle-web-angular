@@ -19,9 +19,8 @@
     <a *ngFor="let item of navigationBar.navigationBarItems; let i = index" 
       (click)="handleClick(i)"
     >
-      <figure *ngIf="item.image">
-        <img [src]="item.image">
-      </figure>
+      <beagle-image *ngIf="item.image" [name]="item.image">
+      </beagle-image>
       {{item.text}}
     </a>
   </ng-container>
