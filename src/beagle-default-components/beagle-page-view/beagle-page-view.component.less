@@ -45,6 +45,14 @@
   .page-item {
     width: 100%;
     overflow: hidden;
+    
+    &:not(.active) {
+      display: none !important;
+    }
+
+    &.active {
+      display: flex;
+    }
   }
 
   .page-indicator {
@@ -66,12 +74,5 @@
 
   .content-itens {
     margin: 0 7%;
-    > :not(.active) {
-      display: none !important;
-    }
-
-    >.active {
-      display: flex;
-    }
   }
 }
