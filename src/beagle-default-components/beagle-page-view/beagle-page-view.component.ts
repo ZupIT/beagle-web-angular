@@ -63,6 +63,18 @@ export class BeaglePageViewComponent implements OnInit {
         })
     }
 
+    backSlide() {
+        if (this.selected > 0) {
+            this.changeSlide(this.selected - 1)
+        }
+    }
+
+    nextSlide() {
+        if (this.selected < this.totalPages.length-1) {
+            this.changeSlide(this.selected + 1)
+        }
+    }
+
     addLink() {
         const head = document.getElementsByTagName('head')
         if (head && head[0]) {

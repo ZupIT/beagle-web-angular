@@ -15,13 +15,13 @@
 -->
 
 <div class="page-view">
-  <span class="material-icons left-arrow">
+  <span class="material-icons left-arrow" (click)="backSlide()">
     keyboard_arrow_left
   </span>
   <div class="content-itens" #contentItens>
     <ng-content></ng-content>
   </div>
-  <span class="material-icons right-arrow">
+  <span class="material-icons right-arrow" (click)="nextSlide()">
     keyboard_arrow_right
   </span>
   <div class="page-indicator">
