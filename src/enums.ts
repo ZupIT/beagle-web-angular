@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
-export * from './beagle-screen/beagle-screen.component'
-export * from './beagle-page-view/beagle-page-view.component'
+export enum ImageContentMode {
+  FIT_XY,
+  FIT_CENTER,
+  CENTER_CROP,
+  CENTER
+}

@@ -22,6 +22,7 @@ import { BeagleTextComponent } from './beagle-text/beagle-text.component'
 import { BeagleContainerComponent } from './beagle-container/beagle-container.component'
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
+import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 
 const components = [
   BeagleButtonComponent,
@@ -30,6 +31,7 @@ const components = [
   BeagleContainerComponent,
   BeagleScreenComponent,
   BeaglePageViewComponent,
+  BeagleImageComponent,
 ]
 
 @NgModule({

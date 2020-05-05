@@ -14,9 +14,17 @@
   * limitations under the License.
 */
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
-export * from './beagle-screen/beagle-screen.component'
-export * from './beagle-page-view/beagle-page-view.component'
+import { Component, Input } from '@angular/core';
+import { ImageContentMode } from '../../enums'
+
+@Component({
+  selector: 'beagle-image',
+  templateUrl: './beagle-image.component.html',
+  styleUrls: ['./beagle-image.component.less'],
+})
+export class BeagleImageComponent {
+
+  @Input() name = ''
+  @Input() contentMode?: ImageContentMode = undefined
+
+}
