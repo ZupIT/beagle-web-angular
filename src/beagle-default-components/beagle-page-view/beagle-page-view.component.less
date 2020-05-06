@@ -17,10 +17,7 @@
 @import "../assets/default-style.less";
 
 .page-view {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+  display: block;
   position: relative;
 
   .left-arrow,
@@ -61,6 +58,10 @@
   }
 
   .page-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     ol {
       list-style: none;
       display: flex;
@@ -78,6 +79,6 @@
   }
 
   .content-itens {
-    margin: 0 7%;
+    margin: 0 30px;
   }
 }
