@@ -27,16 +27,13 @@ import { PageIndicator } from '../../types'
     styleUrls: ['./beagle-page-view.component.less'],
     encapsulation: ViewEncapsulation.None,
 })
-export class BeaglePageViewComponent implements OnInit {
+export class BeaglePageViewComponent {
     @Input() pageIndicator: PageIndicator
     @ViewChild('contentItens') contentItens;
     totalPages: number[] = []
     selected = 0
 
     constructor(private renderer: Renderer2) {
-    }
-
-    ngOnInit() {
     }
 
     ngAfterViewInit() {
