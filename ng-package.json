@@ -3,6 +3,7 @@
   "dest": "./dist",
   "whitelistedNonPeerDependencies": ["beagle-web"],
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "cssUrl": "inline"
   }
 }

@@ -1,0 +1,84 @@
+/*
+  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at
+  *
+  *  http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+*/
+
+@import "../assets/default-style.less";
+
+.page-view {
+  display: block;
+  position: relative;
+
+  .left-arrow,
+  .right-arrow {
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    color: @beagle-black;
+  }
+
+  .right-arrow {
+    right: 0;
+    background: url('../assets/keyboard_arrow_left.svg') no-repeat;
+    transform: rotateY(180deg);
+  }
+
+  .left-arrow {
+    left: 0;
+    background: url('../assets/keyboard_arrow_left.svg') no-repeat;
+  }
+
+  .page-item {
+    width: 100%;
+    overflow: hidden;
+
+    &:not(.active) {
+      display: none !important;
+    }
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  .page-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ol {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      width: .625rem;
+      height: .625rem;
+      cursor: pointer;
+      border-radius: 50%;
+      margin: 10px;
+    }
+  }
+
+  .content-itens {
+    margin: 0 30px;
+  }
+}

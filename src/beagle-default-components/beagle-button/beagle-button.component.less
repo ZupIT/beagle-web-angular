@@ -14,13 +14,15 @@
   * limitations under the License.
 */
 
+@import "../assets/default-style.less";
+
 beagle-button {
     .default-theme {
         border: 1px solid currentColor;
         line-height: 34px;
         color: inherit;
         background: transparent;
-        border-color: rgba(0, 0, 0, .12);
+        border-color: @beagle-black-transparent;
         box-sizing: border-box;
         position: relative;
         cursor: pointer;
@@ -36,5 +38,8 @@ beagle-button {
         padding: 0 16px;
         border-radius: 5px;
         overflow: visible;
+        &:hover {
+          background-color:  @beagle-black-light;
+        }
     }
 }

@@ -14,17 +14,29 @@
   * limitations under the License.
 */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 import { ImageContentMode } from '../../enums'
+import { BeagleImageConfig } from '../../runtime/BeagleImageConfig'
 
 @Component({
   selector: 'beagle-image',
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent {
+export class BeagleImageComponent implements OnInit {
 
   @Input() name = ''
+  @Input() path = ''
   @Input() contentMode?: ImageContentMode = undefined
+  imageName = ''
+
+
+  ngOnInit() {
+    if (this.name) {
+      this.imageName = BeagleImageConfig.imagesLocation + this.name
+    } else {
+      this.imageName = this.path
+    }
+  }
 
 }

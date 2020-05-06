@@ -14,6 +14,8 @@
   * limitations under the License.
 */
 
+@import "../assets/default-style.less";
+
 beagle-screen {
   display: flex;
 
@@ -34,9 +36,10 @@ beagle-screen {
       min-width: 70px;
       line-height: 36px;
       padding: 0 16px;
+      border-radius: 5px;
 
       &:hover {
-        background-color: rgba(0, 0, 0, .12);
+        background-color:  @beagle-black-light;
       }
     }
   }
