@@ -15,15 +15,12 @@
 -->
 
 <div class="page-view">
-  <span class="material-icons left-arrow" (click)="backSlide()">
-    keyboard_arrow_left
+  <span class="left-arrow" (click)="backSlide()">
   </span>
   <div class="content-itens" #contentItens>
     <ng-content></ng-content>
   </div>
-  <span class="material-icons right-arrow" (click)="nextSlide()">
-    keyboard_arrow_right
-  </span>
+  <span class="right-arrow" (click)="nextSlide()"></span>
   <div class="page-indicator">
     <ol>
       <li *ngFor="let item of totalPages" (click)="changeSlide(item)"

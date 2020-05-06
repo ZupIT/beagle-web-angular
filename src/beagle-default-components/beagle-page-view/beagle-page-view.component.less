@@ -24,28 +24,31 @@
   .left-arrow,
   .right-arrow {
     position: absolute;
-    top: 0;
+    top: 50%;
     bottom: 0;
     z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5%;
+    width: 15px;
     color: #242A31;
   }
 
   .right-arrow {
     right: 0;
+    background: url('../assets/keyboard_arrow_left.svg') no-repeat;
+    transform: rotateY(180deg);
   }
 
   .left-arrow {
     left: 0;
+    background: url('../assets/keyboard_arrow_left.svg') no-repeat;
   }
 
   .page-item {
     width: 100%;
     overflow: hidden;
-    
+
     &:not(.active) {
       display: none !important;
     }

@@ -37,7 +37,6 @@ export class BeaglePageViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.addLink()
     }
 
     ngAfterViewInit() {
@@ -72,16 +71,6 @@ export class BeaglePageViewComponent implements OnInit {
     nextSlide() {
         if (this.selected < this.totalPages.length-1) {
             this.changeSlide(this.selected + 1)
-        }
-    }
-
-    addLink() {
-        const head = document.getElementsByTagName('head')
-        if (head && head[0]) {
-            const link: HTMLLinkElement = document.createElement('link')
-            link.setAttribute('rel', 'stylesheet')
-            link.setAttribute('href', 'https://fonts.googleapis.com/icon?family=Material+Icons')
-            head[0].appendChild(link)
         }
     }
 }
