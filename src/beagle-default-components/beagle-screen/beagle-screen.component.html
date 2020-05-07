@@ -18,6 +18,7 @@
   <ng-container *ngIf='navigationBar && navigationBar.navigationBarItems'>
     <a *ngFor="let item of navigationBar.navigationBarItems; let i = index" 
       (click)="handleClick(i)"
+      [ngClass]="{'active': i === selected}"
     >
       <beagle-image *ngIf="item.image" [name]="item.image">
       </beagle-image>
