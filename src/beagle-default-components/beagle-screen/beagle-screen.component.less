@@ -32,14 +32,18 @@ beagle-screen {
       text-decoration: none;
       vertical-align: baseline;
       text-align: center;
-      margin: 0;
+      margin: 0 2px;
       min-width: 70px;
       line-height: 36px;
-      padding: 0 16px;
+      padding: 0 10px;
       border-radius: 5px;
 
       &:hover {
-        background-color:  @beagle-black-light;
+        background-color: @beagle-black-light;
+      }
+
+      &.active {
+        background-color: @beagle-off-white;
       }
     }
   }

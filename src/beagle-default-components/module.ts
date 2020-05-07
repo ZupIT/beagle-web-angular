@@ -25,6 +25,8 @@ import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.com
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 import { BeagleLoaderComponent } from './beagle-loader/beagle-loader.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
+import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 
 const components = [
   BeagleButtonComponent,
@@ -34,7 +36,9 @@ const components = [
   BeagleScreenComponent,
   BeaglePageViewComponent,
   BeagleImageComponent,
-  BeagleLoaderComponent
+  BeagleLoaderComponent,
+  BeagleTabItemComponent,
+  BeagleTabViewComponent,
 ]
 
 @NgModule({

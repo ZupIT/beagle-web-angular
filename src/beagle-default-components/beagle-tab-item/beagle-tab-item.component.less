@@ -14,27 +14,43 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit } from '@angular/core'
-import { TextAlignment } from '../../enums'
+@import "../assets/default-style.less";
 
-@Component({
-  selector: 'beagle-text',
-  templateUrl: './beagle-text.component.html',
-  styleUrls: ['./beagle-text.component.less'],
-})
-export class BeagleTextComponent implements OnInit {
+beagle-tab-item {
+  margin: 0 5px;
+  
+  &.active {
+    .selected {
+      width: 160px;
+      height: 2px;
+      background-color: @beagle-black;
+    }
 
-  @Input() text: string
-  @Input() theme? = ''
-  @Input() textColor? = ''
-  @Input() alignment?: TextAlignment
-
-  ngOnInit() {
-    this.fillDefaultVariables()
+    .tab-content {
+      display: flex;
+      position: absolute;
+      overflow: hidden;
+    }
   }
 
-  fillDefaultVariables(){
-    this.textColor = this.textColor || 'inherit'
-    this.alignment = this.alignment || TextAlignment.INHERIT
+  &:not(.active) {
+    >.tab-content {
+      display: none;
+    }
+  }
+
+  .tab-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+      max-width: 80px;
+      max-height: 80px;
+    }
+
+    &:hover {
+      background-color: @beagle-black-light;
+    }
   }
 }

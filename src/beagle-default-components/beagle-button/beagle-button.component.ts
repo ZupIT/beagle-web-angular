@@ -29,4 +29,9 @@ export class BeagleButtonComponent {
   @Input() theme?: string
   @Input() action?: Action
 
+  handleClick() {
+    //TODO: depois de definir comunicação entre componentes
+    // tratar o click com a action associada nesta função
+  }
+
 }
