@@ -14,18 +14,11 @@
   * limitations under the License.
 */
 
-@import "../assets/default-style.less";
+import { Component } from '@angular/core'
 
-.beagle-loader {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  background: @beagle-black-transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /deep/ .mat-progress-spinner circle, .mat-spinner circle {
-    stroke: @beagle-off-white;
-  }
-}
+@Component({
+  selector: 'beagle-loading',
+  templateUrl: './beagle-loading.component.html',
+  styleUrls: ['./beagle-loading.component.less']
+})
+export class BeagleLoadingComponent { }

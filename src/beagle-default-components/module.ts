@@ -23,7 +23,7 @@ import { BeagleContainerComponent } from './beagle-container/beagle-container.co
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
-import { BeagleLoaderComponent } from './beagle-loader/beagle-loader.component'
+import { BeagleLoadingComponent } from './beagle-loading/beagle-loading.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
@@ -36,7 +36,7 @@ const components = [
   BeagleScreenComponent,
   BeaglePageViewComponent,
   BeagleImageComponent,
-  BeagleLoaderComponent,
+  BeagleLoadingComponent,
   BeagleTabItemComponent,
   BeagleTabViewComponent,
 ]
