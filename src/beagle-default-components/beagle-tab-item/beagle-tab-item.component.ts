@@ -14,12 +14,15 @@
   * limitations under the License.
 */
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
-export * from './beagle-screen/beagle-screen.component'
-export * from './beagle-page-view/beagle-page-view.component'
-export * from './beagle-image/beagle-image.component'
-export * from './beagle-tab-item/beagle-tab-item.component'
-export * from './beagle-tab-view/beagle-tab-view.component'
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+
+@Component({
+  selector: 'beagle-tab-item',
+  templateUrl: './beagle-tab-item.component.html',
+  styleUrls: ['./beagle-tab-item.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleTabItemComponent {
+  @Input() title?: string
+  @Input() icon?: string
+}
