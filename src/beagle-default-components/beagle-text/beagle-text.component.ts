@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { TextAlignment } from '../../types'
+import { TextAlignment } from '../../enums'
 
 @Component({
   selector: 'beagle-text',

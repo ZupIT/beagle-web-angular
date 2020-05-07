@@ -15,8 +15,30 @@
 */
 
 export enum ImageContentMode {
-  FIT_XY,
-  FIT_CENTER,
-  CENTER_CROP,
-  CENTER
+  FIT_XY = 'fit-xy',
+  FIT_CENTER = 'fit-center',
+  CENTER_CROP = 'center-crop',
+  CENTER = 'center',
+}
+
+export enum TextAlignment {
+  LEFT = 'left',
+  CENTER = 'center',
+  RIGHT = 'right',
+  INHERIT = 'inherit',
+}
+
+export enum Direction {
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal'
+}
+
+export enum NavigationType {
+  OPEN_DEEP_LINK,
+  ADD_VIEW,
+  SWAP_VIEW,
+  FINISH_VIEW,
+  POP_VIEW,
+  POP_TO_VIEW,
+  PRESENT_VIEW
 }

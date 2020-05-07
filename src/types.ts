@@ -23,6 +23,7 @@ import {
   BeagleView,
 } from '@zup-it/beagle-web'
 import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/dist/types'
+import { NavigationType } from './enums'
 
 export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
   components: { error: Type<{}>, loading: Type<{}> } & {
@@ -48,16 +49,6 @@ export interface BeagleContext<T = any> {
   getView: () => BeagleView<T>,
 }
 
-enum NavigationType {
-  OPEN_DEEP_LINK,
-  ADD_VIEW,
-  SWAP_VIEW,
-  FINISH_VIEW,
-  POP_VIEW,
-  POP_TO_VIEW,
-  PRESENT_VIEW
-}
-
 type NavigateAction = {
   type: NavigationType,
   shouldPrefetch?: boolean,
@@ -66,7 +57,7 @@ type NavigateAction = {
   screen?: any,
 }
 
-type ShowNativeDialog =  {
+type ShowNativeDialog = {
   title: string,
   message: string,
   buttonText: string,
@@ -78,18 +69,6 @@ type CustomAction = {
 }
 
 export type Action = NavigateAction | ShowNativeDialog | CustomAction
-
-export enum TextAlignment {
-  LEFT = 'left',
-  CENTER = 'center',
-  RIGHT = 'right',
-  INHERIT = 'inherit',
-}
-
-export enum Direction {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal'
-}
 
 export interface NavigationBarItem {
   text: string,
