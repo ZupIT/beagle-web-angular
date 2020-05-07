@@ -14,17 +14,18 @@
   * limitations under the License.
 */
 
+@import "../assets/default-style.less";
 
 .beagle-loader {
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: @beagle-black-transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   /deep/ .mat-progress-spinner circle, .mat-spinner circle {
-
+    stroke: @beagle-off-white;
   }
 }
