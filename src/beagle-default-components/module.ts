@@ -23,6 +23,8 @@ import { BeagleContainerComponent } from './beagle-container/beagle-container.co
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
+import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
+import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 
 const components = [
   BeagleButtonComponent,
@@ -32,6 +34,8 @@ const components = [
   BeagleScreenComponent,
   BeaglePageViewComponent,
   BeagleImageComponent,
+  BeagleTabItemComponent,
+  BeagleTabViewComponent,
 ]
 
 @NgModule({

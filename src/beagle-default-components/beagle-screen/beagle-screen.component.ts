@@ -29,8 +29,11 @@ export class BeagleScreenComponent {
   @Input() identifier?: string
   @Input() navigationBar?: NavigationBar
 
+  selected = 0
+
   handleClick(index: number) {
     //TODO: depois de definir comunicação entre componentes
     // tratar o click com a action associada nesta função
+    this.selected = index
   }
 }

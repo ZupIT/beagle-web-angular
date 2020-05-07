@@ -14,8 +14,8 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
-import { Direction } from '../../types'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { Direction } from '../../enums'
 
 @Component({
   selector: 'beagle-list-view',
@@ -23,13 +23,7 @@ import { Direction } from '../../types'
   styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent implements OnInit {
+export class BeagleListViewComponent {
   @Input() direction: Direction
-  parsedDirection: Direction
-  
-  ngOnInit() {
-    if (this.direction) {
-      this.parsedDirection = Direction[this.direction]
-    }
-  }
+
 }
