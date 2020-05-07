@@ -14,11 +14,11 @@
   * limitations under the License.
 */
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
-export * from './beagle-screen/beagle-screen.component'
-export * from './beagle-page-view/beagle-page-view.component'
-export * from './beagle-image/beagle-image.component'
-export * from './beagle-loader/beagle-loader.component'
+import { Component } from '@angular/core'
+
+@Component({
+  selector: 'beagle-loader',
+  templateUrl: './beagle-loader.component.html',
+  styleUrls: ['./beagle-loader.component.less']
+})
+export class BeagleLoaderComponent { }

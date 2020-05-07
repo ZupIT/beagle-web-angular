@@ -23,6 +23,8 @@ import { BeagleContainerComponent } from './beagle-container/beagle-container.co
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
+import { BeagleLoaderComponent } from './beagle-loader/beagle-loader.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 const components = [
   BeagleButtonComponent,
@@ -32,11 +34,12 @@ const components = [
   BeagleScreenComponent,
   BeaglePageViewComponent,
   BeagleImageComponent,
+  BeagleLoaderComponent
 ]
 
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
 })
 export class BeagleDefaultComponentsModule { }
