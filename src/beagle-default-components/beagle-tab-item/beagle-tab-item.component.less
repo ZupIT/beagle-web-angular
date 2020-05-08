@@ -21,7 +21,6 @@ beagle-tab-item {
   
   &.active {
     .selected {
-      width: 160px;
       height: 2px;
       background-color: @beagle-black;
     }
@@ -30,6 +29,9 @@ beagle-tab-item {
       display: flex;
       position: absolute;
       overflow: hidden;
+      margin-top: 10px;
+      left: 5px;
+      width: 100%;
     }
   }
 
@@ -42,6 +44,7 @@ beagle-tab-item {
   .tab-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 
     .icon {
