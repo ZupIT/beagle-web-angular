@@ -16,7 +16,7 @@
 
 import {
     Component, ViewEncapsulation,
-    Input, OnInit, ViewChild,
+    Input, ViewChild,
     Renderer2,
 } from '@angular/core'
 import { PageIndicator } from '../../types'

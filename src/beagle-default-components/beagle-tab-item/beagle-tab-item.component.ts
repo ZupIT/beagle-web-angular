@@ -15,6 +15,8 @@
 */
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { TabsService } from '../tabs.service'
 
 @Component({
   selector: 'beagle-tab-item',
@@ -22,7 +24,16 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
   styleUrls: ['./beagle-tab-item.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabItemComponent {
+export class BeagleTabItemComponent extends BeagleComponent {
   @Input() title?: string
   @Input() icon?: string
+
+  constructor(private tabsService: TabsService) {
+    super()
+  }
+
+  handleClick() {
+    const item = this.getBeagleContext().getElementId()
+    this.tabsService.changeSelectedTab(item)
+  }
 }

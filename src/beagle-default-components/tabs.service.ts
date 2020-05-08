@@ -1,4 +1,4 @@
-<!-- 
+/*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,13 +11,22 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License. 
--->
-<div class="tab-header" (click)="handleClick()">
-  <beagle-image *ngIf="icon" class="icon" [name]="icon"></beagle-image>
-  {{title}}
-</div>
-<div class="selected"></div>
-<div class="tab-content">
-  <ng-content></ng-content>
-</div>
+  * limitations under the License.
+*/
+
+import { Injectable } from '@angular/core'
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject'
+
+@Injectable()
+export class TabsService {
+
+  private selectedTab: BehaviorSubject<string> = new BehaviorSubject('')
+
+  changeSelectedTab(tabIndex: string) {
+    this.selectedTab.next(tabIndex)
+  }
+
+  notifySelectedTab() {
+    return this.selectedTab.asObservable()
+  }
+}

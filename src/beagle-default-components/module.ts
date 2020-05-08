@@ -25,6 +25,7 @@ import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.com
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
+import { TabsService } from './tabs.service'
 
 const components = [
   BeagleButtonComponent,
@@ -42,5 +43,6 @@ const components = [
   declarations: components,
   exports: components,
   imports: [CommonModule],
+  providers: [TabsService],
 })
 export class BeagleDefaultComponentsModule { }
