@@ -22,7 +22,7 @@ import { Component, AfterViewInit, ViewChild, Renderer2, Input } from '@angular/
   styleUrls: ['./beagle-tab-view.component.less'],
 })
 export class BeagleTabViewComponent implements AfterViewInit {
-  @Input() theme? =''
+  @Input() theme? = ''
   @ViewChild('contentItens') contentItens;
   activeTab = 0
 
