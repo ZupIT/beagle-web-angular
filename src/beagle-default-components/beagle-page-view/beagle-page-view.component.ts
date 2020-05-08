@@ -66,7 +66,7 @@ export class BeaglePageViewComponent {
     }
 
     nextSlide() {
-        if (this.selected < this.totalPages.length-1) {
+        if (this.selected < this.totalPages.length - 1) {
             this.changeSlide(this.selected + 1)
         }
     }

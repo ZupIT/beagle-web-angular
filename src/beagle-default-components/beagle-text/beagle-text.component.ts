@@ -25,15 +25,15 @@ import { TextAlignment } from '../../enums'
 export class BeagleTextComponent implements OnInit {
 
   @Input() text: string
-  @Input() theme? = ''
-  @Input() textColor? = ''
+  @Input() theme?= ''
+  @Input() textColor?= ''
   @Input() alignment?: TextAlignment
 
   ngOnInit() {
     this.fillDefaultVariables()
   }
 
-  fillDefaultVariables(){
+  fillDefaultVariables() {
     this.textColor = this.textColor || 'inherit'
     this.alignment = this.alignment || TextAlignment.INHERIT
   }

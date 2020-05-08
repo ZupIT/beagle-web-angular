@@ -32,10 +32,16 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
   const templateInputs = inputs.map(input => `let-${input.propName}="${input.propName}"`).join(' ')
   const componentInputs = inputs.map(input => `[${input.templateName}]="${input.propName}"`).join(' ')
   const contextDirective = `${contextSelector} [_elementId]="beagleId" [_viewId]="viewId"`
+  const addTheme = inputs.findIndex((item) => item.propName === 'theme')
+  const theme = addTheme > 0 ? '' : 'let-theme="theme"'
+  const themeClass = addTheme > 0 ? '' : '[ngClass]="theme"'
+  console.log('component = ', selector, ' addTheme', addTheme)
+  console.log('theme = ', theme)
+  console.log('themeClass = ', themeClass)
 
   return `
-    <ng-template #${templateName} ${templateInputs} let-children="children" let-beagleId="id" let-styleClass="styleClass" let-styleProperties="styleProperties">
-      <${selector} ${componentInputs} ${contextDirective} [ngClass]="styleClass" [ngStyle]="styleProperties">
+    <ng-template #${templateName} ${templateInputs} let-children="children" let-beagleId="id" ${theme} let-styleProperties="styleProperties">
+      <${selector} ${componentInputs} ${contextDirective} ${themeClass} [ngStyle]="styleProperties">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
           <ng-container *ngTemplateOutlet="getTemplate(child._beagleType_);context:child"></ng-container>
         </ng-container>

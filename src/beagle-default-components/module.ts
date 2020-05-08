@@ -25,6 +25,7 @@ import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.com
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
+import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
 import { TabsService } from './tabs.service'
 
 const components = [
@@ -37,6 +38,7 @@ const components = [
   BeagleImageComponent,
   BeagleTabItemComponent,
   BeagleTabViewComponent,
+  BeagleErrorComponent,
 ]
 
 @NgModule({
