@@ -14,14 +14,18 @@
   * limitations under the License.
 */
 
-export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
-export * from './beagle-text/beagle-text.component'
-export * from './beagle-container/beagle-container.component'
-export * from './beagle-screen/beagle-screen.component'
-export * from './beagle-page-view/beagle-page-view.component'
-export * from './beagle-image/beagle-image.component'
-export * from './beagle-loading/beagle-loading.component'
-export * from './beagle-tab-item/beagle-tab-item.component'
-export * from './beagle-tab-view/beagle-tab-view.component'
-export * from './beagle-error/beagle-error.component'
+@import "../assets/default-style.less";
+
+.beagle-loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background: @beagle-black-transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /deep/ .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: @beagle-off-white;
+  }
+}

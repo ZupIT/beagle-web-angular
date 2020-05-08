@@ -26,6 +26,7 @@ import {
     BeagleTabViewComponent,
     BeagleTabItemComponent,
     BeagleErrorComponent,
+    BeagleLoadingComponent,
 } from '../../../beagle-default-components'
 
 const defaultComponents: Record<string, Type<any>> = {
@@ -40,6 +41,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:tabview': BeagleTabViewComponent,
     'beagle:component:tabitem': BeagleTabItemComponent,
     error: BeagleErrorComponent,
+    loading: BeagleLoadingComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
