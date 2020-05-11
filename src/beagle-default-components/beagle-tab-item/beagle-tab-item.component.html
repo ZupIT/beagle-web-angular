@@ -13,7 +13,7 @@
   * See the License for the specific language governing permissions and
   * limitations under the License. 
 -->
-<div class="tab-header">
+<div class="tab-header" (click)="handleClick()">
   <beagle-image *ngIf="icon" class="icon" [name]="icon"></beagle-image>
   {{title}}
 </div>

@@ -15,7 +15,6 @@
 */
 
 import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core'
-import { BeagleImageConfig } from '../../runtime/BeagleImageConfig'
 import { NavigationBar } from '../../types'
 
 @Component({

@@ -16,8 +16,10 @@
 
 import {
   Component, AfterViewInit, ViewChild,
-  Renderer2, Input, ViewEncapsulation,
+  Renderer2, Input,
+  OnInit, ViewEncapsulation,
 } from '@angular/core'
+import { TabsService } from '../tabs.service'
 
 @Component({
   selector: 'beagle-tab-view',
@@ -25,20 +27,48 @@ import {
   styleUrls: ['./beagle-tab-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabViewComponent implements AfterViewInit {
+export class BeagleTabViewComponent implements AfterViewInit, OnInit {
   @Input() theme?= ''
   @ViewChild('contentItens') contentItens;
-  activeTab = 0
+  activeTab: string
 
-  constructor(private renderer: Renderer2) {
+  constructor(
+    private renderer: Renderer2,
+    private tabsService: TabsService) {
+  }
+
+  ngOnInit() {
+    this.listenTabChanges()
   }
 
   ngAfterViewInit() {
     if (this.contentItens) {
+      this.changeClassTabs()
+    }
+  }
+
+  listenTabChanges() {
+    this.tabsService.notifySelectedTab().subscribe((selected) => {
+      this.changeClassTabs()
+      if (selected != this.activeTab) {
+        this.activeTab = selected
+        this.changeClassTabs()
+      }
+    })
+  }
+
+  changeClassTabs() {
+    if (this.contentItens) {
       const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
       elements.forEach((item, index) => {
-        if (this.activeTab === index) {
+        const viewId = item.getAttribute('ng-reflect-_element-id')
+        if (this.activeTab === '' && index === 0) {
+          this.activeTab = viewId || ''
+        }
+        if (this.activeTab === viewId) {
           this.renderer.addClass(item, 'active')
+        } else {
+          this.renderer.removeClass(item, 'active')
         }
       })
     }

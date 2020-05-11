@@ -25,6 +25,7 @@ import {
     BeagleImageComponent,
     BeagleTabViewComponent,
     BeagleTabItemComponent,
+    BeagleErrorComponent,
     BeagleLoadingComponent,
 } from '../../../beagle-default-components'
 
@@ -39,7 +40,8 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:image': BeagleImageComponent,
     'beagle:component:tabview': BeagleTabViewComponent,
     'beagle:component:tabitem': BeagleTabItemComponent,
-    loading: BeagleLoadingComponent
+    error: BeagleErrorComponent,
+    loading: BeagleLoadingComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {

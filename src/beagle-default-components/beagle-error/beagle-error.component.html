@@ -1,4 +1,4 @@
-/*
+<!-- 
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,31 +11,10 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License.
-*/
+  * limitations under the License. 
+-->
 
-@import "../assets/default-style.less";
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.beagle-loading {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  background: @swampLight;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .spinner {
-    border: 8px solid @blackTransparent;
-    border-left-color: @athensGray;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-  }
-  
-}
+<p>
+  <span class="error">Sorry! </span> An unexpected error happened while loading your page.
+</p>
