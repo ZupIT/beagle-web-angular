@@ -28,7 +28,7 @@ import { TabsService } from '../tabs.service'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleTabViewComponent implements AfterViewInit, OnInit {
-  @Input() theme?= ''
+  @Input() styleId?= ''
   @ViewChild('contentItens') contentItens;
   activeTab: string
 
@@ -42,9 +42,7 @@ export class BeagleTabViewComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    if (this.contentItens) {
-      this.changeClassTabs()
-    }
+    if (this.contentItens) this.changeClassTabs()
   }
 
   listenTabChanges() {

@@ -79,7 +79,7 @@ export interface NavigationBarItem {
 export interface NavigationBar {
   title: string,
   showBackButton: boolean,
-  theme?: string,
+  styleId?: string,
   navigationBarItems?: NavigationBarItem[],
 }
 

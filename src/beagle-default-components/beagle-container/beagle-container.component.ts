@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, ViewEncapsulation } from '@angular/core'
+import { Component, ViewEncapsulation, AfterViewInit, Input } from '@angular/core'
 
 @Component({
   selector: 'beagle-container',
@@ -22,5 +22,11 @@ import { Component, ViewEncapsulation } from '@angular/core'
   styleUrls: ['./beagle-container.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleContainerComponent {
+export class BeagleContainerComponent implements AfterViewInit {
+
+  @Input() onInit?: () => void
+
+  ngAfterViewInit() {
+    if (this.onInit) this.onInit()
+  }
 }

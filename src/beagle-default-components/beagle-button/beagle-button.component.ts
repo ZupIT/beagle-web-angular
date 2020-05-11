@@ -26,12 +26,11 @@ import { Action } from '../../types'
 export class BeagleButtonComponent {
 
   @Input() text: string
-  @Input() theme?: string
-  @Input() action?: Action
+  @Input() styleId?: string
+  @Input() onPress?: () => void
 
   handleClick() {
-    //TODO: depois de definir comunicação entre componentes
-    // tratar o click com a action associada nesta função
+    if (this.onPress) this.onPress()
   }
 
 }
