@@ -24,7 +24,6 @@ import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 import { BeagleLoadingComponent } from './beagle-loading/beagle-loading.component'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
@@ -47,7 +46,7 @@ const components = [
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule],
   providers: [TabsService],
 })
 export class BeagleDefaultComponentsModule { }
