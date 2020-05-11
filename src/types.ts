@@ -22,7 +22,7 @@ import {
   IdentifiableBeagleUIElement,
   BeagleView,
 } from '@zup-it/beagle-web'
-import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/dist/types'
+import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/types'
 import { NavigationType } from './enums'
 
 export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
