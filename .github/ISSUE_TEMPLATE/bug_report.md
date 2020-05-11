@@ -6,7 +6,7 @@ labels: 'Status: Unconfirmed'
 
 ---
 
-Beagle Web version:
+Beagle Angular version:
 
 ## Steps To Reproduce
 
