@@ -27,7 +27,7 @@ import {
     BeagleTabItemComponent,
     BeagleErrorComponent,
     BeagleLoadingComponent,
-} from '../../../beagle-default-components'
+} from '../../../components'
 
 const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:button': BeagleButtonComponent,
