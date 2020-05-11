@@ -14,15 +14,19 @@
   * limitations under the License.
 */
 
-import { Component, AfterViewInit, ViewChild, Renderer2, Input } from '@angular/core'
+import {
+  Component, AfterViewInit, ViewChild,
+  Renderer2, Input, ViewEncapsulation,
+} from '@angular/core'
 
 @Component({
   selector: 'beagle-tab-view',
   templateUrl: './beagle-tab-view.component.html',
   styleUrls: ['./beagle-tab-view.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BeagleTabViewComponent implements AfterViewInit {
-  @Input() theme? =''
+  @Input() theme?= ''
   @ViewChild('contentItens') contentItens;
   activeTab = 0
 
