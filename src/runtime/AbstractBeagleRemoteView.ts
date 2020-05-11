@@ -23,7 +23,14 @@ import {
   NgZone,
   TemplateRef,
 } from '@angular/core'
-import { LoadParams, BeagleView, IdentifiableBeagleUIElement } from '@zup-it/beagle-web'
+import {
+  LoadParams,
+  BeagleView,
+  IdentifiableBeagleUIElement,
+  replaceBindings,
+  EventHandler,
+  createEventHandler,
+} from '@zup-it/beagle-web'
 import { BeagleContext } from '@zup-it/beagle-web'
 import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { createStaticPromise } from './utils/promise'
@@ -40,6 +47,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   ngZone: NgZone
   changeDetector: ChangeDetectorRef
   viewStaticPromise = createStaticPromise<BeagleView>()
+  eventHandler: EventHandler
 
   constructor(
     beagleProvider?: AbstractBeagleProvider,
@@ -58,7 +66,8 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
         'you need to start the beagle provider before using a remote view.',
       )
     }
-    this.view = beagleService.createView()
+    // fixme: what if this.loadParams.baseUrl has been set?
+    this.view = beagleService.createView(this.loadParams.path)
     this.view.subscribe(this.updateView)
     this.view.addErrorListener((errorListener) => {
       errorListener.forEach((error) => {
@@ -67,6 +76,12 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     })
     BeagleContext.registerView(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
+  }
+
+  createEventHandler() {
+    const beagleService = this.beagleProvider.getBeagleUIService()
+    if (!beagleService) return
+    this.eventHandler = createEventHandler(beagleService.getConfig().customActions, this.view)
   }
 
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
@@ -79,8 +94,10 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   updateView = (uiTree: IdentifiableBeagleUIElement<any>) => {
-    this.ngZone.run(() => {
-      this.tree = uiTree
+    this.ngZone.run(() => {  
+      const uiTreeWithActions = this.eventHandler.interpretEventsInTree(uiTree)
+      const uiTreeWithValues = replaceBindings(uiTreeWithActions)
+      this.tree = uiTreeWithValues
       this.changeDetector.detectChanges()
     })
   }
@@ -100,6 +117,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
       )
     }
     this.createBeagleView()
+    this.createEventHandler()
     this.view.updateWithFetch(this.loadParams)
   }
 

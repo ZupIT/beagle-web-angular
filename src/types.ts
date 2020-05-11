@@ -22,7 +22,7 @@ import {
   IdentifiableBeagleUIElement,
   BeagleView,
 } from '@zup-it/beagle-web'
-import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/dist/types'
+import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/types'
 
 export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
   components: { error: Type<{}>, loading: Type<{}> } & {
