@@ -30,9 +30,7 @@ export class BeagleButtonComponent {
   @Input() onPress?: () => void
 
   handleClick() {
-    if (this.onPress) {
-      this.onPress()
-    }
+    if (this.onPress) this.onPress()
   }
 
 }

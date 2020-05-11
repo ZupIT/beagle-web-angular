@@ -42,9 +42,7 @@ export class BeagleTabViewComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    if (this.contentItens) {
-      this.changeClassTabs()
-    }
+    if (this.contentItens) this.changeClassTabs()
   }
 
   listenTabChanges() {
