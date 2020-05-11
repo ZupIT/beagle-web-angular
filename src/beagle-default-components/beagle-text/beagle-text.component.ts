@@ -20,7 +20,6 @@ import { TextAlignment } from '../../enums'
 @Component({
   selector: 'beagle-text',
   templateUrl: './beagle-text.component.html',
-  styleUrls: ['./beagle-text.component.less'],
 })
 export class BeagleTextComponent implements OnInit {
 
