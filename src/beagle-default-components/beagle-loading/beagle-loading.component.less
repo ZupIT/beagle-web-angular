@@ -16,6 +16,10 @@
 
 @import "../assets/default-style.less";
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .beagle-loading {
   width: 100vw;
   height: 100vh;
@@ -25,7 +29,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /deep/ .mat-progress-spinner circle, .mat-spinner circle {
-    stroke: @beagle-off-white;
+  .spinner {
+    border: 8px solid @black-transparent;
+    border-left-color: @beagle-off-white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
   }
+  
 }
