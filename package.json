@@ -36,8 +36,6 @@
     "@zup-it/beagle-web": "0.0.13"
   },
   "peerDependencies": {
-    "@angular/material": "^9.2.2",
-    "@angular/cdk": "^9.2.2",
     "@angular/common": ">= 6 < 10",
     "@angular/core": ">= 6 < 10"
   },
