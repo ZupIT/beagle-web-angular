@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, ViewEncapsulation, Input, OnInit } from '@angular/core'
+import { Component, ViewEncapsulation, Input } from '@angular/core'
 import { NavigationBar } from '../../types'
 
 @Component({

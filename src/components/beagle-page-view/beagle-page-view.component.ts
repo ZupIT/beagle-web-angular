@@ -28,8 +28,9 @@ import { PageIndicator } from '../../types'
     encapsulation: ViewEncapsulation.None,
 })
 export class BeaglePageViewComponent {
-    @Input() pageIndicator: PageIndicator
-    @ViewChild('contentItens') contentItens;
+    
+    @Input() pageIndicator?: PageIndicator
+    @ViewChild('contentItens') contentItens
     totalPages: number[] = []
     selected = 0
 

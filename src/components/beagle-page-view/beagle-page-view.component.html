@@ -24,7 +24,9 @@
   <div class="page-indicator">
     <ol>
       <li *ngFor="let item of totalPages" (click)="changeSlide(item)"
-        [ngStyle]="{'background-color': item === selected ? pageIndicator.selectedColor : pageIndicator.unselectedColor}">
+        [ngStyle]="pageIndicator && {'background-color': item === selected ? pageIndicator.selectedColor : pageIndicator.unselectedColor}"
+        [ngClass]="!pageIndicator && item === selected ? 'active' : 'inactive'"
+        >
     </ol>
   </div>
 </div>

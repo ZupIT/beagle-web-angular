@@ -13,11 +13,11 @@
   * See the License for the specific language governing permissions and
   * limitations under the License. 
 -->
-<div class="tab-header" (click)="handleClick()">
+<div class="tab-header" (click)="handleClick()" >
   <beagle-image *ngIf="icon" class="icon" [name]="icon"></beagle-image>
   {{title}}
 </div>
-<div class="selected"></div>
-<div class="tab-content">
+<div [ngClass]="{'selected': active}"></div>
+<div class="tab-content" *ngIf="active">
   <ng-content></ng-content>
 </div>

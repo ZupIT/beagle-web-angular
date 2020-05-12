@@ -14,7 +14,10 @@
   * limitations under the License.
 */
 
-import { Component, ViewEncapsulation, AfterViewInit, Input } from '@angular/core'
+import {
+  Component, ViewEncapsulation, AfterViewChecked,
+  Input, ElementRef,
+} from '@angular/core'
 
 @Component({
   selector: 'beagle-container',
@@ -22,11 +25,22 @@ import { Component, ViewEncapsulation, AfterViewInit, Input } from '@angular/cor
   styleUrls: ['./beagle-container.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleContainerComponent implements AfterViewInit {
+export class BeagleContainerComponent implements AfterViewChecked {
 
   @Input() onInit?: () => void
+  hasInitialized = false
 
-  ngAfterViewInit() {
-    if (this.onInit) this.onInit()
+  constructor(private element: ElementRef) { }
+
+  ngAfterViewChecked() {
+    //TODO: fix double click to trigger onInit
+    if (!this.hasInitialized && this.isRendered()) {
+      if (this.onInit) this.onInit()
+      this.hasInitialized = true
+    }
+  }
+
+  isRendered() {
+    return this.element.nativeElement.parentNode !== null
   }
 }

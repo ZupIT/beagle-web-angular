@@ -24,12 +24,25 @@ import { TabsService } from '../tabs.service'
   styleUrls: ['./beagle-tab-item.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabItemComponent extends BeagleComponent {
+export class BeagleTabItemComponent extends BeagleComponent implements OnInit {
   @Input() title?: string
   @Input() icon?: string
+  public active = false
+  id: string
 
   constructor(private tabsService: TabsService) {
     super()
+  }
+
+  ngOnInit() {
+    this.id = this.getBeagleContext().getElementId()
+    this.listenTabChanges()
+  }
+
+  listenTabChanges() {
+    this.tabsService.notifySelectedTab().subscribe((selected) => {
+      this.active = selected === this.id
+    })
   }
 
   handleClick() {
