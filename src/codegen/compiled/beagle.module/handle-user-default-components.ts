@@ -40,6 +40,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:image': BeagleImageComponent,
     'beagle:component:tabview': BeagleTabViewComponent,
     'beagle:component:tabitem': BeagleTabItemComponent,
+    'beagle:component:scrollview': BeagleContainerComponent,
     error: BeagleErrorComponent,
     loading: BeagleLoadingComponent,
 }
