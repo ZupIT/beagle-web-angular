@@ -31,8 +31,8 @@ export class BeagleScreenComponent {
   selected = 0
 
   handleClick(index: number) {
-    //TODO: depois de definir comunicação entre componentes
-    // tratar o click com a action associada nesta função
+    //TODO: depois de implementar os eventos e ações deste componente
+    // é preciso tratar a action do item clicado (action em NavigationBarItem)
     this.selected = index
   }
 }
