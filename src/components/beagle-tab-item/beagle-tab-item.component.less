@@ -18,27 +18,21 @@
 
 beagle-tab-item {
   margin: 0 5px;
-  
-  &.active {
-    .selected {
-      height: 2px;
-      background-color: @swamp;
-    }
 
-    .tab-content {
-      display: flex;
-      position: absolute;
-      overflow: hidden;
-      margin-top: 10px;
-      left: 5px;
-      width: 100%;
-    }
+
+  .selected {
+    height: 2px;
+    background-color: @swamp;
   }
 
-  &:not(.active) {
-    >.tab-content {
-      display: none;
-    }
+
+  .tab-content {
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+    margin-top: 10px;
+    left: 5px;
+    width: 100%;
   }
 
   .tab-header {

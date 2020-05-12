@@ -36,6 +36,9 @@ export class BeagleImageComponent implements OnInit {
     } else {
       this.imageName = this.path
     }
+    if (!this.contentMode) {
+      this.contentMode = ImageContentMode.FIT_CENTER
+    }
   }
 
 }

@@ -34,7 +34,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:text': BeagleTextComponent,
     'beagle:component:listview': BeagleListViewComponent,
     'beagle:component:container': BeagleContainerComponent,
-    'beagle:component:screen': BeagleScreenComponent,
+    'beagle:component:screencomponent': BeagleScreenComponent,
     'beagle:component:pageview': BeaglePageViewComponent,
     'beagle:component:networkimage': BeagleImageComponent,
     'beagle:component:image': BeagleImageComponent,
