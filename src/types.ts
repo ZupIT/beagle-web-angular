@@ -26,7 +26,7 @@ import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/types'
 import { NavigationType } from './enums'
 
 export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
-  components: { error: Type<{}>, loading: Type<{}> } & {
+  components: { error?: Type<{}>, loading?: Type<{}> } & {
     [K in keyof Schema]: Type<Schema[K]>
   },
   module: {
