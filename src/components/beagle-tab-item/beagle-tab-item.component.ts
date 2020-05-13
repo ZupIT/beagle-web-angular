@@ -16,7 +16,7 @@
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
-import { TabsService } from '../tabs.service'
+import { TabsService } from '../services/tabs.service'
 
 @Component({
   selector: 'beagle-tab-item',

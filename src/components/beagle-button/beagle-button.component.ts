@@ -15,7 +15,6 @@
 */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { Action } from '../../types'
 
 @Component({
   selector: 'beagle-button',

@@ -18,7 +18,7 @@ import {
   Component, AfterViewInit, ViewChild, 
   Input, OnInit, ViewEncapsulation,
 } from '@angular/core'
-import { TabsService } from '../tabs.service'
+import { TabsService } from '../services/tabs.service'
 
 @Component({
   selector: 'beagle-tab-view',

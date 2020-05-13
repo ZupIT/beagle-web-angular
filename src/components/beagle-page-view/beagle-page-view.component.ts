@@ -19,7 +19,7 @@ import {
     Input, ViewChild,
     Renderer2,
 } from '@angular/core'
-import { PageIndicator } from '../../types'
+import { PageIndicator } from '../types'
 
 @Component({
     selector: 'beagle-page-view',

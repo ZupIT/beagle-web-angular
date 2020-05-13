@@ -16,7 +16,7 @@
 
 import { Component, Input, OnInit } from '@angular/core'
 import { BeagleImageConfig } from '../../runtime/BeagleImageConfig'
-import { ImageContentMode } from '../../types'
+import { ImageContentMode } from '../types'
 
 @Component({
   selector: 'beagle-image',

@@ -15,7 +15,7 @@
 */
 
 import { Component, ViewEncapsulation, Input } from '@angular/core'
-import { NavigationBar } from '../../types'
+import { NavigationBar } from '../types'
 
 @Component({
   selector: 'beagle-screen',
