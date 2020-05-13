@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { Direction } from '../../enums'
+import { Direction } from '../../types'
 
 @Component({
   selector: 'beagle-list-view',

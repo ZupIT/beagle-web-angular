@@ -18,30 +18,29 @@ figure {
   width: 100%;
   height: 100%;
   margin: 0px;
-
-  &.fit-xy,
-  &.fit-center,
-  &.center-crop,
-  &.center {
+  &.FIT_XY,
+  &.FIT_CENTER,
+  &.CENTER_CROP,
+  &.CENTER {
     img {
       width: inherit;
       height: inherit;
     }
   }
 
-  &.fit-xy {
+  &.FIT_XY {
     object-fit: fill
   }
 
-  &.fit-center {
+  &.FIT_CENTER {
     object-fit: cover;
   }
 
-  &.center-crop {
+  &.CENTER_CROP {
     object-fit: none;
   }
 
-  &.center {
+  &.CENTER {
     object-fit: contain;
   }
 

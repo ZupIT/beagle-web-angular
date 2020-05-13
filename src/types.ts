@@ -23,7 +23,6 @@ import {
   BeagleView,
 } from '@zup-it/beagle-web'
 import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/types'
-import { NavigationType } from './enums'
 
 export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
   components: { error?: Type<{}>, loading?: Type<{}> } & {
@@ -48,6 +47,9 @@ export interface BeagleContext<T = any> {
   getElement: () => IdentifiableBeagleUIElement<T> | null,
   getView: () => BeagleView<T>,
 }
+
+type NavigationType = 'OPEN_DEEP_LINK' | 'ADD_VIEW' | 'SWAP_VIEW' | 'FINISH_VIEW' | 
+  'POP_VIEW' | 'POP_TO_VIEW' | 'PRESENT_VIEW'
 
 type NavigateAction = {
   type: NavigationType,
@@ -87,3 +89,9 @@ export interface PageIndicator {
   selectedColor: string,
   unselectedColor: string,
 }
+
+export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' |'CENTER'
+
+export type TextAlignment = 'LEFT' | 'CENTER' | 'RIGHT' | 'INHERIT'
+
+export type Direction = 'VERTICAL' | 'HORIZONTAL'

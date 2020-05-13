@@ -15,8 +15,8 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { ImageContentMode } from '../../enums'
 import { BeagleImageConfig } from '../../runtime/BeagleImageConfig'
+import { ImageContentMode } from '../../types'
 
 @Component({
   selector: 'beagle-image',
@@ -37,7 +37,7 @@ export class BeagleImageComponent implements OnInit {
       this.imageName = this.path
     }
     if (!this.contentMode) {
-      this.contentMode = ImageContentMode.FIT_CENTER
+      this.contentMode = 'FIT_CENTER'
     }
   }
 

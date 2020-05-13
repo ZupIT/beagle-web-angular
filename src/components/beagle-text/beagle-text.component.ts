@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { TextAlignment } from '../../enums'
+import { TextAlignment } from '../../types'
 
 @Component({
   selector: 'beagle-text',
@@ -34,6 +34,6 @@ export class BeagleTextComponent implements OnInit {
 
   fillDefaultVariables() {
     this.textColor = this.textColor || 'inherit'
-    this.alignment = this.alignment || TextAlignment.INHERIT
+    this.alignment = this.alignment || 'INHERIT'
   }
 }
