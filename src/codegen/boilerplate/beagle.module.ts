@@ -23,9 +23,7 @@ function createBoilerplate(
 ) {
   const code = `
     import { BeagleModule } from '@zup-it/beagle-angular'
-    // import all the components you wish to use with Beagle. See the examples below:
-    // import { LoadingComponent } from './components/loading/loading.component'
-    // import { ErrorComponent } from './components/error/error.component'
+    // import all the components you wish to use with Beagle.
     
     @BeagleModule({
       baseUrl: '${baseUrl}',
@@ -34,9 +32,7 @@ function createBoilerplate(
         name: '${componentsModuleName}',
       },
       components: {
-        // Associate every beagle component to your angular component. See the examples below:
-        loading: class Loading {}, // todo: replace by actual component class
-        error: class Error {}, // todo: replace by actual component class
+        // Associate every beagle component to your angular component.
       },
     })
     export class Beagle {}
