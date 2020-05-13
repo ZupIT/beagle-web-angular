@@ -14,17 +14,16 @@
   * limitations under the License. 
 -->
 
-<nav [ngClass]="navigationBar && navigationBar.styleId ? navigationBar.styleId : 'default-navbar'" >
+<nav [ngClass]="navigationBar && navigationBar.styleId ? navigationBar.styleId : 'default-navbar'">
   <ng-container *ngIf='navigationBar && navigationBar.navigationBarItems'>
-    <a *ngFor="let item of navigationBar.navigationBarItems; let i = index" 
-      (click)="handleClick(i)"
-      [ngClass]="{'active': i === selected}"
-    >
-      <beagle-image *ngIf="item.image" [name]="item.image">
+    <a *ngFor="let item of navigationBar.navigationBarItems; let i = index" (click)="handleClick(i)"
+      [ngClass]="{'active': i === selected}">
+      <beagle-image class="screen-image" *ngIf="item.image" [name]="item.image">
       </beagle-image>
       {{item.text}}
     </a>
   </ng-container>
 </nav>
-
-<ng-content></ng-content>
+<div class="content">
+  <ng-content></ng-content>
+</div>

@@ -17,7 +17,9 @@
 @import "../assets/default-style.less";
 
 beagle-screen {
+
   display: flex;
+  flex-direction: column;
 
   .default-navbar {
     a {
@@ -48,18 +50,24 @@ beagle-screen {
     }
   }
 
-  figure {
-    display: inline;
-    margin: 0 5px 0 0;
+  .screen-image {
+    figure {
+      display: inline;
+      margin: 0 5px 0 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    figure,
+    img {
+      max-width: 55px;
+      max-height: 55px;
+    }
   }
 
-  img {
-    vertical-align: middle;
-  }
-
-  figure,
-  img {
-    max-width: 55px;
-    max-height: 55px;
+  .content {
+    margin-top: 10px;
   }
 }
