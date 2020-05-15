@@ -27,7 +27,7 @@ import { TabsService } from '../services/tabs.service'
 export class BeagleTabItemComponent extends BeagleComponent implements OnInit {
   @Input() title?: string
   @Input() icon?: string
-  public active = false
+  active = false
   id: string
 
   constructor(private tabsService: TabsService) {
