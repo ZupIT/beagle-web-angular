@@ -14,29 +14,9 @@
   * limitations under the License.
 */
 
-type NavigationType = 'OPEN_DEEP_LINK' | 'ADD_VIEW' | 'SWAP_VIEW' | 'FINISH_VIEW' |
-    'POP_VIEW' | 'POP_TO_VIEW' | 'PRESENT_VIEW'
-
-type NavigateAction = {
-    type: NavigationType,
-    shouldPrefetch?: boolean,
-    path?: string,
-    data?: Record<string, string>,
-    screen?: any,
-}
-
-type ShowNativeDialog = {
-    title: string,
-    message: string,
-    buttonText: string,
-}
-
-type CustomAction = {
-    name: string,
-    data: Record<string, string>,
-}
-
-export type Action = NavigateAction | ShowNativeDialog | CustomAction
+//TODO: após a refatoração da screen com as novas funcionalidades, validar o tipo
+// da action
+export type Action = any
 
 export interface NavigationBarItem {
     text: string,

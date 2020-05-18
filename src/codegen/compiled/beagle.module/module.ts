@@ -20,9 +20,11 @@ import { originalBeagleModuleName } from './imports'
 interface Params {
   componentsModuleName: string,
   beagleModuleName: string,
+  hasDefaultModule: boolean,
 }
 
-export function createModuleString({ componentsModuleName, beagleModuleName }: Params, hasDefaultModule: boolean) {
+export function createModuleString({ componentsModuleName, beagleModuleName,
+  hasDefaultModule }: Params) {
   const defaultModule = hasDefaultModule ? ', BeagleDefaultComponentsModule' : ''
   const moduleString = `
     @NgModule({

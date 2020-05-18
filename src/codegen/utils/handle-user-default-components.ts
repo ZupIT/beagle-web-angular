@@ -27,7 +27,7 @@ import {
     BeagleTabItemComponent,
     BeagleErrorComponent,
     BeagleLoadingComponent,
-} from '../../../components'
+} from '../../components'
 
 const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:button': BeagleButtonComponent,
@@ -46,12 +46,10 @@ const defaultComponents: Record<string, Type<any>> = {
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
-    return Object.assign(defaultComponents, components)
+    return { ...defaultComponents, ...components }
 }
 
-export function addDefaultModule(components: Record<string, Type<any>>) {
-    const defaultKeys = Object.keys(defaultComponents)
-    const userKeys = Object.keys(components)
-    const hasDefaultComponents = defaultKeys.map((item) => userKeys.indexOf(item))
-    return hasDefaultComponents.includes(-1)
+export function shouldImportDefaultModule(components: Record<string, Type<any>>) {
+    const defaultComponentNames = Object.keys(defaultComponents)
+    return defaultComponentNames.some(name => !components[name])
 }

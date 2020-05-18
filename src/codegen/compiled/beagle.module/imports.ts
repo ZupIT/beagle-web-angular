@@ -20,6 +20,7 @@ interface Params {
   componentsModulePath: string,
   beagleModuleName: string,
   beagleModuleCopyPath: string,
+  hasDefaultModule: boolean,
 }
 
 export const originalBeagleModuleName = 'OriginalBeagleModule'
@@ -29,7 +30,8 @@ export function createImportsString({
   componentsModulePath,
   beagleModuleName,
   beagleModuleCopyPath,
-}: Params, hasDefaultModule: boolean) {
+  hasDefaultModule,
+}: Params) {
   const componentModuleImport = `import { ${componentsModuleName} } from '${componentsModulePath}'`
   const originalBeagleModuleImport = `import { ${beagleModuleName} as ${originalBeagleModuleName} } from '${beagleModuleCopyPath}'`
   const defaultModuleImport = 'import { BeagleDefaultComponentsModule } from \'@zup-it/beagle-angular\''
