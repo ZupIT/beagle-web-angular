@@ -25,14 +25,10 @@ export class BeagleTextComponent implements OnInit {
 
   @Input() text: string
   @Input() styleId?= ''
-  @Input() textColor?= ''
-  @Input() alignment?: TextAlignment
+  @Input() textColor?=  'inherit'
+  @Input() alignment?: TextAlignment = 'INHERIT'
 
-  ngOnInit() {
-    this.fillDefaultVariables()
-  }
-
-  fillDefaultVariables() {
+  ngOnInit() { 
     this.textColor = this.textColor || 'inherit'
     this.alignment = this.alignment || 'INHERIT'
   }

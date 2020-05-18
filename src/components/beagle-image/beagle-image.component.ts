@@ -27,15 +27,13 @@ export class BeagleImageComponent implements OnInit {
 
   @Input() name = ''
   @Input() path = ''
-  @Input() contentMode?: ImageContentMode = undefined
+  @Input() contentMode?: ImageContentMode = 'FIT_CENTER'
   imageName = ''
 
   ngOnInit() {
-    if (this.name) {
-      this.imageName = BeagleImageConfig.imagesLocation + this.name
-    } else {
-      this.imageName = this.path
-    }
+    this.imageName = this.name ? 
+      BeagleImageConfig.imagesLocation + this.name : this.path
+
     if (!this.contentMode) {
       this.contentMode = 'FIT_CENTER'
     }
