@@ -14,23 +14,6 @@
   * limitations under the License.
 */
 
-//TODO: após a refatoração da screen com as novas funcionalidades, validar o tipo
-// da action
-export type Action = any
-
-export interface NavigationBarItem {
-    text: string,
-    image?: string,
-    action: Action,
-}
-
-export interface NavigationBar {
-    title: string,
-    showBackButton: boolean,
-    styleId?: string,
-    navigationBarItems?: NavigationBarItem[],
-}
-
 export interface PageIndicator {
     selectedColor: string,
     unselectedColor: string,
