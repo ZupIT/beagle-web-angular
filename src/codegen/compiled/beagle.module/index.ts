@@ -15,6 +15,9 @@
 */
 
 import { BeagleAngularConfig } from '../../../types'
+import { 
+  combineUserAndDefaultComponents, 
+  shouldImportDefaultModule } from '../../utils/handle-user-default-components'
 import { createCommentaryString } from './commentary'
 import { createImportsString } from './imports'
 import { createTemplateString } from './template'
@@ -36,18 +39,22 @@ export function generateViewEngineCode({
   angularVersion,
 }: CodeGenerationParams) {
   const commentary = createCommentaryString()
+  const hasDefaultModule = shouldImportDefaultModule(config.components)
   const importString = createImportsString({
     componentsModuleName: config.module.name,
     componentsModulePath: config.module.path,
     beagleModuleName,
     beagleModuleCopyPath,
+    hasDefaultModule,
   })
-  const templateString = createTemplateString(Object.values(config.components))
-  const componentString = createComponentString(config.components, angularVersion)
+  const components = combineUserAndDefaultComponents(config.components)
+  const templateString = createTemplateString(Object.values(components))
+  const componentString = createComponentString(components, angularVersion)
   const providerString = createProviderString()
   const moduleString = createModuleString({
     componentsModuleName: config.module.name,
     beagleModuleName,
+    hasDefaultModule,
   })
 
   return `${commentary}\n\n${importString}\n\n${templateString}\n\n${providerString}\n\n${componentString}\n\n${moduleString}\n`

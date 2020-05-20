@@ -14,12 +14,16 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { Direction } from '../types'
+
+@Component({
+  selector: 'beagle-list-view',
+  templateUrl: './beagle-list-view.component.html',
+  styleUrls: ['./beagle-list-view.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleListViewComponent {
+  @Input() direction: Direction
+
+}

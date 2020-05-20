@@ -14,12 +14,40 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+@import "../assets/default-style.less";
+
+beagle-tab-item {
+  margin: 0 5px;
+
+
+  .selected {
+    height: 2px;
+    background-color: @swamp;
+  }
+
+
+  .tab-content {
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+    margin-top: 10px;
+    left: 5px;
+    width: 100%;
+  }
+
+  .tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .icon {
+      max-width: 80px;
+      max-height: 80px;
+    }
+
+    &:hover {
+      background-color: @swampTransparent;
+    }
+  }
+}

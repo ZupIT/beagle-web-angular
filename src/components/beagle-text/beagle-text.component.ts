@@ -14,12 +14,22 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+import { Component, Input, OnInit } from '@angular/core'
+import { TextAlignment } from '../types'
+
+@Component({
+  selector: 'beagle-text',
+  templateUrl: './beagle-text.component.html',
+})
+export class BeagleTextComponent implements OnInit {
+
+  @Input() text: string
+  @Input() styleId?= ''
+  @Input() textColor?=  'inherit'
+  @Input() alignment?: TextAlignment = 'INHERIT'
+
+  ngOnInit() { 
+    this.textColor = this.textColor || 'inherit'
+    this.alignment = this.alignment || 'INHERIT'
+  }
+}

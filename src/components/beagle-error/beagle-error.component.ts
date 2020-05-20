@@ -14,12 +14,14 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+import { Component, ViewEncapsulation } from '@angular/core'
+
+@Component({
+  selector: 'beagle-error',
+  templateUrl: './beagle-error.component.html',
+  styleUrls: ['./beagle-error.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleErrorComponent {
+  
+}

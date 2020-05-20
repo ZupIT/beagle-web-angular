@@ -14,12 +14,22 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
+
+@Component({
+  selector: 'beagle-button',
+  templateUrl: './beagle-button.component.html',
+  styleUrls: ['./beagle-button.component.less'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class BeagleButtonComponent {
+
+  @Input() text: string
+  @Input() styleId?: string
+  @Input() onPress?: () => void
+
+  handleClick() {
+    if (this.onPress) this.onPress()
+  }
+
+}

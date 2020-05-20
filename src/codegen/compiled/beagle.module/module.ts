@@ -20,14 +20,17 @@ import { originalBeagleModuleName } from './imports'
 interface Params {
   componentsModuleName: string,
   beagleModuleName: string,
+  hasDefaultModule: boolean,
 }
 
-export function createModuleString({ componentsModuleName, beagleModuleName }: Params) {
+export function createModuleString({ componentsModuleName, beagleModuleName,
+  hasDefaultModule }: Params) {
+  const defaultModule = hasDefaultModule ? ', BeagleDefaultComponentsModule' : ''
   const moduleString = `
     @NgModule({
       declarations: [BeagleRemoteView],
-      exports: [BeagleRemoteView],
-      imports: [CommonModule, BeagleContextModule, ${componentsModuleName}],
+      exports: [BeagleRemoteView${defaultModule}],
+      imports: [CommonModule, BeagleContextModule, ${componentsModuleName} ${defaultModule}],
       providers: [BeagleProvider],
     })
     export class ${beagleModuleName} {

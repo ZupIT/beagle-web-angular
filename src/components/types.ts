@@ -14,12 +14,13 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+export interface PageIndicator {
+    selectedColor: string,
+    unselectedColor: string,
+}
+
+export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
+
+export type TextAlignment = 'LEFT' | 'CENTER' | 'RIGHT' | 'INHERIT'
+
+export type Direction = 'VERTICAL' | 'HORIZONTAL'

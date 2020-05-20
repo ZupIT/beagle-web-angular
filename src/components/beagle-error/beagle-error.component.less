@@ -14,12 +14,15 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+beagle-error {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 2em;
+  font-size: 23px;
+  justify-content: center;
+
+  beagle-text {
+    margin: 4px;
+  }
+}

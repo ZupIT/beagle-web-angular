@@ -14,12 +14,19 @@
   * limitations under the License.
 */
 
-export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
-export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
-export * from './components/module'
-export * from './components'
-export * from './runtime/BeagleComponent'
-export * from './types'
-export * from './decorator'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject'
+
+@Injectable()
+export class TabsService {
+
+  private selectedTab: BehaviorSubject<string> = new BehaviorSubject('')
+
+  changeSelectedTab(tabIndex: string) {
+    this.selectedTab.next(tabIndex)
+  }
+
+  notifySelectedTab() {
+    return this.selectedTab.asObservable()
+  }
+}
