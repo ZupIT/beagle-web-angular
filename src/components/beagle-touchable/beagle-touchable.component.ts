@@ -25,7 +25,7 @@ interface BeagleTouchableInterface {
   templateUrl: './beagle-touchable.component.html',
   styleUrls: ['./beagle-touchable.component.less'],
 })
-export class BeagleTouchableComponent implements BeagleTouchableInterface{
+export class BeagleTouchableComponent implements BeagleTouchableInterface {
   @Input() onPress: () => void
 
 
