@@ -15,24 +15,42 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { BeagleImageConfig } from '../../runtime/BeagleImageConfig'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { ImageContentMode } from '../types'
+
+export type ImageMode = 'Network' | 'Local'
+export interface Acessibility {
+  accessible: boolean,
+  accessibilityLabel?: string,
+}
+
+export interface BeagleImageInterface {
+  url: string,
+  mode: ImageMode,
+  contentMode?: ImageContentMode,
+  accessibility?: Acessibility,
+  styleId?: string,
+  style?: Record<string, any>,
+}
 
 @Component({
   selector: 'beagle-image',
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent implements OnInit {
-
-  @Input() name = ''
-  @Input() path = ''
+export class BeagleImageComponent extends BeagleComponent implements OnInit, BeagleImageInterface {
+  @Input() url = ''
+  @Input() mode: ImageMode
   @Input() contentMode?: ImageContentMode = 'FIT_CENTER'
-  imageName = ''
+  @Input() accessibility?: Acessibility = {
+    accessible: true,
+    accessibilityLabel: '',
+  }
+  imageSource = ''
 
   ngOnInit() {
-    this.imageName = this.name ? 
-      BeagleImageConfig.imagesLocation + this.name : this.path
+    const view = this.getBeagleContext().getView()
+    this.imageSource = this.mode === 'Local' ? this.url : view.getUrlBuilder().build(this.url)
 
     if (!this.contentMode) {
       this.contentMode = 'FIT_CENTER'

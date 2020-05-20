@@ -14,7 +14,7 @@
   * limitations under the License. 
 -->
 <div class="tab-header" (click)="handleClick()" >
-  <beagle-image *ngIf="icon" class="icon" [name]="icon"></beagle-image>
+  <beagle-image *ngIf="icon" class="icon" [url]="icon" [mode]="'Local'"></beagle-image>
   {{title}}
 </div>
 <div [ngClass]="{'selected': active}"></div>
