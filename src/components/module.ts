@@ -23,6 +23,7 @@ import { BeagleContainerComponent } from './beagle-container/beagle-container.co
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
 import { BeagleImageComponent } from './beagle-image/beagle-image.component'
 import { BeagleLoadingComponent } from './beagle-loading/beagle-loading.component'
+import { BeagleLazyComponent } from './beagle-lazy/beagle-lazy.component'
 import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
@@ -35,6 +36,7 @@ const components = [
   BeagleContainerComponent,
   BeaglePageViewComponent,
   BeagleImageComponent,
+  BeagleLazyComponent,
   BeagleLoadingComponent,
   BeagleTabItemComponent,
   BeagleTabViewComponent,

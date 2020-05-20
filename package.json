@@ -33,7 +33,7 @@
   "sideEffects": false,
   "private": false,
   "dependencies": {
-    "@zup-it/beagle-web": "0.0.16"
+    "@zup-it/beagle-web": "../beagle-web-core/dist/"
   },
   "peerDependencies": {
     "@angular/common": ">= 6 < 10",

@@ -22,6 +22,7 @@ import {
     BeagleContainerComponent,
     BeaglePageViewComponent,
     BeagleImageComponent,
+    BeagleLazyComponent,
     BeagleTabViewComponent,
     BeagleTabItemComponent,
     BeagleErrorComponent,
@@ -40,6 +41,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:tabview': BeagleTabViewComponent,
     'beagle:component:tabitem': BeagleTabItemComponent,
     'beagle:component:scrollview': BeagleContainerComponent,
+    'beagle:component:lazycomponent': BeagleLazyComponent,
     error: BeagleErrorComponent,
     loading: BeagleLoadingComponent,
 }
