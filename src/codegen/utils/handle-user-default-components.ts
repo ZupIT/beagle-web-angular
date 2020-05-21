@@ -27,6 +27,7 @@ import {
     BeagleTabItemComponent,
     BeagleErrorComponent,
     BeagleLoadingComponent,
+    BeagleTouchableComponent,
 } from '../../components'
 
 const defaultComponents: Record<string, Type<any>> = {
@@ -42,6 +43,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:component:tabitem': BeagleTabItemComponent,
     'beagle:component:scrollview': BeagleContainerComponent,
     'beagle:component:lazycomponent': BeagleLazyComponent,
+    'beagle:component:touchable': BeagleTouchableComponent,
     error: BeagleErrorComponent,
     loading: BeagleLoadingComponent,
 }
