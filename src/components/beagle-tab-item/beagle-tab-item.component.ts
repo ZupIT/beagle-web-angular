@@ -17,6 +17,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { TabsService } from '../services/tabs.service'
+import { BeagleTabItemInterface } from '../schemas/tab-view'
 
 @Component({
   selector: 'beagle-tab-item',
@@ -24,7 +25,7 @@ import { TabsService } from '../services/tabs.service'
   styleUrls: ['./beagle-tab-item.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabItemComponent extends BeagleComponent implements OnInit {
+export class BeagleTabItemComponent extends BeagleComponent implements BeagleTabItemInterface, OnInit {
   @Input() title?: string
   @Input() icon?: string
   active = false

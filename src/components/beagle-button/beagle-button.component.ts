@@ -15,6 +15,7 @@
 */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { BeagleButtonInterface } from '../schemas/button'
 
 @Component({
   selector: 'beagle-button',
@@ -22,7 +23,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core'
   styleUrls: ['./beagle-button.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleButtonComponent {
+export class BeagleButtonComponent implements BeagleButtonInterface {
 
   @Input() text: string
   @Input() styleId?: string

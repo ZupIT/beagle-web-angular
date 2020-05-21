@@ -19,6 +19,7 @@ import {
   Input, OnInit, ViewEncapsulation,
 } from '@angular/core'
 import { TabsService } from '../services/tabs.service'
+import { BeagleTabViewInterface } from '../schemas/tab-view'
 
 @Component({
   selector: 'beagle-tab-view',
@@ -26,7 +27,7 @@ import { TabsService } from '../services/tabs.service'
   styleUrls: ['./beagle-tab-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabViewComponent implements AfterViewInit, OnInit {
+export class BeagleTabViewComponent implements BeagleTabViewInterface, AfterViewInit, OnInit {
   @Input() styleId?= ''
   @ViewChild('contentItens') contentItens
   activeTab = ''
