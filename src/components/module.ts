@@ -26,6 +26,7 @@ import { BeagleLoadingComponent } from './beagle-loading/beagle-loading.componen
 import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.component'
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
+import { BeagleTouchableComponent } from './beagle-touchable/beagle-touchable.component'
 import { TabsService } from './services/tabs.service'
 
 const components = [
@@ -39,6 +40,7 @@ const components = [
   BeagleTabItemComponent,
   BeagleTabViewComponent,
   BeagleErrorComponent,
+  BeagleTouchableComponent,
 ]
 
 @NgModule({
