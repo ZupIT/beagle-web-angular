@@ -16,29 +16,14 @@
 
 import { Component, Input, OnInit } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
-import { ImageContentMode } from '../types'
-
-export type ImageMode = 'Network' | 'Local'
-export interface Acessibility {
-  accessible: boolean,
-  accessibilityLabel?: string,
-}
-
-export interface BeagleImageInterface {
-  url: string,
-  mode: ImageMode,
-  contentMode?: ImageContentMode,
-  accessibility?: Acessibility,
-  styleId?: string,
-  style?: Record<string, any>,
-}
+import { BeagleImageInterface, ImageMode, Acessibility, ImageContentMode } from '../schemas/image'
 
 @Component({
   selector: 'beagle-image',
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent extends BeagleComponent implements OnInit, BeagleImageInterface {
+export class BeagleImageComponent extends BeagleComponent implements BeagleImageInterface, OnInit {
   @Input() url = ''
   @Input() mode: ImageMode
   @Input() contentMode?: ImageContentMode = 'FIT_CENTER'
