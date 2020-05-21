@@ -14,9 +14,11 @@
   * limitations under the License.
 */
 
+import * as CSS from 'csstype'
+
 export interface BeagleButtonInterface {
   text: string,
   styleId?: string,
   onPress?: () => void,
-  style?: Record<string, any>,
+  style?: CSS.Properties,
 }

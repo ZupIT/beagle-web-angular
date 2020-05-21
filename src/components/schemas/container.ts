@@ -14,7 +14,9 @@
   * limitations under the License.
 */
 
+import * as CSS from 'csstype'
+
 export interface BeagleContainerInterface {
   onInit?: () => void,
-  style?: Record<string, any>,
+  style?: CSS.Properties,
 }
