@@ -17,13 +17,15 @@
 import { Component, Input, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core'
 import { LoadParams } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { BeagleLazyInterface } from '../schemas/lazy'
 
 @Component({
   selector: 'beagle-lazy',
   templateUrl: './beagle-lazy.component.html',
   styleUrls: ['./beagle-lazy.component.less'],
 })
-export class BeagleLazyComponent extends BeagleComponent implements OnInit, AfterViewInit{
+export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyInterface,
+  AfterViewInit {
 
   @Input() path: string
 
@@ -31,15 +33,20 @@ export class BeagleLazyComponent extends BeagleComponent implements OnInit, Afte
     super()
   }
 
-  ngOnInit() {
-  }
-
-  ngAfterViewInit() { 
+  ngAfterViewInit() {
     const params: LoadParams = {
       path: this.path,
       shouldShowLoading: false,
-    } 
-    this.getBeagleContext().replace(params)
+    }
+    const oldTree = this.getBeagleContext().getElement()
+
+    this.getBeagleContext().append(params).then((item) => {
+      const newTree = this.getBeagleContext().getElement()
+      if (oldTree && newTree) {
+        oldTree.children = newTree.children?.slice(oldTree.children?.length) || []
+        this.getBeagleContext().updateWithTree({ sourceTree: oldTree })
+      }
+    })
   }
 
 }
