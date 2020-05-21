@@ -35,6 +35,8 @@ import { BeagleContext } from '@zup-it/beagle-web'
 import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
+import { twoPointsToUnderline } from '../codegen/utils/formatting'
+import { getPackageVersion } from '../cli/utils/packages'
 
 let nextViewId = 1
 
@@ -85,16 +87,17 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
-    if (!this[componentName]) {
+    const version = getPackageVersion('@angular/core')
+    if (!this[componentName] && !this[twoPointsToUnderline(componentName)]) {
       console.warn(
         `Beagle: the component ${componentName} was not declared in Beagle's configuration.`,
       )
     }
-    return this[componentName]
+    return version >= 9 ? this[twoPointsToUnderline(componentName)] : this[componentName]
   }
 
   updateView = (uiTree: IdentifiableBeagleUIElement<any>) => {
-    this.ngZone.run(() => {  
+    this.ngZone.run(() => {
       const uiTreeWithActions = this.eventHandler.interpretEventsInTree(uiTree)
       const uiTreeWithValues = replaceBindings(uiTreeWithActions)
       this.tree = uiTreeWithValues
