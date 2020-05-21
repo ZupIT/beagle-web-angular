@@ -14,13 +14,7 @@
   * limitations under the License.
 */
 
-export interface PageIndicator {
-    selectedColor: string,
-    unselectedColor: string,
-}
 
 export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
 
-export type TextAlignment = 'LEFT' | 'CENTER' | 'RIGHT' | 'INHERIT'
 
-export type Direction = 'VERTICAL' | 'HORIZONTAL'

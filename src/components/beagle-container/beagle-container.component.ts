@@ -18,6 +18,7 @@ import {
   Component, ViewEncapsulation, AfterViewChecked,
   Input, ElementRef,
 } from '@angular/core'
+import { BeagleContainerInterface } from '../schemas/container'
 
 @Component({
   selector: 'beagle-container',
@@ -25,7 +26,7 @@ import {
   styleUrls: ['./beagle-container.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleContainerComponent implements AfterViewChecked {
+export class BeagleContainerComponent implements BeagleContainerInterface, AfterViewChecked {
 
   @Input() onInit?: () => void
   hasInitialized = false

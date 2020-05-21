@@ -19,7 +19,7 @@ import {
     Input, ViewChild,
     Renderer2,
 } from '@angular/core'
-import { PageIndicator } from '../types'
+import { BeaglePageViewInterface, PageIndicator } from '../schemas/page-view'
 
 @Component({
     selector: 'beagle-page-view',
@@ -27,7 +27,7 @@ import { PageIndicator } from '../types'
     styleUrls: ['./beagle-page-view.component.less'],
     encapsulation: ViewEncapsulation.None,
 })
-export class BeaglePageViewComponent {
+export class BeaglePageViewComponent implements BeaglePageViewInterface {
     
     @Input() pageIndicator?: PageIndicator
     @ViewChild('contentItens') contentItens
