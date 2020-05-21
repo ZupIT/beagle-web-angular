@@ -14,6 +14,8 @@
   * limitations under the License.
 */
 
+import * as CSS from 'csstype'
+
 export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
 
 export type ImageMode = 'Network' | 'Local'
@@ -29,5 +31,5 @@ export interface BeagleImageInterface {
   contentMode?: ImageContentMode,
   accessibility?: Acessibility,
   styleId?: string,
-  style?: Record<string, any>,
+  style?: CSS.Properties,
 }
