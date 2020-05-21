@@ -54,7 +54,7 @@ function getBeagleMetadata(beagleModulePath: string) {
   } catch (error) {
     if (typeof error.message !== 'string') throw error
     if (error.message.startsWith('Cannot find module')) {
-      throw new BeagleCliError(`Could not find the beagle module file at "${beagleModulePath}".`)
+      throw new BeagleCliError(`${error.message}$ ----- Could not find the beagle module file at "${beagleModulePath}".`)
     }
     if (error.message.match('Unable to compile TypeScript')) {
       throw new BeagleCliError(`Unable to compile TypeScript, see the error below:\n\n${error.message}`)

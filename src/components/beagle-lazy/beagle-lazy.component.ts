@@ -27,16 +27,17 @@ export class BeagleLazyComponent extends BeagleComponent implements OnInit, Afte
 
   @Input() path: string
 
-  constructor(){
+  constructor() {
     super()
   }
 
   ngOnInit() {
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() { 
     const params: LoadParams = {
       path: this.path,
+      shouldShowLoading: false,
     } 
     this.getBeagleContext().replace(params)
   }
