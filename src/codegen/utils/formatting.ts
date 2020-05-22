@@ -24,3 +24,8 @@ export function removeExtraIndentation(code: string, numberOfExtraSpaces: number
     .replace(/^\n/, '')
     .replace(/\s*$/, '')
 }
+
+// function created to make a workaround on ivy problem, which cause queries with two points doesn't work
+export function twoPointsToUnderline(str: string) {
+  return str && str.replace(/[:]/g, '_')
+}
