@@ -15,16 +15,16 @@
 */
 
 import { Type } from '@angular/core'
-import { kebabToCamelCase, removeExtraIndentation } from '../../utils/formatting'
+import { kebabToCamelCase, removeExtraIndentation, twoPointsToUnderline } from '../../utils/formatting'
 import { getComponentAnnotations } from '../../utils/metadata'
 import { remoteViewSelector } from '../../../constants'
 
 
 function createViewChildString(name: string, templateName: string, angularVersion: number): string {
   if (angularVersion >= 8) {
-    return `'${name}': new ViewChild('${templateName}', { static: true })`
+    return `'${twoPointsToUnderline(name)}': new ViewChild('${templateName}', { static: true })`
   } else {
-    return `'${name}': new ViewChild('${templateName}')`
+    return `'${twoPointsToUnderline(name)}': new ViewChild('${templateName}')`
   }
 }
 
