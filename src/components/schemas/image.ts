@@ -14,8 +14,22 @@
   * limitations under the License.
 */
 
-export class BeagleImageConfig {
-  // The default location for the images is /src/assets, assuming
-  // the root path of the aplication is /src.
-  public static imagesLocation = '/assets/'
+import * as CSS from 'csstype'
+
+export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
+
+export type ImageMode = 'Network' | 'Local'
+
+export interface Acessibility {
+  accessible: boolean,
+  accessibilityLabel?: string,
+}
+
+export interface BeagleImageInterface {
+  url: string,
+  mode: ImageMode,
+  contentMode?: ImageContentMode,
+  accessibility?: Acessibility,
+  styleId?: string,
+  style?: CSS.Properties,
 }
