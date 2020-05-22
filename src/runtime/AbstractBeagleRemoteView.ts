@@ -87,13 +87,12 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
-    const version = getPackageVersion('@angular/core')
-    if (!this[componentName] && !this[twoPointsToUnderline(componentName)]) {
+    if (!this[twoPointsToUnderline(componentName)]) {
       console.warn(
         `Beagle: the component ${componentName} was not declared in Beagle's configuration.`,
       )
     }
-    return version >= 9 ? this[twoPointsToUnderline(componentName)] : this[componentName]
+    return this[twoPointsToUnderline(componentName)]
   }
 
   updateView = (uiTree: IdentifiableBeagleUIElement<any>) => {
