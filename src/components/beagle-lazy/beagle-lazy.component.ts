@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core'
+import { Component, Input, AfterViewInit } from '@angular/core'
 import { LoadParams } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleLazyInterface } from '../schemas/lazy'
@@ -22,7 +22,6 @@ import { BeagleLazyInterface } from '../schemas/lazy'
 @Component({
   selector: 'beagle-lazy',
   templateUrl: './beagle-lazy.component.html',
-  styleUrls: ['./beagle-lazy.component.less'],
 })
 export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyInterface,
   AfterViewInit {
@@ -38,15 +37,8 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
       path: this.path,
       shouldShowLoading: false,
     }
-    const oldTree = this.getBeagleContext().getElement()
 
-    this.getBeagleContext().append(params).then((item) => {
-      const newTree = this.getBeagleContext().getElement()
-      if (oldTree && newTree) {
-        oldTree.children = newTree.children?.slice(oldTree.children?.length) || []
-        this.getBeagleContext().updateWithTree({ sourceTree: oldTree })
-      }
-    })
+    this.getBeagleContext().replace(params)
   }
 
 }

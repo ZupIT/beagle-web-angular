@@ -15,6 +15,7 @@
 */
 
 import { Type } from '@angular/core'
+import { convertComponentsToCustom } from '@zup-it/beagle-web'
 import {
     BeagleButtonComponent,
     BeagleTextComponent,
@@ -29,8 +30,6 @@ import {
     BeagleLoadingComponent,
     BeagleTouchableComponent,
 } from '../../components'
-
-import { convertComponentsToCustom } from '@zup-it/beagle-web'
 
 const defaultComponents: Record<string, Type<any>> = {
     'beagle:button': BeagleButtonComponent,
