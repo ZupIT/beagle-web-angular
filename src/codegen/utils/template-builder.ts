@@ -39,7 +39,7 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
     <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="children" let-beagleId="id" let-style="style">
       <${selector} ${componentInputs} ${contextDirective} [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
-          <ng-container *ngTemplateOutlet="getTemplate(child._beagleType_);context:child"></ng-container>
+          <ng-container *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:child"></ng-container>
         </ng-container>
       </${selector}>
     </ng-template>
@@ -54,7 +54,7 @@ export function createRemoteViewTemplate(components: ComponentInfo[]) {
   const containerTemplate = `
     <ng-container #__view_container>
       <ng-container *ngIf="!!tree">
-        <ng-container *ngTemplateOutlet="getTemplate(tree._beagleType_);context:tree">
+        <ng-container *ngTemplateOutlet="getTemplate(tree._beagleComponent_);context:tree">
         </ng-container>
       </ng-container>
     </ng-container>

@@ -32,17 +32,17 @@ import {
 import { convertComponentsToCustom } from '@zup-it/beagle-web'
 
 const defaultComponents: Record<string, Type<any>> = {
-    'beagle:component:button': BeagleButtonComponent,
-    'beagle:component:text': BeagleTextComponent,
-    'beagle:component:listview': BeagleListViewComponent,
-    'beagle:component:container': BeagleContainerComponent,
-    'beagle:component:screencomponent': BeagleContainerComponent,
-    'beagle:component:pageview': BeaglePageViewComponent,
-    'beagle:component:image': BeagleImageComponent,
-    'beagle:component:tabview': BeagleTabViewComponent,
-    'beagle:component:tabitem': BeagleTabItemComponent,
-    'beagle:component:scrollview': BeagleContainerComponent,
-    'beagle:component:touchable': BeagleTouchableComponent,
+    'beagle:button': BeagleButtonComponent,
+    'beagle:text': BeagleTextComponent,
+    'beagle:listview': BeagleListViewComponent,
+    'beagle:container': BeagleContainerComponent,
+    'beagle:screencomponent': BeagleContainerComponent,
+    'beagle:pageview': BeaglePageViewComponent,
+    'beagle:image': BeagleImageComponent,
+    'beagle:tabview': BeagleTabViewComponent,
+    'beagle:tabitem': BeagleTabItemComponent,
+    'beagle:scrollview': BeagleContainerComponent,
+    'beagle:touchable': BeagleTouchableComponent,
     error: BeagleErrorComponent,
     loading: BeagleLoadingComponent,
 }
