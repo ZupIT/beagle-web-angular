@@ -14,16 +14,22 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { BeagleListViewInterface, Direction } from '../schemas/list-view'
+import * as CSS from 'csstype'
 
-@Component({
-  selector: 'beagle-list-view',
-  templateUrl: './beagle-list-view.component.html',
-  styleUrls: ['./beagle-list-view.component.less'],
-  encapsulation: ViewEncapsulation.None,
-})
-export class BeagleListViewComponent implements BeagleListViewInterface {
-  @Input() direction: Direction
+export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
 
+export type ImageMode = 'Network' | 'Local'
+
+export interface Acessibility {
+  accessible: boolean,
+  accessibilityLabel?: string,
+}
+
+export interface BeagleImageInterface {
+  url: string,
+  mode: ImageMode,
+  contentMode?: ImageContentMode,
+  accessibility?: Acessibility,
+  styleId?: string,
+  style?: CSS.Properties,
 }

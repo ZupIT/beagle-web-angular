@@ -15,5 +15,5 @@
 */
 
 export interface BeagleTouchableInterface {
-    onPress: () => void,
+  onPress: () => void,
 }

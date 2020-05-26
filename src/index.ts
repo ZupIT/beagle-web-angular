@@ -17,7 +17,6 @@
 export * from './runtime/AbstractBeagleRemoteView'
 export * from './runtime/AbstractBeagleProvider'
 export * from './runtime/beagle-context/module'
-export * from './runtime/BeagleImageConfig'
 export * from './components/module'
 export * from './components'
 export * from './runtime/BeagleComponent'

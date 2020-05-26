@@ -15,13 +15,13 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { TextAlignment } from '../types'
+import { BeagleTextInterface, TextAlignment } from '../schemas/text'
 
 @Component({
   selector: 'beagle-text',
   templateUrl: './beagle-text.component.html',
 })
-export class BeagleTextComponent implements OnInit {
+export class BeagleTextComponent implements BeagleTextInterface, OnInit {
 
   @Input() text: string
   @Input() styleId?= ''

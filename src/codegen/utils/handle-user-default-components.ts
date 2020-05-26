@@ -30,26 +30,27 @@ import {
     BeagleTouchableComponent,
 } from '../../components'
 
+import { convertComponentsToCustom } from '@zup-it/beagle-web'
+
 const defaultComponents: Record<string, Type<any>> = {
-    'beagle:component:button': BeagleButtonComponent,
-    'beagle:component:text': BeagleTextComponent,
-    'beagle:component:listview': BeagleListViewComponent,
-    'beagle:component:container': BeagleContainerComponent,
-    'beagle:component:screencomponent': BeagleContainerComponent,
-    'beagle:component:pageview': BeaglePageViewComponent,
-    'beagle:component:networkimage': BeagleImageComponent,
-    'beagle:component:image': BeagleImageComponent,
-    'beagle:component:tabview': BeagleTabViewComponent,
-    'beagle:component:tabitem': BeagleTabItemComponent,
-    'beagle:component:scrollview': BeagleContainerComponent,
-    'beagle:component:lazycomponent': BeagleLazyComponent,
-    'beagle:component:touchable': BeagleTouchableComponent,
+    'beagle:button': BeagleButtonComponent,
+    'beagle:text': BeagleTextComponent,
+    'beagle:listview': BeagleListViewComponent,
+    'beagle:container': BeagleContainerComponent,
+    'beagle:screencomponent': BeagleContainerComponent,
+    'beagle:pageview': BeaglePageViewComponent,
+    'beagle:image': BeagleImageComponent,
+    'beagle:tabview': BeagleTabViewComponent,
+    'beagle:tabitem': BeagleTabItemComponent,
+    'beagle:scrollview': BeagleContainerComponent,
+    'beagle:touchable': BeagleTouchableComponent,
+    'beagle:lazycomponent': BeagleLazyComponent,
     error: BeagleErrorComponent,
     loading: BeagleLoadingComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
-    return { ...defaultComponents, ...components }
+    return { ...defaultComponents, ...convertComponentsToCustom(components) }
 }
 
 export function shouldImportDefaultModule(components: Record<string, Type<any>>) {
