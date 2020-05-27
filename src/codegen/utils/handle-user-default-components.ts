@@ -43,8 +43,8 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:tabitem': BeagleTabItemComponent,
     'beagle:scrollview': BeagleContainerComponent,
     'beagle:touchable': BeagleTouchableComponent,
-    error: BeagleErrorComponent,
-    loading: BeagleLoadingComponent,
+    'custom:error': BeagleErrorComponent,
+    'custom:loading': BeagleLoadingComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
