@@ -29,8 +29,6 @@ import {
     BeagleTouchableComponent,
 } from '../../components'
 
-import { convertComponentsToCustom } from '@zup-it/beagle-web'
-
 const defaultComponents: Record<string, Type<any>> = {
     'beagle:button': BeagleButtonComponent,
     'beagle:text': BeagleTextComponent,
@@ -48,7 +46,7 @@ const defaultComponents: Record<string, Type<any>> = {
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
-    return { ...defaultComponents, ...convertComponentsToCustom(components) }
+    return { ...defaultComponents, ...components }
 }
 
 export function shouldImportDefaultModule(components: Record<string, Type<any>>) {
