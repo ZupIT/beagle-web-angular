@@ -32,11 +32,10 @@ import {
   createEventHandler,
 } from '@zup-it/beagle-web'
 import { BeagleContext } from '@zup-it/beagle-web'
+import { twoPointsToUnderline } from '../codegen/utils/formatting'
 import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
-import { twoPointsToUnderline } from '../codegen/utils/formatting'
-import { getPackageVersion } from '../cli/utils/packages'
 
 let nextViewId = 1
 
