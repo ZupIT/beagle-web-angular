@@ -49,7 +49,7 @@ const defaultComponents: Record<string, Type<any>> = {
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
-    return { ...defaultComponents, ...convertComponentsToCustom(components) }
+    return { ...defaultComponents, ...components }
 }
 
 export function shouldImportDefaultModule(components: Record<string, Type<any>>) {
