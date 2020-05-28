@@ -15,7 +15,6 @@
 */
 
 import { Type } from '@angular/core'
-import { convertComponentsToCustom } from '@zup-it/beagle-web'
 import {
     BeagleButtonComponent,
     BeagleTextComponent,
