@@ -15,6 +15,7 @@
 */
 
 import { Type } from '@angular/core'
+import { convertComponentsToCustom } from '@zup-it/beagle-web'
 import {
     BeagleButtonComponent,
     BeagleTextComponent,
@@ -22,14 +23,13 @@ import {
     BeagleContainerComponent,
     BeaglePageViewComponent,
     BeagleImageComponent,
+    BeagleLazyComponent,
     BeagleTabViewComponent,
     BeagleTabItemComponent,
     BeagleErrorComponent,
     BeagleLoadingComponent,
     BeagleTouchableComponent,
 } from '../../components'
-
-import { convertComponentsToCustom } from '@zup-it/beagle-web'
 
 const defaultComponents: Record<string, Type<any>> = {
     'beagle:button': BeagleButtonComponent,
@@ -45,6 +45,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'beagle:touchable': BeagleTouchableComponent,
     'custom:error': BeagleErrorComponent,
     'custom:loading': BeagleLoadingComponent,
+    'beagle:lazycomponent': BeagleLazyComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {
