@@ -16,7 +16,7 @@
 
 import {
   Component, ViewEncapsulation, AfterViewChecked,
-  Input, ElementRef,
+  Input, ElementRef, NgZone,
 } from '@angular/core'
 import { BeagleContainerInterface } from '../schemas/container'
 
@@ -26,18 +26,26 @@ import { BeagleContainerInterface } from '../schemas/container'
   styleUrls: ['./beagle-container.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleContainerComponent implements BeagleContainerInterface, AfterViewChecked {
+export class BeagleContainerComponent implements BeagleContainerInterface,
+  AfterViewChecked {
 
   @Input() onInit?: () => void
   hasInitialized = false
 
-  constructor(private element: ElementRef) { }
+  constructor(
+    private element: ElementRef,
+    private ngZone: NgZone) { }
 
   ngAfterViewChecked() {
-    //TODO: fix double click to trigger onInit
-    if (!this.hasInitialized && this.isRendered()) {
-      if (this.onInit) this.onInit()
-      this.hasInitialized = true
+    if (!this.hasInitialized && this.onInit) {
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          if (!this.hasInitialized && this.isRendered()) {
+            this.hasInitialized = true
+            this.onInit && this.onInit()
+          }
+        }, 5)
+      })
     }
   }
 
