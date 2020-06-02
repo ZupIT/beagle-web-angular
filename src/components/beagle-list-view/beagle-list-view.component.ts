@@ -14,8 +14,13 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { BeagleListViewInterface, Direction } from '../schemas/list-view'
+import {
+  Component, Input, ViewEncapsulation,
+  OnInit, AfterViewInit, ElementRef,
+} from '@angular/core'
+import { EventHandler, replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { BeagleListViewInterface } from '../schemas/list-view'
 
 @Component({
   selector: 'beagle-list-view',
@@ -23,7 +28,48 @@ import { BeagleListViewInterface, Direction } from '../schemas/list-view'
   styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent implements BeagleListViewInterface {
-  @Input() direction: Direction
+export class BeagleListViewComponent extends BeagleComponent
+  implements BeagleListViewInterface, AfterViewInit {
+  @Input() dataSource: any[]
+  @Input() template: BeagleUIElement
+  @Input() onInit?: () => void
+  eventHandler: EventHandler
+  hasInitialized = false
+
+  constructor(private element: ElementRef) {
+    super()
+    console.log('no constructor')
+  }
+
+  ngOnInit() {
+    console.log('no ngOnInit')
+  }
+
+  ngAfterViewInit() {
+    console.log('no ngAfterViewInit')
+    const tree = this.getBeagleContext().getElement()
+    this.verifyCallingOnInit()
+    if (this.dataSource && tree) {
+      const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
+        [{ id: 'item', value: item }]))
+      tree.children = parsedTree
+
+      this.getBeagleContext().updateWithTree({
+        sourceTree: tree,
+      })
+    }
+  }
+
+  ngAfterViewChecked() {
+    console.log('dentro no ngAfterViewChecked')
+    this.verifyCallingOnInit()
+  }
+
+  verifyCallingOnInit() {
+    if (!this.hasInitialized) {
+      this.hasInitialized = true
+      if (this.onInit) this.onInit()
+    }
+  }
 
 }
