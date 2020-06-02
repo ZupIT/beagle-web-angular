@@ -37,7 +37,7 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
 
   return `
     <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="children" let-beagleId="id" let-style="style">
-      <${selector} ${componentInputs} ${contextDirective} [ngClass]="styleId || ''" [ngStyle]="style">
+      <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId" [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
           <ng-container *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:child"></ng-container>
         </ng-container>
