@@ -24,7 +24,6 @@ import { SimpleFormInterface } from '../schemas/simple-form'
 })
 export class BeagleSimpleFormComponent implements SimpleFormInterface {
   
-  @Input() styleId?: string
   @Input() onSubmit?: () => void
 
   handleSubmit() {
