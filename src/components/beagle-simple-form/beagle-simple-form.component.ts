@@ -26,7 +26,8 @@ export class BeagleSimpleFormComponent implements SimpleFormInterface {
   
   @Input() onSubmit?: () => void
 
-  handleSubmit() {
-    this.onSubmit && this.onSubmit();
+  handleSubmit(event: Event) {
+    event.preventDefault()
+    this.onSubmit && this.onSubmit()
   }
 }

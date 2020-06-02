@@ -16,6 +16,7 @@
 
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 import { BeagleButtonComponent } from './beagle-button/beagle-button.component'
 import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.component'
 import { BeagleTextComponent } from './beagle-text/beagle-text.component'
@@ -50,7 +51,7 @@ const components = [
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   providers: [TabsService],
 })
 export class BeagleDefaultComponentsModule { }
