@@ -43,7 +43,7 @@ export class BeagleButtonComponent extends BeagleComponent implements BeagleButt
   }
 
   handleClick() {
-    this.onPress && this.onPress()
+    this.onPress && this.type === 'button' && this.onPress()
   }
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {
