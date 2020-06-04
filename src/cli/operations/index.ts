@@ -25,7 +25,8 @@ const cliOperations: Record<string, CliOperation> = {
     run: runInit,
   },
   'view-engine': {
-    description: 'Generates all the code you need when using Angular\'s View Engine. This is not necessary when using Ivy.',
+    description: `Generates all the code you need when using Angular\'s View Engine.
+      This is not necessary when using Ivy.`,
     options: [
       {
         name: '--npm',
@@ -33,17 +34,20 @@ const cliOperations: Record<string, CliOperation> = {
       },
       {
         name: '--config',
-        description: 'optional. Path (relative to the project\'s root) to the view engine configuration file.',
+        description: `optional. Path (relative to the project\'s root)
+          to the view engine configuration file.`,
         example: '--config=path/to/config',
       },
       {
         name: '--input',
-        description: 'optional. Path (relative to the project\'s root) to the file with the beagle module.',
+        description: `optional. Path (relative to the project\'s root)
+          to the file with the beagle module.`,
         example: '--input=path/to/beagle_module',
       },
       {
         name: '--output',
-        description: 'optional. Path (relative to the project\'s root) to write the generated file.',
+        description: `optional. Path (relative to the project\'s root)
+          to write the generated file.`,
         example: '--output=path/to/output',
       },
     ],

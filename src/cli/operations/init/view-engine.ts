@@ -40,9 +40,11 @@ export function undoViewEngineConfiguration(isNpm: boolean) {
   if (path) logInfo(`Configuration file at "${path}" was successfully removed.`)
   try {
     removeDependencies(dependencyNames, true)
-    logInfo(`The following dependencies were successfully removed from your package.json: ${dependencyNames.join(', ')}.`)
+    logInfo(`The following dependencies were successfully removed from your package.json:
+      ${dependencyNames.join(', ')}.`)
   } catch {
-    logWarning(`Unable to remove the following dependencies from your package.json: ${dependencyNames.join(', ')}.`)
+    logWarning(`Unable to remove the following dependencies from your package.json:
+      ${dependencyNames.join(', ')}.`)
   }
 }
 
@@ -54,22 +56,28 @@ function setupConfig(beagleModulePath: string, outputPath: string) {
 
 function setupDependencies(isNpm: boolean) {
   addDependencies(dependencies, true)
-  logInfo(`The following dependencies were successfully added to your package.json: ${dependencyNames.join(', ')}`)
+  logInfo(`The following dependencies were successfully added to your package.json:
+    ${dependencyNames.join(', ')}`)
   try {
     console.log('installing dependencies...')
     install(isNpm)
   } catch {
     const cmd = isNpm ? 'npm install' : 'yarn'
-    logWarning(`Could not install the dependencies. Please, run "${cmd}" before running you project.`)
+    logWarning(`Could not install the dependencies. Please, run "${cmd}"
+      before running you project.`)
   }
 }
 
 function setupGitIgnore(paths: string[]) {
   try {
     const hasFileChanged = addToGitIgnore(paths, 'Beagle')
-    if (hasFileChanged) logInfo(`The following paths were successfully added to your .gitignore: ${paths.join(', ')}`)
+    if (hasFileChanged) { 
+      logInfo(`The following paths were successfully added to your .gitignore:
+        ${paths.join(', ')}`)
+    }
   } catch {
-    logWarning(`Could not add to your .gitignore: ${paths.join(', ')}. Do you have a .gitignore file?`)
+    logWarning(`Could not add to your .gitignore: ${paths.join(', ')}.
+    Do you have a .gitignore file?`)
   }
 }
 
@@ -107,7 +115,8 @@ function logViewEngineInfo(isNpm: boolean) {
     { text: ` ${runScript} serve `, background: 'yellow', color: 'gray' },
     ' instead.',
   )
-  logSuccess(`If you upgrade Angular to use Ivy, don\'t forget to run "${runCli} beagle init" again.`)
+  logSuccess(`If you upgrade Angular to use Ivy, don\'t forget to run "
+    ${runCli} beagle init" again.`)
 }
 
 

@@ -28,7 +28,7 @@ import {
     BeagleErrorComponent,
     BeagleLoadingComponent,
     BeagleTouchableComponent,
-    BeagleSimpleFormComponent
+    BeagleSimpleFormComponent,
 } from '../../components'
 
 const defaultComponents: Record<string, Type<any>> = {
@@ -46,7 +46,7 @@ const defaultComponents: Record<string, Type<any>> = {
     'custom:error': BeagleErrorComponent,
     'custom:loading': BeagleLoadingComponent,
     'beagle:lazycomponent': BeagleLazyComponent,
-    'beagle:simpleform': BeagleSimpleFormComponent
+    'beagle:simpleform': BeagleSimpleFormComponent,
 }
 
 export function combineUserAndDefaultComponents(components: Record<string, Type<any>>) {

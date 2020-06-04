@@ -32,7 +32,8 @@ export function validateAngularVersion() {
     )
   }
   if (version > max) {
-    logWarning(`You're using Angular ${version}. Maximum supported version is ${max}. Please open an issue if you note something broke in this latest angular version.`)
+    logWarning(`You're using Angular ${version}. Maximum supported version is ${max}.
+      Please open an issue if you note something broke in this latest angular version.`)
   }
 }
 
