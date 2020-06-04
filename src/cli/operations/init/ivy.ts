@@ -20,7 +20,8 @@ import { undoViewEngineConfiguration } from './view-engine'
 function handleIvy(isNpm: boolean) {
   const runCmd = isNpm ? 'npx' : 'yarn'
   undoViewEngineConfiguration(isNpm)
-  logSuccess(`Beagle has detected you're using Ivy. No Further configuration is required! If you change to ViewEngine, be sure to re-run "${runCmd} beagle init".`)
+  logSuccess(`Beagle has detected you're using Ivy. No Further configuration is required!
+    If you change to ViewEngine, be sure to re-run "${runCmd} beagle init".`)
 }
 
 export default handleIvy

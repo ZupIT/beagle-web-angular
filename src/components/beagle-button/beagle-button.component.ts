@@ -15,8 +15,8 @@
 */
 
 import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
-import { BeagleButtonInterface } from '../schemas/button'
 import { IdentifiableBeagleUIElement } from '@zup-it/beagle-web/types'
+import { BeagleButtonInterface } from '../schemas/button'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 
 @Component({
@@ -25,7 +25,8 @@ import { BeagleComponent } from '../../runtime/BeagleComponent'
   styleUrls: ['./beagle-button.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleButtonComponent extends BeagleComponent implements BeagleButtonInterface, AfterViewInit {
+export class BeagleButtonComponent extends BeagleComponent
+  implements BeagleButtonInterface, AfterViewInit {
 
   @Input() text: string
   @Input() styleId?: string
@@ -47,7 +48,9 @@ export class BeagleButtonComponent extends BeagleComponent implements BeagleButt
   }
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {
-    return element && element.onPress && element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
+    return element &&
+    element.onPress &&
+    element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
   }
 
 }

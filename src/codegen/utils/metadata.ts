@@ -23,7 +23,8 @@ export function getComponentAnnotations(component: Type<any>) {
   const reflection = new ReflectionCapabilities()
   const annotations = reflection.annotations(component)
   if (!annotations || !annotations.length) {
-    throw new BeagleCodeGenerationError(`Couldn't find annotations for component "${component.name || component}"`)
+    throw new BeagleCodeGenerationError(`Couldn't find annotations for component "
+      ${component.name || component}"`)
   }
   return annotations[annotations.length - 1]
 }

@@ -63,14 +63,16 @@ async function askAboutBeagleModule() {
 
 async function askAboutComponentsModule() {
   const componentsModulePath = await getUserInput({
-    question: 'Path to the module with the components to use with beagle (press enter to use default):',
+    question: `Path to the module with the components to use with beagle
+      (press enter to use default):`,
     defaultValue: DEFAULT_COMPONENTS_MODULE_PATH,
   })
 
   let componentsModuleName = DEFAULT_COMPONENTS_MODULE_NAME
   if (componentsModulePath !== DEFAULT_COMPONENTS_MODULE_PATH) {
     componentsModuleName = await getUserInput({
-      question: 'Name of the module with the components to use with beagle (press enter to use default):',
+      question: `Name of the module with the components to use with beagle
+        (press enter to use default):`,
       defaultValue: DEFAULT_COMPONENTS_MODULE_NAME,
     })
   }
