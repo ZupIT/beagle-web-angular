@@ -18,7 +18,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "sh ./bin/check-license.sh"
+      "pre-commit": "sh ./bin/check-license.sh",
+      "pre-push": "yarn lint"
     }
   },
   "main": "dist/bundles/beagle-angular.umd.js",
