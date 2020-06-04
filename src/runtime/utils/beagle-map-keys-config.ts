@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import { DefaultSchema } from "@zup-it/beagle-web"
-import { ComponentName } from "@zup-it/beagle-web/types"
-import { BeagleAngularConfig } from "../../types"
+import { DefaultSchema } from '@zup-it/beagle-web'
+import { ComponentName } from '@zup-it/beagle-web/types'
+import { BeagleAngularConfig } from '../../types'
 
 function createBeagleMapKeysConfig <Schema = DefaultSchema>()  {
     let mapLowercaseConfig: Record<string, string>

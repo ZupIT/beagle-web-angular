@@ -13,6 +13,41 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
+import { Type } from '@angular/core'
+import {
+    BeagleButtonComponent,
+    BeagleTextComponent,
+    BeagleListViewComponent,
+    BeagleContainerComponent,
+    BeaglePageViewComponent,
+    BeagleImageComponent,
+    BeagleLazyComponent,
+    BeagleTabViewComponent,
+    BeagleTabItemComponent,
+    BeagleErrorComponent,
+    BeagleLoadingComponent,
+    BeagleTouchableComponent,
+    BeagleSimpleFormComponent,
+} from './components'
+
 export const viewIdAttributeName = '__beagle_view_id'
 export const remoteViewSelector = 'beagle-remote-view'
 export const contextSelector = 'beagle-context'
+
+export const defaultComponents: Record<string, Type<any>> = {
+    'beagle:button': BeagleButtonComponent,
+    'beagle:text': BeagleTextComponent,
+    'beagle:listview': BeagleListViewComponent,
+    'beagle:container': BeagleContainerComponent,
+    'beagle:screencomponent': BeagleContainerComponent,
+    'beagle:pageview': BeaglePageViewComponent,
+    'beagle:image': BeagleImageComponent,
+    'beagle:tabview': BeagleTabViewComponent,
+    'beagle:tabitem': BeagleTabItemComponent,
+    'beagle:scrollview': BeagleContainerComponent,
+    'beagle:touchable': BeagleTouchableComponent,
+    'custom:error': BeagleErrorComponent,
+    'custom:loading': BeagleLoadingComponent,
+    'beagle:lazycomponent': BeagleLazyComponent,
+    'beagle:simpleform': BeagleSimpleFormComponent,
+}
