@@ -16,8 +16,8 @@
 
 import createCoreBeagleUIService, { DefaultSchema } from '@zup-it/beagle-web'
 import { BeagleAngularConfig, BeagleAngularUIService } from '../types'
+import { defaultComponents } from '../constants'
 import beagleMapKeysConfig from './utils/beagle-map-keys-config'
-import { defaultComponents } from './utils/constants'
 
 export abstract class AbstractBeagleProvider {
   private service: BeagleAngularUIService | undefined
