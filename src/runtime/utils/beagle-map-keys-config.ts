@@ -19,21 +19,21 @@ import { ComponentName } from '@zup-it/beagle-web/types'
 import { BeagleAngularConfig } from '../../types'
 
 function createBeagleMapKeysConfig <Schema = DefaultSchema>()  {
-    let mapLowercaseConfig: Record<string, string>
+  let mapLowercaseConfig: Record<string, string>
 
     
-    function createMapOfKeys(components: BeagleAngularConfig<Schema>['components']) {
-        const keys = Object.keys(components)
-        mapLowercaseConfig = keys.reduce((result, key) => 
-            ({ ...result, [key.toLowerCase()]: key }), {})
-    }
+  function createMapOfKeys(components: BeagleAngularConfig<Schema>['components']) {
+    const keys = Object.keys(components)
+    mapLowercaseConfig = keys.reduce((result, key) => 
+      ({ ...result, [key.toLowerCase()]: key }), {})
+  }
 
-    return {
-        setMapKeysConfig: (components: BeagleAngularConfig<Schema>['components']) => 
-            createMapOfKeys(components),
-        getComponent: <T>(name: ComponentName<T>) => 
-            mapLowercaseConfig[(name as string).toLowerCase()],
-    }
+  return {
+    setMapKeysConfig: (components: BeagleAngularConfig<Schema>['components']) => 
+      createMapOfKeys(components),
+    getComponent: <T>(name: ComponentName<T>) => 
+      mapLowercaseConfig[(name as string).toLowerCase()],
+  }
 }
 
 const beagleMapKeysConfig = createBeagleMapKeysConfig()
