@@ -15,7 +15,11 @@
 */
 
 import { Type } from '@angular/core'
-import { kebabToCamelCase, removeExtraIndentation, twoPointsToUnderline } from '../../utils/formatting'
+import {
+  kebabToCamelCase,
+  removeExtraIndentation,
+  twoPointsToUnderline,
+} from '../../utils/formatting'
 import { getComponentAnnotations } from '../../utils/metadata'
 import { remoteViewSelector } from '../../../constants'
 
@@ -39,7 +43,10 @@ function createQueries(components: Record<string, Type<any>>, angularVersion: nu
 }
 
 
-export function createComponentString(components: Record<string, Type<any>>, angularVersion: number) {
+export function createComponentString(
+    components: Record<string, Type<any>>,
+    angularVersion: number,
+  ) {
   const queries = createQueries(components, angularVersion)
 
   const componentString = `

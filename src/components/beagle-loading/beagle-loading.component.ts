@@ -19,6 +19,6 @@ import { Component } from '@angular/core'
 @Component({
   selector: 'beagle-loading',
   templateUrl: './beagle-loading.component.html',
-  styleUrls: ['./beagle-loading.component.less']
+  styleUrls: ['./beagle-loading.component.less'],
 })
 export class BeagleLoadingComponent { }

@@ -38,7 +38,8 @@ function runViewEngine(options: Option[]) {
     require('ts-node')
     require('amd-loader')
   } catch {
-    throw new BeagleCliError(`Error! Please run "${runInstall} -D ts-node amd-loader" before running "${runCli} beagle view-engine".`)
+    throw new BeagleCliError(`Error! Please run "${runInstall} -D ts-node amd-loader"
+      before running " ${runCli} beagle view-engine".`)
   }
 
   try {
