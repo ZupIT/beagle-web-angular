@@ -19,7 +19,8 @@ import { logInfo } from '../../utils/styledLogger'
 import { ensureDirectoryExistence, getImportFilePath } from '../../utils/filesystem'
 import { InitApplicationData, AngularEngine } from '../../types'
 import createBeagleModuleBoilerplate from '../../../codegen/boilerplate/beagle.module'
-import createComponentsModuleBoilerplate from '../../../codegen/boilerplate/beagle-components.module'
+import createComponentsModuleBoilerplate
+  from '../../../codegen/boilerplate/beagle-components.module'
 
 interface BeagleFileParams {
   beagleModulePath: string,

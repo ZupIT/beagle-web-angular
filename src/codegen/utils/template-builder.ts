@@ -30,16 +30,20 @@ function kebabToCamelCase(str: string) {
 function createTemplateForComponent(selector: string, inputs: ComponentFactory<any>['inputs']) {
   const templateName = kebabToCamelCase(selector)
   const templateInputs = inputs.map(input => `let-${input.propName}="${input.propName}"`).join(' ')
-  const componentInputs = inputs.map(input => `[${input.templateName}]="${input.propName}"`).join(' ')
+  const componentInputs = inputs.map(input =>
+    `[${input.templateName}]="${input.propName}"`).join(' ')
   const contextDirective = `${contextSelector} [_elementId]="beagleId" [_viewId]="viewId"`
   const addStyleId = inputs.findIndex((item) => item.propName === 'styleId')
   const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="styleId"'
 
   return `
-    <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="children" let-beagleId="id" let-style="style">
-      <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId" [ngClass]="styleId || ''" [ngStyle]="style">
+    <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="children"
+      let-beagleId="id" let-style="style">
+      <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId"
+        [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
-          <ng-container *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:child"></ng-container>
+          <ng-container *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:child">
+          </ng-container>
         </ng-container>
       </${selector}>
     </ng-template>

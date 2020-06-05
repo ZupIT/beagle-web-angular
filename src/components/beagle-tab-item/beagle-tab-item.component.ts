@@ -25,7 +25,9 @@ import { BeagleTabItemInterface } from '../schemas/tab-view'
   styleUrls: ['./beagle-tab-item.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabItemComponent extends BeagleComponent implements BeagleTabItemInterface, OnInit {
+export class BeagleTabItemComponent extends BeagleComponent
+  implements BeagleTabItemInterface, OnInit {
+
   @Input() title?: string
   @Input() icon?: string
   active = false

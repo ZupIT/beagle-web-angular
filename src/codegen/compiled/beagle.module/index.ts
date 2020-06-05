@@ -57,5 +57,6 @@ export function generateViewEngineCode({
     hasDefaultModule,
   })
 
-  return `${commentary}\n\n${importString}\n\n${templateString}\n\n${providerString}\n\n${componentString}\n\n${moduleString}\n`
+  return `${commentary}\n\n${importString}\n\n${templateString}\n\n${providerString}
+    \n\n${componentString}\n\n${moduleString}\n`
 }

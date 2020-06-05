@@ -23,6 +23,7 @@
   "include": [
     "./src/cli/**/*.*",
     "./src/cli/operations/view-engine/tsconfig.view-engine.json",
-    "./src/codegen/**/*.*"
+    "./src/codegen/**/*.*",
+    "./src/test.ts"
   ]
 }
