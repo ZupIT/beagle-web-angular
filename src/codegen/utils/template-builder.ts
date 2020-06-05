@@ -29,7 +29,8 @@ function kebabToCamelCase(str: string) {
 
 function createTemplateForComponent(selector: string, inputs: ComponentFactory<any>['inputs']) {
   const templateName = kebabToCamelCase(selector)
-  const templateInputs = inputs.map(input => `let-${input.propName}="tree.${input.propName}"`).join(' ')
+  const templateInputs = inputs.map(input => 
+    `let-${input.propName}="tree.${input.propName}"`).join(' ')
   const componentInputs = inputs.map(input =>
     `[${input.templateName}]="${input.propName}"`).join(' ')
   const contextDirective = `${contextSelector} [_elementId]="beagleId" [_viewId]="viewId"`
@@ -42,7 +43,8 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
       <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId"
         [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
-          <ng-container *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:{tree: child}">
+          <ng-container 
+            *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:{tree: child}">
           </ng-container>
         </ng-container>
       </${selector}>
