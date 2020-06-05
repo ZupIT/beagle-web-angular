@@ -15,12 +15,12 @@
 */
 
 import {
-  Component, Input, ViewEncapsulation,
-  OnInit, AfterViewInit, ElementRef, NgZone, OnChanges, SimpleChanges,
+  Component, Input, AfterViewInit, ElementRef, 
+  OnChanges, SimpleChanges, ViewEncapsulation,
 } from '@angular/core'
-import { EventHandler, replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
+import { replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
-import { BeagleListViewInterface } from '../schemas/list-view'
+import { BeagleListViewInterface, Direction } from '../schemas/list-view'
 
 @Component({
   selector: 'beagle-list-view',
@@ -29,24 +29,18 @@ import { BeagleListViewInterface } from '../schemas/list-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent extends BeagleComponent
-  implements BeagleListViewInterface, AfterViewInit,
-  OnInit, OnChanges {
-
+  implements BeagleListViewInterface, AfterViewInit, OnChanges {
+  
+  @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
-  eventHandler: EventHandler
+  
   hasInitialized = false
   usedDataSource: any[]
 
-  constructor(private element: ElementRef,
-    private ngZone: NgZone) {
+  constructor(private element: ElementRef) {
     super()
-    console.log('!!!!! constructor this.dataSource', this.dataSource)
-  }
-
-  ngOnInit() {
-    console.log('onInit this.dataSource', this.dataSource)
   }
 
   ngAfterViewInit() {
@@ -54,36 +48,25 @@ export class BeagleListViewComponent extends BeagleComponent
   }
 
   ngAfterViewChecked() {
-    console.log('dentro no ngAfterViewChecked')
     if (!this.hasInitialized && this.onInit) {
-      // this.ngZone.runOutsideAngular(() => {
-      //   setTimeout(() => {
       this.verifyCallingOnInit()
-      //   }, 5)
-      // })
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('Current changes', changes['dataSource']?.currentValue)
-    console.log('previous changes', changes['dataSource']?.previousValue)
     if ('dataSource' in changes &&
       JSON.stringify(changes['dataSource'].currentValue) !==
       JSON.stringify(changes['dataSource'].previousValue)) {
       const tree = this.getBeagleContext().getElement()
-      console.log('*** tree antes', tree)
       if (tree) {
         this.usedDataSource = this.dataSource
         const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
           [{ id: 'item', value: item }]))
         tree.children = parsedTree
-        console.log('*** updateWithTree tree depois', tree)
         this.getBeagleContext().updateWithTree({
           sourceTree: tree,
         })
       }
-    } else {
-      console.log('no else')
     }
   }
 

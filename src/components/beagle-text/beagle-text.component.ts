@@ -20,6 +20,7 @@ import { BeagleTextInterface, TextAlignment } from '../schemas/text'
 @Component({
   selector: 'beagle-text',
   templateUrl: './beagle-text.component.html',
+  styleUrls: ['./beagle-text.component.less'],
 })
 export class BeagleTextComponent implements BeagleTextInterface, OnInit {
 
