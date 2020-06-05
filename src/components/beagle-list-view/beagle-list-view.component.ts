@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import {
-  Component, Input, AfterViewInit, ElementRef, 
+import { Component, Input, ElementRef,
   OnChanges, SimpleChanges, ViewEncapsulation,
+  NgZone, AfterViewChecked,
 } from '@angular/core'
 import { replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
@@ -29,27 +29,28 @@ import { BeagleListViewInterface, Direction } from '../schemas/list-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent extends BeagleComponent
-  implements BeagleListViewInterface, AfterViewInit, OnChanges {
-  
+  implements BeagleListViewInterface, AfterViewChecked, OnChanges {
+
   @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
-  
   hasInitialized = false
   usedDataSource: any[]
 
-  constructor(private element: ElementRef) {
+  constructor(
+    private element: ElementRef, 
+    private ngZone: NgZone) {
     super()
-  }
-
-  ngAfterViewInit() {
-    this.verifyCallingOnInit()
   }
 
   ngAfterViewChecked() {
     if (!this.hasInitialized && this.onInit) {
-      this.verifyCallingOnInit()
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.verifyCallingOnInit()
+        }, 5)
+      })
     }
   }
 
@@ -78,6 +79,6 @@ export class BeagleListViewComponent extends BeagleComponent
   }
 
   isRendered() {
-    return this.element.nativeElement.parentNode !== null
+    return this.element.nativeElement.isConnected
   }
 }
