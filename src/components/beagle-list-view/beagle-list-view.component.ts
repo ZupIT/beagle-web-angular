@@ -16,7 +16,7 @@
 
 import {
   Component, Input, ViewEncapsulation,
-  OnInit, AfterViewInit, ElementRef,
+  OnInit, AfterViewInit, ElementRef, NgZone, OnChanges, SimpleChanges,
 } from '@angular/core'
 import { EventHandler, replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
@@ -29,47 +29,72 @@ import { BeagleListViewInterface } from '../schemas/list-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent extends BeagleComponent
-  implements BeagleListViewInterface, AfterViewInit {
+  implements BeagleListViewInterface, AfterViewInit,
+  OnInit, OnChanges {
+
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
   eventHandler: EventHandler
   hasInitialized = false
+  usedDataSource: any[]
 
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef,
+    private ngZone: NgZone) {
     super()
-    console.log('no constructor')
+    console.log('!!!!! constructor this.dataSource', this.dataSource)
   }
 
   ngOnInit() {
-    console.log('no ngOnInit')
+    console.log('onInit this.dataSource', this.dataSource)
   }
 
   ngAfterViewInit() {
-    console.log('no ngAfterViewInit')
-    const tree = this.getBeagleContext().getElement()
     this.verifyCallingOnInit()
-    if (this.dataSource && tree) {
-      const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
-        [{ id: 'item', value: item }]))
-      tree.children = parsedTree
-
-      this.getBeagleContext().updateWithTree({
-        sourceTree: tree,
-      })
-    }
   }
 
   ngAfterViewChecked() {
     console.log('dentro no ngAfterViewChecked')
-    this.verifyCallingOnInit()
+    if (!this.hasInitialized && this.onInit) {
+      // this.ngZone.runOutsideAngular(() => {
+      //   setTimeout(() => {
+      this.verifyCallingOnInit()
+      //   }, 5)
+      // })
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('Current changes', changes['dataSource']?.currentValue)
+    console.log('previous changes', changes['dataSource']?.previousValue)
+    if ('dataSource' in changes &&
+      JSON.stringify(changes['dataSource'].currentValue) !==
+      JSON.stringify(changes['dataSource'].previousValue)) {
+      const tree = this.getBeagleContext().getElement()
+      console.log('*** tree antes', tree)
+      if (tree) {
+        this.usedDataSource = this.dataSource
+        const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
+          [{ id: 'item', value: item }]))
+        tree.children = parsedTree
+        console.log('*** updateWithTree tree depois', tree)
+        this.getBeagleContext().updateWithTree({
+          sourceTree: tree,
+        })
+      }
+    } else {
+      console.log('no else')
+    }
   }
 
   verifyCallingOnInit() {
-    if (!this.hasInitialized) {
+    if (!this.hasInitialized && this.isRendered()) {
       this.hasInitialized = true
       if (this.onInit) this.onInit()
     }
   }
 
+  isRendered() {
+    return this.element.nativeElement.parentNode !== null
+  }
 }
