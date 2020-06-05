@@ -24,12 +24,15 @@ function createBeagleMapKeysConfig <Schema = DefaultSchema>()  {
     
     function createMapOfKeys(components: BeagleAngularConfig<Schema>['components']) {
         const keys = Object.keys(components)
-        mapLowercaseConfig = keys.reduce((result, key) => ({ ...result, [key.toLowerCase()]: key }), {})
+        mapLowercaseConfig = keys.reduce((result, key) => 
+            ({ ...result, [key.toLowerCase()]: key }), {})
     }
 
     return {
-        setMapKeysConfig: (components: BeagleAngularConfig<Schema>['components']) => createMapOfKeys(components),
-        getComponent: <T>(name: ComponentName<T>) => mapLowercaseConfig[(name as string).toLowerCase()],
+        setMapKeysConfig: (components: BeagleAngularConfig<Schema>['components']) => 
+            createMapOfKeys(components),
+        getComponent: <T>(name: ComponentName<T>) => 
+            mapLowercaseConfig[(name as string).toLowerCase()],
     }
 }
 
