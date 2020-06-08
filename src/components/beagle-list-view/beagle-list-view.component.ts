@@ -35,8 +35,7 @@ export class BeagleListViewComponent extends BeagleComponent
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
-  hasInitialized = false
-  usedDataSource: any[]
+  private hasInitialized = false
 
   constructor(
     private element: ElementRef, 
@@ -60,7 +59,6 @@ export class BeagleListViewComponent extends BeagleComponent
       JSON.stringify(changes['dataSource'].previousValue)) {
       const tree = this.getBeagleContext().getElement()
       if (tree) {
-        this.usedDataSource = this.dataSource
         const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
           [{ id: 'item', value: item }]))
         tree.children = parsedTree
