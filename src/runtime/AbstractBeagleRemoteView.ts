@@ -36,6 +36,7 @@ import { twoPointsToUnderline } from '../codegen/utils/formatting'
 import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
+import beagleMapKeysConfig from './utils/beagle-map-keys-config'
 
 let nextViewId = 1
 
@@ -86,12 +87,15 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
-    if (!this[twoPointsToUnderline(componentName)]) {
+    const component = beagleMapKeysConfig.getComponent(componentName)
+    const normalizedComponentName = twoPointsToUnderline(component)
+    
+    if (!this[normalizedComponentName]) {
       console.warn(
         `Beagle: the component ${componentName} was not declared in Beagle's configuration.`,
       )
     }
-    return this[twoPointsToUnderline(componentName)]
+    return this[normalizedComponentName]
   }
 
   updateView = (uiTree: IdentifiableBeagleUIElement<any>) => {

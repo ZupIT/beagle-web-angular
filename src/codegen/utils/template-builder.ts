@@ -29,20 +29,22 @@ function kebabToCamelCase(str: string) {
 
 function createTemplateForComponent(selector: string, inputs: ComponentFactory<any>['inputs']) {
   const templateName = kebabToCamelCase(selector)
-  const templateInputs = inputs.map(input => `let-${input.propName}="${input.propName}"`).join(' ')
+  const templateInputs = inputs.map(input => 
+    `let-${input.propName}="tree.${input.propName}"`).join(' ')
   const componentInputs = inputs.map(input =>
     `[${input.templateName}]="${input.propName}"`).join(' ')
   const contextDirective = `${contextSelector} [_elementId]="beagleId" [_viewId]="viewId"`
   const addStyleId = inputs.findIndex((item) => item.propName === 'styleId')
-  const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="styleId"'
+  const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="tree.styleId"'
 
   return `
-    <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="children"
-      let-beagleId="id" let-style="style">
+    <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="tree.children"
+      let-beagleId="tree.id" let-style="tree.style">
       <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId"
         [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
-          <ng-container *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:child">
+          <ng-container 
+            *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:{tree: child}">
           </ng-container>
         </ng-container>
       </${selector}>
@@ -58,7 +60,7 @@ export function createRemoteViewTemplate(components: ComponentInfo[]) {
   const containerTemplate = `
     <ng-container #__view_container>
       <ng-container *ngIf="!!tree">
-        <ng-container *ngTemplateOutlet="getTemplate(tree._beagleComponent_);context:tree">
+        <ng-container *ngTemplateOutlet="getTemplate(tree._beagleComponent_);context:{tree: tree}">
         </ng-container>
       </ng-container>
     </ng-container>
