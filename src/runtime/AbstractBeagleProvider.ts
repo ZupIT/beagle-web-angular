@@ -30,7 +30,13 @@ export abstract class AbstractBeagleProvider {
     
     beagleMapKeysConfig.setMapKeysConfig({ ...config.components, ...defaultComponents })
     // @ts-ignore // fixme
-    this.service = createCoreBeagleUIService<Schema>(config)
+    this.service = createCoreBeagleUIService<Schema>({
+      ...config,
+      components: {
+        ...defaultComponents,
+        ...config.components,
+      },
+    })
   }
 
   getBeagleUIService() {
