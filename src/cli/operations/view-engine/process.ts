@@ -89,8 +89,8 @@ export function start() {
   writeFileSync(viewEngineConfig.outputPath, fileContent)
   copyFileSync(viewEngineConfig.beagleModulePath, beagleModuleCopyPath)
 
-  logSuccess(`Beagle module files have been successfully generated at "
-    ${dirname(viewEngineConfig.outputPath)}"!`)
+  logSuccess(`Beagle module files have been successfully generated at 
+    "${dirname(viewEngineConfig.outputPath)}"!`)
 }
 
 try {
