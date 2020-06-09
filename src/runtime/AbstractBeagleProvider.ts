@@ -16,6 +16,8 @@
 
 import createCoreBeagleUIService, { DefaultSchema } from '@zup-it/beagle-web'
 import { BeagleAngularConfig, BeagleAngularUIService } from '../types'
+import { defaultComponents } from '../constants'
+import beagleMapKeysConfig from './utils/beagle-map-keys-config'
 
 export abstract class AbstractBeagleProvider {
   private service: BeagleAngularUIService | undefined
@@ -25,6 +27,8 @@ export abstract class AbstractBeagleProvider {
       console.error('Beagle service has already started!')
       return
     }
+    
+    beagleMapKeysConfig.setMapKeysConfig({ ...config.components, ...defaultComponents })
     // @ts-ignore // fixme
     this.service = createCoreBeagleUIService<Schema>(config)
   }
