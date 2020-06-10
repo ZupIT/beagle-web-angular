@@ -14,7 +14,8 @@
     "build-angular": "ng build beagle-angular --prod",
     "build": "yarn build-angular && yarn build-cli && yarn fix-package",
     "test": "ng test",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "watch": "nodemon --watch 'src/**/*.ts' -e ts --exec yarn build"
   },
   "husky": {
     "hooks": {

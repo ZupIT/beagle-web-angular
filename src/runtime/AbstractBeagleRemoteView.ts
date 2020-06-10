@@ -67,7 +67,6 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
         'you need to start the beagle provider before using a remote view.',
       )
     }
-    // fixme: what if this.loadParams.baseUrl has been set?
     this.view = beagleService.createView(this.loadParams.path)
     this.view.subscribe(this.updateView)
     this.view.addErrorListener((errorListener) => {
