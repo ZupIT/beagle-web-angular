@@ -14,8 +14,13 @@
   * limitations under the License.
 */
 
+import { BeagleUIElement } from '@zup-it/beagle-web'
+
 export type Direction = 'VERTICAL' | 'HORIZONTAL'
 
 export interface BeagleListViewInterface {
   direction: Direction,
+  dataSource: any[],
+  onInit?: () => void,
+  template: BeagleUIElement,
 }

@@ -14,7 +14,12 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { Component, Input, ElementRef,
+  OnChanges, SimpleChanges, ViewEncapsulation,
+  NgZone, AfterViewChecked,
+} from '@angular/core'
+import { replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleListViewInterface, Direction } from '../schemas/list-view'
 
 @Component({
@@ -23,7 +28,55 @@ import { BeagleListViewInterface, Direction } from '../schemas/list-view'
   styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent implements BeagleListViewInterface {
-  @Input() direction: Direction
+export class BeagleListViewComponent extends BeagleComponent
+  implements BeagleListViewInterface, AfterViewChecked, OnChanges {
 
+  @Input() direction: Direction
+  @Input() dataSource: any[]
+  @Input() template: BeagleUIElement
+  @Input() onInit?: () => void
+  private hasInitialized = false
+
+  constructor(
+    private element: ElementRef, 
+    private ngZone: NgZone) {
+    super()
+  }
+
+  ngAfterViewChecked() {
+    if (!this.hasInitialized && this.onInit) {
+      this.ngZone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.verifyCallingOnInit()
+        }, 5)
+      })
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('dataSource' in changes &&
+      JSON.stringify(changes['dataSource'].currentValue) !==
+      JSON.stringify(changes['dataSource'].previousValue)) {
+      const tree = this.getBeagleContext().getElement()
+      if (tree) {
+        const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
+          [{ id: 'item', value: item }]))
+        tree.children = parsedTree
+        this.getBeagleContext().updateWithTree({
+          sourceTree: tree,
+        })
+      }
+    }
+  }
+
+  verifyCallingOnInit() {
+    if (!this.hasInitialized && this.isRendered()) {
+      this.hasInitialized = true
+      if (this.onInit) this.onInit()
+    }
+  }
+
+  isRendered() {
+    return this.element.nativeElement.isConnected
+  }
 }

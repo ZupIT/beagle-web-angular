@@ -50,6 +50,6 @@ export class BeagleContainerComponent implements BeagleContainerInterface,
   }
 
   isRendered() {
-    return this.element.nativeElement.parentNode !== null
+    return this.element.nativeElement.isConnected
   }
 }
