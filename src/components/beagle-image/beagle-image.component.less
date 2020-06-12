@@ -18,29 +18,29 @@ figure {
   width: inherit;
   height: inherit;
   margin: 0px;
-  &.FIT_XY,
-  &.FIT_CENTER,
-  &.CENTER_CROP,
-  &.CENTER {
+  .FIT_XY,
+  .FIT_CENTER,
+  .CENTER_CROP,
+  .CENTER {
     img {
       width: inherit;
       height: inherit;
     }
   }
 
-  &.FIT_XY {
+  .FIT_XY {
     object-fit: fill
   }
 
-  &.FIT_CENTER {
+  .FIT_CENTER {
     object-fit: cover;
   }
 
-  &.CENTER_CROP {
+  .CENTER_CROP {
     object-fit: none;
   }
 
-  &.CENTER {
+  .CENTER {
     object-fit: contain;
   }
 
