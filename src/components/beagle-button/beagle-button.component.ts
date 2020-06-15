@@ -31,11 +31,20 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() text: string
   @Input() styleId?: string
   @Input() onPress?: () => void
+  @Input() style?: Record<string, any>
+  usedStyle: Record<string, any>
 
   public type = 'button'
 
   constructor() {
     super()
+  }
+
+  ngOnInit() {
+    this.usedStyle = { ...this.style }
+    if (this.usedStyle && this.usedStyle.margin) {
+      delete this.usedStyle.margin
+    }
   }
 
   ngAfterViewInit() {
@@ -49,8 +58,8 @@ export class BeagleButtonComponent extends BeagleComponent
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {
     return element &&
-    element.onPress &&
-    element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
+      element.onPress &&
+      element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
   }
 
 }
