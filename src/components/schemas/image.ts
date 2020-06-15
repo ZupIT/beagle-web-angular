@@ -22,7 +22,7 @@ export type ImageMode = 'local' | 'remote'
 
 export interface ImagePath {
   _beagleImagePath_: ImageMode,
-  url: string
+  url: string,
 }
 
 export interface Acessibility {

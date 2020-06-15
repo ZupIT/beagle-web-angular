@@ -34,7 +34,9 @@ export class BeagleImageComponent extends BeagleComponent implements BeagleImage
 
   ngOnInit() {
     const view = this.getBeagleContext().getView()
-    this.imageSource = this.path && this.path._beagleImagePath_ === 'local' ? this.path && this.path.url || '' : view.getUrlBuilder().build(this.path && this.path.url || '')
+    this.imageSource = this.path && this.path._beagleImagePath_ === 'local'
+      ? this.path && this.path.url || ''
+      : view.getUrlBuilder().build(this.path && this.path.url || '')
 
     if (!this.contentMode) {
       this.contentMode = 'FIT_CENTER'
