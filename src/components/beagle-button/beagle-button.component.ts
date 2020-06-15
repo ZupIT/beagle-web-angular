@@ -13,7 +13,7 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-
+import { Properties as CSSProperties } from 'csstype'
 import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
 import { IdentifiableBeagleUIElement } from '@zup-it/beagle-web/types'
 import { BeagleButtonInterface } from '../schemas/button'
@@ -31,7 +31,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() text: string
   @Input() styleId?: string
   @Input() onPress?: () => void
-  @Input() style?: Record<string, any>
+  @Input() style?: CSSProperties
   usedStyle: Record<string, any>
 
   public type = 'button'
