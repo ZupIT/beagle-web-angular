@@ -16,7 +16,6 @@
 
 import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
 import { BeagleModalInterface } from '../schemas/modal'
-import { BeagleComponent } from '../../runtime/BeagleComponent'
 
 @Component({
   selector: 'beagle-modal',
@@ -24,17 +23,11 @@ import { BeagleComponent } from '../../runtime/BeagleComponent'
   styleUrls: ['./beagle-modal.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleModalComponent extends BeagleComponent implements BeagleModalInterface {
-
+export class BeagleModalComponent implements BeagleModalInterface {
   @Input() isOpen: boolean
   @Input() onClose: () => void
-
-  constructor() {
-    super()
-  }
 
   handleClose() {
     this.onClose && this.onClose()
   }
-
 }
