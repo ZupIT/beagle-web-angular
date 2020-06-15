@@ -42,8 +42,12 @@ export class BeagleButtonComponent extends BeagleComponent
 
   ngOnInit() {
     this.usedStyle = { ...this.style }
-    if (this.usedStyle && this.usedStyle.margin) {
-      delete this.usedStyle.margin
+    if (this.usedStyle) {
+      this.usedStyle.margin && delete this.usedStyle.margin
+      this.usedStyle.top && delete this.usedStyle.top
+      this.usedStyle.bottom && delete this.usedStyle.bottom
+      this.usedStyle.right && delete this.usedStyle.right
+      this.usedStyle.left && delete this.usedStyle.left
     }
   }
 
