@@ -31,6 +31,7 @@ import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
 import { BeagleTouchableComponent } from './beagle-touchable/beagle-touchable.component'
 import { TabsService } from './services/tabs.service'
 import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-form.component'
+import { BeagleContextModule } from '../runtime/beagle-context/module'
 
 const components = [
   BeagleButtonComponent,
@@ -51,7 +52,7 @@ const components = [
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BeagleContextModule],
   providers: [TabsService],
 })
 export class BeagleDefaultComponentsModule { }
