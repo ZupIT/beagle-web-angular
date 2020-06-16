@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, Input, AfterViewInit, ViewEncapsulation } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { TabsService } from '../services/tabs.service'
 import { BeagleTabItemInterface } from '../schemas/tab-view'
@@ -26,18 +26,18 @@ import { BeagleTabItemInterface } from '../schemas/tab-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleTabItemComponent extends BeagleComponent
-  implements BeagleTabItemInterface, OnInit {
+  implements BeagleTabItemInterface, AfterViewInit {
 
   @Input() title?: string
   @Input() icon?: string
-  active = false
-  id: string
+  public active = false
+  private id: string
 
   constructor(private tabsService: TabsService) {
     super()
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.id = this.getBeagleContext().getElementId()
     this.listenTabChanges()
   }

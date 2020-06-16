@@ -14,9 +14,16 @@
   * limitations under the License.
 */
 
-import { Component, Input, ElementRef,
-  OnChanges, SimpleChanges, ViewEncapsulation,
-  NgZone, AfterViewChecked,
+import {
+  Component,
+  Input,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+  ViewEncapsulation,
+  NgZone,
+  AfterViewChecked,
+  AfterViewInit,
 } from '@angular/core'
 import { replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
@@ -29,13 +36,14 @@ import { BeagleListViewInterface, Direction } from '../schemas/list-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent extends BeagleComponent
-  implements BeagleListViewInterface, AfterViewChecked, OnChanges {
+  implements BeagleListViewInterface, AfterViewChecked, OnChanges, AfterViewInit {
 
   @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
   private hasInitialized = false
+  private hasRenderedDataSource = false
 
   constructor(
     private element: ElementRef, 
@@ -53,20 +61,28 @@ export class BeagleListViewComponent extends BeagleComponent
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if ('dataSource' in changes &&
-      JSON.stringify(changes['dataSource'].currentValue) !==
-      JSON.stringify(changes['dataSource'].previousValue)) {
-      const tree = this.getBeagleContext().getElement()
-      if (tree) {
-        const parsedTree = this.dataSource.map((item) => replaceBindings(this.template,
-          [{ id: 'item', value: item }]))
-        tree.children = parsedTree
-        this.getBeagleContext().updateWithTree({
-          sourceTree: tree,
-        })
-      }
+  renderDataSource() {
+    const tree = this.getBeagleContext().getElement()
+    if (tree) {
+      const parsedTree = this.dataSource.map(item => replaceBindings(
+        this.template,
+        [{ id: 'item', value: item }],
+      ))
+      tree.children = parsedTree
+      this.getBeagleContext().updateWithTree({ sourceTree: tree })
     }
+    this.hasRenderedDataSource = true
+  }
+
+  ngAfterViewInit() {
+    if (!this.hasRenderedDataSource) this.renderDataSource()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['dataSource'] || !this.getBeagleContext) return
+    const current = JSON.stringify(changes['dataSource'].currentValue)
+    const prev  = JSON.stringify(changes['dataSource'].previousValue)
+    if (prev !== current) this.renderDataSource()
   }
 
   verifyCallingOnInit() {
