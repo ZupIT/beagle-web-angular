@@ -17,7 +17,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
-import { BeagleContextModule } from '../runtime/beagle-context/module'
 import { BeagleButtonComponent } from './beagle-button/beagle-button.component'
 import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.component'
 import { BeagleTextComponent } from './beagle-text/beagle-text.component'
@@ -30,6 +29,7 @@ import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.compon
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
 import { BeagleTouchableComponent } from './beagle-touchable/beagle-touchable.component'
+import { BeagleModalComponent } from './beagle-modal/beagle-modal.component'
 import { TabsService } from './services/tabs.service'
 import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-form.component'
 
@@ -47,12 +47,13 @@ const components = [
   BeagleErrorComponent,
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
+  BeagleModalComponent,
 ]
 
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule, FormsModule, BeagleContextModule],
+  imports: [CommonModule, FormsModule],
   providers: [TabsService],
 })
 export class BeagleDefaultComponentsModule { }

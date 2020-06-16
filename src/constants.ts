@@ -28,13 +28,19 @@ import {
   BeagleLoadingComponent,
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
+  BeagleModalComponent,
 } from './components'
 
 export const viewIdAttributeName = '__beagle_view_id'
 export const remoteViewSelector = 'beagle-remote-view'
 export const contextSelector = 'beagle-context'
 
-export const defaultComponents: Record<string, Type<any>> = {
+const libRequiredComponents = {
+  'custom:error': BeagleErrorComponent,
+  'custom:loading': BeagleLoadingComponent,
+}
+
+const beagleDefaultComponents = {
   'beagle:button': BeagleButtonComponent,
   'beagle:text': BeagleTextComponent,
   'beagle:listview': BeagleListViewComponent,
@@ -46,8 +52,16 @@ export const defaultComponents: Record<string, Type<any>> = {
   'beagle:tabitem': BeagleTabItemComponent,
   'beagle:scrollview': BeagleContainerComponent,
   'beagle:touchable': BeagleTouchableComponent,
-  'custom:error': BeagleErrorComponent,
-  'custom:loading': BeagleLoadingComponent,
   'beagle:lazycomponent': BeagleLazyComponent,
   'beagle:simpleform': BeagleSimpleFormComponent,
+}
+
+const webSpecificComponents = {
+  'custom:modal': BeagleModalComponent,
+}
+
+export const defaultComponents: Record<string, Type<any>> = {
+  ...libRequiredComponents,
+  ...beagleDefaultComponents,
+  ...webSpecificComponents,
 }
