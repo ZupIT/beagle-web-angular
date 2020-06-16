@@ -41,8 +41,8 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
   const styleVariable = addStyle >= 0 ? '' : 'let-style="tree.style"'
 
   return `
-    <ng-template #${templateName} ${templateInputs} ${styleIdVariable} ${styleVariable} let-children="tree.children"
-      let-beagleId="tree.id">
+    <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="tree.children"
+      let-beagleId="tree.id" ${styleVariable}>
       <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId"
         [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
