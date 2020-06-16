@@ -14,11 +14,14 @@
   * limitations under the License.
 */
 
-import * as CSS from 'csstype'
+import { Properties as CSSProperties } from 'csstype'
 
 export interface BeagleButtonInterface {
   text: string,
   styleId?: string,
   onPress?: () => void,
-  style?: CSS.Properties,
+  style?: CSSProperties,
 }
+
+export const StylesNotToInherit = ['margin', 'marginTop', 'marginBottom', 'marginRight', 
+  'marginLeft', 'top', 'left', 'right', 'bottom']
