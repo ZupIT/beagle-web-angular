@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, AfterViewInit } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleImageInterface, ImageMode, Acessibility, ImageContentMode } from '../schemas/image'
 
@@ -23,7 +23,9 @@ import { BeagleImageInterface, ImageMode, Acessibility, ImageContentMode } from 
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent extends BeagleComponent implements BeagleImageInterface, OnInit {
+export class BeagleImageComponent
+  extends BeagleComponent
+  implements BeagleImageInterface, AfterViewInit {
   @Input() url = ''
   @Input() mode: ImageMode
   @Input() contentMode?: ImageContentMode = 'FIT_CENTER'
@@ -33,7 +35,7 @@ export class BeagleImageComponent extends BeagleComponent implements BeagleImage
   }
   imageSource = ''
 
-  ngOnInit() {
+  ngAfterViewInit() {
     const view = this.getBeagleContext().getView()
     this.imageSource = this.mode === 'Local' ? this.url : view.getUrlBuilder().build(this.url)
 
