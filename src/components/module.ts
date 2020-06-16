@@ -29,6 +29,7 @@ import { BeagleTabItemComponent } from './beagle-tab-item/beagle-tab-item.compon
 import { BeagleTabViewComponent } from './beagle-tab-view/beagle-tab-view.component'
 import { BeagleErrorComponent } from './beagle-error/beagle-error.component'
 import { BeagleTouchableComponent } from './beagle-touchable/beagle-touchable.component'
+import { BeagleModalComponent } from './beagle-modal/beagle-modal.component'
 import { TabsService } from './services/tabs.service'
 import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-form.component'
 
@@ -46,6 +47,7 @@ const components = [
   BeagleErrorComponent,
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
+  BeagleModalComponent,
 ]
 
 @NgModule({
