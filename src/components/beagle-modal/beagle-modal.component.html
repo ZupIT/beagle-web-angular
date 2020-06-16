@@ -14,6 +14,10 @@
   * limitations under the License. 
 -->
 
-<div (click)="handleClose()" [hidden]="!isOpen">
-  <ng-content></ng-content>
+<div class="modal" [hidden]="!isOpen">
+  <div class="modal-background">
+    <div class="modal-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
 </div>

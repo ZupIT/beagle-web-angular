@@ -16,7 +16,13 @@
 
 @import "../assets/default-style.less";
 
-beagle-modal {
+.modal-content {
+  background-color: #FFF;
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.modal-background {
   background: @blackTransparent;
   position: fixed;
   top: 0;
@@ -26,11 +32,4 @@ beagle-modal {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  > div {
-    background-color: #FFF;
-    border-radius: 25px;
-    width: 800px;
-    padding: 20px;
-  }
 }

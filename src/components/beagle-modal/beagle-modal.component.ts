@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
+import { Component, Input, ViewEncapsulation, ElementRef, OnInit, OnDestroy } from '@angular/core'
 import { BeagleModalInterface } from '../schemas/modal'
 
 @Component({
@@ -23,11 +23,36 @@ import { BeagleModalInterface } from '../schemas/modal'
   styleUrls: ['./beagle-modal.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleModalComponent implements BeagleModalInterface {
+export class BeagleModalComponent implements BeagleModalInterface, OnInit, OnDestroy {
   @Input() isOpen: boolean
   @Input() onClose: () => void
 
+  constructor(private elementRef: ElementRef) {}
+
+  ngOnInit() {
+    document.addEventListener('keyup', (event) => this.closeOnEsc(event))
+    this.elementRef.nativeElement.addEventListener('click', el => this.closeOnClick(el))
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('keyup', (event) => this.closeOnEsc(event))
+    this.elementRef.nativeElement.removeEventListener('click', el => this.closeOnClick(el))
+  }
+
   handleClose() {
     this.onClose && this.onClose()
+  }
+
+  closeOnEsc({ key }: KeyboardEvent) {
+    if (key === 'Escape') {
+      this.handleClose()
+      document.removeEventListener('keyup', this.handleClose)
+    }
+  }
+
+  closeOnClick({ target }) {
+    if (target.className === 'modal-background') {
+      this.handleClose()
+    }
   }
 }
