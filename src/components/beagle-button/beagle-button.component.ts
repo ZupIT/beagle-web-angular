@@ -16,7 +16,7 @@
 import { Properties as CSSProperties } from 'csstype'
 import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
 import { IdentifiableBeagleUIElement } from '@zup-it/beagle-web/types'
-import { BeagleButtonInterface } from '../schemas/button'
+import { BeagleButtonInterface, StylesNotToInherit } from '../schemas/button'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 
 @Component({
@@ -32,8 +32,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() styleId?: string
   @Input() onPress?: () => void
   @Input() style?: CSSProperties
-  usedStyle: Record<string, any> = {}
-
+  public usefulStyle: Record<string, any> = {}
   public type = 'button'
 
   constructor() {
@@ -41,13 +40,13 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   ngOnInit() {
-    this.usedStyle = { ...this.style }
-    if (this.usedStyle) {
-      this.usedStyle.margin && delete this.usedStyle.margin
-      this.usedStyle.top && delete this.usedStyle.top
-      this.usedStyle.bottom && delete this.usedStyle.bottom
-      this.usedStyle.right && delete this.usedStyle.right
-      this.usedStyle.left && delete this.usedStyle.left
+    if (this.style) {
+      this.usefulStyle = Object.keys(this.style).reduce((styleObject, prop) => {
+        if (!StylesNotToInherit.includes(prop)) {
+          styleObject[prop] = this.style && this.style[prop]
+        }
+        return styleObject
+      }, {})
     }
   }
 
