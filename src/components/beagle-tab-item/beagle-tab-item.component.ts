@@ -30,8 +30,8 @@ export class BeagleTabItemComponent extends BeagleComponent
 
   @Input() title?: string
   @Input() icon?: string
-  active = false
-  id: string
+  public active = false
+  private id: string
 
   constructor(private tabsService: TabsService) {
     super()

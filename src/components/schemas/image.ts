@@ -18,7 +18,12 @@ import * as CSS from 'csstype'
 
 export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
 
-export type ImageMode = 'Network' | 'Local'
+export type ImageMode = 'local' | 'remote'
+
+export interface ImagePath {
+  _beagleImagePath_: ImageMode,
+  url: string,
+}
 
 export interface Acessibility {
   accessible: boolean,
@@ -26,8 +31,7 @@ export interface Acessibility {
 }
 
 export interface BeagleImageInterface {
-  url: string,
-  mode: ImageMode,
+  path: ImagePath,
   contentMode?: ImageContentMode,
   accessibility?: Acessibility,
   styleId?: string,
