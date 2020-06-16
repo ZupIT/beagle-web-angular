@@ -32,7 +32,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() styleId?: string
   @Input() onPress?: () => void
   @Input() style?: CSSProperties
-  usedStyle: Record<string, any>
+  usedStyle: Record<string, any> = {}
 
   public type = 'button'
 
