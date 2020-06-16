@@ -2,7 +2,7 @@
   "compileOnSave":false,
   "compilerOptions":{
     "baseUrl":"./src",
-    "outDir":"./dist",
+    "outDir":"./.dist",
     "inlineSources":true,
     "types":["node"],
     "sourceMap":true,
@@ -27,7 +27,8 @@
     "strictInjectionParameters":true,
     "skipTemplateCodegen":true,
     "strictMetadataEmit":true,
-    "enableResourceInlining":true
+    "enableResourceInlining":true,
+    "enableIvy": false,
   },
   "exclude":[
     "src/test.ts",

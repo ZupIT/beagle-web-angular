@@ -11,8 +11,8 @@
   "scripts": {
     "fix-package": "node bin/fix-package.js",
     "build-cli": "yarn tsc -p tsconfig.cli.json",
-    "build-angular": "ng build beagle-angular --prod",
-    "build": "yarn build-angular && yarn build-cli && yarn fix-package",
+    "copy-dist": "yarn ncp .dist dist",
+    "build": "ng build beagle-angular --prod && yarn build-cli && yarn fix-package && yarn copy-dist",
     "test": "ng test",
     "lint": "eslint src/**/*.ts",
     "watch": "nodemon --watch src -e ts,html,css,less --exec yarn build"
@@ -75,6 +75,7 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "ncp": "^2.0.0",
     "ng-packagr": "^9.0.0",
     "protractor": "~5.4.3",
     "rxjs": "~6.5.4",
