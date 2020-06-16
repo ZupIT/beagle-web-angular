@@ -15,37 +15,46 @@
 */
 
 figure {
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: inherit;
+  min-width: inherit;
+  min-height: inherit;
+  max-width: inherit;
+  max-height: inherit;
   margin: 0px;
-  &.FIT_XY,
-  &.FIT_CENTER,
-  &.CENTER_CROP,
-  &.CENTER {
+
+  .FIT_XY,
+  .FIT_CENTER,
+  .CENTER_CROP,
+  .CENTER {
     img {
       width: inherit;
       height: inherit;
     }
   }
 
-  &.FIT_XY {
+  .FIT_XY {
     object-fit: fill
   }
 
-  &.FIT_CENTER {
+  .FIT_CENTER {
     object-fit: cover;
   }
 
-  &.CENTER_CROP {
+  .CENTER_CROP {
     object-fit: none;
   }
 
-  &.CENTER {
+  .CENTER {
     object-fit: contain;
   }
 
   img {
     width: inherit;
     height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    max-width: inherit;
+    max-height: inherit;
   }
 }

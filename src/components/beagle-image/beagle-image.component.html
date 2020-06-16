@@ -14,6 +14,6 @@
   * limitations under the License.
 -->
 
-<figure [ngClass]="contentMode">
-  <img [src]="imageSource" [alt]="accessibility?.accessibilityLabel">
+<figure>
+  <img [src]="imageSource" [ngClass]="contentMode" [alt]="accessibility?.accessibilityLabel">
 </figure>
