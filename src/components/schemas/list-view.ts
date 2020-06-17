@@ -18,9 +18,13 @@ import { BeagleUIElement } from '@zup-it/beagle-web'
 
 export type Direction = 'VERTICAL' | 'HORIZONTAL'
 
-export interface BeagleListViewInterface {
+export interface BeagleFutureListViewInterface {
   direction: Direction,
   dataSource: any[],
   onInit?: () => void,
   template: BeagleUIElement,
+}
+
+export interface BeagleListViewInterface {
+  direction: Direction,
 }
