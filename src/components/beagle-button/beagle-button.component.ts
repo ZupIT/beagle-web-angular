@@ -13,10 +13,10 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-
+import { Properties as CSSProperties } from 'csstype'
 import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
 import { IdentifiableBeagleUIElement } from '@zup-it/beagle-web/types'
-import { BeagleButtonInterface } from '../schemas/button'
+import { BeagleButtonInterface, StylesNotToInherit } from '../schemas/button'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 
 @Component({
@@ -31,11 +31,23 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() text: string
   @Input() styleId?: string
   @Input() onPress?: () => void
-
+  @Input() style?: CSSProperties
+  public usefulStyle: Record<string, any> = {}
   public type = 'button'
 
   constructor() {
     super()
+  }
+
+  ngOnInit() {
+    if (this.style) {
+      this.usefulStyle = Object.keys(this.style).reduce((styleObject, prop) => {
+        if (!StylesNotToInherit.includes(prop)) {
+          styleObject[prop] = this.style && this.style[prop]
+        }
+        return styleObject
+      }, {})
+    }
   }
 
   ngAfterViewInit() {
@@ -49,8 +61,8 @@ export class BeagleButtonComponent extends BeagleComponent
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {
     return element &&
-    element.onPress &&
-    element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
+      element.onPress &&
+      element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
   }
 
 }
