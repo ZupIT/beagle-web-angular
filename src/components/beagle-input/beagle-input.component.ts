@@ -23,8 +23,8 @@ import { BeagleInputInterface, InputType } from '../schemas/input'
 })
 export class BeagleInputComponent implements BeagleInputInterface, OnInit {
 
-  @Input() value: string
-  @Input() placeholder: string
+  @Input() value?: string
+  @Input() placeholder?: string
   @Input() disabled?: boolean
   @Input() readOnly?: boolean
   @Input() type?: InputType
