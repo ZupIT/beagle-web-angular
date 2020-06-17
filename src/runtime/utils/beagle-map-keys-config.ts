@@ -32,7 +32,7 @@ function createBeagleMapKeysConfig <Schema = DefaultSchema>()  {
     setMapKeysConfig: (components: BeagleAngularConfig<Schema>['components']) => 
       createMapOfKeys(components),
     getComponent: <T>(name: ComponentName<T>) => 
-      mapLowercaseConfig[(name as string).toLowerCase()],
+      name && mapLowercaseConfig[(name as string).toLowerCase()],
   }
 }
 
