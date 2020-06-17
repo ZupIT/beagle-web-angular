@@ -14,13 +14,14 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { BeagleTextInterface, TextAlignment } from '../schemas/text'
 
 @Component({
   selector: 'beagle-text',
   templateUrl: './beagle-text.component.html',
   styleUrls: ['./beagle-text.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BeagleTextComponent implements BeagleTextInterface, OnInit {
 

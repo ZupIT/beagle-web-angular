@@ -17,8 +17,12 @@
 @import "../assets/default-style.less";
 
 beagle-button {
-  cursor: pointer;
-  .default-theme {
+  background-color: inherit !important;
+  padding: 0 !important;
+  display: inline-block !important;
+  
+  button {
+    cursor: pointer;
     border: 1px solid @swampLight;
     color: inherit;
     background: transparent;
@@ -32,6 +36,7 @@ beagle-button {
     text-align: center;
     margin: 0;
     min-width: 70px;
+    width: 100%;
     line-height: 34px;
     padding: 0 16px;
     border-radius: 5px;
@@ -40,11 +45,5 @@ beagle-button {
     &:hover {
       background-color: @swampTransparent;
     }
-  }
-
-  :not(.default-theme) {
-    all: inherit;
-    padding: 0px;
-    margin: 0px;
   }
 }
