@@ -2,6 +2,7 @@
 yarn.lock
 node_modules/
 dist/
+.dist/
 yarn-error.log
 .DS_Store
 package-lock.json

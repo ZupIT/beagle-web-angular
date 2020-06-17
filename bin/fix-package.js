@@ -17,7 +17,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const DIST_PACKAGE = './dist/package.json'
+const DIST_PACKAGE = './.dist/package.json'
 const CONFIG_PATH = './lib-fix-package.json'
 
 async function readJSON(filePath) {
