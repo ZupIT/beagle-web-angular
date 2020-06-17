@@ -19,7 +19,7 @@ import { BeagleInputInterface, InputType } from '../schemas/input'
 
 @Component({
   selector: 'beagle-input',
-  templateUrl: './beagle-input.component.html'
+  templateUrl: './beagle-input.component.html',
 })
 export class BeagleInputComponent implements BeagleInputInterface, OnInit {
 
