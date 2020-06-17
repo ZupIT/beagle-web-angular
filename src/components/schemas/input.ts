@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import * as CSS from 'csstype'
+import { Properties as CSSProperties } from 'csstype'
 
 export type InputType = 'DATE' | 'EMAIL' | 'PASSWORD' | 'NUMBER' | 'TEXT'
 
@@ -26,7 +26,7 @@ export interface BeagleInputInterface {
   type?: InputType,
   hidden?: boolean,
   styleId?: string,
-  style?: CSS.Properties,
+  style?: CSSProperties,
   onChange?: () => void,
   onBlur?: () => void,
   onFocus?: () => void,
