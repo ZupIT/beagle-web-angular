@@ -50,6 +50,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   changeDetector: ChangeDetectorRef
   viewStaticPromise = createStaticPromise<BeagleView>()
   eventHandler: EventHandler
+  isEmpty
 
   constructor(
     beagleProvider?: AbstractBeagleProvider,
@@ -102,6 +103,9 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
       const uiTreeWithActions = this.eventHandler.interpretEventsInTree(uiTree)
       const uiTreeWithValues = replaceBindings(uiTreeWithActions)
       this.tree = uiTreeWithValues
+      // Even empty trees have id, so we verify <= 1 when handling empty tree
+      // considering that the id will be present
+      this.isEmpty = Object.keys(this.tree).length <= 1 
       this.changeDetector.detectChanges()
     })
   }

@@ -62,7 +62,7 @@ export function createRemoteViewTemplate(components: ComponentInfo[]) {
 
   const containerTemplate = `
     <ng-container #__view_container>
-      <ng-container *ngIf="!!tree">
+      <ng-container *ngIf="!!tree && !isEmpty">
         <ng-container *ngTemplateOutlet="getTemplate(tree._beagleComponent_);context:{tree: tree}">
         </ng-container>
       </ng-container>
