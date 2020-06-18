@@ -50,7 +50,6 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   changeDetector: ChangeDetectorRef
   viewStaticPromise = createStaticPromise<BeagleView>()
   eventHandler: EventHandler
-  isEmpty = false
 
   constructor(
     beagleProvider?: AbstractBeagleProvider,
