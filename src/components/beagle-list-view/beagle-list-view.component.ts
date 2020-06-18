@@ -14,19 +14,7 @@
   * limitations under the License.
 */
 
-import {
-  Component,
-  Input,
-  ElementRef,
-  OnChanges,
-  SimpleChanges,
-  ViewEncapsulation,
-  NgZone,
-  AfterViewChecked,
-  AfterViewInit,
-} from '@angular/core'
-import { replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
-import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
 import { BeagleListViewInterface, Direction } from '../schemas/list-view'
 
 @Component({
@@ -35,64 +23,7 @@ import { BeagleListViewInterface, Direction } from '../schemas/list-view'
   styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent extends BeagleComponent
-  implements BeagleListViewInterface, AfterViewChecked, OnChanges, AfterViewInit {
-
+export class BeagleListViewComponent implements BeagleListViewInterface {
   @Input() direction: Direction
-  @Input() dataSource: any[]
-  @Input() template: BeagleUIElement
-  @Input() onInit?: () => void
-  private hasInitialized = false
-  private hasRenderedDataSource = false
 
-  constructor(
-    private element: ElementRef, 
-    private ngZone: NgZone) {
-    super()
-  }
-
-  ngAfterViewChecked() {
-    if (!this.hasInitialized && this.onInit) {
-      this.ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          this.verifyCallingOnInit()
-        }, 5)
-      })
-    }
-  }
-
-  renderDataSource() {
-    const tree = this.getBeagleContext().getElement()
-    if (tree) {
-      const parsedTree = this.dataSource.map(item => replaceBindings(
-        this.template,
-        [{ id: 'item', value: item }],
-      ))
-      tree.children = parsedTree
-      this.getBeagleContext().updateWithTree({ sourceTree: tree })
-    }
-    this.hasRenderedDataSource = true
-  }
-
-  ngAfterViewInit() {
-    if (!this.hasRenderedDataSource) this.renderDataSource()
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (!changes['dataSource'] || !this.getBeagleContext) return
-    const current = JSON.stringify(changes['dataSource'].currentValue)
-    const prev  = JSON.stringify(changes['dataSource'].previousValue)
-    if (prev !== current) this.renderDataSource()
-  }
-
-  verifyCallingOnInit() {
-    if (!this.hasInitialized && this.isRendered()) {
-      this.hasInitialized = true
-      if (this.onInit) this.onInit()
-    }
-  }
-
-  isRendered() {
-    return this.element.nativeElement.isConnected
-  }
 }
