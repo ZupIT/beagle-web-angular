@@ -102,10 +102,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     this.ngZone.run(() => {
       const uiTreeWithActions = this.eventHandler.interpretEventsInTree(uiTree)
       const uiTreeWithValues = replaceBindings(uiTreeWithActions)
-      this.tree = uiTreeWithValues
-      // Even empty trees have id, so we verify <= 1 when handling empty tree
-      // considering that the id will be present
-      this.isEmpty = Object.keys(this.tree).length <= 1 
+      this.tree = uiTree && Object.keys(uiTree).length > 0 ? uiTreeWithValues : null
       this.changeDetector.detectChanges()
     })
   }
