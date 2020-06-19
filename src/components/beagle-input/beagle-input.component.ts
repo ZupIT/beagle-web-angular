@@ -14,13 +14,15 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { BeagleInputInterface, InputType } from '../schemas/input'
 import { InputHandler } from '../schemas/input-handler'
 
 @Component({
   selector: 'beagle-input',
   templateUrl: './beagle-input.component.html',
+  styleUrls: ['./beagle-input.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BeagleInputComponent implements BeagleInputInterface, OnInit {
 
