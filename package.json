@@ -36,7 +36,8 @@
   "private": false,
   "dependencies": {
     "@zup-it/beagle-web": "0.3.0",
-    "csstype": "^2.6.10"
+    "csstype": "^2.6.10",
+    "showdown": "^1.9.1"
   },
   "peerDependencies": {
     "@angular/common": ">= 6 < 10",
@@ -59,6 +60,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^13.7.7",
+    "@types/showdown": "^1.9.3",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/eslint-plugin-tslint": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
