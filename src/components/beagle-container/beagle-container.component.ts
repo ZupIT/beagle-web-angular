@@ -18,6 +18,8 @@ import {
   Component, ViewEncapsulation, AfterViewChecked,
   Input, ElementRef, NgZone,
 } from '@angular/core'
+import { BeagleAnalytics } from '@zup-it/beagle-web'
+import { ScreenEvent } from '@zup-it/beagle-web/types'
 import { BeagleContainerInterface } from '../schemas/container'
 
 @Component({
@@ -30,6 +32,7 @@ export class BeagleContainerComponent implements BeagleContainerInterface,
   AfterViewChecked {
 
   @Input() onInit?: () => void
+  @Input() screenAnalyticsEvent: ScreenEvent
   hasInitialized = false
 
   constructor(
@@ -37,10 +40,13 @@ export class BeagleContainerComponent implements BeagleContainerInterface,
     private ngZone: NgZone) { }
 
   ngAfterViewChecked() {
-    if (!this.hasInitialized && this.onInit) {
+  
+    if (!this.hasInitialized && (this.onInit || this.screenAnalyticsEvent)) {
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           if (!this.hasInitialized && this.isRendered()) {
+            this.screenAnalyticsEvent && 
+              BeagleAnalytics.getAnalytics().trackEventOnScreenAppeared(this.screenAnalyticsEvent)
             this.hasInitialized = true
             this.onInit && this.onInit()
           }
