@@ -22,6 +22,6 @@
   [hidden]="hidden"
   [(ngModel)]="value"
   [value]="value"
-  (ngModelChange)="handleChange()"
-  (blur)="handleBlur()"
-  (focus)="handleFocus()" />
+  (ngModelChange)="handleChange($event)"
+  (blur)="handleBlur($event)"
+  (focus)="handleFocus($event)" />

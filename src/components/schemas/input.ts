@@ -15,6 +15,7 @@
 */
 
 import { Properties as CSSProperties } from 'csstype'
+import { InputHandler } from './input-handler'
 
 export type InputType = 'DATE' | 'EMAIL' | 'PASSWORD' | 'NUMBER' | 'TEXT'
 
@@ -27,7 +28,7 @@ export interface BeagleInputInterface {
   hidden?: boolean,
   styleId?: string,
   style?: CSSProperties,
-  onChange?: () => void,
-  onBlur?: () => void,
-  onFocus?: () => void,
+  onChange?: InputHandler,
+  onBlur?: InputHandler,
+  onFocus?: InputHandler,
 }

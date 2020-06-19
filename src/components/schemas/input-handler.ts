@@ -14,18 +14,4 @@
   * limitations under the License.
 */
 
-import { Properties as CSSProperties } from 'csstype'
-import { InputHandler } from './input-handler'
-
-export interface TextAreaInterface {
-  value?: string,
-  label?: string,
-  name?: string,
-  onChange?: InputHandler,
-  onFocus?: InputHandler,
-  onBlur?: InputHandler,
-  disabled?: boolean,
-  readonly?: boolean,
-  styleId?: string,
-  style?: CSSProperties,
-}
+export type InputHandler = (event: { value: string }) => void
