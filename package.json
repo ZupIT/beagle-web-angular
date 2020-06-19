@@ -15,7 +15,7 @@
     "build": "ng build beagle-angular --prod && yarn build-cli && yarn fix-package && yarn copy-dist",
     "test": "ng test",
     "lint": "eslint src/**/*.ts",
-    "watch": "nodemon --watch src -e ts,html,css,less --exec yarn build"
+    "watch": "yarn nodemon --watch src -e ts,html,css,less --exec yarn build"
   },
   "husky": {
     "hooks": {
@@ -79,6 +79,7 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "ncp": "^2.0.0",
     "ng-packagr": "^9.0.0",
+    "nodemon": "^2.0.4",
     "protractor": "~5.4.3",
     "rxjs": "~6.5.4",
     "ts-node": "^8.8.1",

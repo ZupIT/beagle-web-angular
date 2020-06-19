@@ -29,6 +29,8 @@ import {
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
   BeagleModalComponent,
+  BeagleInputComponent,
+  BeagleTextAreaComponent,
   BeagleMarkdownComponent,
 } from './components'
 
@@ -55,10 +57,12 @@ const beagleDefaultComponents = {
   'beagle:touchable': BeagleTouchableComponent,
   'beagle:lazycomponent': BeagleLazyComponent,
   'beagle:simpleform': BeagleSimpleFormComponent,
+  'beagle:input': BeagleInputComponent,
 }
 
 const webSpecificComponents = {
   'custom:modal': BeagleModalComponent,
+  'custom:text-area': BeagleTextAreaComponent,
   'custom:markdown': BeagleMarkdownComponent,
 }
 

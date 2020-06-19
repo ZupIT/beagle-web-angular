@@ -14,7 +14,4 @@
   * limitations under the License.
 */
 
-
-export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
-
-
+export type InputHandler = (event: { value: string }) => void
