@@ -15,7 +15,7 @@
 */
 
 import * as CSS from 'csstype'
-import { ScreenEvent } from '@zup-it/beagle-web/types';
+import { ScreenEvent } from '@zup-it/beagle-web/types'
 
 export interface BeagleContainerInterface {
   onInit?: () => void,
