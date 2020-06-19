@@ -14,14 +14,4 @@
   * limitations under the License.
 */
 
-import { Properties as CSSProperties } from 'csstype'
-
-export type TextAlignment = 'LEFT' | 'CENTER' | 'RIGHT' | 'INHERIT'
-
-export interface BeagleTextInterface {
-  text: string,
-  textColor?: string,
-  alignment?: TextAlignment,
-  styleId?: string,
-  style?: CSSProperties,
-}
+export type InputHandler = (event: { value: string }) => void

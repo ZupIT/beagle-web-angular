@@ -15,8 +15,7 @@
 */
 
 import { Properties as CSSProperties } from 'csstype'
-
-export type InputHandler = (event: { value: string }) => void
+import { InputHandler } from './input-handler'
 
 export interface TextAreaInterface {
   value?: string,
