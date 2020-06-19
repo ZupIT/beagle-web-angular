@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import * as CSS from 'csstype'
+import { Properties as CSSProperties } from 'csstype'
 
 export interface BeagleContainerInterface {
   onInit?: () => void,
-  style?: CSS.Properties,
+  style?: CSSProperties,
 }
