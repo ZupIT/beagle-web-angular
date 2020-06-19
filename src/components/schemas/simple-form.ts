@@ -14,10 +14,10 @@
   * limitations under the License.
 */
 
-import * as CSS from 'csstype'
+import { Properties as CSSProperties } from 'csstype'
 
 export interface SimpleFormInterface {
-  style?: CSS.Properties,
+  style?: CSSProperties,
   styleId?: string,
   onSubmit?: () => void,
 }
