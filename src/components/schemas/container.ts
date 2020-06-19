@@ -20,5 +20,5 @@ import { ScreenEvent } from '@zup-it/beagle-web/types'
 export interface BeagleContainerInterface {
   onInit?: () => void,
   style?: CSS.Properties,
-  screenAnalyticsEvent: ScreenEvent,
+  screenAnalyticsEvent?: ScreenEvent,
 }
