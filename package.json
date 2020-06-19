@@ -36,12 +36,12 @@
   "private": false,
   "dependencies": {
     "@zup-it/beagle-web": "0.3.0",
-    "csstype": "^2.6.10"
+    "csstype": "^2.6.10",
+    "showdown": "^1.9.1"
   },
   "peerDependencies": {
     "@angular/common": ">= 6 < 10",
-    "@angular/core": ">= 6 < 10",
-    "showdown": "^1.9.1"
+    "@angular/core": ">= 6 < 10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.1",
