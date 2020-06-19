@@ -16,6 +16,7 @@
 
 import { Component, Input, OnInit } from '@angular/core'
 import { BeagleInputInterface, InputType } from '../schemas/input'
+import { InputHandler } from '../schemas/input-handler'
 
 @Component({
   selector: 'beagle-input',
@@ -29,9 +30,9 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
   @Input() readOnly?: boolean
   @Input() type?: InputType
   @Input() hidden?: boolean
-  @Input() onChange?: () => void
-  @Input() onBlur?: () => void
-  @Input() onFocus?: () => void
+  @Input() onChange?: InputHandler
+  @Input() onBlur?: InputHandler
+  @Input() onFocus?: InputHandler
 
   ngOnInit() {
     this.value = this.value || ''
@@ -42,15 +43,15 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
     this.hidden = this.hidden || false
   }
 
-  public handleChange() {
-    this.onChange && this.onChange()
+  public handleChange(value) {
+    this.onChange && this.onChange({ value })
   }
 
-  public handleBlur() {
-    this.onBlur && this.onBlur()
+  public handleBlur(event) {
+    this.onBlur && this.onBlur({ value: event.target.value })
   }
 
-  public handleFocus() {
-    this.onFocus && this.onFocus()
+  public handleFocus(event) {
+    this.onFocus && this.onFocus({ value: event.target.value })
   }
 }
