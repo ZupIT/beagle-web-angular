@@ -29,6 +29,8 @@ import {
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
   BeagleModalComponent,
+  BeagleInputComponent,
+  BeagleTextAreaComponent,
 } from './components'
 
 export const viewIdAttributeName = '__beagle_view_id'
@@ -54,10 +56,12 @@ const beagleDefaultComponents = {
   'beagle:touchable': BeagleTouchableComponent,
   'beagle:lazycomponent': BeagleLazyComponent,
   'beagle:simpleform': BeagleSimpleFormComponent,
+  'beagle:input': BeagleInputComponent,
 }
 
 const webSpecificComponents = {
   'custom:modal': BeagleModalComponent,
+  'custom:text-area': BeagleTextAreaComponent,
 }
 
 export const defaultComponents: Record<string, Type<any>> = {

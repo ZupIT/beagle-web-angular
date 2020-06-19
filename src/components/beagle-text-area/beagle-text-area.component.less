@@ -14,16 +14,17 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { BeagleListViewInterface, Direction } from '../schemas/list-view'
+label {
+  display: block;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
 
-@Component({
-  selector: 'beagle-list-view',
-  templateUrl: './beagle-list-view.component.html',
-  styleUrls: ['./beagle-list-view.component.less'],
-  encapsulation: ViewEncapsulation.None,
-})
-export class BeagleListViewComponent implements BeagleListViewInterface {
-  @Input() direction: Direction
+  p {
+    margin: 0 0 5px 0;
+  }
 
+  text-area {
+    flex: 1;
+  }
 }
