@@ -34,6 +34,8 @@ export class BeagleMarkdownComponent implements BeagleTextInterface {
   }
 
   convertMarkdownToHTML(inputText: string) {
+    if(!this.htmlContainer) return
+
     if (!inputText) {
       this.htmlContainer.nativeElement.innerHTML = ''
       return
