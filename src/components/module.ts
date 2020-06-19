@@ -32,6 +32,7 @@ import { BeagleTouchableComponent } from './beagle-touchable/beagle-touchable.co
 import { BeagleModalComponent } from './beagle-modal/beagle-modal.component'
 import { TabsService } from './services/tabs.service'
 import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-form.component'
+import { BeagleMarkdownComponent } from './beagle-markdown/beagle-markdown.component'
 
 const components = [
   BeagleButtonComponent,
@@ -48,6 +49,7 @@ const components = [
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
   BeagleModalComponent,
+  BeagleMarkdownComponent,
 ]
 
 @NgModule({
