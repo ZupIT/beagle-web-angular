@@ -14,16 +14,19 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { BeagleListViewInterface, Direction } from '../schemas/list-view'
+import { Properties as CSSProperties } from 'csstype'
 
-@Component({
-  selector: 'beagle-list-view',
-  templateUrl: './beagle-list-view.component.html',
-  styleUrls: ['./beagle-list-view.component.less'],
-  encapsulation: ViewEncapsulation.None,
-})
-export class BeagleListViewComponent implements BeagleListViewInterface {
-  @Input() direction: Direction
+export type InputHandler = (event: { value: string }) => void
 
+export interface TextAreaInterface {
+  value?: string,
+  label?: string,
+  name?: string,
+  onChange?: InputHandler,
+  onFocus?: InputHandler,
+  onBlur?: InputHandler,
+  disabled?: boolean,
+  readonly?: boolean,
+  styleId?: string,
+  style?: CSSProperties,
 }
