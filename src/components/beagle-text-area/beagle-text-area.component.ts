@@ -15,7 +15,8 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { TextAreaInterface, InputHandler } from '../schemas/text-area'
+import { TextAreaInterface } from '../schemas/text-area'
+import { InputHandler } from '../schemas/input-handler'
 
 @Component({
   selector: 'beagle-text-area',

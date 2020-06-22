@@ -22,6 +22,8 @@ import {
   ChangeDetectorRef,
   NgZone,
   TemplateRef,
+  Output,
+  EventEmitter,
 } from '@angular/core'
 import {
   LoadParams,
@@ -51,6 +53,8 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   viewStaticPromise = createStaticPromise<BeagleView>()
   eventHandler: EventHandler
 
+  @Output() onCreateBeagleView: EventEmitter<BeagleView> = new EventEmitter<BeagleView>()
+
   constructor(
     beagleProvider?: AbstractBeagleProvider,
     ngZone?: NgZone,
@@ -77,6 +81,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     })
     BeagleContext.registerView(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
+    this.onCreateBeagleView.emit(this.view)
   }
 
   createEventHandler() {
