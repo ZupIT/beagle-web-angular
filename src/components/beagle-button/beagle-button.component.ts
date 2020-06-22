@@ -59,7 +59,9 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   handleClick() {
-    this.clickAnalyticsEvent && this.beagleAnalytics.trackEventOnClick(this.clickAnalyticsEvent)
+    if (this.clickAnalyticsEvent && this.beagleAnalytics) {
+      this.beagleAnalytics.trackEventOnClick(this.clickAnalyticsEvent)
+    }
     this.onPress && this.type === 'button' && this.onPress()
   }
 
