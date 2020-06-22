@@ -15,7 +15,8 @@
 */
 import { Properties as CSSProperties } from 'csstype'
 import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
-import { IdentifiableBeagleUIElement } from '@zup-it/beagle-web/types'
+import { BeagleAnalytics } from '@zup-it/beagle-web'
+import { IdentifiableBeagleUIElement, ClickEvent } from '@zup-it/beagle-web/types'
 import { BeagleButtonInterface, StylesNotToInherit } from '../schemas/button'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 
@@ -32,8 +33,10 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() styleId?: string
   @Input() onPress?: () => void
   @Input() style?: CSSProperties
+  @Input() clickAnalyticsEvent?: ClickEvent
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
+  beagleAnalytics = BeagleAnalytics.getAnalytics()
 
   constructor() {
     super()
@@ -56,6 +59,9 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   handleClick() {
+    if (this.clickAnalyticsEvent && this.beagleAnalytics) {
+      this.beagleAnalytics.trackEventOnClick(this.clickAnalyticsEvent)
+    }
     this.onPress && this.type === 'button' && this.onPress()
   }
 
