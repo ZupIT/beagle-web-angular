@@ -36,6 +36,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() clickAnalyticsEvent?: ClickEvent
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
+  beagleAnalytics = BeagleAnalytics.getAnalytics()
 
   constructor() {
     super()
@@ -58,8 +59,7 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   handleClick() {
-    this.clickAnalyticsEvent && 
-      BeagleAnalytics.getAnalytics().trackEventOnClick(this.clickAnalyticsEvent)
+    this.clickAnalyticsEvent && this.beagleAnalytics.trackEventOnClick(this.clickAnalyticsEvent)
     this.onPress && this.type === 'button' && this.onPress()
   }
 
