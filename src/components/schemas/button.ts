@@ -15,12 +15,14 @@
 */
 
 import { Properties as CSSProperties } from 'csstype'
+import { ClickEvent } from '@zup-it/beagle-web/types'
 
 export interface BeagleButtonInterface {
   text: string,
   styleId?: string,
   onPress?: () => void,
   style?: CSSProperties,
+  clickAnalyticsEvent?: ClickEvent,
 }
 
 export const StylesNotToInherit = ['margin', 'marginTop', 'marginBottom', 'marginRight', 

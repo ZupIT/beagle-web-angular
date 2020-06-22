@@ -14,9 +14,11 @@
   * limitations under the License.
 */
 
-import { Properties as CSSProperties } from 'csstype'
+import * as CSS from 'csstype'
+import { ScreenEvent } from '@zup-it/beagle-web/types'
 
 export interface BeagleContainerInterface {
   onInit?: () => void,
-  style?: CSSProperties,
+  style?: CSS.Properties,
+  screenAnalyticsEvent?: ScreenEvent,
 }
