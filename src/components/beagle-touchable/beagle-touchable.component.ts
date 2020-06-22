@@ -25,7 +25,6 @@ import { BeagleTouchableInterface } from '../schemas/touchable'
 export class BeagleTouchableComponent implements BeagleTouchableInterface {
   @Input() onPress: () => void
 
-
   handleClick() {
     if (this.onPress) this.onPress()
   }
