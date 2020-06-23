@@ -21,12 +21,14 @@
     <ng-content></ng-content>
   </div>
   <span class="right-arrow" (click)="nextSlide()"></span>
-  <div class="page-indicator">
+  <div *ngIf="pageIndicator" class="page-indicator">
     <ol>
-      <li *ngFor="let item of totalPages" (click)="changeSlide(item)"
+      <li
+        *ngFor="let item of totalPages"
+        (click)="changeSlide(item)"
         [ngStyle]="pageIndicator && {'background-color': item === selected ? pageIndicator.selectedColor : pageIndicator.unselectedColor}"
-        [ngClass]="!pageIndicator && item === selected ? 'active' : 'inactive'"
-        >
+        [ngClass]="item === selected ? 'active' : 'inactive'"
+      ></li>
     </ol>
   </div>
 </div>
