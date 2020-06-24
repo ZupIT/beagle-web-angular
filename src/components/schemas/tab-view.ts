@@ -14,11 +14,13 @@
   * limitations under the License.
 */
 
+import { ImagePath } from './image'
+
 export interface BeagleTabViewInterface {
   styleId?: string,
 }
 
 export interface BeagleTabItemInterface {
   title?: string,
-  icon?: string,
+  icon?: ImagePath,
 }
