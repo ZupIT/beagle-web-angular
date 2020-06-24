@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { TabsService } from '../services/tabs.service'
 import { BeagleTabItemInterface } from '../schemas/tab-view'
+import { ImagePath } from '../schemas/image'
 
 @Component({
   selector: 'beagle-tab-item',
@@ -30,7 +31,7 @@ export class BeagleTabItemComponent extends BeagleComponent
   implements BeagleTabItemInterface, AfterViewInit, OnDestroy {
 
   @Input() title?: string
-  @Input() icon?: string
+  @Input() icon?: ImagePath
   public active = false
   private id: string
   private selectedTabSubscription: Subscription

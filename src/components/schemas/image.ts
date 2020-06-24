@@ -25,7 +25,7 @@ export interface ImagePath {
   url: string,
 }
 
-export interface Acessibility {
+export interface Accessibility {
   accessible: boolean,
   accessibilityLabel?: string,
 }
@@ -33,7 +33,7 @@ export interface Acessibility {
 export interface BeagleImageInterface {
   path: ImagePath,
   contentMode?: ImageContentMode,
-  accessibility?: Acessibility,
+  accessibility?: Accessibility,
   styleId?: string,
   style?: CSSProperties,
 }

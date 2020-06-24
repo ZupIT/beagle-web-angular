@@ -32,7 +32,7 @@ export class BeagleTabViewComponent implements
   BeagleTabViewInterface, AfterViewInit, OnInit, OnDestroy {
 
   @Input() styleId?= ''
-  @ViewChild('contentItens') contentItens
+  @ViewChild('contentItems') contentItems
   private activeTab = ''
   private selectedTabSubscription: Subscription
 
@@ -43,7 +43,7 @@ export class BeagleTabViewComponent implements
   }
 
   ngAfterViewInit() {
-    if (this.contentItens) this.initializeTabSelected()
+    if (this.contentItems) this.initializeTabSelected()
   }
 
   ngOnDestroy() {
@@ -57,8 +57,8 @@ export class BeagleTabViewComponent implements
   }
 
   initializeTabSelected() {
-    if (this.contentItens) {
-      const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
+    if (this.contentItems) {
+      const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
       elements.forEach((item, index) => {
         const viewId = item.getAttribute('data-beagle-id')
         if (this.activeTab === '' && index === 0) {
