@@ -15,6 +15,8 @@
 */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { ClickEvent } from '@zup-it/beagle-web/types'
+import { BeagleAnalytics } from '@zup-it/beagle-web'
 import { BeagleTouchableInterface } from '../schemas/touchable'
 
 @Component({
@@ -25,8 +27,13 @@ import { BeagleTouchableInterface } from '../schemas/touchable'
 })
 export class BeagleTouchableComponent implements BeagleTouchableInterface {
   @Input() onPress: () => void
+  @Input() clickAnalyticsEvent?: ClickEvent
+  beagleAnalytics = BeagleAnalytics.getAnalytics()
 
   handleClick() {
+    if (this.clickAnalyticsEvent && this.beagleAnalytics) {
+      this.beagleAnalytics.trackEventOnClick(this.clickAnalyticsEvent)
+    }
     if (this.onPress) this.onPress()
   }
 }
