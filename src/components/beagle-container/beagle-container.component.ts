@@ -46,8 +46,9 @@ export class BeagleContainerComponent implements BeagleContainerInterface,
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           if (!this.hasInitialized && this.isRendered()) {
-            this.screenAnalyticsEvent && 
-              BeagleAnalytics.getAnalytics().trackEventOnScreenAppeared(this.screenAnalyticsEvent)
+            if (this.screenAnalyticsEvent && this.beagleAnalytics) {
+              this.beagleAnalytics.trackEventOnScreenAppeared(this.screenAnalyticsEvent)
+            }
             this.hasInitialized = true
             this.onInit && this.onInit()
           }
