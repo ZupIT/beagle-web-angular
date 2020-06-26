@@ -16,7 +16,7 @@
 
 import { Component, Input, AfterViewInit } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
-import { BeagleImageInterface, Acessibility, ImageContentMode, ImagePath } from '../schemas/image'
+import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
 
 @Component({
   selector: 'beagle-image',
@@ -27,8 +27,8 @@ export class BeagleImageComponent extends BeagleComponent
   implements BeagleImageInterface, AfterViewInit {
   
   @Input() path: ImagePath
-  @Input() contentMode?: ImageContentMode = 'FIT_CENTER'
-  @Input() accessibility?: Acessibility = {
+  @Input() mode?: ImageMode = 'FIT_CENTER'
+  @Input() accessibility?: Accessibility = {
     accessible: true,
     accessibilityLabel: '',
   }
@@ -40,8 +40,8 @@ export class BeagleImageComponent extends BeagleComponent
       ? this.path && this.path.url || ''
       : view.getUrlBuilder().build(this.path && this.path.url || '')
 
-    if (!this.contentMode) {
-      this.contentMode = 'FIT_CENTER'
+    if (!this.mode) {
+      this.mode = 'FIT_CENTER'
     }
   }
 
