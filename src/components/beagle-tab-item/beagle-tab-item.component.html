@@ -14,7 +14,7 @@
   * limitations under the License. 
 -->
 <div class="tab-header" (click)="handleClick()" >
-  <img *ngIf="icon" class="icon" [src]="icon" />
+  <img *ngIf="icon" class="icon" [src]="icon.url" />
   {{title}}
 </div>
 <div [ngClass]="{'selected': active}"></div>

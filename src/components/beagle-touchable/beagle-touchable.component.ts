@@ -14,17 +14,17 @@
   * limitations under the License.
 */
 
-import { Component, Input } from '@angular/core'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
 import { BeagleTouchableInterface } from '../schemas/touchable'
 
 @Component({
   selector: 'beagle-touchable',
   templateUrl: './beagle-touchable.component.html',
   styleUrls: ['./beagle-touchable.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BeagleTouchableComponent implements BeagleTouchableInterface {
   @Input() onPress: () => void
-
 
   handleClick() {
     if (this.onPress) this.onPress()

@@ -15,9 +15,10 @@
 */
 
 import {
-  Component, AfterViewInit, ViewChild, 
-  Input, OnInit, ViewEncapsulation,
+  Component, AfterViewInit, ViewChild,
+  Input, OnInit, ViewEncapsulation, OnDestroy,
 } from '@angular/core'
+import { Subscription } from 'rxjs'
 import { TabsService } from '../services/tabs.service'
 import { BeagleTabViewInterface } from '../schemas/tab-view'
 
@@ -27,34 +28,39 @@ import { BeagleTabViewInterface } from '../schemas/tab-view'
   styleUrls: ['./beagle-tab-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTabViewComponent implements BeagleTabViewInterface, AfterViewInit, OnInit {
-  @Input() styleId?= ''
-  @ViewChild('contentItens') contentItens
-  activeTab = ''
+export class BeagleTabViewComponent implements
+  BeagleTabViewInterface, AfterViewInit, OnInit, OnDestroy {
 
-  constructor(
-    private tabsService: TabsService) {
-  }
+  @Input() styleId?= ''
+  @ViewChild('contentItems') contentItems
+  private activeTab = ''
+  private selectedTabSubscription: Subscription
+
+  constructor(private tabsService: TabsService) { }
 
   ngOnInit() {
     this.listenTabChanges()
   }
 
   ngAfterViewInit() {
-    if (this.contentItens) this.initializeTabSelected()
+    if (this.contentItems) this.initializeTabSelected()
+  }
+
+  ngOnDestroy() {
+    this.selectedTabSubscription && this.selectedTabSubscription.unsubscribe()
   }
 
   listenTabChanges() {
-    this.tabsService.notifySelectedTab().subscribe((selected) => {
+    this.selectedTabSubscription = this.tabsService.notifySelectedTab().subscribe((selected) => {
       this.initializeTabSelected()
     })
   }
 
   initializeTabSelected() {
-    if (this.contentItens) {
-      const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
+    if (this.contentItems) {
+      const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
       elements.forEach((item, index) => {
-        const viewId = item.getAttribute('ng-reflect-_element-id')
+        const viewId = item.getAttribute('data-beagle-id')
         if (this.activeTab === '' && index === 0) {
           this.activeTab = viewId || ''
           this.tabsService.changeSelectedTab(this.activeTab)

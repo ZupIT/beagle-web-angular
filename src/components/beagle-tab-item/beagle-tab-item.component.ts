@@ -14,10 +14,12 @@
   * limitations under the License.
 */
 
-import { Component, Input, AfterViewInit, ViewEncapsulation } from '@angular/core'
+import { Component, Input, AfterViewInit, ViewEncapsulation, OnDestroy } from '@angular/core'
+import { Subscription } from 'rxjs'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { TabsService } from '../services/tabs.service'
 import { BeagleTabItemInterface } from '../schemas/tab-view'
+import { ImagePath } from '../schemas/image'
 
 @Component({
   selector: 'beagle-tab-item',
@@ -26,12 +28,13 @@ import { BeagleTabItemInterface } from '../schemas/tab-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleTabItemComponent extends BeagleComponent
-  implements BeagleTabItemInterface, AfterViewInit {
+  implements BeagleTabItemInterface, AfterViewInit, OnDestroy {
 
   @Input() title?: string
-  @Input() icon?: string
+  @Input() icon?: ImagePath
   public active = false
   private id: string
+  private selectedTabSubscription: Subscription
 
   constructor(private tabsService: TabsService) {
     super()
@@ -42,8 +45,12 @@ export class BeagleTabItemComponent extends BeagleComponent
     this.listenTabChanges()
   }
 
+  ngOnDestroy() {
+    this.selectedTabSubscription && this.selectedTabSubscription.unsubscribe()
+  }
+
   listenTabChanges() {
-    this.tabsService.notifySelectedTab().subscribe((selected) => {
+    this.selectedTabSubscription = this.tabsService.notifySelectedTab().subscribe((selected) => {
       this.active = selected === this.id
     })
   }

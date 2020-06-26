@@ -16,24 +16,24 @@
 
 import { Properties as CSSProperties } from 'csstype'
 
-export type ImageContentMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
+export type ImageMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
 
-export type ImageMode = 'local' | 'remote'
+export type ImagePathMode = 'local' | 'remote'
 
 export interface ImagePath {
-  _beagleImagePath_: ImageMode,
+  _beagleImagePath_: ImagePathMode,
   url: string,
 }
 
-export interface Acessibility {
+export interface Accessibility {
   accessible: boolean,
   accessibilityLabel?: string,
 }
 
 export interface BeagleImageInterface {
   path: ImagePath,
-  contentMode?: ImageContentMode,
-  accessibility?: Acessibility,
+  mode?: ImageMode,
+  accessibility?: Accessibility,
   styleId?: string,
   style?: CSSProperties,
 }
