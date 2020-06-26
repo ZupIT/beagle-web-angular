@@ -30,7 +30,7 @@ import { BeaglePageViewInterface, PageIndicator } from '../schemas/page-view'
 export class BeaglePageViewComponent implements BeaglePageViewInterface {
     
     @Input() pageIndicator?: PageIndicator
-    @ViewChild('contentItens') contentItens
+    @ViewChild('contentItems') contentItems
     totalPages: number[] = []
     selected = 0
 
@@ -38,8 +38,8 @@ export class BeaglePageViewComponent implements BeaglePageViewInterface {
     }
 
     ngAfterViewInit() {
-        if (this.contentItens) {
-            const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
+        if (this.contentItems) {
+            const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
             this.totalPages = elements.map((item, index) => {
                 this.renderer.addClass(item, 'page-item')
                 return index
@@ -49,7 +49,7 @@ export class BeaglePageViewComponent implements BeaglePageViewInterface {
     }
 
     changeSlide(index: number) {
-        const elements: Element[] = Array.from(this.contentItens.nativeElement.children)
+        const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
         elements.forEach((element, pos) => {
             if (pos === index) {
                 this.renderer.addClass(element, 'active')
