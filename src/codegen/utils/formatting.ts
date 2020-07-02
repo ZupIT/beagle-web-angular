@@ -26,7 +26,8 @@ export function removeExtraIndentation(code: string, numberOfExtraSpaces: number
 }
 
 /* function created to make a workaround on ivy problem,
-which cause queries with two points or hyphen doesn't work*/
+which cause queries with some special characters to throw an error,
+for example two points or hyphen*/
 export function replaceToUnderline(str: string) {
   return str && str.replace(/[^\d\w_]/g, '_')
 }
