@@ -34,7 +34,7 @@ import {
   createEventHandler,
 } from '@zup-it/beagle-web'
 import { BeagleContext } from '@zup-it/beagle-web'
-import { twoPointsToUnderline } from '../codegen/utils/formatting'
+import { replaceToUnderline } from '../codegen/utils/formatting'
 import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
@@ -92,8 +92,8 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
 
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
     const component = beagleMapKeysConfig.getComponent(componentName)
-    const normalizedComponentName = twoPointsToUnderline(component)
-    
+    const normalizedComponentName = replaceToUnderline(component)
+
     if (!this[normalizedComponentName]) {
       console.warn(
         `Beagle: the component ${componentName} was not declared in Beagle's configuration.`,
