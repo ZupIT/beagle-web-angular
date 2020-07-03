@@ -87,6 +87,8 @@ import { Beagle } from './beagle.module';
 export class AppModule { }
 ```
 
+[Manual configuration](/docs/manual_configuration.md)
+
 ### Step 2: JSON creation to be rendered
 
 Now, you just have to create a JSON to render the components. Usually, this process would be made by an external server that would return de JSON, but for this example we'll create a local file to be accessed for the test.
