@@ -30,11 +30,11 @@ npx beagle help
 
 If the Beagle's commands were listed, that means that the installation correctly worked.
 
-Well done! Your library was installed. Now, you can see more of how to use Beagle on Angular.
+```Well done! Your library was installed. Now, you can see more of how to use Beagle on Angular.```
 
 ## Usage configurations
 
-After you finished the installation, you need to make Beagle's usage configuration for Angular's framework. To do so, you just have to follow these steps:
+After you finished the installation, you need to make **Beagle's usage configuration for Angular's framework**. To do so, you just have to follow these steps:
 
 ### Step 1: Automatic Configuration
 
@@ -64,8 +64,8 @@ In this case, type the backend's basis URL that will be used to rescue JSON file
 
 At the end of this process, two files will be generate on your project: 
 
-- beagle-components.module.ts
-- beagle.module.ts.
+- **beagle-components.module.ts**
+- **beagle.module.ts**
 
 Open the file `app.module.ts` and, then, import Beagle's module that was just generated:
 
@@ -122,7 +122,7 @@ The Beagle's library comes with many pre-defined components ready to be used in 
 The code above creates a JSON with two os these components: container e text.
 ```
 
-After you created your JSON, open the file beagle.module.ts we generated in the previous step and add as a baseUrl the path: http://localhost:4200/assets
+After you created your JSON, open the file `beagle.module.ts` we generated in the previous step and add as a baseUrl the path: http://localhost:4200/assets
 
 ```
 import { BeagleModule } from '@zup-it/beagle-angular'
@@ -148,7 +148,7 @@ Well done, your configuration is ready! Now, we'll see how to render mapped comp
 
 After created the JSON, you need to add a local, inside the application, where the components will be rendered. To make this action, the Beagle's library provides the component `<beagle-remote-view>`.
 
-Open the file app.component.html and replace all the content with this code:
+Open the file `app.component.html` and replace all the content with this code:
 
 `<beagle-remote-view [loadParams]="loadParams"></beagle-remote-view>`
 
@@ -199,6 +199,7 @@ export class AppComponent {
 ### Testing the application
 
 Before we test if our configuration worked, you have to run one of the commands below to initialize the application: 
+
 If you use npm:
 
 `npm run serve`
@@ -208,8 +209,10 @@ If you use yarn:
 `yarn serve`
 
 
-```It's important to clarify here that the command used to restart the application is fundamental make work the changes you intend to make in Beagle's configurations files.
-This process also must be done for any change made on @Input() proprieties of your mapped components. Beagle's team is constantly developing solutions to improve this.```
+```
+Its important to clarify here that the command used to restart the application is fundamental make work the changes you intend to make in Beagle's configurations files.
+This process also must be done for any change made on @Input() proprieties of your mapped components. Beagle's team is constantly developing solutions to improve this.
+```
 
 After finished this commands, access the local: `http://localhost:4200`
 You should see the screen with the text present in the text attribute in the json above
