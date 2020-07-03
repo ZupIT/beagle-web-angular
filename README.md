@@ -211,7 +211,7 @@ If you use yarn:
 
 ```
 Its important to clarify here that the command used to restart the application is fundamental make work the changes you intend to make in Beagle's configurations files.
-This process also must be done for any change made on @Input() proprieties of your mapped components. Beagle's team is constantly developing solutions to improve this.
+This process also must be done for any change made on @Input() properties of your mapped components. Beagle's team is constantly developing solutions to improve this.
 ```
 
 After finished this commands, access the local: `http://localhost:4200`
