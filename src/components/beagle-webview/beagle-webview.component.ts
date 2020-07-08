@@ -26,8 +26,8 @@ import { BeagleWebviewInterface } from '../schemas/webview'
 })
 export class BeagleWebviewComponent implements OnInit, BeagleWebviewInterface {
 
-  @Input() url: string;
-  @Input() styleId?= '';
+  @Input() url: string
+  @Input() styleId?= ''
   iframeUrl
   constructor(private sanitizer: DomSanitizer) {
   }
