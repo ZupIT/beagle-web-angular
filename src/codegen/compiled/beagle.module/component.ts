@@ -18,17 +18,19 @@ import { Type } from '@angular/core'
 import {
   kebabToCamelCase,
   removeExtraIndentation,
-  twoPointsToUnderline,
+  replaceToUnderline,
 } from '../../utils/formatting'
 import { getComponentAnnotations } from '../../utils/metadata'
 import { remoteViewSelector } from '../../../constants'
 
 
 function createViewChildString(name: string, templateName: string, angularVersion: number): string {
+  const componentName = replaceToUnderline(name)
+
   if (angularVersion >= 8) {
-    return `'${twoPointsToUnderline(name)}': new ViewChild('${templateName}', { static: true })`
+    return `'${componentName}': new ViewChild('${templateName}', { static: true })`
   } else {
-    return `'${twoPointsToUnderline(name)}': new ViewChild('${templateName}')`
+    return `'${componentName}': new ViewChild('${templateName}')`
   }
 }
 
