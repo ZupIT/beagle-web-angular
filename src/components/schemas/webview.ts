@@ -18,7 +18,7 @@ import { Properties as CSSProperties } from 'csstype'
 
 
 export interface BeagleWebviewInterface {
-  url: string | null,
+  url: string,
   styleId?: string,
   style?: CSSProperties,
 }
