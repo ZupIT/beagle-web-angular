@@ -32,7 +32,7 @@ function runViewEngine(options: Option[]) {
     envVariables[name] ? `${result}${envVariables[name]}=${value} ` : result
   ), '')
 
-  const cmd = `${envString}${runCli} ts-node -P ${pathToTsConfig} ${pathToIndex}`
+  const cmd = `${envString}${runCli} ts-node -P "${pathToTsConfig}" "${pathToIndex}"`
 
   try {
     require('ts-node')
