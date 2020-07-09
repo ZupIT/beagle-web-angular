@@ -225,4 +225,5 @@ You should see the screen with the text present in the text attribute in the jso
 `Well done, you created your first screen with Beagle!`
 
 # License
-Beagle Angular is Apache licensed
+Beagle Angular is Apache licensed .
+<!--[Apache licensed](https://github.com/ZupIT/beagle-web-react/blob/master/LICENSE)-->
