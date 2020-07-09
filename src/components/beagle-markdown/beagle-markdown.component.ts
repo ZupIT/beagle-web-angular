@@ -14,7 +14,15 @@
   * limitations under the License.
 */
 
-import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  ViewChild,
+  ViewEncapsulation,
+  SimpleChanges
+} from '@angular/core'
 import { Converter } from 'showdown'
 import { BeagleTextInterface } from '../schemas/text'
 
@@ -24,13 +32,16 @@ import { BeagleTextInterface } from '../schemas/text'
   styleUrls: ['./beagle-markdown.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleMarkdownComponent implements BeagleTextInterface {
+export class BeagleMarkdownComponent implements BeagleTextInterface, OnChanges {
 
   public converter = new Converter()
-  @ViewChild('htmlContainer') htmlContainer: ElementRef;
-  @Input()
-  set text(inputText: string) {
-    this.convertMarkdownToHTML(inputText)
+  @ViewChild('htmlContainer') htmlContainer: ElementRef
+  @Input() text: string
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.text && changes.text.previousValue != changes.text.currentValue) {
+      this.convertMarkdownToHTML(changes.text.currentValue)
+    }
   }
 
   convertMarkdownToHTML(inputText: string) {
