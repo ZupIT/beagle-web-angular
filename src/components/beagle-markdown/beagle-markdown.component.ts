@@ -21,7 +21,7 @@ import {
   OnChanges,
   ViewChild,
   ViewEncapsulation,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core'
 import { Converter } from 'showdown'
 import { BeagleTextInterface } from '../schemas/text'
