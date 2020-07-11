@@ -1,3 +1,6 @@
+# [Beagle Angular](https://docs.usebeagle.io/v/v1.0-en/get-started/installing-beagle/web#angular)
+Beagle Angular is a Zup's open source library for using [Beagle](https://docs.usebeagle.io/v/v1.0-en/) in an [Angular](https://angular.io/) based project.
+
 # Getting started
 
 ## Installing Beagle's library
@@ -220,3 +223,7 @@ After finished this commands, access the local: `http://localhost:4200`
 You should see the screen with the text present in the text attribute in the json above
 
 `Well done, you created your first screen with Beagle!`
+
+# License
+Beagle Angular is Apache licensed.
+<!--[Apache licensed](https://github.com/ZupIT/beagle-web-react/blob/master/LICENSE)-->
