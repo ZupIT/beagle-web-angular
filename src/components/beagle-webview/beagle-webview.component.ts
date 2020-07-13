@@ -15,7 +15,7 @@
 */
 
 import { Component, OnInit, Input, ViewEncapsulation, SecurityContext } from '@angular/core'
-import { DomSanitizer } from '@angular/platform-browser'
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { BeagleWebviewInterface } from '../schemas/webview'
 
 @Component({
@@ -27,7 +27,8 @@ import { BeagleWebviewInterface } from '../schemas/webview'
 export class BeagleWebviewComponent implements OnInit, BeagleWebviewInterface {
 
   @Input() url: string
-  iframeUrl
+  iframeUrl: SafeResourceUrl
+  
   constructor(private sanitizer: DomSanitizer) {
   }
 
