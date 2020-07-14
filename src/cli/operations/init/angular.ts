@@ -17,7 +17,7 @@
 import { writeFileSync } from 'fs'
 import BeagleCliError from '../../errors'
 import { AngularEngine } from '../../types'
-import { ensurePathExistence } from '../../utils/object'
+import { ensurePathExistence, getEnvironmentPaths } from '../../utils/object'
 import { getPackageVersion } from '../../utils/packages'
 import { logWarning } from '../../utils/styledLogger'
 
@@ -73,14 +73,17 @@ function createReplaceEntryForProject(
     replaceWith,
   )
 
-  ensurePathExistence(project, 'architect.build.configurations.production.fileReplacements', [])
-  const hasReplacedProduction = addFileReplacement(
-    project.architect.build.configurations.production.fileReplacements,
-    replace,
-    replaceWith,
-  )
-  
-  return hasReplacedGlobal || hasReplacedProduction
+  const hasReplacedEnv: boolean[] = []
+  getEnvironmentPaths(project, 'architect.build.configurations').forEach(path => {
+    ensurePathExistence(project, `architect.build.configurations.${path}.fileReplacements`, [])
+    hasReplacedEnv.push(addFileReplacement(
+      project.architect.build.configurations[path].fileReplacements,
+      replace,
+      replaceWith,
+    ))
+  })
+
+  return hasReplacedGlobal ||  hasReplacedEnv.some(value => value === true)
 }
 
 function createReplaceEntry(
