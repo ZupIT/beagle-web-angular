@@ -73,6 +73,8 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
       )
     }
     this.view = beagleService.createView(this.loadParams.path)
+    beagleService.globalContext.subscribe(this.updateTreeView)
+
     this.view.subscribe(this.updateView)
     this.view.addErrorListener((errorListener) => {
       errorListener.forEach((error) => {
@@ -110,6 +112,10 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
       this.changeDetector.detectChanges()
     })
   }
+
+  updateTreeView = () => (
+    this.view && this.view.updateWithTree({ sourceTree: this.view.getTree() })
+  )
 
   elementIdentity(index: number, element: IdentifiableBeagleUIElement<any>) {
     return element.id
