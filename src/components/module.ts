@@ -35,6 +35,7 @@ import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-fo
 import { BeagleInputComponent } from './beagle-input/beagle-input.component'
 import { BeagleTextAreaComponent } from './beagle-text-area/beagle-text-area.component'
 import { BeagleMarkdownComponent } from './beagle-markdown/beagle-markdown.component'
+import { BeagleWebviewComponent } from './beagle-webview/beagle-webview.component'
 
 const components = [
   BeagleButtonComponent,
@@ -54,6 +55,7 @@ const components = [
   BeagleInputComponent,
   BeagleTextAreaComponent,
   BeagleMarkdownComponent,
+  BeagleWebviewComponent,
 ]
 
 @NgModule({
