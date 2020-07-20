@@ -14,8 +14,7 @@
   * limitations under the License.
 */
 
-import { PageIndicatorInterface } from './page-indicator';
-
+import { PageIndicatorInterface } from './page-indicator'
 
 export interface BeaglePageViewInterface {
   pageIndicator?: PageIndicatorInterface,
