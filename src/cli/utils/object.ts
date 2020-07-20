@@ -31,5 +31,5 @@ export function ensurePathExistence(object: any, path: string, defaultValue: any
 export function getEnvironmentPaths(object: any, path: string) {
   const keys = path.split('.')
   keys.forEach(key => object = object[key])
-  return Object.entries(object).map(([key]) => key)
+  return Object.keys(object)
 }
