@@ -15,7 +15,6 @@
 */
 
 export * from './runtime/AbstractBeagleRemoteView'
-export * from './runtime/AbstractBeagleProvider'
 export * from './runtime/BeagleProvider.service'
 export * from './runtime/beagle-context/module'
 export * from './components/module'

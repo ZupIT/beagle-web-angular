@@ -13,9 +13,34 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-
 import { Injectable } from '@angular/core'
-import { AbstractBeagleProvider } from './AbstractBeagleProvider'
+import createCoreBeagleUIService, { DefaultSchema } from '@zup-it/beagle-web'
+import { BeagleAngularConfig, BeagleAngularUIService } from '../types'
+import { defaultComponents } from '../constants'
+import beagleMapKeysConfig from './utils/beagle-map-keys-config'
 
 @Injectable()
-export class BeagleProvider extends AbstractBeagleProvider {}
+export class BeagleProvider {
+  private service: BeagleAngularUIService | undefined
+
+  start<Schema = DefaultSchema>(config: BeagleAngularConfig<Schema>) {
+    if (this.service) {
+      console.error('Beagle service has already started!')
+      return
+    }
+    
+    beagleMapKeysConfig.setMapKeysConfig({ ...config.components, ...defaultComponents })
+    // @ts-ignore // fixme
+    this.service = createCoreBeagleUIService<Schema>({
+      ...config,
+      components: {
+        ...defaultComponents,
+        ...config.components,
+      },
+    })
+  }
+
+  getBeagleUIService() {
+    return this.service
+  }
+}
