@@ -13,22 +13,10 @@
   * See the License for the specific language governing permissions and
   * limitations under the License. 
 -->
-
-<div class="page-view">
-  <span class="left-arrow" (click)="backSlide()">
-  </span>
-  <div class="content-items" #contentItems>
-    <ng-content></ng-content>
-  </div>
-  <span class="right-arrow" (click)="nextSlide()"></span>
-  <div *ngIf="pageIndicator" class="page-indicator">
-    <ol>
-      <li
-        *ngFor="let item of totalPages"
-        (click)="changeSlide(item)"
-        [ngStyle]="pageIndicator && {'background-color': item === currentPage ? pageIndicator.selectedColor : pageIndicator.unselectedColor}"
-        [ngClass]="item === currentPage ? 'active' : 'inactive'"
-      ></li>
-    </ol>
-  </div>
+<div class="page-indicator">
+  <ol>
+    <li *ngFor="let item of totalPages; index as i"
+      [ngStyle]="{'background-color': i === currentPage ? selectedColor : unselectedColor}"
+      [ngClass]="i === currentPage ? 'active' : 'inactive'"></li>
+  </ol>
 </div>

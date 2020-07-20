@@ -14,11 +14,9 @@
   * limitations under the License.
 */
 
-import { PageIndicatorInterface } from './page-indicator';
-
-
-export interface BeaglePageViewInterface {
-  pageIndicator?: PageIndicatorInterface,
-  onPageChange?: (index: number) => void,
+export interface PageIndicatorInterface {
+  selectedColor?: string,
+  unselectedColor?: string,
+  numberOfPages?: number,
   currentPage?: number,
 }
