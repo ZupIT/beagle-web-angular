@@ -14,10 +14,8 @@
   * limitations under the License.
 */
 
-import { removeExtraIndentation } from '../../utils/formatting'
+import { Injectable } from '@angular/core'
+import { AbstractBeagleProvider } from './AbstractBeagleProvider'
 
-export function createProviderString() {
-  const providerString = ``
-
-  return removeExtraIndentation(providerString, 4)
-}
+@Injectable()
+export class BeagleProvider extends AbstractBeagleProvider {}
