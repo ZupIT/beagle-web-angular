@@ -66,8 +66,8 @@
     "showdown": "^1.9.1"
   },
   "peerDependencies": {
-    "@angular/common": ">= 6 < 10",
-    "@angular/core": ">= 6 < 10"
+    "@angular/common": ">= 6 <= 10",
+    "@angular/core": ">= 6 <= 10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.1",
