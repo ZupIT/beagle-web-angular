@@ -49,7 +49,7 @@ export function createImportsString({
     } from '@angular/core'
     import {
       AbstractBeagleRemoteView,
-      AbstractBeagleProvider,
+      BeagleProvider,
       BeagleContextModule,
       getBeagleConfigMetadata,
     } from '@zup-it/beagle-angular'

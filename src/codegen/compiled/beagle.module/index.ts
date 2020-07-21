@@ -21,7 +21,6 @@ import {
 import { createCommentaryString } from './commentary'
 import { createImportsString } from './imports'
 import { createTemplateString } from './template'
-import { createProviderString } from './provider'
 import { createComponentString } from './component'
 import { createModuleString } from './module'
 
@@ -50,13 +49,12 @@ export function generateViewEngineCode({
   const components = combineUserAndDefaultComponents(config.components)
   const templateString = createTemplateString(Object.values(components))
   const componentString = createComponentString(components, angularVersion)
-  const providerString = createProviderString()
   const moduleString = createModuleString({
     componentsModuleName: config.module.name,
     beagleModuleName,
     hasDefaultModule,
   })
 
-  return `${commentary}\n\n${importString}\n\n${templateString}\n\n${providerString}
+  return `${commentary}\n\n${importString}\n\n${templateString}
     \n\n${componentString}\n\n${moduleString}\n`
 }

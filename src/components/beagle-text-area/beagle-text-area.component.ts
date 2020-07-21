@@ -34,7 +34,7 @@ export class BeagleTextAreaComponent implements TextAreaInterface, OnInit {
   @Input() readonly?: boolean
 
   ngOnInit() {
-    this.label = this.value || ''
+    this.label = this.label || ''
     this.disabled = this.disabled || false
     this.readonly = this.readonly || false
   }
