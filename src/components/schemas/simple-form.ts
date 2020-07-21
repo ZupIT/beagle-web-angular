@@ -19,5 +19,5 @@ import { Properties as CSSProperties } from 'csstype'
 export interface SimpleFormInterface {
   style?: CSSProperties,
   styleId?: string,
-  onSubmit?: () => void,
+  onSubmit: () => void,
 }
