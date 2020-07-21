@@ -33,6 +33,7 @@ import {
   BeagleTextAreaComponent,
   BeagleMarkdownComponent,
   BeaglePageIndicatorComponent,
+  BeagleWebviewComponent,
 } from './components'
 
 export const viewIdAttributeName = '__beagle_view_id'
@@ -60,6 +61,7 @@ const beagleDefaultComponents = {
   'beagle:simpleform': BeagleSimpleFormComponent,
   'beagle:input': BeagleInputComponent,
   'beagle:pageindicator': BeaglePageIndicatorComponent,
+  'beagle:webview': BeagleWebviewComponent,
 }
 
 const webSpecificComponents = {

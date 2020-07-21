@@ -16,8 +16,8 @@
 
 import { Properties as CSSProperties } from 'csstype'
 
-export interface SimpleFormInterface {
+
+export interface BeagleWebviewInterface {
+  url: string,
   style?: CSSProperties,
-  styleId?: string,
-  onSubmit: () => void,
 }

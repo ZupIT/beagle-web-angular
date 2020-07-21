@@ -38,6 +38,7 @@ import { BeagleMarkdownComponent } from './beagle-markdown/beagle-markdown.compo
 import {
   BeaglePageIndicatorComponent,
 } from './beagle-page-indicator/beagle-page-indicator.component'
+import { BeagleWebviewComponent } from './beagle-webview/beagle-webview.component'
 
 const components = [
   BeagleButtonComponent,
@@ -58,6 +59,7 @@ const components = [
   BeagleInputComponent,
   BeagleTextAreaComponent,
   BeagleMarkdownComponent,
+  BeagleWebviewComponent,
 ]
 
 @NgModule({
