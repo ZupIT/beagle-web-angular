@@ -42,6 +42,11 @@ export class BeaglePageViewComponent implements BeaglePageViewInterface, OnInit 
 
   ngOnInit() {
     this.currentPage = this.currentPage || 0
+    if (this.pageIndicator) {
+      console.log(`The way you are using page view is deprecated. 
+      This will be removed in a future version; please refactor this component 
+      using new context features.`)
+    }
   }
 
   ngAfterViewInit() {
