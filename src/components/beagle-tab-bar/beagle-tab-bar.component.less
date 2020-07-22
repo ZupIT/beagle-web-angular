@@ -17,21 +17,20 @@
 @import "../assets/default-style.less";
 
 beagle-tab-bar {
+  display: flex;
 
   .selected {
     height: 2px;
     background-color: @swamp;
-  }
-
-  .tab-item {
-    display: flex;
-    margin: 0 10px;
+    width: 100%;
   }
 
   .tab-item {
     min-width: 20px;
     min-height: 15px;
     display: flex;
+    flex-direction: column;
+    margin: 0 10px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
