@@ -17,6 +17,10 @@
 import { PageIndicatorInterface } from './page-indicator'
 
 export interface BeaglePageViewInterface {
+  /**
+   * @deprecated Since version 1.1. Will be deleted in version 2.0.
+   * Use pageIndicator as a component instead.
+  */
   pageIndicator?: PageIndicatorInterface,
   onPageChange?: (index: number) => void,
   currentPage?: number,

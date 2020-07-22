@@ -31,7 +31,10 @@ import { PageIndicatorInterface } from '../schemas/page-indicator'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeaglePageViewComponent implements BeaglePageViewInterface, OnInit {
-
+  /**
+   * @deprecated Since version 1.1. Will be deleted in version 2.0.
+   * Use pageIndicator as a component instead.
+  */
   @Input() pageIndicator?: PageIndicatorInterface
   @Input() onPageChange?: (index: number) => void
   @Input() currentPage?: number
