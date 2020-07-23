@@ -1,11 +1,12 @@
 # [Beagle Angular](https://docs.usebeagle.io/v/v1.0-en/get-started/installing-beagle/web#angular)
+
 Beagle Angular is a Zup's open source library for using [Beagle](https://docs.usebeagle.io/v/v1.0-en/) in an [Angular](https://angular.io/) based project.
 
 # Getting started
 
 ## Installing Beagle's library
 
-To follow the installation process, navigate to the root of your angular project and run one of the commands below according to the package manager of your preference. 
+To follow the installation process, navigate to the root of your angular project and run one of the commands below according to the package manager of your preference.
 
 If you use Yarn:
 
@@ -33,7 +34,7 @@ npx beagle help
 
 If the Beagle's commands were listed, that means that the installation correctly worked.
 
-```Well done! Your library was installed. Now, you can see more of how to use Beagle on Angular.```
+`Well done! Your library was installed. Now, you can see more of how to use Beagle on Angular.`
 
 ## Usage configurations
 
@@ -41,7 +42,7 @@ After you finished the installation, you need to make **Beagle's usage configura
 
 ### Step 1: Automatic Configuration
 
-Type one of the commands below to generate the files that will be used on Beagle's library. It's possible to execute the command according to your package manager: 
+Type one of the commands below to generate the files that will be used on Beagle's library. It's possible to execute the command according to your package manager:
 
 ```
 yarn beagle init
@@ -51,21 +52,25 @@ yarn beagle init
 npx beagle init
 ```
 
-Once you made it, Beagle will return some questions. To answer them, follow the orientations below: 
+Once you made it, Beagle will return some questions. To answer them, follow the orientations below:
 
-#### Question 1: Would you like to use yarn or npm? 
-In this case, type the option that will be used as manager. In our example, we will use `yarn`, so type `yarn` and press enter. 
+#### Question 1: Would you like to use yarn or npm?
 
-#### Question 2: Path to the beagle module (press enter to use default) 
+In this case, type the option that will be used as manager. In our example, we will use `yarn`, so type `yarn` and press enter.
+
+#### Question 2: Path to the beagle module (press enter to use default)
+
 In this case, type the module path that will be used for Beagle. Considering we're creating this project from zero e and there is no module, you just have to press enter without informing anything.
 
 #### Question 3: Path to the module with the components to use with beagle (press enter to use default)
-In this case, type the module path that will be used for Beagle's components. Considering we don't have any module yet, you just have to press enter without informing anything. 
 
-#### Question 4:  What's the base url of the backend providing your beagle JSONs? (press enter to use default)
+In this case, type the module path that will be used for Beagle's components. Considering we don't have any module yet, you just have to press enter without informing anything.
+
+#### Question 4: What's the base url of the backend providing your beagle JSONs? (press enter to use default)
+
 In this case, type the backend's basis URL that will be used to rescue JSON files. For our example, we'll use a JSON, so just type: `http://localhost:4200/assets`
 
-At the end of this process, two files will be generate on your project: 
+At the end of this process, two files will be generate on your project:
 
 - **beagle-components.module.ts**
 - **beagle.module.ts**
@@ -100,30 +105,30 @@ On your angular project, navigate to the `src/assets` file and create a new file
 
 ```json
 {
-    "_beagleComponent_": "beagle:container",
-    "children": [
-        {
-            "_beagleComponent_":"beagle:text",
-            "text":"Hello Beagle"
-        },
-       {
-            "_beagleComponent_":"beagle:text",
-            "style":{
-              "padding":{
-                "top":{
-                  "value":10,
-                  "type": "REAL"
-                }
-              }
-            },
-            "text":"Beagle is a cross-platform framework which provices usage of the server Driven UI concept,natively in iOS, Android and Web applications. By using Beagle, your team could easily change application's layout and data by just changing backend code"
+  "_beagleComponent_": "beagle:container",
+  "children": [
+    {
+      "_beagleComponent_": "beagle:text",
+      "text": "Hello Beagle"
+    },
+    {
+      "_beagleComponent_": "beagle:text",
+      "style": {
+        "padding": {
+          "top": {
+            "value": 10,
+            "type": "REAL"
+          }
         }
-    ]
+      },
+      "text": "Beagle is a cross-platform framework which provices usage of the server Driven UI concept,natively in iOS, Android and Web applications. By using Beagle, your team could easily change application's layout and data by just changing backend code"
+    }
+  ]
 }
 ```
 
 ```
-The Beagle's library comes with many pre-defined components ready to be used in their project. 
+The Beagle's library comes with many pre-defined components ready to be used in their project.
 The code above creates a JSON with two os these components: container e text.
 ```
 
@@ -148,7 +153,6 @@ export class Beagle {}
 
 Well done, your configuration is ready! Now, we'll see how to render mapped components on JSON.
 
-
 ### Step 3: Using beagle-remote-view
 
 After created the JSON, you need to add a local, inside the application, where the components will be rendered. To make this action, the Beagle's library provides the component `<beagle-remote-view>`.
@@ -170,12 +174,12 @@ loadParams: LoadParams;
 
 constructor() {
   this.loadParams = {
-    path: '/payload.json'
+    path: 'assets/payload.json'
   };
 }
 ```
 
-```Notice that, in this path, we use the/payload.json value that will be associated to the baseUrl from the previous step to create a path to access our JSON files.```
+`Notice that, in this path, we use the/payload.json value that will be associated to the baseUrl from the previous step to create a path to access our JSON files.`
 
 At the end of this process, the content of your app.component.ts file must be similar to this code below:
 
@@ -195,7 +199,7 @@ export class AppComponent {
 
   constructor() {
     this.loadParams = {
-      path: '/payload.json'
+      path: 'assets/payload.json'
     };
   }
 }
@@ -203,16 +207,15 @@ export class AppComponent {
 
 ### Testing the application
 
-Before we test if our configuration worked, you have to run one of the commands below to initialize the application: 
+Before we test if our configuration worked, you have to run one of the commands below to initialize the application:
 
 If you use npm:
 
 `npm run serve`
 
-If you use yarn: 
+If you use yarn:
 
 `yarn serve`
-
 
 ```
 Its important to clarify here that the command used to restart the application is fundamental make work the changes you intend to make in Beagle's configurations files.
@@ -225,5 +228,7 @@ You should see the screen with the text present in the text attribute in the jso
 `Well done, you created your first screen with Beagle!`
 
 # License
+
 Beagle Angular is Apache licensed.
+
 <!--[Apache licensed](https://github.com/ZupIT/beagle-web-react/blob/master/LICENSE)-->
