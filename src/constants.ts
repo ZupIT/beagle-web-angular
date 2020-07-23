@@ -32,7 +32,9 @@ import {
   BeagleInputComponent,
   BeagleTextAreaComponent,
   BeagleMarkdownComponent,
+  BeaglePageIndicatorComponent,
   BeagleWebviewComponent,
+  BeagleTabBarComponent,
 } from './components'
 
 export const viewIdAttributeName = '__beagle_view_id'
@@ -54,11 +56,13 @@ const beagleDefaultComponents = {
   'beagle:image': BeagleImageComponent,
   'beagle:tabview': BeagleTabViewComponent,
   'beagle:tabitem': BeagleTabItemComponent,
+  'beagle:tabbar': BeagleTabBarComponent,
   'beagle:scrollview': BeagleContainerComponent,
   'beagle:touchable': BeagleTouchableComponent,
   'beagle:lazycomponent': BeagleLazyComponent,
   'beagle:simpleform': BeagleSimpleFormComponent,
-  'beagle:input': BeagleInputComponent,
+  'beagle:pageindicator': BeaglePageIndicatorComponent,
+  'beagle:textInput': BeagleInputComponent,
   'beagle:webview': BeagleWebviewComponent,
 }
 
