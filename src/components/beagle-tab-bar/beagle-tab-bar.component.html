@@ -15,7 +15,7 @@
 -->
 
 <div class="tab-item" *ngFor="let item of items; index as i">
-  <div class="item-content" (click)="changeSelectedTab(i)">
+  <div class="tab-item-content" (click)="changeSelectedTab(i)">
     <img *ngIf="item.icon" class="icon" [src]="item.icon.url" />
     {{item.title}}
   </div>
