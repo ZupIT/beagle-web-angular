@@ -15,60 +15,89 @@
 */
 
 import {
-    Component, ViewEncapsulation,
-    Input, ViewChild,
-    Renderer2,
+  Component, ViewEncapsulation,
+  Input, ViewChild,
+  Renderer2,
+  SimpleChanges,
+  OnInit,
 } from '@angular/core'
-import { BeaglePageViewInterface, PageIndicator } from '../schemas/page-view'
+import { BeaglePageViewInterface } from '../schemas/page-view'
+import { PageIndicatorInterface } from '../schemas/page-indicator'
 
 @Component({
-    selector: 'beagle-page-view',
-    templateUrl: './beagle-page-view.component.html',
-    styleUrls: ['./beagle-page-view.component.less'],
-    encapsulation: ViewEncapsulation.None,
+  selector: 'beagle-page-view',
+  templateUrl: './beagle-page-view.component.html',
+  styleUrls: ['./beagle-page-view.component.less'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class BeaglePageViewComponent implements BeaglePageViewInterface {
-    
-    @Input() pageIndicator?: PageIndicator
-    @ViewChild('contentItems') contentItems
-    totalPages: number[] = []
-    selected = 0
+export class BeaglePageViewComponent implements BeaglePageViewInterface, OnInit {
+  /**
+   * @deprecated Since version 1.1. Will be deleted in version 2.0.
+   * Use pageIndicator as a component instead.
+  */
+  @Input() pageIndicator?: PageIndicatorInterface
+  @Input() onPageChange?: (index: number) => void
+  @Input() currentPage?: number
+  @ViewChild('contentItems') contentItems
+  totalPages: number[] = []
 
-    constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2) { }
+
+  ngOnInit() {
+    this.currentPage = this.currentPage || 0
+    if (this.pageIndicator) {
+      console.log(`The way you are using page view is deprecated. 
+      This will be removed in a future version; please refactor this component 
+      using new context features.`)
     }
+  }
 
-    ngAfterViewInit() {
-        if (this.contentItems) {
-            const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
-            this.totalPages = elements.map((item, index) => {
-                this.renderer.addClass(item, 'page-item')
-                return index
-            })
-            this.changeSlide(0)
+  ngAfterViewInit() {
+    if (this.contentItems && this.contentItems.nativeElement) {
+      const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
+      this.totalPages = elements.map((item, index) => {
+        this.renderer.addClass(item, 'page-item')
+        return index
+      })
+      this.changeActualPage(this.currentPage)
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['currentPage']) return
+    const current = changes['currentPage'].currentValue
+    const prev = changes['currentPage'].previousValue
+    if (prev !== current) this.changeActualPage(this.currentPage)
+  }
+
+  changeSlide(index: number) {
+    if (this.onPageChange) this.onPageChange(index)
+    else this.changeActualPage(index)
+  }
+
+  changeActualPage(index) {
+    if (this.contentItems && this.contentItems.nativeElement) {
+      const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
+      elements.forEach((element, pos) => {
+        if (pos === index) {
+          this.renderer.addClass(element, 'active')
+          this.currentPage = index
+        } else {
+          this.renderer.removeClass(element, 'active')
         }
+      })
     }
+  }
 
-    changeSlide(index: number) {
-        const elements: Element[] = Array.from(this.contentItems.nativeElement.children)
-        elements.forEach((element, pos) => {
-            if (pos === index) {
-                this.renderer.addClass(element, 'active')
-                this.selected = index
-            } else {
-                this.renderer.removeClass(element, 'active')
-            }
-        })
+  backSlide() {
+    if (this.currentPage !== undefined && this.currentPage > 0) {
+      this.changeSlide(this.currentPage - 1)
     }
+  }
 
-    backSlide() {
-        if (this.selected > 0) {
-            this.changeSlide(this.selected - 1)
-        }
+  nextSlide() {
+    if (this.currentPage !== undefined && this.currentPage < this.totalPages.length - 1) {
+      this.changeSlide(this.currentPage + 1)
     }
-
-    nextSlide() {
-        if (this.selected < this.totalPages.length - 1) {
-            this.changeSlide(this.selected + 1)
-        }
-    }
+  }
 }
