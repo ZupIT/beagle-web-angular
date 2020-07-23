@@ -10,13 +10,13 @@ To follow the installation process, navigate to the root of your angular project
 
 If you use Yarn:
 
-```
+```sh
 yarn add @zup-it/beagle-angular
 ```
 
 If you use npm:
 
-```
+```sh
 npm install --save @zup-it/beagle-angular
 ```
 
@@ -24,11 +24,11 @@ npm install --save @zup-it/beagle-angular
 
 To confirm if the process worked, you simply have to use one of the commands below:
 
-```
+```sh
 yarn beagle help
 ```
 
-```
+```sh
 npx beagle help
 ```
 
@@ -44,11 +44,11 @@ After you finished the installation, you need to make **Beagle's usage configura
 
 Type one of the commands below to generate the files that will be used on Beagle's library. It's possible to execute the command according to your package manager:
 
-```
+```sh
 yarn beagle init
 ```
 
-```
+```sh
 npx beagle init
 ```
 
@@ -77,7 +77,7 @@ At the end of this process, two files will be generate on your project:
 
 Open the file `app.module.ts` and, then, import Beagle's module that was just generated:
 
-```
+```ts
 ...
 import { Beagle } from './beagle.module';
 
@@ -134,7 +134,7 @@ The code above creates a JSON with two os these components: container e text.
 
 After you created your JSON, open the file `beagle.module.ts` we generated in the previous step and add as a baseUrl the path: http://localhost:4200/assets
 
-```
+```ts
 import { BeagleModule } from '@zup-it/beagle-angular'
 // import all the components you wish to use with Beagle.
 
@@ -159,17 +159,21 @@ After created the JSON, you need to add a local, inside the application, where t
 
 Open the file `app.component.html` and replace all the content with this code:
 
-`<beagle-remote-view [loadParams]="loadParams"></beagle-remote-view>`
+```html
+<beagle-remote-view [loadParams]="loadParams"></beagle-remote-view>
+```
 
 Notice that the component above needs to receive a `loadParams` mandatory propriety and that's what we'll create now.
 
 Open the file `app.component.ts` and import LoadParams as the following example:
 
-`import { LoadParams } from '@zup-it/beagle-web';`
+```ts
+import { LoadParams } from '@zup-it/beagle-web';
+```
 
 Once you made it, state the variable that will be used on the template:
 
-```
+```ts
 loadParams: LoadParams;
 
 constructor() {
@@ -183,7 +187,7 @@ constructor() {
 
 At the end of this process, the content of your app.component.ts file must be similar to this code below:
 
-```
+```ts
 import { Component } from '@angular/core';
 import { LoadParams } from '@zup-it/beagle-web';
 
