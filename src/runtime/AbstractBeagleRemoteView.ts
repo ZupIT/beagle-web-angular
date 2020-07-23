@@ -72,11 +72,6 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     }
     this.view = beagleService.createView(this.loadParams.path)
     this.view.subscribe(this.updateView)
-    this.view.addErrorListener((errorListener) => {
-      errorListener.forEach((error) => {
-        console.error(error)
-      })
-    })
     BeagleContext.registerView(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
     this.onCreateBeagleView.emit(this.view)
