@@ -24,4 +24,5 @@ export interface BeaglePageViewInterface {
   pageIndicator?: PageIndicatorInterface,
   onPageChange?: (index: number) => void,
   currentPage?: number,
+  showArrow?: boolean,
 }
