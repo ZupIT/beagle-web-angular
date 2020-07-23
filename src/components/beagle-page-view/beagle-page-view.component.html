@@ -15,12 +15,12 @@
 -->
 
 <div class="page-view">
-  <span class="left-arrow" (click)="backSlide()">
+  <span *ngIf="showArrow" class="left-arrow" (click)="backSlide()">
   </span>
   <div class="content-items" #contentItems>
     <ng-content></ng-content>
   </div>
-  <span class="right-arrow" (click)="nextSlide()"></span>
+  <span *ngIf="showArrow" class="right-arrow" (click)="nextSlide()"></span>
   <div *ngIf="pageIndicator" class="page-indicator">
     <ol>
       <li
