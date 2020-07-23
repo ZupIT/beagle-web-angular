@@ -1,3 +1,4 @@
+
 #
   # Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   #
@@ -33,6 +34,13 @@ jobs:
     
     - name: lint
       run: yarn lint
+
+    - name: Jest Annotations & Coverage
+      uses: mattallty/jest-github-action@v1.0.3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        test-command: "yarn test --maxWorkers=2"
 
     - name: type-check
       run: yarn build
