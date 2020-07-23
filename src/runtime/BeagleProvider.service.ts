@@ -13,13 +13,14 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-
+import { Injectable } from '@angular/core'
 import createCoreBeagleUIService, { DefaultSchema } from '@zup-it/beagle-web'
 import { BeagleAngularConfig, BeagleAngularUIService } from '../types'
 import { defaultComponents } from '../constants'
 import beagleMapKeysConfig from './utils/beagle-map-keys-config'
 
-export abstract class AbstractBeagleProvider {
+@Injectable()
+export class BeagleProvider {
   private service: BeagleAngularUIService | undefined
 
   start<Schema = DefaultSchema>(config: BeagleAngularConfig<Schema>) {

@@ -27,3 +27,9 @@ function ensurePathArrayExistence(object: any, pathArray: string[], defaultValue
 export function ensurePathExistence(object: any, path: string, defaultValue: any) {
   ensurePathArrayExistence(object, path.split('.'), defaultValue)
 }
+
+export function getEnvironmentPaths(object: any, path: string) {
+  const keys = path.split('.')
+  keys.forEach(key => object = object[key])
+  return Object.keys(object)
+}

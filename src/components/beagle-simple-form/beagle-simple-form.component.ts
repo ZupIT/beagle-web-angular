@@ -23,7 +23,7 @@ import { SimpleFormInterface } from '../schemas/simple-form'
 })
 export class BeagleSimpleFormComponent implements SimpleFormInterface {
   
-  @Input() onSubmit?: () => void
+  @Input() onSubmit: () => void
 
   handleSubmit(event: Event) {
     event.preventDefault()
