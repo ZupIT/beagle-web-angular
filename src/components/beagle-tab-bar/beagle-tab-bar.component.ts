@@ -35,8 +35,6 @@ implements BeagleTabBarInterface {
   constructor() {
     super()
   }
-
-  /** @deprecated since v4. This parameter is no longer used */
   
   changeSelectedTab(selectedTab: number) {
     this.onTabSelection && this.onTabSelection(selectedTab)
