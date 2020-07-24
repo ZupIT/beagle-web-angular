@@ -37,12 +37,6 @@ jobs:
     - name: lint
       run: yarn lint
 
-    - name: type-check
-      run: yarn check-types
-
-    - name: type-check for tests
-      run: yarn check-test-types
-
     - name: Jest Annotations & Coverage
       if: ${{ github.repository_owner == 'ZupIT'}}
       uses: mattallty/jest-github-action@v1.0.3
