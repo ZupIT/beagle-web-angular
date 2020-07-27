@@ -14,13 +14,12 @@
   * limitations under the License.
 */
 
-import { removeExtraIndentation } from '../../utils/formatting'
+import { replaceToUnderline } from '../../../src/codegen/utils/formatting'
 
-export function createProviderString() {
-  const providerString = `
-    @Injectable()
-    export class BeagleProvider extends AbstractBeagleProvider {}
-  `
-
-  return removeExtraIndentation(providerString, 4)
-}
+describe('replaceToUnderline', () => {
+  it('should remove invalid special characters and add undescore', () => {
+    const invalidString = 'custom:loading'
+    const validString = 'custom_loading'
+    expect(replaceToUnderline(invalidString)).toStrictEqual(validString)
+  })
+})

@@ -1,6 +1,6 @@
 {
   "name": "@zup-it/beagle-angular",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "licenses": [
     {
@@ -13,7 +13,7 @@
     "build-cli": "yarn tsc -p tsconfig.cli.json",
     "copy-dist": "yarn ncp .dist dist",
     "build": "ng build beagle-angular --prod && yarn build-cli && yarn fix-package && yarn copy-dist",
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint src/**/*.ts",
     "watch": "yarn nodemon --watch src -e ts,html,css,less --exec yarn build"
   },
@@ -21,32 +21,6 @@
     "hooks": {
       "pre-commit": "sh ./bin/check-license.sh",
       "pre-push": "yarn lint"
-    }
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/src/__tests__/"
-    ],
-    "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupJest.ts"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/dist",
-      "<rootDir>/.dist",
-      "<rootDir>/node_modules/"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.spec.json",
-        "setupFilesAfterEnv": [
-          "<rootDir>/setupJest.ts"
-        ],
-        "stringifyContentPathRegex": "\\.html$",
-        "asTransformers": [
-          "<rootDir>/node_modules/jest-preset-angular/InlineHtmlStripeStylesTransformer"
-        ]
-      }
     }
   },
   "main": "dist/bundles/beagle-angular.umd.js",
@@ -61,13 +35,13 @@
   "sideEffects": false,
   "private": false,
   "dependencies": {
-    "@zup-it/beagle-web": "1.0.1",
+    "@zup-it/beagle-web": "1.1.0",
     "csstype": "^2.6.10",
     "showdown": "^1.9.1"
   },
   "peerDependencies": {
-    "@angular/common": ">= 6 < 10",
-    "@angular/core": ">= 6 < 10"
+    "@angular/common": ">= 6 <= 10",
+    "@angular/core": ">= 6 <= 10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.1",

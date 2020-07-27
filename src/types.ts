@@ -21,11 +21,17 @@ import {
   LoadParams,
   IdentifiableBeagleUIElement,
   BeagleView,
+  ErrorComponentParams,
 } from '@zup-it/beagle-web'
 import { UpdateWithTreeParams, Omit } from '@zup-it/beagle-web/types'
 
+export { ErrorComponentParams }
+
 export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
-  components: { 'custom:error'?: Type<{}>, 'custom:loading'?: Type<{}> } & {
+  components: {
+    'custom:error'?: Type<{} | ErrorComponentParams>,
+    'custom:loading'?: Type<{}>,
+  } & {
     [K in keyof Schema]: Type<Schema[K]>
   },
   module: {

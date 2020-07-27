@@ -1,4 +1,4 @@
-/*
+<!-- 
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,18 +11,12 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License.
-*/
-
-import { PageIndicatorInterface } from './page-indicator'
-
-export interface BeaglePageViewInterface {
-  /**
-   * @deprecated Since version 1.1. Will be deleted in version 2.0.
-   * Use pageIndicator as a component instead.
-  */
-  pageIndicator?: PageIndicatorInterface,
-  onPageChange?: (index: number) => void,
-  currentPage?: number,
-  showArrow?: boolean,
-}
+  * limitations under the License. 
+-->
+<div class="page-indicator">
+  <ol>
+    <li *ngFor="let item of totalPages; index as i"
+      [ngStyle]="{'background-color': i === currentPage ? selectedColor : unselectedColor}"
+      [ngClass]="i === currentPage ? 'active' : 'inactive'"></li>
+  </ol>
+</div>

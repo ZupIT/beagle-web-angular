@@ -35,7 +35,11 @@ import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-fo
 import { BeagleInputComponent } from './beagle-input/beagle-input.component'
 import { BeagleTextAreaComponent } from './beagle-text-area/beagle-text-area.component'
 import { BeagleMarkdownComponent } from './beagle-markdown/beagle-markdown.component'
+import {
+  BeaglePageIndicatorComponent,
+} from './beagle-page-indicator/beagle-page-indicator.component'
 import { BeagleWebviewComponent } from './beagle-webview/beagle-webview.component'
+import { BeagleTabBarComponent } from './beagle-tab-bar/beagle-tab-bar.component'
 
 const components = [
   BeagleButtonComponent,
@@ -43,6 +47,7 @@ const components = [
   BeagleTextComponent,
   BeagleContainerComponent,
   BeaglePageViewComponent,
+  BeaglePageIndicatorComponent,
   BeagleImageComponent,
   BeagleLazyComponent,
   BeagleLoadingComponent,
@@ -56,6 +61,7 @@ const components = [
   BeagleTextAreaComponent,
   BeagleMarkdownComponent,
   BeagleWebviewComponent,
+  BeagleTabBarComponent,
 ]
 
 @NgModule({

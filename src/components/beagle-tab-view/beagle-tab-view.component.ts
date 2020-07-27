@@ -28,6 +28,10 @@ import { BeagleTabViewInterface } from '../schemas/tab-view'
   styleUrls: ['./beagle-tab-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
+/**
+ * @deprecated Since version 1.1. Will be deleted in version 2.0.
+ * Consider replacing this component for a tabBar with a pageview.
+*/
 export class BeagleTabViewComponent implements
   BeagleTabViewInterface, AfterViewInit, OnInit, OnDestroy {
 
@@ -39,6 +43,8 @@ export class BeagleTabViewComponent implements
   constructor(private tabsService: TabsService) { }
 
   ngOnInit() {
+    console.warn(`Tabview is deprecated. This will be removed in a future version.
+    Please consider replacing this component for a tabBar with a pageview.`)
     this.listenTabChanges()
   }
 

@@ -14,15 +14,33 @@
   * limitations under the License.
 */
 
-import { PageIndicatorInterface } from './page-indicator'
+@import "../assets/default-style.less";
 
-export interface BeaglePageViewInterface {
-  /**
-   * @deprecated Since version 1.1. Will be deleted in version 2.0.
-   * Use pageIndicator as a component instead.
-  */
-  pageIndicator?: PageIndicatorInterface,
-  onPageChange?: (index: number) => void,
-  currentPage?: number,
-  showArrow?: boolean,
+.page-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ol {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    width: .625rem;
+    height: .625rem;
+    cursor: no-drop;
+    border-radius: 50%;
+    margin: 10px;
+
+    &.active {
+      background-color: @swamp;
+    }
+
+    &.inactive {
+      background-color: @swampTransparent;
+    }
+  }
 }

@@ -35,7 +35,7 @@ import {
 } from '@zup-it/beagle-web'
 import { BeagleContext } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
-import { AbstractBeagleProvider } from './AbstractBeagleProvider'
+import { BeagleProvider } from './BeagleProvider.service'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
 import beagleMapKeysConfig from './utils/beagle-map-keys-config'
@@ -47,8 +47,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   tree: IdentifiableBeagleUIElement<any>
   view: BeagleView
   viewId = `${nextViewId++}`
-  beagleProvider: AbstractBeagleProvider
-  ngZone: NgZone
+ ngZone: NgZone
   changeDetector: ChangeDetectorRef
   viewStaticPromise = createStaticPromise<BeagleView>()
   eventHandler: EventHandler
@@ -56,11 +55,10 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   @Output() onCreateBeagleView: EventEmitter<BeagleView> = new EventEmitter<BeagleView>()
 
   constructor(
-    beagleProvider?: AbstractBeagleProvider,
+    private beagleProvider: BeagleProvider,
     ngZone?: NgZone,
     changeDetector?: ChangeDetectorRef,
   ) {
-    if (beagleProvider) this.beagleProvider = beagleProvider
     if (ngZone) this.ngZone = ngZone
     if (changeDetector) this.changeDetector = changeDetector
   }
@@ -74,11 +72,6 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     }
     this.view = beagleService.createView(this.loadParams.path)
     this.view.subscribe(this.updateView)
-    this.view.addErrorListener((errorListener) => {
-      errorListener.forEach((error) => {
-        console.error(error)
-      })
-    })
     BeagleContext.registerView(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
     this.onCreateBeagleView.emit(this.view)
