@@ -14,11 +14,20 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component';
-import { BeagleAnalytics } from '@zup-it/beagle-web';
+import { Properties as CSSProperties } from 'csstype'
+import { By } from '@angular/platform-browser';
+import { BeagleComponent } from '../../runtime/BeagleComponent';
+import { Injectable } from '@angular/core';
+import { BeagleContext } from '@zup-it/beagle-web/types';
 
 let component: BeagleButtonComponent
+let fixture: ComponentFixture<BeagleButtonComponent>;
+let mockStyle: CSSProperties = {
+  height: '100',
+  width: '50'
+}
 
 describe('BeagleButtonComponent', () => {
 
@@ -29,12 +38,22 @@ describe('BeagleButtonComponent', () => {
         BeagleButtonComponent
       ]
     }).compileComponents();
-    const fixture = TestBed.createComponent(BeagleButtonComponent);
+    fixture = TestBed.createComponent(BeagleButtonComponent);
     component = fixture.componentInstance;
   }));
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call ngOnInit and set Style', () => {
+    spyOn(component, 'ngOnInit').and.callThrough();
+    component.style = mockStyle
+    component.ngOnInit();
+
+    expect(component.ngOnInit).toHaveBeenCalled();
+    expect(component.usefulStyle).toEqual(mockStyle)
+
   });
 
 });
