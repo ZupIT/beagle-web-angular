@@ -21,58 +21,47 @@ import { BeagleComponent } from '../../runtime/BeagleComponent';
 import { BeagleContext } from '../../types';
 
 class beagleComponentMock extends BeagleComponent {
-    getBeagleContext: (() => BeagleContext)
+  getBeagleContext: (() => BeagleContext)
 }
 
 let component: BeagleImageComponent
 const imagePathModeMock: ImagePathMode = "local"
 const pathMock: ImagePath = {
-    _beagleImagePath_: imagePathModeMock,
-    url: 'http://teste.com.br',
+  _beagleImagePath_: imagePathModeMock,
+  url: 'http://teste.com.br',
 }
 const accessibilityMock: Accessibility = {
-    accessible: true,
-    accessibilityLabel: '',
+  accessible: true,
+  accessibilityLabel: '',
 }
 const imageModeMock: ImageMode = "FIT_CENTER"
 
 describe('BeagleImageComponent', () => {
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleImageComponent
-            ]
-        }).compileComponents();
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleImageComponent
+      ]
+    }).compileComponents();
 
-        // const beagleComponent = TestBed.get(beagleComponentMock)
-        // console.log('COMPONENTE',beagleComponent)
-        // spyOn(beagleComponent,'getBeagleContext').and.callThrough();
+    const fixture = TestBed.createComponent(BeagleImageComponent);
+    component = fixture.componentInstance;
+    component.path = pathMock
 
-        const fixture = TestBed.createComponent(BeagleImageComponent);
-        component = fixture.componentInstance;
-        console.log('COMPONENT', component);
-        component.path = pathMock
+  }));
 
-    }));
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
 
-      it('should create the component', () => {
-        expect(component).toBeTruthy();
-      });
+  it(`should check all the Inputs`, () => {
 
-      it(`should check all the Inputs`, () => {
-        expect(typeof(component.path)).toEqual("object")
-        expect(component.mode).toEqual(imageModeMock)
-        expect(component.accessibility).toEqual(accessibilityMock)
-        expect(component.imageSource).toEqual('')
+    expect(typeof (component.path)).toEqual("object")
+    expect(component.mode).toEqual(imageModeMock)
+    expect(component.accessibility).toEqual(accessibilityMock)
+    expect(component.imageSource).toEqual('')
 
-      });
-
-    it('should call afterViewInit', () => {
-        jest.spyOn(component,'getBeagleContext')
-        spyOn(component,'ngAfterViewInit').and.callThrough()
-        component.ngAfterViewInit();
-        expect(component.ngAfterViewInit).toHaveBeenCalled();
-    });
+  });
 
 });

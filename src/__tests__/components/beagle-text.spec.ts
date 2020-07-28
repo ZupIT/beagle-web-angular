@@ -15,7 +15,6 @@
 */
 
 import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component';
 import { TextAlignment } from '../../components/schemas/text'
 
@@ -38,16 +37,16 @@ describe('BeagleTextComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call onInit', ()=>{
-    jest.spyOn(component,'ngOnInit')
+  it('should call onInit', () => {
+    jest.spyOn(component, 'ngOnInit')
     component.ngOnInit();
     expect(component.ngOnInit).toHaveBeenCalled();
-});
+  });
 
   it(`should check all the Inputs`, () => {
     expect(component.alignment).toBe(textAlignment || 'INHERIT')
     expect(component.styleId).toBe('')
-    expect(typeof(component.text)).toBe('string')
+    expect(typeof (component.text)).toBe('string')
     expect(component.textColor).toBe('inherit')
   });
 });

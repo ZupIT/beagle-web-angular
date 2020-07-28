@@ -18,33 +18,23 @@ import { TestBed, async } from '@angular/core/testing';
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component';
 import { BeagleAnalytics } from '@zup-it/beagle-web';
 
-describe('BeagleButtonComponent', () => {
-  let component: BeagleButtonComponent
+let component: BeagleButtonComponent
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [
-//         BeagleButtonComponent
-//       ]
-//     }).compileComponents();
-//     const fixture = TestBed.createComponent(BeagleButtonComponent);
-//     component = fixture.componentInstance;
-//   }));
+describe('BeagleButtonComponent', () => {
+
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleButtonComponent
+      ]
+    }).compileComponents();
+    const fixture = TestBed.createComponent(BeagleButtonComponent);
+    component = fixture.componentInstance;
+  }));
 
   it('should create the component', () => {
-    expect(true).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-//   it('should call onInit', ()=>{
-//     jest.spyOn(component,'ngOnInit')
-//     component.ngOnInit();
-//     expect(component.ngOnInit).toHaveBeenCalled();
-// });
-
-//   it(`should check all the Inputs`, () => {
-//     expect(component.alignment).toBe(textAlignment || 'INHERIT')
-//     expect(component.styleId).toBe('')
-//     expect(typeof(component.text)).toBe('string')
-//     expect(component.textColor).toBe('inherit')
-//   });
 });
