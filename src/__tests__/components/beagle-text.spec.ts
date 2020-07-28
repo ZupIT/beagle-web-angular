@@ -14,8 +14,8 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing';
-import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component';
+import { TestBed, async } from '@angular/core/testing'
+import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
 import { TextAlignment } from '../../components/schemas/text'
 
 describe('BeagleTextComponent', () => {
@@ -25,28 +25,28 @@ describe('BeagleTextComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BeagleTextComponent
+        BeagleTextComponent,
       ],
-    }).compileComponents();
-    const fixture = TestBed.createComponent(BeagleTextComponent);
-    component = fixture.componentInstance;
+    }).compileComponents()
+    const fixture = TestBed.createComponent(BeagleTextComponent)
+    component = fixture.componentInstance
     component.text = 'Teste'
-  }));
+  }))
 
   it('should create the component', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
   it('should call onInit', () => {
     jest.spyOn(component, 'ngOnInit')
-    component.ngOnInit();
-    expect(component.ngOnInit).toHaveBeenCalled();
-  });
+    component.ngOnInit()
+    expect(component.ngOnInit).toHaveBeenCalled()
+  })
 
-  it(`should check all the Inputs`, () => {
+  it('should check all the Inputs', () => {
     expect(component.alignment).toBe(textAlignment || 'INHERIT')
     expect(component.styleId).toBe('')
     expect(typeof (component.text)).toBe('string')
     expect(component.textColor).toBe('inherit')
-  });
-});
+  })
+})

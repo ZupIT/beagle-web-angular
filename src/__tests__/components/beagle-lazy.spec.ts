@@ -14,13 +14,13 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
-import { BeagleLazyComponent } from '../../components/beagle-lazy/beagle-lazy.component';
-import { BeagleComponent } from '../../runtime/BeagleComponent';
+import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
+import { BeagleLazyComponent } from '../../components/beagle-lazy/beagle-lazy.component'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
 
-let component: BeagleLazyComponent;
-let beagleComponent: BeagleComponent;
-let fixture: ComponentFixture<BeagleLazyComponent>;
+let component: BeagleLazyComponent
+let beagleComponent: BeagleComponent
+let fixture: ComponentFixture<BeagleLazyComponent>
 
 
 describe('BeagleImageComponent', () => {
@@ -28,21 +28,21 @@ describe('BeagleImageComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                BeagleLazyComponent
+                BeagleLazyComponent,
             ],
             providers: [
-                BeagleComponent
-            ]
-        }).compileComponents();
+                BeagleComponent,
+            ],
+        }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleLazyComponent);
-        beagleComponent = TestBed.get(BeagleComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(BeagleLazyComponent)
+        beagleComponent = TestBed.get(BeagleComponent)
+        component = fixture.componentInstance
 
-    }));
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
-});
+})

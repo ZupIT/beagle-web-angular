@@ -23,7 +23,7 @@ const maxLengthIgnorePattern = `(${singleLineString})|(${doubleQuoted})|(${templ
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  parserOptions: { project: ['./tsconfig.json', './tsconfig.cli.json'] },
+  parserOptions: { project: ['./tsconfig.json', './tsconfig.cli.json'], createDefaultProgram: true },
   extends: [
     'plugin:@typescript-eslint/recommended',
   ],
@@ -51,7 +51,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': 'off',
     'import/order': ['warn', {
-      groups: ['builtin', 'external','internal', 'parent', 'sibling', 'index'],
+      groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
       'newlines-between': 'ignore'
     }],
     '@typescript-eslint/no-non-null-assertion': 'off',

@@ -14,14 +14,14 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
-import { BeagleMarkdownComponent } from '../../components/beagle-markdown/beagle-markdown.component';
+import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
-import { SimpleChanges, SimpleChange, ElementRef } from '@angular/core';
+import { SimpleChanges, SimpleChange, ElementRef } from '@angular/core'
+import { BeagleMarkdownComponent } from '../../components/beagle-markdown/beagle-markdown.component'
 
-let component: BeagleMarkdownComponent;
-let fixture: ComponentFixture<BeagleMarkdownComponent>;
-let markdown = '> This is a markdown **text**'
+let component: BeagleMarkdownComponent
+let fixture: ComponentFixture<BeagleMarkdownComponent>
+const markdown = '> This is a markdown **text**'
 
 
 describe('BeagleImageComponent', () => {
@@ -30,18 +30,18 @@ describe('BeagleImageComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 BeagleMarkdownComponent,
-            ]
-        }).compileComponents();
+            ],
+        }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleMarkdownComponent);
-        component = fixture.componentInstance;
-        component.htmlContainer = fixture.debugElement.query(By.all());
+        fixture = TestBed.createComponent(BeagleMarkdownComponent)
+        component = fixture.componentInstance
+        component.htmlContainer = fixture.debugElement.query(By.all())
         component.htmlContainer.nativeElement.innerHtml = ''
-    }));
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
     it('should call ngOnChanges and convertMarkdownToHTML thoroughly', () => {
 
@@ -50,23 +50,23 @@ describe('BeagleImageComponent', () => {
 
         component.ngOnChanges({ text: new SimpleChange(null, markdown, true) })
 
-        expect(component.ngOnChanges).toHaveBeenCalled();
-        expect(component.convertMarkdownToHTML).toHaveBeenCalled();
-    });
+        expect(component.ngOnChanges).toHaveBeenCalled()
+        expect(component.convertMarkdownToHTML).toHaveBeenCalled()
+    })
 
     it('should return on second condition on convertMarkdownToHTML', () => {
 
         spyOn(component, 'convertMarkdownToHTML').and.callThrough()
         component.convertMarkdownToHTML('')
-        expect(component.convertMarkdownToHTML).toHaveBeenCalled();
-    });
+        expect(component.convertMarkdownToHTML).toHaveBeenCalled()
+    })
 
 
     it('should return on first condition on convertMarkdownToHTML', () => {
         delete component.htmlContainer
         spyOn(component, 'convertMarkdownToHTML').and.callThrough()
         component.convertMarkdownToHTML('')
-        expect(component.convertMarkdownToHTML).toHaveBeenCalled();
-    });
+        expect(component.convertMarkdownToHTML).toHaveBeenCalled()
+    })
 
-});
+})

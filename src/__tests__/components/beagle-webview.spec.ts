@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing';
-import { BeagleWebviewComponent } from '../../components/beagle-webview/beagle-webview.component';
-import { stringify } from 'querystring';
+import { stringify } from 'querystring'
+import { TestBed, async } from '@angular/core/testing'
+import { BeagleWebviewComponent } from '../../components/beagle-webview/beagle-webview.component'
 
 let component: BeagleWebviewComponent
 
@@ -26,23 +26,23 @@ describe('BeagleWebviewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                BeagleWebviewComponent
+                BeagleWebviewComponent,
             ],
-        }).compileComponents();
-        const fixture = TestBed.createComponent(BeagleWebviewComponent);
-        component = fixture.componentInstance;
+        }).compileComponents()
+        const fixture = TestBed.createComponent(BeagleWebviewComponent)
+        component = fixture.componentInstance
         component.url = 'http://www.test.com'
-    }));
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
     it('should call on init', () => {
         spyOn(component, 'ngOnInit').and.callThrough()
-        component.ngOnInit();
+        component.ngOnInit()
 
-        expect(component.ngOnInit).toBeCalled();
-    });
+        expect(component.ngOnInit).toBeCalled()
+    })
 
-});
+})

@@ -14,55 +14,65 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
-import { BeagleInputComponent } from '../../components/beagle-input/beagle-input.component';
-import { FormsModule } from '@angular/forms';
+import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
+import { BeagleInputComponent } from '../../components/beagle-input/beagle-input.component'
 
 
 let component: BeagleInputComponent
-let fixture: ComponentFixture<BeagleInputComponent>;
+let fixture: ComponentFixture<BeagleInputComponent>
 
+
+function setAndCallHandler(selector: string, value: string, event: string) {
+    fixture.detectChanges()
+    tick()
+
+    const input = fixture.debugElement.query(By.all()).nativeElement
+    input.value = value
+    input.dispatchEvent(new Event(event))
+    tick()
+}
 
 describe('BeagleImageComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                FormsModule
+                FormsModule,
             ],
             declarations: [
-                BeagleInputComponent
-            ]
-        }).compileComponents();
+                BeagleInputComponent,
+            ],
+        }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleInputComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(BeagleInputComponent)
+        component = fixture.componentInstance
 
-    }));
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
 
-    it(`should call on init and set Inputs`, () => {
-        spyOn(component, 'ngOnInit').and.callThrough();
-        component.ngOnInit();
+    it('should call on init and set Inputs', () => {
+        spyOn(component, 'ngOnInit').and.callThrough()
+        component.ngOnInit()
         expect(component.ngOnInit).toBeCalled()
 
-        expect(typeof (component.value)).toEqual("string")
-        expect(typeof (component.placeholder)).toEqual("string")
-        expect(typeof (component.disabled)).toEqual("boolean")
-        expect(typeof (component.readOnly)).toEqual("boolean")
-        expect(typeof (component.type)).toEqual("string")
-        expect(typeof (component.hidden)).toEqual("boolean")
-    });
+        expect(typeof (component.value)).toEqual('string')
+        expect(typeof (component.placeholder)).toEqual('string')
+        expect(typeof (component.disabled)).toEqual('boolean')
+        expect(typeof (component.readOnly)).toEqual('boolean')
+        expect(typeof (component.type)).toEqual('string')
+        expect(typeof (component.hidden)).toEqual('boolean')
+    })
 
-    it(`should call handlers and set Inputs`, fakeAsync(() => {
-        spyOn(component, 'handleChange').and.callThrough();
-        spyOn(component, 'handleFocus').and.callThrough();
-        spyOn(component, 'handleBlur').and.callThrough();
+    it('should call handlers and set Inputs', fakeAsync(() => {
+        spyOn(component, 'handleChange').and.callThrough()
+        spyOn(component, 'handleFocus').and.callThrough()
+        spyOn(component, 'handleBlur').and.callThrough()
 
         setAndCallHandler('input', 'Testing', 'input')
         setAndCallHandler('input', 'Testing', 'focus')
@@ -71,16 +81,8 @@ describe('BeagleImageComponent', () => {
         expect(component.handleChange).toHaveBeenCalled()
         expect(component.handleFocus).toHaveBeenCalled()
         expect(component.handleBlur).toHaveBeenCalled()
-    }));
+    }))
 
-    function setAndCallHandler(selector: string, value: string, event: string) {
-        fixture.detectChanges();
-        tick();
+    
 
-        let input = fixture.debugElement.query(By.all()).nativeElement;
-        input.value = value;
-        input.dispatchEvent(new Event(event));
-        tick();
-    }
-
-});
+})

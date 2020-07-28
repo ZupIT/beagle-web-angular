@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing';
-import { BeagleTabViewComponent } from '../../components/beagle-tab-view/beagle-tab-view.component';
-import { TabsService } from '../../components/services/tabs.service';
+import { TestBed, async } from '@angular/core/testing'
+import { BeagleTabViewComponent } from '../../components/beagle-tab-view/beagle-tab-view.component'
+import { TabsService } from '../../components/services/tabs.service'
 
 let component: BeagleTabViewComponent
 
@@ -26,27 +26,27 @@ describe('BeagleTabViewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                BeagleTabViewComponent
+                BeagleTabViewComponent,
             ],
             providers: [
-                TabsService
-            ]
-        }).compileComponents();
-        const fixture = TestBed.createComponent(BeagleTabViewComponent);
-        component = fixture.componentInstance;
-    }));
+                TabsService,
+            ],
+        }).compileComponents()
+        const fixture = TestBed.createComponent(BeagleTabViewComponent)
+        component = fixture.componentInstance
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
     it('should call on Init', () => {
-        spyOn(component, 'ngOnInit').and.callThrough();
-        spyOn(component, 'listenTabChanges').and.callThrough();
+        spyOn(component, 'ngOnInit').and.callThrough()
+        spyOn(component, 'listenTabChanges').and.callThrough()
         component.ngOnInit()
 
-        expect(component.ngOnInit).toBeCalled();
-        expect(component.listenTabChanges).toBeCalled();
-    });
+        expect(component.ngOnInit).toBeCalled()
+        expect(component.listenTabChanges).toBeCalled()
+    })
 
-});
+})

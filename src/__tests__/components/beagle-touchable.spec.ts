@@ -14,12 +14,23 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { BeagleTouchableComponent } from '../../components/beagle-touchable/beagle-touchable.component';
-import { By } from '@angular/platform-browser';
+import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing'
+import { By } from '@angular/platform-browser'
+import { BeagleTouchableComponent } 
+  from '../../components/beagle-touchable/beagle-touchable.component'
 
 let component: BeagleTouchableComponent
-let fixture: ComponentFixture<BeagleTouchableComponent>;
+let fixture: ComponentFixture<BeagleTouchableComponent>
+
+function setAndCallHandler(selector: string, value: string, event: string) {
+  fixture.detectChanges()
+  tick()
+
+  const input = fixture.debugElement.query(By.css(selector)).nativeElement
+  input.value = value
+  input.dispatchEvent(new Event(event))
+  tick()
+}
 
 describe('BeagleTouchableComponent', () => {
 
@@ -27,33 +38,23 @@ describe('BeagleTouchableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BeagleTouchableComponent
-      ]
-    }).compileComponents();
-    fixture = TestBed.createComponent(BeagleTouchableComponent);
-    component = fixture.componentInstance;
-  }));
+        BeagleTouchableComponent,
+      ],
+    }).compileComponents()
+    fixture = TestBed.createComponent(BeagleTouchableComponent)
+    component = fixture.componentInstance
+  }))
 
   it('should create the component', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
-  it(`should call handlers and set Inputs`, fakeAsync(() => {
-    spyOn(component, 'handleClick').and.callThrough();
+  it('should call handlers and set Inputs', fakeAsync(() => {
+    spyOn(component, 'handleClick').and.callThrough()
 
     setAndCallHandler('div', 'Testing', 'click')
 
     expect(component.handleClick).toHaveBeenCalled()
-  }));
+  }))
 
-  function setAndCallHandler(selector: string, value: string, event: string) {
-    fixture.detectChanges();
-    tick();
-
-    let input = fixture.debugElement.query(By.css(selector)).nativeElement;
-    input.value = value;
-    input.dispatchEvent(new Event(event));
-    tick();
-  }
-
-});
+})

@@ -14,16 +14,16 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
-import { BeagleErrorComponent } from '../../components/beagle-error/beagle-error.component';
-import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component';
+import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserTestingModule } from '@angular/platform-browser/testing'
+import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
+import { BeagleErrorComponent } from '../../components/beagle-error/beagle-error.component'
 
-let component: BeagleErrorComponent;
-let fixture: ComponentFixture<BeagleErrorComponent>;
+let component: BeagleErrorComponent
+let fixture: ComponentFixture<BeagleErrorComponent>
 
 
 describe('BeagleImageComponent', () => {
@@ -32,17 +32,17 @@ describe('BeagleImageComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 BeagleErrorComponent,
-                BeagleTextComponent
-            ]
-        }).compileComponents();
+                BeagleTextComponent,
+            ],
+        }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleErrorComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(BeagleErrorComponent)
+        component = fixture.componentInstance
 
-    }));
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
-});
+})

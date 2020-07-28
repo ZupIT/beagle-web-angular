@@ -14,18 +14,12 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing';
-import { BeagleImageComponent } from '../../components/beagle-image/beagle-image.component';
-import { ImagePath, ImagePathMode, Accessibility, ImageMode } from '../../components/schemas/image';
-import { BeagleComponent } from '../../runtime/BeagleComponent';
-import { BeagleContext } from '../../types';
-
-class beagleComponentMock extends BeagleComponent {
-  getBeagleContext: (() => BeagleContext)
-}
+import { TestBed, async } from '@angular/core/testing'
+import { BeagleImageComponent } from '../../components/beagle-image/beagle-image.component'
+import { ImagePath, ImagePathMode, Accessibility, ImageMode } from '../../components/schemas/image'
 
 let component: BeagleImageComponent
-const imagePathModeMock: ImagePathMode = "local"
+const imagePathModeMock: ImagePathMode = 'local'
 const pathMock: ImagePath = {
   _beagleImagePath_: imagePathModeMock,
   url: 'http://teste.com.br',
@@ -34,34 +28,34 @@ const accessibilityMock: Accessibility = {
   accessible: true,
   accessibilityLabel: '',
 }
-const imageModeMock: ImageMode = "FIT_CENTER"
+const imageModeMock: ImageMode = 'FIT_CENTER'
 
 describe('BeagleImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BeagleImageComponent
-      ]
-    }).compileComponents();
+        BeagleImageComponent,
+      ],
+    }).compileComponents()
 
-    const fixture = TestBed.createComponent(BeagleImageComponent);
-    component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(BeagleImageComponent)
+    component = fixture.componentInstance
     component.path = pathMock
 
-  }));
+  }))
 
   it('should create the component', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
-  it(`should check all the Inputs`, () => {
+  it('should check all the Inputs', () => {
 
-    expect(typeof (component.path)).toEqual("object")
+    expect(typeof (component.path)).toEqual('object')
     expect(component.mode).toEqual(imageModeMock)
     expect(component.accessibility).toEqual(accessibilityMock)
     expect(component.imageSource).toEqual('')
 
-  });
+  })
 
-});
+})

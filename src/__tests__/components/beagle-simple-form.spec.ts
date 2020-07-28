@@ -14,13 +14,13 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
-import { BeagleSimpleFormComponent } from '../../components/beagle-simple-form/beagle-simple-form.component';
-import { By } from '@angular/platform-browser'
+import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
+import { BeagleSimpleFormComponent } 
+    from '../../components/beagle-simple-form/beagle-simple-form.component'
 
-let component: BeagleSimpleFormComponent;
-let fixture: ComponentFixture<BeagleSimpleFormComponent>;
+let component: BeagleSimpleFormComponent
+let fixture: ComponentFixture<BeagleSimpleFormComponent>
 
 
 describe('BeagleImageComponent', () => {
@@ -31,23 +31,23 @@ describe('BeagleImageComponent', () => {
                 BeagleSimpleFormComponent,
             ],
             imports: [
-                FormsModule
-            ]
-        }).compileComponents();
+                FormsModule,
+            ],
+        }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleSimpleFormComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(BeagleSimpleFormComponent)
+        component = fixture.componentInstance
 
-    }));
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
     it('should trigger on Submit', fakeAsync(() => {
         spyOn(component, 'handleSubmit').and.callThrough()
         component.handleSubmit(new Event('submit', {}))
-        expect(component.handleSubmit).toBeCalled();
-    }));
+        expect(component.handleSubmit).toBeCalled()
+    }))
 
-});
+})

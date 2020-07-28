@@ -14,11 +14,11 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
-import { BeagleLoadingComponent } from '../../components/beagle-loading/beagle-loading.component';
+import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
+import { BeagleLoadingComponent } from '../../components/beagle-loading/beagle-loading.component'
 
-let component: BeagleLoadingComponent;
-let fixture: ComponentFixture<BeagleLoadingComponent>;
+let component: BeagleLoadingComponent
+let fixture: ComponentFixture<BeagleLoadingComponent>
 
 
 describe('BeagleImageComponent', () => {
@@ -27,15 +27,15 @@ describe('BeagleImageComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 BeagleLoadingComponent,
-            ]
-        }).compileComponents();
+            ],
+        }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleLoadingComponent);
-        component = fixture.componentInstance;
-    }));
+        fixture = TestBed.createComponent(BeagleLoadingComponent)
+        component = fixture.componentInstance
+    }))
 
     it('should create the component', () => {
-        expect(component).toBeTruthy();
-    });
+        expect(component).toBeTruthy()
+    })
 
-});
+})
