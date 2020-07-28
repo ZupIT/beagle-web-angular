@@ -17,10 +17,6 @@
 import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component';
 import { Properties as CSSProperties } from 'csstype'
-import { By } from '@angular/platform-browser';
-import { BeagleComponent } from '../../runtime/BeagleComponent';
-import { Injectable } from '@angular/core';
-import { BeagleContext } from '@zup-it/beagle-web/types';
 
 let component: BeagleButtonComponent
 let fixture: ComponentFixture<BeagleButtonComponent>;
