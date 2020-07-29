@@ -1,4 +1,3 @@
-
 #
   # Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   #
@@ -19,7 +18,7 @@ name: Pull request validation
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ development, master, release/* ]
 
 jobs:
   validation:
@@ -39,11 +38,21 @@ jobs:
       run: yarn lint
 
     - name: Jest Annotations & Coverage
+      if: ${{ github.repository_owner == 'ZupIT'}}
       uses: mattallty/jest-github-action@v1.0.3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         test-command: "yarn test --maxWorkers=2"
 
-    - name: type-check
+    - name: Jest Coverage
+      if: ${{ github.repository_owner != 'ZupIT'}}
+      uses: mattallty/jest-github-action@v1.0.3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        test-command: "yarn test --maxWorkers=2"
+        coverage-comment: false
+    
+    - name: build
       run: yarn build
