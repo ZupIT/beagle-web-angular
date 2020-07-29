@@ -25,17 +25,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-
     - name: clear cache
       run: yarn cache clean
 
+    # Checks-out beagle-web-core under $GITHUB_WORKSPACE
+    - name: clone beagle-web-core
+      uses: actions/checkout@v2
+      with:
+        repository: ZupIT/beagle-web-core
+        path: core
+
+    - name: install beagle-web-core
+      run: cd core && yarn
+
+    - name: build beagle-web-core
+      run: cd core && yarn build
+
+    - name: create link for beagle-web-core
+      run: cd core/dist && yarn link
+
+    # Checks-out beagle-angular under $GITHUB_WORKSPACE
+    - name: clone beagle-angular
+      uses: actions/checkout@v2
+      with:
+        path: angular
+
+    - name: link beagle-angular to beagle-web-core
+      run: cd angular && yarn link @zup-it/beagle-web
+
     - name: install
-      run: yarn
+      run: cd angular && yarn
     
     - name: lint
-      run: yarn lint
+      run: cd angular && yarn lint
 
     - name: Jest Annotations & Coverage
       if: ${{ github.repository_owner == 'ZupIT'}}
@@ -43,6 +65,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        working-directory: "angular"
         test-command: "yarn test --maxWorkers=2"
 
     - name: Jest Coverage
@@ -51,8 +74,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        working-directory: "angular"
         test-command: "yarn test --maxWorkers=2"
         coverage-comment: false
     
     - name: build
-      run: yarn build
+      run: cd angular && yarn build
