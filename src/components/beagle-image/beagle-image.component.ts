@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, AfterViewInit } from '@angular/core'
-import { BeagleComponent } from '../../runtime/BeagleComponent'
+import UrlBuilder from '@zup-it/beagle-web/UrlBuilder'
 import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
 
 @Component({
@@ -23,8 +23,7 @@ import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../sc
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent extends BeagleComponent
-  implements BeagleImageInterface, AfterViewInit {
+export class BeagleImageComponent implements BeagleImageInterface, AfterViewInit {
   
   @Input() path: ImagePath
   @Input() mode?: ImageMode = 'FIT_CENTER'
@@ -35,10 +34,9 @@ export class BeagleImageComponent extends BeagleComponent
   public imageSource = ''
 
   ngAfterViewInit() {
-    const view = this.getBeagleContext().getView()
     this.imageSource = this.path && this.path._beagleImagePath_ === 'local'
       ? this.path && this.path.url || ''
-      : view.getUrlBuilder().build(this.path && this.path.url || '')
+      : UrlBuilder.build(this.path && this.path.url || '')
 
     if (!this.mode) {
       this.mode = 'FIT_CENTER'
