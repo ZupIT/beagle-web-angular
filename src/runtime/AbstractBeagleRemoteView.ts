@@ -29,9 +29,6 @@ import {
   LoadParams,
   BeagleView,
   IdentifiableBeagleUIElement,
-  replaceBindings,
-  EventHandler,
-  createEventHandler,
 } from '@zup-it/beagle-web'
 import { BeagleContext } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
@@ -44,14 +41,12 @@ let nextViewId = 1
 
 export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestroy, OnChanges {
   loadParams: LoadParams = { path: '' }
-  tree: IdentifiableBeagleUIElement<any>
+  tree: IdentifiableBeagleUIElement<any> | null
   view: BeagleView
   viewId = `${nextViewId++}`
   ngZone: NgZone
   changeDetector: ChangeDetectorRef
   viewStaticPromise = createStaticPromise<BeagleView>()
-  eventHandler: EventHandler
-  globalContextSubscription: () => void
 
   @Output() onCreateBeagleView: EventEmitter<BeagleView> = new EventEmitter<BeagleView>()
 
@@ -79,16 +74,6 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     this.onCreateBeagleView.emit(this.view)
   }
 
-  updateTreeView = () => (	
-    this.view && this.view.updateWithTree({ sourceTree: this.view.getTree() })	
-  )
-
-  createEventHandler() {
-    const beagleService = this.beagleProvider.getBeagleUIService()
-    if (!beagleService) return
-    this.eventHandler = createEventHandler(beagleService.getConfig().customActions, this.view)
-  }
-
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
     const component = beagleMapKeysConfig.getComponent(componentName)
     const normalizedComponentName = replaceToUnderline(component)
@@ -103,9 +88,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
 
   updateView = (uiTree: IdentifiableBeagleUIElement<any>) => {
     this.ngZone.run(() => {
-      const uiTreeWithActions = this.eventHandler.interpretEventsInTree(uiTree)
-      const uiTreeWithValues = replaceBindings(uiTreeWithActions)
-      this.tree = uiTree && Object.keys(uiTree).length > 0 ? uiTreeWithValues : null
+      this.tree = uiTree && Object.keys(uiTree).length > 0 ? uiTree : null
       this.changeDetector.detectChanges()
     })
   }
@@ -125,8 +108,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
       )
     }
     this.createBeagleView()
-    this.createEventHandler()
-    this.view.updateWithFetch(this.loadParams)
+    this.view.fetch(this.loadParams)
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -135,13 +117,13 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
         changes.loadParams.previousValue
         && changes.loadParams.previousValue !== changes.loadParams.currentValue
       ) {
-        this.view.updateWithFetch(this.loadParams)
+        this.view.fetch(this.loadParams)
       }
     }
   }
 
   ngOnDestroy() {
-    this.globalContextSubscription && this.globalContextSubscription()
+    this.view.destroy()
     BeagleContext.unregisterView(this.viewId)
   }
 }
