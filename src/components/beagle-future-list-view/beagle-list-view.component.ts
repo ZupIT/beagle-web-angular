@@ -24,7 +24,10 @@ import {
   NgZone,
   AfterViewChecked,
   AfterViewInit,
+  OnInit,
+  OnDestroy,
 } from '@angular/core'
+import { fromEvent, Subscriber, Subscription } from 'rxjs'
 import { BeagleUIElement } from '@zup-it/beagle-web'
 import Expression from '@zup-it/beagle-web/Renderer/Expression'
 import Tree from '@zup-it/beagle-web/utils/Tree'
@@ -39,19 +42,40 @@ import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleFutureListViewComponent extends BeagleComponent
-  implements BeagleFutureListViewInterface, AfterViewChecked, OnChanges, AfterViewInit {
+  implements BeagleFutureListViewInterface,
+  AfterViewChecked, OnChanges, AfterViewInit, OnInit, OnDestroy {
 
   @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
+  @Input() onScrollEnd?: () => void
+  @Input() scrollEndThreshold?: number
+  
+  private scrollSubscription: Subscription
   private hasInitialized = false
   private hasRenderedDataSource = false
+  private hasSize = false
 
   constructor(
-    private element: ElementRef, 
+    private element: ElementRef,
     private ngZone: NgZone) {
     super()
+  }
+
+  ngOnInit() {
+    this.setDefaultValues()
+    if (this.element.nativeElement.parentNode.style) {
+      const sizeProperty = this.direction === 'VERTICAL' ? 'height' : 'width'
+      this.hasSize = this.element.nativeElement.parentNode.style[sizeProperty] !== ''
+    }
+    this.createScrollListener()
+  }
+
+  ngAfterViewInit() {
+    if (!this.hasRenderedDataSource) this.renderDataSource()
+    if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
+    else this.verifyNoScroll()
   }
 
   ngAfterViewChecked() {
@@ -61,6 +85,47 @@ export class BeagleFutureListViewComponent extends BeagleComponent
           this.verifyCallingOnInit()
         }, 5)
       })
+    }
+  }
+
+  setDefaultValues() {
+    if (!this.scrollEndThreshold) {
+      this.scrollEndThreshold = 100
+    }
+    if (!this.direction) {
+      this.direction = 'VERTICAL'
+    }
+  }
+
+  createScrollListener() {
+    let parentNode: HTMLElement
+    let listenTo
+
+    if (this.hasSize) {
+      parentNode = this.element.nativeElement.parentNode
+      listenTo = parentNode
+    } else {
+      parentNode = document.body.parentNode as HTMLElement
+      listenTo = window
+    }
+
+    this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(
+      (event) => this.calcPercentage(parentNode))
+  }
+
+  calcPercentage(parentNode: HTMLElement) {
+    let screenPercentage
+    if (this.direction === 'VERTICAL') {
+      const scrollPosition = parentNode.scrollTop
+      screenPercentage = (scrollPosition /
+        (parentNode?.scrollHeight - parentNode?.clientHeight)) * 100
+    } else {
+      const scrollPosition = parentNode.scrollLeft
+      screenPercentage = (scrollPosition /
+        (parentNode?.scrollWidth - parentNode?.clientWidth)) * 100
+    }
+    if (this.scrollEndThreshold && screenPercentage >= this.scrollEndThreshold) {
+      this.callOnScrollEnd()
     }
   }
 
@@ -80,14 +145,20 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     this.hasRenderedDataSource = true
   }
 
-  ngAfterViewInit() {
-    if (!this.hasRenderedDataSource) this.renderDataSource()
+  verifyNoScroll() {
+    const element = this.element.nativeElement
+    //Content is smaller than the visible screen height, so there is no scroll.
+    //Therefore, we call the callOnScrollEnd function.
+    if ((this.direction === 'VERTICAL' && element.scrollHeight >= element.clientHeight) ||
+      (this.direction === 'HORIZONTAL' && element.scrollWidth >= element.clientWidth)) {
+      this.callOnScrollEnd()
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['dataSource'] || !this.getBeagleContext) return
     const current = JSON.stringify(changes['dataSource'].currentValue)
-    const prev  = JSON.stringify(changes['dataSource'].previousValue)
+    const prev = JSON.stringify(changes['dataSource'].previousValue)
     if (prev !== current) this.renderDataSource()
   }
 
@@ -100,5 +171,13 @@ export class BeagleFutureListViewComponent extends BeagleComponent
 
   isRendered() {
     return this.element.nativeElement.isConnected
+  }
+
+  callOnScrollEnd() {
+    this.onScrollEnd && this.onScrollEnd()
+  }
+
+  ngOnDestroy() {
+    this.scrollSubscription && this.scrollSubscription.unsubscribe()
   }
 }

@@ -22,6 +22,8 @@ export interface BeagleFutureListViewInterface {
   direction: Direction,
   dataSource: any[],
   onInit?: () => void,
+  onScrollEnd?: () => void,
+  scrollEndThreshold?: number,
   template: BeagleUIElement,
 }
 
