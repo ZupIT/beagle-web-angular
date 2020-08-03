@@ -27,7 +27,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core'
-import { fromEvent, Subscriber, Subscription } from 'rxjs'
+import { fromEvent, Subscription } from 'rxjs'
 import { BeagleUIElement } from '@zup-it/beagle-web'
 import Expression from '@zup-it/beagle-web/Renderer/Expression'
 import Tree from '@zup-it/beagle-web/utils/Tree'
@@ -101,7 +101,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     let parentNode: HTMLElement
     let listenTo
 
-    if (this.hasSize) {
+    if (this.hasSize || this.direction === 'HORIZONTAL') {
       parentNode = this.element.nativeElement.parentNode
       listenTo = parentNode
     } else {
