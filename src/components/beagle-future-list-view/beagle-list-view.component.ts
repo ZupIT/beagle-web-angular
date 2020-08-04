@@ -26,6 +26,7 @@ import {
   AfterViewInit,
   OnInit,
   OnDestroy,
+  HostBinding,
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
 import { BeagleUIElement } from '@zup-it/beagle-web'
@@ -51,11 +52,13 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void
   @Input() scrollEndThreshold?: number
-  
+  @Input() useParentScroll?: boolean
+  @HostBinding('class') hasScrollClass = ''
+
   private scrollSubscription: Subscription
   private hasInitialized = false
   private hasRenderedDataSource = false
-  private hasSize = false
+  private parentNode: HTMLElement
 
   constructor(
     private element: ElementRef,
@@ -65,17 +68,14 @@ export class BeagleFutureListViewComponent extends BeagleComponent
 
   ngOnInit() {
     this.setDefaultValues()
-    if (this.element.nativeElement.parentNode.style) {
-      const sizeProperty = this.direction === 'VERTICAL' ? 'height' : 'width'
-      this.hasSize = this.element.nativeElement.parentNode.style[sizeProperty] !== ''
-    }
-    this.createScrollListener()
   }
 
   ngAfterViewInit() {
-    if (!this.hasRenderedDataSource) this.renderDataSource()
+    this.createScrollListener() 
     if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
     else this.verifyNoScroll()
+
+    if (!this.hasRenderedDataSource) this.renderDataSource()
   }
 
   ngAfterViewChecked() {
@@ -89,41 +89,48 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   }
 
   setDefaultValues() {
-    if (!this.scrollEndThreshold) {
-      this.scrollEndThreshold = 100
+    if (!this.scrollEndThreshold) this.scrollEndThreshold = 100
+    if (!this.direction) this.direction = 'VERTICAL'
+    if (this.useParentScroll === undefined) this.useParentScroll = false
+    this.hasScrollClass = this.useParentScroll === false ?  'hasScroll' : ''
+  }
+
+  getParentNode(node) {
+    if (!node) return null
+    if (this.direction === 'VERTICAL' &&
+      (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight) ||
+      this.direction === 'HORIZONTAL' &&
+      (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth)
+    ) {
+      return this.getParentNode(node.parentNode)
     }
-    if (!this.direction) {
-      this.direction = 'VERTICAL'
-    }
+    return node
   }
 
   createScrollListener() {
-    let parentNode: HTMLElement
-    let listenTo
-
-    if (this.hasSize || this.direction === 'HORIZONTAL') {
-      parentNode = this.element.nativeElement.parentNode
-      listenTo = parentNode
+    if (this.useParentScroll || this.direction === 'HORIZONTAL') {
+      this.parentNode = this.getParentNode(this.element.nativeElement.parentNode)
     } else {
-      parentNode = document.body.parentNode as HTMLElement
-      listenTo = window
+      this.parentNode = this.element.nativeElement
     }
-
+    const listenTo = this.parentNode.nodeName === 'HTML' ? window : this.parentNode
     this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(
-      (event) => this.calcPercentage(parentNode))
+      (event) => this.calcPercentage(),
+    )
   }
 
-  calcPercentage(parentNode: HTMLElement) {
+  calcPercentage() {
     let screenPercentage
     if (this.direction === 'VERTICAL') {
-      const scrollPosition = parentNode.scrollTop
+      const scrollPosition = this.parentNode.scrollTop
       screenPercentage = (scrollPosition /
-        (parentNode?.scrollHeight - parentNode?.clientHeight)) * 100
+        (this.parentNode?.scrollHeight - this.parentNode?.clientHeight)) * 100
     } else {
-      const scrollPosition = parentNode.scrollLeft
+      const scrollPosition = this.parentNode.scrollLeft
       screenPercentage = (scrollPosition /
-        (parentNode?.scrollWidth - parentNode?.clientWidth)) * 100
+        (this.parentNode?.scrollWidth - this.parentNode?.clientWidth)) * 100
     }
+
     if (this.scrollEndThreshold && screenPercentage >= this.scrollEndThreshold) {
       this.callOnScrollEnd()
     }
@@ -149,8 +156,8 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     const element = this.element.nativeElement
     //Content is smaller than the visible screen height, so there is no scroll.
     //Therefore, we call the callOnScrollEnd function.
-    if ((this.direction === 'VERTICAL' && element.scrollHeight >= element.clientHeight) ||
-      (this.direction === 'HORIZONTAL' && element.scrollWidth >= element.clientWidth)) {
+    if ((this.direction === 'VERTICAL' && element.scrollHeight <= this.parentNode.clientHeight) ||
+      (this.direction === 'HORIZONTAL' && element.scrollWidth <= this.parentNode.clientWidth)) {
       this.callOnScrollEnd()
     }
   }

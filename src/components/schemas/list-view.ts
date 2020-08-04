@@ -15,6 +15,7 @@
 */
 
 import { BeagleUIElement } from '@zup-it/beagle-web'
+import { Properties as CSSProperties } from 'csstype'
 
 export type Direction = 'VERTICAL' | 'HORIZONTAL'
 
@@ -25,6 +26,8 @@ export interface BeagleFutureListViewInterface {
   onScrollEnd?: () => void,
   scrollEndThreshold?: number,
   template: BeagleUIElement,
+  useParentScroll?: boolean,
+  style?: CSSProperties,
 }
 
 export interface BeagleListViewInterface {
