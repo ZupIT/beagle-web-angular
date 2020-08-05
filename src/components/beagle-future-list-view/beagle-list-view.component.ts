@@ -72,10 +72,10 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   }
 
   ngAfterViewInit() {
+    this.setParentNode()
     this.createScrollListener()
-    if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
-    else this.verifyNoScroll()
 
+    if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
     if (!this.hasRenderedDataSource) this.renderDataSource()
   }
 
@@ -108,15 +108,24 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     return node
   }
 
-  createScrollListener() {
+  setParentNode() {
     if (this.useParentScroll || this.direction === 'HORIZONTAL') {
       this.parentNode = this.getParentNode(this.element.nativeElement.parentNode)
     } else {
       this.parentNode = this.element.nativeElement
     }
+  }
+
+  createScrollListener() {
+    if (this.scrollSubscription) {
+      this.scrollSubscription.unsubscribe()
+    }
     const listenTo = this.parentNode.nodeName === 'HTML' ? window : this.parentNode
     this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(
-      (event) => this.calcPercentage(),
+      (event) => {
+        console.log('event', event)
+        this.calcPercentage()
+      },
     )
   }
 
@@ -155,15 +164,19 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
     this.allowedOnScrollEnd = true
     this.hasRenderedDataSource = true
+   
+    // If the dataSource comes from a context, it might be initially empty, so the closes
+    // scroll is one, when the data actually comes, the closes scroll may change, so to guarantee
+    // the scroll will work as expected, we call verifyChangedParent every time the dataSource
+    // is changed
+    this.verifyChangedParent()
   }
 
-  verifyNoScroll() {
-    const element = this.element.nativeElement
-    //Content is smaller than the visible screen height, so there is no scroll.
-    //Therefore, we call the callOnScrollEnd function.
-    if ((this.direction === 'VERTICAL' && element.scrollHeight <= this.parentNode.clientHeight) ||
-      (this.direction === 'HORIZONTAL' && element.scrollWidth <= this.parentNode.clientWidth)) {
-      this.callOnScrollEnd()
+  verifyChangedParent() {
+    const previousParent = this.parentNode
+    this.setParentNode()
+    if (previousParent !== this.parentNode) {
+      this.createScrollListener()
     }
   }
 
