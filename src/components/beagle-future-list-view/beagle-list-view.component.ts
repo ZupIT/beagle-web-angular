@@ -96,12 +96,24 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     this.hasScrollClass = this.useParentScroll === false ? 'hasScroll' : ''
   }
 
+  allowedScroll(node) {
+    const overflowY = getComputedStyle(node).overflowY
+    const overflowX = getComputedStyle(node).overflowX
+    const hasYscroll = overflowY !== 'visible' && overflowY !== 'hidden'
+    const hasXscroll = overflowX !== 'visible' && overflowX !== 'hidden'
+    return { hasYscroll, hasXscroll }
+  }
+
   getParentNode(node) {
     if (!node) return null
-    if (this.direction === 'VERTICAL' &&
-      (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight) ||
-      this.direction === 'HORIZONTAL' &&
-      (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth)
+    if (node.nodeName === 'HTML') return node
+
+    const { hasYscroll, hasXscroll } = this.allowedScroll(node)
+
+    if ((this.direction === 'VERTICAL' &&
+      (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight || !hasYscroll)) ||
+      (this.direction === 'HORIZONTAL' &&
+        (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXscroll))
     ) {
       return this.getParentNode(node.parentNode)
     }
@@ -122,10 +134,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     }
     const listenTo = this.parentNode.nodeName === 'HTML' ? window : this.parentNode
     this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(
-      (event) => {
-        console.log('event', event)
-        this.calcPercentage()
-      },
+      (event) => this.calcPercentage(),
     )
   }
 
@@ -164,7 +173,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
     this.allowedOnScrollEnd = true
     this.hasRenderedDataSource = true
-   
+
     // If the dataSource comes from a context, it might be initially empty, so the closes
     // scroll is one, when the data actually comes, the closes scroll may change, so to guarantee
     // the scroll will work as expected, we call verifyChangedParent every time the dataSource

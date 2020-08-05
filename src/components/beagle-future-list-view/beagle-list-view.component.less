@@ -16,11 +16,12 @@
 
 beagle-future-list-view {
   display: block;
+
   .beagle-list-view {
     display: flex;
     width: 100%;
     height: 100%;
-    
+
     &.VERTICAL {
       flex-direction: column;
     }
@@ -29,7 +30,12 @@ beagle-future-list-view {
       flex-direction: row;
     }
   }
-  &.hasScroll{
+
+  &.hasScroll {
     overflow: auto;
+  }
+
+  beagle-container {
+    overflow: visible;
   }
 }
