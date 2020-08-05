@@ -59,6 +59,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   private hasInitialized = false
   private hasRenderedDataSource = false
   private parentNode: HTMLElement
+  private allowedOnScrollEnd = true
 
   constructor(
     private element: ElementRef,
@@ -71,7 +72,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   }
 
   ngAfterViewInit() {
-    this.createScrollListener() 
+    this.createScrollListener()
     if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
     else this.verifyNoScroll()
 
@@ -92,7 +93,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     if (!this.scrollEndThreshold) this.scrollEndThreshold = 100
     if (!this.direction) this.direction = 'VERTICAL'
     if (this.useParentScroll === undefined) this.useParentScroll = false
-    this.hasScrollClass = this.useParentScroll === false ?  'hasScroll' : ''
+    this.hasScrollClass = this.useParentScroll === false ? 'hasScroll' : ''
   }
 
   getParentNode(node) {
@@ -131,14 +132,17 @@ export class BeagleFutureListViewComponent extends BeagleComponent
         (this.parentNode?.scrollWidth - this.parentNode?.clientWidth)) * 100
     }
 
-    if (this.scrollEndThreshold && screenPercentage >= this.scrollEndThreshold) {
+    if (this.scrollEndThreshold &&
+      screenPercentage >= this.scrollEndThreshold &&
+      this.allowedOnScrollEnd) {
+      this.allowedOnScrollEnd = false
       this.callOnScrollEnd()
     }
   }
 
   renderDataSource() {
     const element = this.getBeagleContext().getElement()
-    if (!element) return
+    if (!element || !Array.isArray(this.dataSource)) return
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item) => {
@@ -149,6 +153,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     })
 
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
+    this.allowedOnScrollEnd = true
     this.hasRenderedDataSource = true
   }
 
