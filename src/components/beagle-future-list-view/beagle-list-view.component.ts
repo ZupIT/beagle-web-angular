@@ -96,7 +96,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     this.hasScrollClass = this.useParentScroll === false ? 'hasScroll' : ''
   }
 
-  allowedScroll(node) {
+  allowedScroll(node: HTMLElement) {
     const overflowY = getComputedStyle(node).overflowY
     const overflowX = getComputedStyle(node).overflowX
     const hasYscroll = overflowY !== 'visible' && overflowY !== 'hidden'
@@ -104,7 +104,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     return { hasYscroll, hasXscroll }
   }
 
-  getParentNode(node) {
+  getParentNode(node: HTMLElement) {
     if (!node) return null
     if (node.nodeName === 'HTML') return node
 
@@ -115,13 +115,13 @@ export class BeagleFutureListViewComponent extends BeagleComponent
       (this.direction === 'HORIZONTAL' &&
         (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXscroll))
     ) {
-      return this.getParentNode(node.parentNode)
+      return this.getParentNode(node.parentNode as HTMLElement)
     }
     return node
   }
 
   setParentNode() {
-    if (this.useParentScroll || this.direction === 'HORIZONTAL') {
+    if (this.useParentScroll) {
       this.parentNode = this.getParentNode(this.element.nativeElement.parentNode)
     } else {
       this.parentNode = this.element.nativeElement
@@ -139,7 +139,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   }
 
   calcPercentage() {
-    let screenPercentage
+    let screenPercentage: number
     if (this.direction === 'VERTICAL') {
       const scrollPosition = this.parentNode.scrollTop
       screenPercentage = (scrollPosition /
@@ -151,7 +151,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     }
 
     if (this.scrollEndThreshold &&
-      screenPercentage >= this.scrollEndThreshold &&
+      Math.ceil(screenPercentage) >= this.scrollEndThreshold &&
       this.allowedOnScrollEnd) {
       this.allowedOnScrollEnd = false
       this.callOnScrollEnd()
@@ -171,7 +171,6 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     })
 
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
-    this.allowedOnScrollEnd = true
     this.hasRenderedDataSource = true
 
     // If the dataSource comes from a context, it might be initially empty, so the closes
@@ -179,6 +178,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     // the scroll will work as expected, we call verifyChangedParent every time the dataSource
     // is changed
     this.verifyChangedParent()
+    this.allowedOnScrollEnd = true
   }
 
   verifyChangedParent() {
