@@ -39,11 +39,18 @@ function createBeagleHttpClient(): AngularHttpClientConfig {
 
       const { body, headers, method } = optionsRequest || {}
       const httpRequestOptions = { observe: 'response', body, headers }
-      
+  
       return new Promise(async (resolve) => {
         const request =
           await httpService[requestMethod](url, method || 'get', httpRequestOptions).toPromise()
         request.json = async () => request.body
+        request.text = async () => {
+          try {
+            return JSON.stringify(request.body)
+          } catch (error) {
+            return request.body
+          }
+        }
         resolve(request)
       })
     },
