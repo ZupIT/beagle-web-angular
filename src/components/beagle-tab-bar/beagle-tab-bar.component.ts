@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, AfterViewInit, ViewEncapsulation, OnDestroy } from '@angular/core'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { ItemTitle, BeagleTabBarInterface } from '../schemas/tab-bar'
 

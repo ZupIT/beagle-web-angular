@@ -16,11 +16,11 @@
 import { Type } from '@angular/core'
 import {
   BeagleConfig,
-  BeagleUIService,
+  BeagleService,
   DefaultSchema,
   ErrorComponentParams,
 } from '@zup-it/beagle-web'
-import { BeagleContext } from '@zup-it/beagle-web/types'
+import { ViewContentManager } from '@zup-it/beagle-web'
 
 export { ErrorComponentParams }
 
@@ -37,8 +37,8 @@ export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
   },
 }
 
-export interface BeagleAngularUIService<Schema = DefaultSchema> extends BeagleUIService<Schema> {
+export interface BeagleAngularUIService<Schema = DefaultSchema> extends BeagleService {
   getConfig: () => BeagleAngularConfig<Schema>,
 }
 
-export { BeagleContext }
+export type BeagleContext = ViewContentManager

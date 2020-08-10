@@ -15,7 +15,7 @@
 */
 
 import { DefaultSchema } from '@zup-it/beagle-web'
-import { ComponentName } from '@zup-it/beagle-web/types'
+import { ComponentName } from '@zup-it/beagle-web'
 import { BeagleAngularConfig } from '../../types'
 
 function createBeagleMapKeysConfig <Schema = DefaultSchema>()  {

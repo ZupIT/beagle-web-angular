@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import { Component, Input, ViewEncapsulation } from '@angular/core'
-import { ClickEvent } from '@zup-it/beagle-web/types'
-import { BeagleAnalytics } from '@zup-it/beagle-web'
+import { Component, Input, ViewEncapsulation, Injector } from '@angular/core'
+import { ClickEvent, Analytics } from '@zup-it/beagle-web'
+import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleTouchableInterface } from '../schemas/touchable'
 
 @Component({
@@ -28,7 +28,15 @@ import { BeagleTouchableInterface } from '../schemas/touchable'
 export class BeagleTouchableComponent implements BeagleTouchableInterface {
   @Input() onPress: () => void
   @Input() clickAnalyticsEvent?: ClickEvent
-  beagleAnalytics = BeagleAnalytics.getAnalytics()
+  beagleAnalytics: Analytics | undefined
+
+  constructor(injector: Injector) {
+    try {
+      const beagleProvider = injector.get(BeagleProvider)
+      const beagleService = beagleProvider.getBeagleUIService()
+      this.beagleAnalytics = beagleService && beagleService.analytics
+    } catch {}
+  }
 
   handleClick() {
     if (this.clickAnalyticsEvent && this.beagleAnalytics) {
