@@ -19,8 +19,8 @@ import {
   BeagleService,
   DefaultSchema,
   ErrorComponentParams,
+  ViewContentManager,
 } from '@zup-it/beagle-web'
-import { ViewContentManager } from '@zup-it/beagle-web'
 
 export { ErrorComponentParams }
 
