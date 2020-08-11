@@ -14,8 +14,7 @@
   * limitations under the License.
 */
 
-import { DefaultSchema } from '@zup-it/beagle-web'
-import { ComponentName } from '@zup-it/beagle-web'
+import { DefaultSchema, ComponentName } from '@zup-it/beagle-web'
 import { BeagleAngularConfig } from '../../types'
 
 function createBeagleMapKeysConfig <Schema = DefaultSchema>()  {
