@@ -29,10 +29,8 @@ import {
   HostBinding,
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
-import { BeagleUIElement } from '@zup-it/beagle-web'
-import Expression from '@zup-it/beagle-web/Renderer/Expression'
-import Tree from '@zup-it/beagle-web/utils/Tree'
-import { clone } from '@zup-it/beagle-web/utils/tree-manipulation'
+import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
+import Expression from '@zup-it/beagle-web/beagle-view/render/expression'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
 
@@ -164,7 +162,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item) => {
-      const child = clone(this.template)
+      const child = Tree.clone(this.template)
       return Tree.replaceEach(child, component => (
         Expression.resolveForComponent(component, [{ id: 'item', value: item }])
       ))
