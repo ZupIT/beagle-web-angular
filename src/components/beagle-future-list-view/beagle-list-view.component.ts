@@ -30,7 +30,6 @@ import {
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import Expression from '@zup-it/beagle-web/beagle-view/render/expression'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
 
@@ -43,7 +42,7 @@ import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
 export class BeagleFutureListViewComponent extends BeagleComponent
   implements BeagleFutureListViewInterface,
   AfterViewChecked, OnChanges, AfterViewInit, OnInit, OnDestroy {
-
+    @Input() teste: string
   @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() template: BeagleUIElement
@@ -90,6 +89,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   setDefaultValues() {
     if (!this.scrollEndThreshold) this.scrollEndThreshold = 100
     if (!this.direction) this.direction = 'VERTICAL'
+    if (!this.dataSource) this.dataSource = []
     if (this.useParentScroll === undefined) this.useParentScroll = false
     this.hasScrollClass = this.useParentScroll === false ? 'hasScroll' : ''
   }
@@ -158,14 +158,47 @@ export class BeagleFutureListViewComponent extends BeagleComponent
 
   renderDataSource() {
     const element = this.getBeagleContext().getElement()
-    if (!element || !Array.isArray(this.dataSource)) return
-
-    // @ts-ignore: at this point, element.children won't have ids and it's ok.
+    if (!element || !Array.isArray(this.dataSource) || this.dataSource.length === 0) return
+    
+    //@ts-ignore
     element.children = this.dataSource.map((item) => {
       const child = Tree.clone(this.template)
-      return Tree.replaceEach(child, component => (
-        Expression.resolveForComponent(component, [{ id: 'item', value: item }])
-      ))
+      return Tree.replaceEach(child, (component, index) => {
+        const id = `${element.id}_item_${index}`
+        component.id = id
+        // return component
+        // detachedContext[id] = [{ id: 'item', value: item }],
+        
+        // return component
+
+        // ComponentTree.formatChildrenProperty(component)
+        // ComponentTree.assignId(component)
+        // Action.deserialize({
+        //   component,
+        //   contextHierarchy: [{ id: 'item', value: item }],
+        //   actionHandlers: { ...defaultActionHandlers },
+        //   beagleView: view,
+        // })
+        // return Expression.resolveForComponent(component, [{ id: 'item', value: item }])
+       
+        
+        const itemContext = { id: 'item', value: item }
+        if (component.context) {
+          component.context.value = {
+            ...component.context.value,
+            item: {
+              value: item,
+            },
+          }
+          let replacedComponent = JSON.stringify(component)
+          replacedComponent = replacedComponent.replace('@{item',
+            `@{${component.context.id}.item.value`)
+          return JSON.parse(replacedComponent)
+        } else {
+          component.context = itemContext
+          return component
+        }
+      })
     })
 
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
