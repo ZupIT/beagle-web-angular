@@ -15,8 +15,9 @@
 */
 
 import { Directive, ViewContainerRef, ElementRef, OnInit, Input } from '@angular/core'
-import { BeagleContext } from '@zup-it/beagle-web'
+import { ViewContentManagerMap } from '@zup-it/beagle-web'
 import { contextSelector } from '../../constants'
+import { BeagleProvider } from '../BeagleProvider.service'
 import { BeagleComponent } from '../BeagleComponent'
 
 @Directive({
@@ -25,8 +26,17 @@ import { BeagleComponent } from '../BeagleComponent'
 export class BeagleContextDirective implements OnInit {
   @Input() _elementId: string
   @Input() _viewId: string
+  private contentManagerMap: ViewContentManagerMap
 
-  constructor(public viewContainerRef: ViewContainerRef, public elementRef: ElementRef) { }
+  constructor(
+    public viewContainerRef: ViewContainerRef,
+    public elementRef: ElementRef,
+    beagleProvider: BeagleProvider,
+  ) {
+    const beagleService = beagleProvider.getBeagleUIService()
+    if (!beagleService) throw new Error('Beagle: no instance for the BeagleService has been found!')
+    this.contentManagerMap = beagleService.viewContentManagerMap
+  }
 
   ngOnInit() {
     let component
@@ -42,7 +52,7 @@ export class BeagleContextDirective implements OnInit {
       component = this.viewContainerRef._data?.componentView?.component
     }
     if (component instanceof BeagleComponent) {
-      component.getBeagleContext = () => BeagleContext.getContext(this._viewId, this._elementId)
+      component.getBeagleContext = () => this.contentManagerMap.get(this._viewId, this._elementId)
     }
   }
 }

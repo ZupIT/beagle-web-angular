@@ -30,7 +30,6 @@ import {
   BeagleView,
   IdentifiableBeagleUIElement,
 } from '@zup-it/beagle-web'
-import { BeagleContext } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
 import { BeagleProvider } from './BeagleProvider.service'
 import { createStaticPromise } from './utils/promise'
@@ -66,9 +65,9 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
         'you need to start the beagle provider before using a remote view.',
       )
     }
-    this.view = beagleService.createView(this.loadParams.path)
+    this.view = beagleService.createView()
     this.view.subscribe(this.updateView)
-    BeagleContext.registerView(`${this.viewId}`, this.view)
+    beagleService.viewContentManagerMap.register(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
     this.onCreateBeagleView.emit(this.view)
   }
@@ -123,6 +122,6 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
 
   ngOnDestroy() {
     this.view.destroy()
-    BeagleContext.unregisterView(this.viewId)
+    this.beagleProvider.getBeagleUIService()!.viewContentManagerMap.unregister(this.viewId)
   }
 }
