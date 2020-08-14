@@ -16,10 +16,10 @@
 
 import {
   Component, ViewEncapsulation, AfterViewChecked,
-  Input, ElementRef, NgZone, OnDestroy,
+  Input, ElementRef, NgZone, OnDestroy, Injector,
 } from '@angular/core'
-import { BeagleAnalytics } from '@zup-it/beagle-web'
-import { ScreenEvent } from '@zup-it/beagle-web/types'
+import { ScreenEvent, Analytics } from '@zup-it/beagle-web'
+import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleContainerInterface } from '../schemas/container'
 
 @Component({
@@ -34,11 +34,15 @@ export class BeagleContainerComponent implements BeagleContainerInterface,
   @Input() onInit?: () => void
   @Input() screenAnalyticsEvent: ScreenEvent
   hasInitialized = false
-  beagleAnalytics = BeagleAnalytics.getAnalytics()
+  private beagleAnalytics: Analytics | undefined
 
-  constructor(
-    private element: ElementRef,
-    private ngZone: NgZone) { }
+  constructor(private element: ElementRef, private ngZone: NgZone, injector: Injector) {
+    try {
+      const beagleProvider = injector.get(BeagleProvider)
+      const beagleService = beagleProvider.getBeagleUIService()
+      this.beagleAnalytics = beagleService && beagleService.analytics
+    } catch {}
+  }
 
   ngAfterViewChecked() {
   

@@ -14,8 +14,9 @@
   * limitations under the License.
 */
 
-import { Component, Input, AfterViewInit } from '@angular/core'
-import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { Component, Input, AfterViewInit, Injector } from '@angular/core'
+import { URLBuilder } from '@zup-it/beagle-web'
+import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
 
 @Component({
@@ -23,9 +24,7 @@ import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../sc
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent extends BeagleComponent
-  implements BeagleImageInterface, AfterViewInit {
-  
+export class BeagleImageComponent implements BeagleImageInterface, AfterViewInit {
   @Input() path: ImagePath
   @Input() mode?: ImageMode = 'FIT_CENTER'
   @Input() accessibility?: Accessibility = {
@@ -33,12 +32,20 @@ export class BeagleImageComponent extends BeagleComponent
     accessibilityLabel: '',
   }
   public imageSource = ''
+  private urlBuilder: URLBuilder | undefined
+
+  constructor(injector: Injector) {
+    try {
+      const beagleProvider = injector.get(BeagleProvider)
+      const beagleService = beagleProvider.getBeagleUIService()
+      this.urlBuilder = beagleService && beagleService.urlBuilder
+    } catch {}
+  }
 
   ngAfterViewInit() {
-    const view = this.getBeagleContext().getView()
-    this.imageSource = this.path && this.path._beagleImagePath_ === 'local'
+    this.imageSource = (this.path && this.path._beagleImagePath_ === 'local') || !this.urlBuilder
       ? this.path && this.path.url || ''
-      : view.getUrlBuilder().build(this.path && this.path.url || '')
+      : this.urlBuilder.build(this.path && this.path.url || '')
 
     if (!this.mode) {
       this.mode = 'FIT_CENTER'

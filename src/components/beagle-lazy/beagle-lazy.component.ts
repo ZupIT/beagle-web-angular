@@ -38,7 +38,7 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
       shouldShowLoading: false,
     }
 
-    this.getBeagleContext().replace(params)
+    this.getBeagleContext().replaceComponent(params)
   }
 
 }

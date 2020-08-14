@@ -25,7 +25,8 @@ import {
   AfterViewChecked,
   AfterViewInit,
 } from '@angular/core'
-import { replaceBindings, BeagleUIElement } from '@zup-it/beagle-web'
+import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
+import Expression from '@zup-it/beagle-web/beagle-view/render/expression'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
 
@@ -35,7 +36,7 @@ import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
   styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent extends BeagleComponent
+export class BeagleFutureListViewComponent extends BeagleComponent
   implements BeagleFutureListViewInterface, AfterViewChecked, OnChanges, AfterViewInit {
 
   @Input() direction: Direction
@@ -62,15 +63,18 @@ export class BeagleListViewComponent extends BeagleComponent
   }
 
   renderDataSource() {
-    const tree = this.getBeagleContext().getElement()
-    if (tree) {
-      const parsedTree = this.dataSource.map(item => replaceBindings(
-        this.template,
-        [{ id: 'item', value: item }],
+    const element = this.getBeagleContext().getElement()
+    if (!element) return
+
+    // @ts-ignore: at this point, element.children won't have ids and it's ok.
+    element.children = this.dataSource.map((item) => {
+      const child = Tree.clone(this.template)
+      return Tree.replaceEach(child, component => (
+        Expression.resolveForComponent(component, [{ id: 'item', value: item }])
       ))
-      tree.children = parsedTree
-      this.getBeagleContext().updateWithTree({ sourceTree: tree })
-    }
+    })
+
+    this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
     this.hasRenderedDataSource = true
   }
 
