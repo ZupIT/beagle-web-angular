@@ -39,7 +39,7 @@ export class BeagleImageComponent implements BeagleImageInterface, AfterViewInit
       const beagleProvider = injector.get(BeagleProvider)
       const beagleService = beagleProvider.getBeagleUIService()
       this.urlBuilder = beagleService && beagleService.urlBuilder
-    } catch {}
+    } catch { }
   }
 
   ngAfterViewInit() {

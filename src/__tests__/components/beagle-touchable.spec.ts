@@ -14,23 +14,13 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing'
-import { By } from '@angular/platform-browser'
-import { BeagleTouchableComponent } 
+import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testing'
+import { BeagleTouchableComponent }
   from '../../components/beagle-touchable/beagle-touchable.component'
+import { setAndCallHandler } from './mocks/test-mocks.spec'
 
 let component: BeagleTouchableComponent
 let fixture: ComponentFixture<BeagleTouchableComponent>
-
-function setAndCallHandler(selector: string, value: string, event: string) {
-  fixture.detectChanges()
-  tick()
-
-  const input = fixture.debugElement.query(By.css(selector)).nativeElement
-  input.value = value
-  input.dispatchEvent(new Event(event))
-  tick()
-}
 
 describe('BeagleTouchableComponent', () => {
 
@@ -43,18 +33,20 @@ describe('BeagleTouchableComponent', () => {
     }).compileComponents()
     fixture = TestBed.createComponent(BeagleTouchableComponent)
     component = fixture.componentInstance
+    component.onPress = jest.fn()
+    fixture.detectChanges()
   }))
 
-  it('should create the component', () => {
-    expect(component).toBeTruthy()
+  it('should match snapshot', () => {
+    expect(fixture).toMatchSnapshot()
   })
 
   it('should call handlers and set Inputs', fakeAsync(() => {
     spyOn(component, 'handleClick').and.callThrough()
 
-    setAndCallHandler('div', 'Testing', 'click')
+    setAndCallHandler('div', 'Testing', 'click', fixture)
 
-    expect(component.handleClick).toHaveBeenCalled()
+    expect(component.onPress).toHaveBeenCalled()
   }))
 
 })

@@ -16,8 +16,8 @@
 
 import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
-import { BeagleSimpleFormComponent } 
-    from '../../components/beagle-simple-form/beagle-simple-form.component'
+import { BeagleSimpleFormComponent }
+  from '../../components/beagle-simple-form/beagle-simple-form.component'
 
 let component: BeagleSimpleFormComponent
 let fixture: ComponentFixture<BeagleSimpleFormComponent>
@@ -25,29 +25,29 @@ let fixture: ComponentFixture<BeagleSimpleFormComponent>
 
 describe('BeagleImageComponent', () => {
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleSimpleFormComponent,
-            ],
-            imports: [
-                FormsModule,
-            ],
-        }).compileComponents()
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleSimpleFormComponent,
+      ],
+      imports: [
+        FormsModule,
+      ],
+    }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleSimpleFormComponent)
-        component = fixture.componentInstance
+    fixture = TestBed.createComponent(BeagleSimpleFormComponent)
+    component = fixture.componentInstance
+    component.onSubmit = jest.fn()
+  }))
 
-    }))
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
-
-    it('should trigger on Submit', fakeAsync(() => {
-        spyOn(component, 'handleSubmit').and.callThrough()
-        component.handleSubmit(new Event('submit', {}))
-        expect(component.handleSubmit).toBeCalled()
-    }))
+  it('should trigger on Submit', fakeAsync(() => {
+    spyOn(component, 'handleSubmit').and.callThrough()
+    component.handleSubmit(new Event('submit', {}))
+    expect(component.onSubmit).toBeCalled()
+  }))
 
 })

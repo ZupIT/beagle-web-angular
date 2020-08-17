@@ -1,3 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleTextAreaComponent should match snapshot 1`] = `
+BeagleTextAreaComponent {
+  "disabled": true,
+  "label": "Label Test",
+  "name": "Label",
+  "onBlur": [MockFunction],
+  "onChange": [MockFunction],
+  "onFocus": [MockFunction],
+  "readonly": true,
+  "value": "Testing",
+}
+`;
+
 /*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
@@ -13,25 +28,3 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-
-import { TestBed, async } from '@angular/core/testing'
-import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
-
-describe('BeagleTextComponent', () => {
-  let component: BeagleTextComponent
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleTextComponent,
-      ],
-    }).compileComponents()
-    const fixture = TestBed.createComponent(BeagleTextComponent)
-    component = fixture.componentInstance
-    component.text = 'Teste'
-  }))
-
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot()
-  })
-})

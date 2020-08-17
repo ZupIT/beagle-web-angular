@@ -23,30 +23,22 @@ let component: BeagleTabViewComponent
 describe('BeagleTabViewComponent', () => {
 
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleTabViewComponent,
-            ],
-            providers: [
-                TabsService,
-            ],
-        }).compileComponents()
-        const fixture = TestBed.createComponent(BeagleTabViewComponent)
-        component = fixture.componentInstance
-    }))
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleTabViewComponent,
+      ],
+      providers: [
+        TabsService,
+      ],
+    }).compileComponents()
+    const fixture = TestBed.createComponent(BeagleTabViewComponent)
+    component = fixture.componentInstance
+  }))
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
+  it('should match the snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should call on Init', () => {
-        spyOn(component, 'ngOnInit').and.callThrough()
-        spyOn(component, 'listenTabChanges').and.callThrough()
-        component.ngOnInit()
-
-        expect(component.ngOnInit).toBeCalled()
-        expect(component.listenTabChanges).toBeCalled()
-    })
 
 })

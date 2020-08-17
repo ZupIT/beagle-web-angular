@@ -14,35 +14,37 @@
   * limitations under the License.
 */
 
-import { stringify } from 'querystring'
 import { TestBed, async } from '@angular/core/testing'
+import { SafeResourceUrl } from '@angular/platform-browser'
 import { BeagleWebviewComponent } from '../../components/beagle-webview/beagle-webview.component'
 
 let component: BeagleWebviewComponent
-
+interface SafeUrl extends SafeResourceUrl {
+  changingThisBreaksApplicationSecurity: string,
+}
 describe('BeagleWebviewComponent', () => {
 
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleWebviewComponent,
-            ],
-        }).compileComponents()
-        const fixture = TestBed.createComponent(BeagleWebviewComponent)
-        component = fixture.componentInstance
-        component.url = 'http://www.test.com'
-    }))
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleWebviewComponent,
+      ],
+    }).compileComponents()
+    const fixture = TestBed.createComponent(BeagleWebviewComponent)
+    component = fixture.componentInstance
+    component.url = 'http://www.test.com'
+  }))
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should call on init', () => {
-        spyOn(component, 'ngOnInit').and.callThrough()
-        component.ngOnInit()
-
-        expect(component.ngOnInit).toBeCalled()
-    })
+  it('should match snapshot', () => {
+    spyOn(component, 'ngOnInit').and.callThrough()
+    component.ngOnInit()
+    const safe: SafeUrl = { changingThisBreaksApplicationSecurity: 'http://www.test.com' }
+    expect(component.iframeUrl).toEqual(safe)
+  })
 
 })

@@ -16,7 +16,8 @@
 
 import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing'
 import { Properties as CSSProperties } from 'csstype'
-import { BeagleButtonComponent } from '../components/beagle-button/beagle-button.component'
+import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component'
+import mockBeagleContext from './mocks/test-mocks.spec'
 
 let component: BeagleButtonComponent
 let fixture: ComponentFixture<BeagleButtonComponent>
@@ -25,10 +26,10 @@ const mockStyle: CSSProperties = {
   width: '50',
 }
 
+
 describe('BeagleButtonComponent', () => {
-
-
   beforeEach(async(() => {
+    jest.autoMockOn()
     TestBed.configureTestingModule({
       declarations: [
         BeagleButtonComponent,
@@ -36,20 +37,27 @@ describe('BeagleButtonComponent', () => {
     }).compileComponents()
     fixture = TestBed.createComponent(BeagleButtonComponent)
     component = fixture.componentInstance
+    component.getBeagleContext = () => mockBeagleContext
+    fixture.detectChanges()
   }))
 
-  it('should create the component', () => {
-    expect(component).toBeTruthy()
+  it('should match snapshot', () => {
+    expect(fixture).toMatchSnapshot()
   })
 
-  it('should call ngOnInit and set Style', () => {
+  it('should keep styles', () => {
     spyOn(component, 'ngOnInit').and.callThrough()
     component.style = mockStyle
     component.ngOnInit()
-
-    expect(component.ngOnInit).toHaveBeenCalled()
     expect(component.usefulStyle).toEqual(mockStyle)
+  })
 
+  it('should keep original styles and remove margin style', () => {
+    spyOn(component, 'ngOnInit').and.callThrough()
+    component.style = mockStyle
+    component.ngOnInit()
+    component.style = { ...mockStyle, margin: '10px' }
+    expect(component.usefulStyle).toEqual(mockStyle)
   })
 
 })

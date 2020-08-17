@@ -14,74 +14,58 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
+import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
-import { By } from '@angular/platform-browser'
-import { BeagleTextAreaComponent } 
-    from '../../components/beagle-text-area/beagle-text-area.component'
+import { BeagleTextAreaComponent }
+  from '../../components/beagle-text-area/beagle-text-area.component'
+import { setAndCallHandler } from './mocks/test-mocks.spec'
 
 let component: BeagleTextAreaComponent
 let fixture: ComponentFixture<BeagleTextAreaComponent>
 
-function setAndCallHandler(selector: string, value: string, event: string) {
-    fixture.detectChanges()
-    tick()
-
-    const input = fixture.debugElement.query(By.css(selector)).nativeElement
-    input.value = value
-    input.dispatchEvent(new Event(event))
-    tick()
-}
 
 
 describe('BeagleTextAreaComponent', () => {
 
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleTextAreaComponent,
-            ],
-            imports: [
-                FormsModule,
-            ],
-        }).compileComponents()
-        fixture = TestBed.createComponent(BeagleTextAreaComponent)
-        component = fixture.componentInstance
-        component.value = 'Testing'
-        component.label = 'Label Test'
-        component.name = 'Label'
-        component.disabled = true
-        component.readonly = true
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleTextAreaComponent,
+      ],
+      imports: [
+        FormsModule,
+      ],
+    }).compileComponents()
+    fixture = TestBed.createComponent(BeagleTextAreaComponent)
+    component = fixture.componentInstance
+    component.value = 'Testing'
+    component.label = 'Label Test'
+    component.name = 'Label'
+    component.disabled = true
+    component.readonly = true
+    component.onChange = jest.fn()
+    component.onFocus = jest.fn()
+    component.onBlur = jest.fn()
 
-    }))
+  }))
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should call on Init', () => {
-        spyOn(component, 'ngOnInit').and.callThrough()
-        component.ngOnInit()
+  it('should call handlers', fakeAsync(() => {
+    spyOn(component, 'handleChange').and.callThrough()
+    spyOn(component, 'handleFocus').and.callThrough()
+    spyOn(component, 'handleBlur').and.callThrough()
 
-        expect(component.ngOnInit).toBeCalled()
-        expect(component.label).toEqual('Label Test')
-        expect(component.disabled).toEqual(true)
-        expect(component.readonly).toEqual(true)
-    })
+    setAndCallHandler('textarea', 'Testing', 'input', fixture)
+    setAndCallHandler('textarea', 'Testing', 'focus', fixture)
+    setAndCallHandler('textarea', 'Testing', 'blur', fixture)
 
-    it('should call handlers and set Inputs', fakeAsync(() => {
-        spyOn(component, 'handleChange').and.callThrough()
-        spyOn(component, 'handleFocus').and.callThrough()
-        spyOn(component, 'handleBlur').and.callThrough()
+    expect(component.onChange).toHaveBeenCalled()
+    expect(component.onFocus).toHaveBeenCalled()
+    expect(component.onBlur).toHaveBeenCalled()
+  }))
 
-        setAndCallHandler('textarea', 'Testing', 'input')
-        setAndCallHandler('textarea', 'Testing', 'focus')
-        setAndCallHandler('textarea', 'Testing', 'blur')
-
-        expect(component.handleChange).toHaveBeenCalled()
-        expect(component.handleFocus).toHaveBeenCalled()
-        expect(component.handleBlur).toHaveBeenCalled()
-    }))
-
- })
+})

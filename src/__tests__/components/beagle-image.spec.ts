@@ -42,20 +42,23 @@ describe('BeagleImageComponent', () => {
     const fixture = TestBed.createComponent(BeagleImageComponent)
     component = fixture.componentInstance
     component.path = pathMock
-
+    spyOn(component, 'ngAfterViewInit').and.callThrough()
   }))
 
-  it('should create the component', () => {
-    expect(component).toBeTruthy()
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
   })
 
-  it('should check all the Inputs', () => {
-
-    expect(typeof (component.path)).toEqual('object')
-    expect(component.mode).toEqual(imageModeMock)
-    expect(component.accessibility).toEqual(accessibilityMock)
+  it('should add imageSource', () => {
     expect(component.imageSource).toEqual('')
+    component.ngAfterViewInit()
+    expect(component.imageSource).toEqual('http://teste.com.br')
+  })
 
+  it('should add default mode', () => {
+    delete component.mode
+    component.ngAfterViewInit()
+    expect(component.mode).toEqual(imageModeMock)
   })
 
 })

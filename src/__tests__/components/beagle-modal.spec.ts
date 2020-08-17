@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleModalComponent } from '../../components/beagle-modal/beagle-modal.component'
 
 let component: BeagleModalComponent
@@ -23,52 +23,40 @@ let fixture: ComponentFixture<BeagleModalComponent>
 
 describe('BeagleImageComponent', () => {
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleModalComponent,
-            ],
-        }).compileComponents()
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleModalComponent,
+      ],
+    }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleModalComponent)
-        component = fixture.componentInstance
+    fixture = TestBed.createComponent(BeagleModalComponent)
+    component = fixture.componentInstance
+    component.onClose = jest.fn()
+  }))
 
-    }))
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
+  it('should call onClose', () => {
+    spyOn(component, 'handleClose').and.callThrough()
+    component.handleClose()
+    expect(component.onClose).toBeCalled()
+  })
 
-    it('should call on Init', () => {
-        spyOn(component, 'ngOnInit').and.callThrough()
-        component.ngOnInit()
-        expect(component.ngOnInit).toBeCalled()
-    })
+  it('should call onCLose on Esc event', () => {
+    spyOn(component, 'closeOnEsc').and.callThrough()
+    const event = new KeyboardEvent('event', { key: 'Escape' })
+    component.closeOnEsc(event)
+    expect(component.onClose).toBeCalled()
+  })
 
-    it('should call on Destroy', () => {
-        spyOn(component, 'ngOnDestroy').and.callThrough()
-        component.ngOnDestroy()
-        expect(component.ngOnDestroy).toBeCalled()
-    })
-
-    it('should call handleClose', () => {
-        spyOn(component, 'handleClose').and.callThrough()
-        component.handleClose()
-        expect(component.handleClose).toBeCalled()
-    })
-
-    it('should call closeOnEsc', () => {
-        spyOn(component, 'closeOnEsc').and.callThrough()
-        const event = new KeyboardEvent('event', { key: 'Escape' })
-        component.closeOnEsc(event)
-        expect(component.closeOnEsc).toBeCalled()
-    })
-
-    it('should call closeOnClick', () => {
-        spyOn(component, 'closeOnClick').and.callThrough()
-        component.closeOnClick({ target: { className: 'modal-background' } })
-        expect(component.closeOnClick).toBeCalled()
-    })
+  it('should call onClose on modal background click event', () => {
+    spyOn(component, 'closeOnClick').and.callThrough()
+    component.closeOnClick({ target: { className: 'modal-background' } })
+    expect(component.onClose).toBeCalled()
+  })
 
 
 })

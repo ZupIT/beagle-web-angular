@@ -14,9 +14,9 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
-import { BeagleListViewComponent } 
-    from '../../components/beagle-list-view/beagle-list-view.component'
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
+import { BeagleListViewComponent }
+  from '../../components/beagle-list-view/beagle-list-view.component'
 import { Direction } from '../../components/schemas/list-view'
 
 let component: BeagleListViewComponent
@@ -26,25 +26,25 @@ const vertical: Direction = 'VERTICAL'
 
 describe('BeagleImageComponent', () => {
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleListViewComponent,
-            ],
-        }).compileComponents()
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleListViewComponent,
+      ],
+    }).compileComponents()
 
-        fixture = TestBed.createComponent(BeagleListViewComponent)
-        component = fixture.componentInstance
-        component.direction = vertical
-    }))
+    fixture = TestBed.createComponent(BeagleListViewComponent)
+    component = fixture.componentInstance
+    component.direction = vertical
+  }))
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should check inputs', () => {
-        expect(typeof (component.direction)).toBe('string')
-        expect(component.direction).toBe(vertical)
-    })
+  it('should check inputs', () => {
+    expect(typeof (component.direction)).toBe('string')
+    expect(component.direction).toBe(vertical)
+  })
 
 })

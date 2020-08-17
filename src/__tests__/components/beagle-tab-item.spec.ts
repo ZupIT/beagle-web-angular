@@ -14,56 +14,60 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing'
+import { TestBed, async, fakeAsync, ComponentFixture } from '@angular/core/testing'
 import { BeagleTabItemComponent } from '../../components/beagle-tab-item/beagle-tab-item.component'
 import { TabsService } from '../../components/services/tabs.service'
 import { ImagePath, ImagePathMode } from '../../components/schemas/image'
+import mockBeagleContext, { setAndCallHandler } from './mocks/test-mocks.spec'
 
 let component: BeagleTabItemComponent
+let fixture: ComponentFixture<any>
 const imagePathModeMock: ImagePathMode = 'local'
 const pathMock: ImagePath = {
-    _beagleImagePath_: imagePathModeMock,
-    url: 'http://teste.com.br',
+  _beagleImagePath_: imagePathModeMock,
+  url: 'http://teste.com.br',
 }
+let tabServiceMock: TabsService
 
 describe('BeagleTabItemComponent', () => {
 
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                BeagleTabItemComponent,
-            ],
-            providers: [
-                TabsService,
-            ],
-        }).compileComponents()
-        const fixture = TestBed.createComponent(BeagleTabItemComponent)
-        component = fixture.componentInstance
-    }))
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BeagleTabItemComponent,
+      ],
+      providers: [
+        TabsService,
+      ],
+    }).compileComponents()
+    fixture = TestBed.createComponent(BeagleTabItemComponent)
+    tabServiceMock = TestBed.get(TabsService)
+    spyOn(tabServiceMock, 'notifySelectedTab').and.callThrough()
+    spyOn(tabServiceMock, 'changeSelectedTab').and.callThrough()
+    component = fixture.componentInstance
+    component.getBeagleContext = () => mockBeagleContext
+  }))
 
-    it('should create the component', () => {
-        expect(component).toBeTruthy()
-    })
+  it('should match snapshot', () => {
+    expect(component).toMatchSnapshot()
+  })
 
-    it('should check Inputs', () => {
-        component.icon = pathMock
-        component.title = 'Tab Title'
-        expect(typeof (component.title)).toBe('string')
-        expect(typeof (component.icon)).toBe('object')
-        expect(typeof (component.active)).toBe('boolean')
-    })
+  it('should retrieve component id call listenTabChanges', () => {
+    spyOn(component, 'ngAfterViewInit').and.callThrough()
+    spyOn(component, 'listenTabChanges').and.callThrough()
+    component.ngAfterViewInit()
+    expect(component['id']).toBe('abcd')
+    expect(component.listenTabChanges).toHaveBeenCalled()
+    expect(tabServiceMock.notifySelectedTab).toHaveBeenCalled()
+  })
 
-    it('should call on Destroy', () => {
-        spyOn(component, 'ngOnDestroy').and.callThrough()
-        component.ngOnDestroy()
-        expect(component.ngOnDestroy).toBeCalled()
-    })
+  it('should call on click Handler', fakeAsync(() => {
+    spyOn(component, 'handleClick').and.callThrough()
 
-    it('should call on listenTabChanges', () => {
-        spyOn(component, 'listenTabChanges').and.callThrough()
-        component.listenTabChanges()
-        expect(component.listenTabChanges).toBeCalled()
-    })
+    setAndCallHandler('div', 'Testing', 'click', fixture)
+
+    expect(component.handleClick).toHaveBeenCalled()
+  }))
 
 })
