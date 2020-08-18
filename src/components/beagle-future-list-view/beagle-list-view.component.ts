@@ -30,7 +30,6 @@ import {
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import Expression from '@zup-it/beagle-web/beagle-view/render/expression'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
 
@@ -46,6 +45,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
 
   @Input() direction: Direction
   @Input() dataSource: any[]
+  @Input() iteratorName?: string
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void
@@ -91,27 +91,27 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     if (!this.scrollEndThreshold) this.scrollEndThreshold = 100
     if (!this.direction) this.direction = 'VERTICAL'
     if (this.useParentScroll === undefined) this.useParentScroll = false
-    this.hasScrollClass = this.useParentScroll === false ? 'hasScroll' : ''
+    this.hasScrollClass = this.useParentScroll ? '' : 'hasScroll'
   }
 
   allowedScroll(node: HTMLElement) {
     const overflowY = getComputedStyle(node).overflowY
     const overflowX = getComputedStyle(node).overflowX
-    const hasYscroll = overflowY !== 'visible' && overflowY !== 'hidden'
-    const hasXscroll = overflowX !== 'visible' && overflowX !== 'hidden'
-    return { hasYscroll, hasXscroll }
+    const hasYScroll = overflowY !== 'visible' && overflowY !== 'hidden'
+    const hasXScroll = overflowX !== 'visible' && overflowX !== 'hidden'
+    return { hasYScroll: hasYScroll, hasXScroll: hasXScroll }
   }
 
   getParentNode(node: HTMLElement) {
     if (!node) return null
     if (node.nodeName === 'HTML') return node
 
-    const { hasYscroll, hasXscroll } = this.allowedScroll(node)
+    const { hasYScroll: hasYScroll, hasXScroll: hasXScroll } = this.allowedScroll(node)
 
     if ((this.direction === 'VERTICAL' &&
-      (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight || !hasYscroll)) ||
+      (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight || !hasYScroll)) ||
       (this.direction === 'HORIZONTAL' &&
-        (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXscroll))
+        (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXScroll))
     ) {
       return this.getParentNode(node.parentNode as HTMLElement)
     }
@@ -159,13 +159,14 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   renderDataSource() {
     const element = this.getBeagleContext().getElement()
     if (!element || !Array.isArray(this.dataSource)) return
+    const contextId = this.iteratorName || 'item'
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
-    element.children = this.dataSource.map((item) => {
+    element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
-      return Tree.replaceEach(child, component => (
-        Expression.resolveForComponent(component, [{ id: 'item', value: item }])
-      ))
+      child._implicitContexts_ = [{ id: contextId, value: item }]
+      child.id = `${element.id}_${index}`
+      return child
     })
 
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
@@ -197,7 +198,9 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   verifyCallingOnInit() {
     if (!this.hasInitialized && this.isRendered()) {
       this.hasInitialized = true
-      if (this.onInit) this.onInit()
+      if (this.onInit) {
+        this.onInit()
+      }
     }
   }
 
