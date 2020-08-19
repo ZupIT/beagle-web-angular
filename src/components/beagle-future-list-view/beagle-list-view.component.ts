@@ -74,7 +74,7 @@ export class BeagleFutureListViewComponent
     element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
       child._implicitContexts_ = [{ id: contextId, value: item }]
-      child.id = `${element.id}_${index}`
+      child.id = child.id || `${element.id}_${index}`
       return child
     })
 
@@ -94,9 +94,5 @@ export class BeagleFutureListViewComponent
     const current = JSON.stringify(changes['dataSource'].currentValue)
     const prev = JSON.stringify(changes['dataSource'].previousValue)
     if (prev !== current) this.renderDataSource()
-  }
-
-  callOnScrollEnd() {
-    this.onScrollEnd && this.onScrollEnd()
   }
 }

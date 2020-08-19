@@ -87,9 +87,22 @@ export class BeagleListViewScroll
     }
   }
 
+  canScrollContent (element: HTMLElement) {
+    return (
+     this.direction === 'HORIZONTAL'
+       ? element.scrollWidth > element.clientWidth
+       : element.scrollHeight > element.clientHeight
+     )
+   }
+
   createScrollListener() {
     if (this.scrollSubscription) this.scrollSubscription.unsubscribe()
     const listenTo = this.parentNode.nodeName === 'HTML' ? window : this.parentNode
+
+    if (!this.canScrollContent(listenTo instanceof Window ? document.body : listenTo)) {
+      this.callOnScrollEnd()
+    }
+    
     this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(() => this.calcPercentage())
   }
 
@@ -110,10 +123,7 @@ export class BeagleListViewScroll
       && Math.ceil(screenPercentage) >= this.scrollEndThreshold
     )
 
-    if (isOverThreshold && this.allowedOnScrollEnd) {
-      this.allowedOnScrollEnd = false
-      this.callOnScrollEnd()
-    }
+    if (isOverThreshold) this.callOnScrollEnd()
   }
 
   verifyChangedParent() {
@@ -125,7 +135,8 @@ export class BeagleListViewScroll
   }
 
   callOnScrollEnd() {
-    this.onScrollEnd && this.onScrollEnd()
+    if (this.allowedOnScrollEnd && this.onScrollEnd) this.onScrollEnd()
+    this.allowedOnScrollEnd = false
   }
 
   allowOnScrollEnd() {
