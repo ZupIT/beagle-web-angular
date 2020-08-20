@@ -17,14 +17,12 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleListViewComponent }
   from '../../components/beagle-list-view/beagle-list-view.component'
-import { Direction } from '../../components/schemas/list-view'
 
 let component: BeagleListViewComponent
 let fixture: ComponentFixture<BeagleListViewComponent>
-const vertical: Direction = 'VERTICAL'
 
 
-describe('BeagleImageComponent', () => {
+describe('BeagleListViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,16 +33,10 @@ describe('BeagleImageComponent', () => {
 
     fixture = TestBed.createComponent(BeagleListViewComponent)
     component = fixture.componentInstance
-    component.direction = vertical
   }))
 
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot()
-  })
-
-  it('should check inputs', () => {
-    expect(typeof (component.direction)).toBe('string')
-    expect(component.direction).toBe(vertical)
   })
 
 })

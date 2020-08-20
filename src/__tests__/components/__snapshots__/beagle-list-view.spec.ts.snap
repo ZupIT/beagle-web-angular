@@ -1,10 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BeagleImageComponent should match snapshot 1`] = `
-BeagleListViewComponent {
-  "direction": "VERTICAL",
-}
-`;
+exports[`BeagleListViewComponent should match snapshot 1`] = `BeagleListViewComponent {}`;
 
 /*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA

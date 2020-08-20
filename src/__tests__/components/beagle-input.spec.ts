@@ -34,7 +34,7 @@ function setAndCallHandler(selector: string, value: string, event: string) {
   tick()
 }
 
-describe('BeagleImageComponent', () => {
+describe('BeagleInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

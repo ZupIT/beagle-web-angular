@@ -23,7 +23,7 @@ let component: BeagleMarkdownComponent
 let fixture: ComponentFixture<BeagleMarkdownComponent>
 const markdown = '> This is a markdown text'
 
-describe('BeagleImageComponent', () => {
+describe('BeagleMarkdownComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

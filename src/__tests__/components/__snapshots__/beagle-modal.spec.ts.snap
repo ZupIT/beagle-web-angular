@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BeagleImageComponent should match snapshot 1`] = `
+exports[`BeagleModalComponent should match snapshot 1`] = `
 BeagleModalComponent {
   "elementRef": ElementRef {
     "nativeElement": <div

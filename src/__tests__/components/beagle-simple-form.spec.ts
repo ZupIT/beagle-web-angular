@@ -23,7 +23,7 @@ let component: BeagleSimpleFormComponent
 let fixture: ComponentFixture<BeagleSimpleFormComponent>
 
 
-describe('BeagleImageComponent', () => {
+describe('BeagleSimpleFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

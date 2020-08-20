@@ -21,7 +21,7 @@ let component: BeagleModalComponent
 let fixture: ComponentFixture<BeagleModalComponent>
 
 
-describe('BeagleImageComponent', () => {
+describe('BeagleModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

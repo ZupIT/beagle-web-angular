@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BeagleImageComponent should match snapshot 1`] = `
+exports[`BeagleSimpleFormComponent should match snapshot 1`] = `
 BeagleSimpleFormComponent {
   "onSubmit": [MockFunction],
 }
