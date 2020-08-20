@@ -48,12 +48,12 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   ngAfterViewInit() {
-    const element = this.getBeagleContext().getElement()
+    const element = this.getViewContentManager().getElement()
     this.type = this.isSubmitButton(element)
   }
 
   handleClick() {
-    const analytics = this.getBeagleContext().getView().getBeagleService().analytics
+    const analytics = this.getViewContentManager().getView().getBeagleService().analytics
     if (this.clickAnalyticsEvent && analytics) {
       analytics.trackEventOnClick(this.clickAnalyticsEvent)
     }

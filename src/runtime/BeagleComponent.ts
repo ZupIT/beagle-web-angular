@@ -14,8 +14,8 @@
   * limitations under the License.
 */
 
-import { BeagleContext } from '../types'
+import { ViewContentManager } from '../types'
 
 export abstract class BeagleComponent {
-  public getBeagleContext: () => BeagleContext
+  public getViewContentManager: () => ViewContentManager
 }

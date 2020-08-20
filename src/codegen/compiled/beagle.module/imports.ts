@@ -50,7 +50,7 @@ export function createImportsString({
     import {
       AbstractBeagleRemoteView,
       BeagleProvider,
-      BeagleContextModule,
+      ViewContentManagerModule,
       getBeagleConfigMetadata,
     } from '@zup-it/beagle-angular'
     import { CommonModule } from '@angular/common'
