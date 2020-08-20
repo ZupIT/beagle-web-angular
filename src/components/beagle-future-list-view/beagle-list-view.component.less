@@ -31,7 +31,13 @@ beagle-future-list-view {
 
   &.hasScroll {
     overflow: auto;
-    width: 100%;
-    height: 100%;
+
+    &.HORIZONTAL {
+      width: 100%;
+    }
+
+    &.VERTICAL {
+      height: 100%;
+    }
   }
 }
