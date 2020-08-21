@@ -22,17 +22,11 @@ import {
   SimpleChanges,
   ViewEncapsulation,
   NgZone,
-  AfterViewChecked,
-  AfterViewInit,
-  OnInit,
-  OnDestroy,
   HostBinding,
 } from '@angular/core'
-import { fromEvent, Subscription } from 'rxjs'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import Expression from '@zup-it/beagle-web/beagle-view/render/expression'
-import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
+import { BeagleListViewScroll } from './beagle-list-view.scroll'
 
 @Component({
   selector: 'beagle-future-list-view',
@@ -40,12 +34,13 @@ import { BeagleFutureListViewInterface, Direction } from '../schemas/list-view'
   styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleFutureListViewComponent extends BeagleComponent
-  implements BeagleFutureListViewInterface,
-  AfterViewChecked, OnChanges, AfterViewInit, OnInit, OnDestroy {
-
+export class BeagleFutureListViewComponent
+  extends BeagleListViewScroll
+  implements BeagleFutureListViewInterface, OnChanges
+{
   @Input() direction: Direction
   @Input() dataSource: any[]
+  @Input() iteratorName?: string
   @Input() template: BeagleUIElement
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void
@@ -53,119 +48,34 @@ export class BeagleFutureListViewComponent extends BeagleComponent
   @Input() useParentScroll?: boolean
   @HostBinding('class') hasScrollClass = ''
 
-  private scrollSubscription: Subscription
-  private hasInitialized = false
   private hasRenderedDataSource = false
-  private parentNode: HTMLElement
-  private allowedOnScrollEnd = true
 
-  constructor(
-    private element: ElementRef,
-    private ngZone: NgZone) {
-    super()
+  constructor(element: ElementRef, ngZone: NgZone) {
+    super(element, ngZone)
   }
 
   ngOnInit() {
-    this.setDefaultValues()
+    super.ngOnInit()
+    this.scrollEndThreshold = this.scrollEndThreshold || 100
+    this.direction = this.direction || 'VERTICAL'
   }
 
   ngAfterViewInit() {
-    this.setParentNode()
-    this.createScrollListener()
-
-    if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
+    super.ngAfterViewInit()
     if (!this.hasRenderedDataSource) this.renderDataSource()
-  }
-
-  ngAfterViewChecked() {
-    if (!this.hasInitialized && this.onInit) {
-      this.ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          this.verifyCallingOnInit()
-        }, 5)
-      })
-    }
-  }
-
-  setDefaultValues() {
-    if (!this.scrollEndThreshold) this.scrollEndThreshold = 100
-    if (!this.direction) this.direction = 'VERTICAL'
-    if (this.useParentScroll === undefined) this.useParentScroll = false
-    this.hasScrollClass = this.useParentScroll === false ? 'hasScroll' : ''
-  }
-
-  allowedScroll(node: HTMLElement) {
-    const overflowY = getComputedStyle(node).overflowY
-    const overflowX = getComputedStyle(node).overflowX
-    const hasYscroll = overflowY !== 'visible' && overflowY !== 'hidden'
-    const hasXscroll = overflowX !== 'visible' && overflowX !== 'hidden'
-    return { hasYscroll, hasXscroll }
-  }
-
-  getParentNode(node: HTMLElement) {
-    if (!node) return null
-    if (node.nodeName === 'HTML') return node
-
-    const { hasYscroll, hasXscroll } = this.allowedScroll(node)
-
-    if ((this.direction === 'VERTICAL' &&
-      (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight || !hasYscroll)) ||
-      (this.direction === 'HORIZONTAL' &&
-        (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXscroll))
-    ) {
-      return this.getParentNode(node.parentNode as HTMLElement)
-    }
-    return node
-  }
-
-  setParentNode() {
-    if (this.useParentScroll) {
-      this.parentNode = this.getParentNode(this.element.nativeElement.parentNode)
-    } else {
-      this.parentNode = this.element.nativeElement
-    }
-  }
-
-  createScrollListener() {
-    if (this.scrollSubscription) {
-      this.scrollSubscription.unsubscribe()
-    }
-    const listenTo = this.parentNode.nodeName === 'HTML' ? window : this.parentNode
-    this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(
-      (event) => this.calcPercentage(),
-    )
-  }
-
-  calcPercentage() {
-    let screenPercentage: number
-    if (this.direction === 'VERTICAL') {
-      const scrollPosition = this.parentNode.scrollTop
-      screenPercentage = (scrollPosition /
-        (this.parentNode?.scrollHeight - this.parentNode?.clientHeight)) * 100
-    } else {
-      const scrollPosition = this.parentNode.scrollLeft
-      screenPercentage = (scrollPosition /
-        (this.parentNode?.scrollWidth - this.parentNode?.clientWidth)) * 100
-    }
-
-    if (this.scrollEndThreshold &&
-      Math.ceil(screenPercentage) >= this.scrollEndThreshold &&
-      this.allowedOnScrollEnd) {
-      this.allowedOnScrollEnd = false
-      this.callOnScrollEnd()
-    }
   }
 
   renderDataSource() {
     const element = this.getBeagleContext().getElement()
     if (!element || !Array.isArray(this.dataSource)) return
+    const contextId = this.iteratorName || 'item'
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
-    element.children = this.dataSource.map((item) => {
+    element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
-      return Tree.replaceEach(child, component => (
-        Expression.resolveForComponent(component, [{ id: 'item', value: item }])
-      ))
+      child._implicitContexts_ = [{ id: contextId, value: item }]
+      child.id = child.id || `${element.id}_${index}`
+      return child
     })
 
     this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
@@ -176,15 +86,7 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     // the scroll will work as expected, we call verifyChangedParent every time the dataSource
     // is changed
     this.verifyChangedParent()
-    this.allowedOnScrollEnd = true
-  }
-
-  verifyChangedParent() {
-    const previousParent = this.parentNode
-    this.setParentNode()
-    if (previousParent !== this.parentNode) {
-      this.createScrollListener()
-    }
+    this.allowOnScrollEnd()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -192,24 +94,5 @@ export class BeagleFutureListViewComponent extends BeagleComponent
     const current = JSON.stringify(changes['dataSource'].currentValue)
     const prev = JSON.stringify(changes['dataSource'].previousValue)
     if (prev !== current) this.renderDataSource()
-  }
-
-  verifyCallingOnInit() {
-    if (!this.hasInitialized && this.isRendered()) {
-      this.hasInitialized = true
-      if (this.onInit) this.onInit()
-    }
-  }
-
-  isRendered() {
-    return this.element.nativeElement.isConnected
-  }
-
-  callOnScrollEnd() {
-    this.onScrollEnd && this.onScrollEnd()
-  }
-
-  ngOnDestroy() {
-    this.scrollSubscription && this.scrollSubscription.unsubscribe()
   }
 }
