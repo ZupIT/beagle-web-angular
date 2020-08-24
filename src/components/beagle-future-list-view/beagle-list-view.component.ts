@@ -46,6 +46,8 @@ export class BeagleFutureListViewComponent
   @Input() onScrollEnd?: () => void
   @Input() scrollEndThreshold?: number
   @Input() useParentScroll?: boolean
+  @Input() key?: string
+  @Input() __suffix__?: string
   @HostBinding('class') hasScrollClass = ''
 
   private hasRenderedDataSource = false
@@ -69,13 +71,24 @@ export class BeagleFutureListViewComponent
     const element = this.getViewContentManager().getElement()
     if (!element || !Array.isArray(this.dataSource)) return
     const contextId = this.iteratorName || 'item'
+    const listViewTag = element._beagleComponent_.toLowerCase()
+    const listViewId = element.id
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item, index) => {
-      const child = Tree.clone(this.template)
-      child._implicitContexts_ = [{ id: contextId, value: item }]
-      child.id = child.id || `${element.id}_${index}`
-      return child
+      const templateTree = Tree.clone(this.template)
+      const iterationKey = this.key && item[this.key] !== undefined ? item[this.key] : index
+      const suffix = this.__suffix__ || ''
+      templateTree._implicitContexts_ = [{ id: contextId, value: item }]
+      Tree.forEach(templateTree, (component, componentIndex) => {
+        const baseId = component.id ? `${component.id}${suffix}` : `${listViewId}:${componentIndex}`
+        component.id = `${baseId}:${iterationKey}`
+        if (component._beagleComponent_.toLowerCase() === listViewTag) {
+          component.__suffix__ = `${suffix}:${iterationKey}`
+        }
+      })
+
+      return templateTree
     })
 
     this.getViewContentManager().getView().getRenderer().doFullRender(element, element.id)

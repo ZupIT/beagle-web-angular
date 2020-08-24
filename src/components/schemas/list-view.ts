@@ -29,6 +29,8 @@ export interface BeagleFutureListViewInterface {
   template: BeagleUIElement,
   useParentScroll?: boolean,
   style?: CSSProperties,
+  key?: string,
+  __suffix__?: string,
 }
 
 export interface BeagleListViewInterface {
