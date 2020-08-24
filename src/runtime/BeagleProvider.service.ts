@@ -29,6 +29,7 @@ export class BeagleProvider {
       return
     }
     
+    console.log('Running beagle-angular 1.1.3-rc.2')
     beagleMapKeysConfig.setMapKeysConfig({ ...config.components, ...defaultComponents })
     // @ts-ignore // fixme
     this.service = createCoreBeagleUIService<Schema>({
