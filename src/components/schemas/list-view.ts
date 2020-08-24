@@ -22,6 +22,7 @@ export type Direction = 'VERTICAL' | 'HORIZONTAL'
 export interface BeagleFutureListViewInterface {
   direction: Direction,
   dataSource: any[],
+  iteratorName?: string,
   onInit?: () => void,
   onScrollEnd?: () => void,
   scrollEndThreshold?: number,
