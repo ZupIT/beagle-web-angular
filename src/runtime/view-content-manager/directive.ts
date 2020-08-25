@@ -15,15 +15,16 @@
 */
 
 import { Directive, ViewContainerRef, ElementRef, OnInit, Input } from '@angular/core'
-import { ViewContentManagerMap } from '@zup-it/beagle-web'
-import { contextSelector } from '../../constants'
+import { logger, ViewContentManagerMap } from '@zup-it/beagle-web'
+import { createBeagleContextFromViewContentManager } from '@zup-it/beagle-web/legacy/beagle-context'
+import { viewContentManagerSelector } from '../../constants'
 import { BeagleProvider } from '../BeagleProvider.service'
 import { BeagleComponent } from '../BeagleComponent'
 
 @Directive({
-  selector: `[${contextSelector}]`,
+  selector: `[${viewContentManagerSelector}]`,
 })
-export class BeagleContextDirective implements OnInit {
+export class ViewContentManager implements OnInit {
   @Input() _elementId: string
   @Input() _viewId: string
   private contentManagerMap: ViewContentManagerMap
@@ -52,7 +53,15 @@ export class BeagleContextDirective implements OnInit {
       component = this.viewContainerRef._data?.componentView?.component
     }
     if (component instanceof BeagleComponent) {
-      component.getBeagleContext = () => this.contentManagerMap.get(this._viewId, this._elementId)
+      component.getViewContentManager = () => (
+        this.contentManagerMap.get(this._viewId, this._elementId)
+      )
+      // todo: legacy code. Remove with v2.0.
+      component.getBeagleContext = () => {
+        logger.warn('"getBeagleContext" has been deprecated. Consider using "getViewContentManager" instead.')
+        const contentManager = this.contentManagerMap.get(this._viewId, this._elementId)
+        return createBeagleContextFromViewContentManager(contentManager)
+      }
     }
   }
 }

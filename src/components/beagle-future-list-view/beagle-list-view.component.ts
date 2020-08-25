@@ -66,7 +66,7 @@ export class BeagleFutureListViewComponent
   }
 
   renderDataSource() {
-    const element = this.getBeagleContext().getElement()
+    const element = this.getViewContentManager().getElement()
     if (!element || !Array.isArray(this.dataSource)) return
     const contextId = this.iteratorName || 'item'
 
@@ -78,7 +78,7 @@ export class BeagleFutureListViewComponent
       return child
     })
 
-    this.getBeagleContext().getView().getRenderer().doFullRender(element, element.id)
+    this.getViewContentManager().getView().getRenderer().doFullRender(element, element.id)
     this.hasRenderedDataSource = true
 
     // If the dataSource comes from a context, it might be initially empty, so the closes
@@ -90,7 +90,7 @@ export class BeagleFutureListViewComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes['dataSource'] || !this.getBeagleContext) return
+    if (!changes['dataSource'] || !this.getViewContentManager) return
     const current = JSON.stringify(changes['dataSource'].currentValue)
     const prev = JSON.stringify(changes['dataSource'].previousValue)
     if (prev !== current) this.renderDataSource()

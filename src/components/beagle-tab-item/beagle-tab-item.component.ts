@@ -41,7 +41,7 @@ export class BeagleTabItemComponent extends BeagleComponent
   }
 
   ngAfterViewInit() {
-    this.id = this.getBeagleContext().getElementId()
+    this.id = this.getViewContentManager().getElementId()
     this.listenTabChanges()
   }
 
@@ -56,7 +56,7 @@ export class BeagleTabItemComponent extends BeagleComponent
   }
 
   handleClick() {
-    const item = this.getBeagleContext().getElementId()
+    const item = this.getViewContentManager().getElementId()
     this.tabsService.changeSelectedTab(item)
   }
 }

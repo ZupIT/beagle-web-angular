@@ -15,10 +15,10 @@
 */
 
 import { NgModule } from '@angular/core'
-import { BeagleContextDirective } from './directive'
+import { ViewContentManager } from './directive'
 
 @NgModule({
-  declarations: [BeagleContextDirective],
-  exports: [BeagleContextDirective],
+  declarations: [ViewContentManager],
+  exports: [ViewContentManager],
 })
-export class BeagleContextModule {}
+export class ViewContentManagerModule {}

@@ -14,8 +14,13 @@
   * limitations under the License.
 */
 
-import { BeagleContext } from '../types'
+import { ViewContentManager, BeagleContext } from '../types'
 
 export abstract class BeagleComponent {
+  /**
+   * @deprecated since v1.2. Will be removed in v2.0. You should use `getViewContentManager`
+   * instead.
+   */
   public getBeagleContext: () => BeagleContext
+  public getViewContentManager: () => ViewContentManager
 }

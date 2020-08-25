@@ -30,7 +30,7 @@ export function createModuleString({ componentsModuleName, beagleModuleName,
     @NgModule({
       declarations: [BeagleRemoteView],
       exports: [BeagleRemoteView${defaultModule}],
-      imports: [CommonModule, BeagleContextModule, ${componentsModuleName} ${defaultModule}],
+      imports: [CommonModule, ViewContentManagerModule, ${componentsModuleName} ${defaultModule}],
       providers: [BeagleProvider],
     })
     export class ${beagleModuleName} {
