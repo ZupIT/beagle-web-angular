@@ -16,9 +16,10 @@
 
 export * from './runtime/AbstractBeagleRemoteView'
 export * from './runtime/BeagleProvider.service'
-export * from './runtime/beagle-context/module'
+export * from './runtime/view-content-manager/module'
 export * from './components/module'
 export * from './components'
 export * from './runtime/BeagleComponent'
 export * from './types'
 export * from './decorator'
+export * from './runtime/AngularHttpClientConfig.service'

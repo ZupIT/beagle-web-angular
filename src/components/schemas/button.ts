@@ -23,6 +23,7 @@ export interface BeagleButtonInterface {
   onPress?: () => void,
   style?: CSSProperties,
   clickAnalyticsEvent?: ClickEvent,
+  disabled?: boolean,
 }
 
 export const StylesNotToInherit = ['margin', 'marginTop', 'marginBottom', 'marginRight', 

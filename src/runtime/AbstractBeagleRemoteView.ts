@@ -121,6 +121,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   ngOnDestroy() {
+    this.view.destroy()
     this.beagleProvider.getBeagleUIService()!.viewContentManagerMap.unregister(this.viewId)
   }
 }
