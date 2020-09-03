@@ -15,7 +15,7 @@
 */
 
 import { ComponentFactory } from '@angular/core'
-import { contextSelector } from '../../constants'
+import { viewContentManagerSelector } from '../../constants'
 
 interface ComponentInfo {
   beagleType: string,
@@ -33,7 +33,7 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
     `let-${input.propName}="tree.${input.propName}"`).join(' ')
   const componentInputs = inputs.map(input =>
     `[${input.templateName}]="${input.propName}"`).join(' ')
-  const contextDirective = `${contextSelector} [_elementId]="beagleId" [_viewId]="viewId"`
+  const contextDirective = `${viewContentManagerSelector} [_elementId]="beagleId" [_viewId]="viewId"`
   const addStyleId = inputs.findIndex((item) => item.propName === 'styleId')
   const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="tree.styleId"'
   

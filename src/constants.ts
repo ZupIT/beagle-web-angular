@@ -40,7 +40,7 @@ import {
 
 export const viewIdAttributeName = '__beagle_view_id'
 export const remoteViewSelector = 'beagle-remote-view'
-export const contextSelector = 'beagle-context'
+export const viewContentManagerSelector = 'beagle-content-manager'
 
 const libRequiredComponents = {
   'custom:error': BeagleErrorComponent,

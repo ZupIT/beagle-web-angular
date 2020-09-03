@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, AfterViewInit, Injector } from '@angular/core'
+import { Component, Input, OnInit, Injector } from '@angular/core'
 import { URLBuilder } from '@zup-it/beagle-web'
 import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
@@ -24,7 +24,7 @@ import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../sc
   templateUrl: './beagle-image.component.html',
   styleUrls: ['./beagle-image.component.less'],
 })
-export class BeagleImageComponent implements BeagleImageInterface, AfterViewInit {
+export class BeagleImageComponent implements BeagleImageInterface, OnInit {
   @Input() path: ImagePath
   @Input() mode?: ImageMode = 'FIT_CENTER'
   @Input() accessibility?: Accessibility = {
@@ -42,7 +42,7 @@ export class BeagleImageComponent implements BeagleImageInterface, AfterViewInit
     } catch { }
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.imageSource = (this.path && this.path._beagleImagePath_ === 'local') || !this.urlBuilder
       ? this.path && this.path.url || ''
       : this.urlBuilder.build(this.path && this.path.url || '')
