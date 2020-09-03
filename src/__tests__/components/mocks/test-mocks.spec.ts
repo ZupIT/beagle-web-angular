@@ -13,23 +13,28 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-import { LoadParams } from '@zup-it/beagle-web'
+import { ViewContentManager, BeagleView } from '@zup-it/beagle-web'
 import { tick, ComponentFixture } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
-import { BeagleContext } from '../../../types'
 
-const mockParam: LoadParams = {
-  path: 'string ',
+
+const mockBeagleView: BeagleView = {
+  fetch: jest.fn(),
+  addErrorListener: jest.fn(),
+  destroy: jest.fn(),
+  getBeagleNavigator: jest.fn(),
+  getBeagleService: jest.fn(),
+  getRenderer: jest.fn(),
+  getTree: jest.fn(),
+  subscribe: jest.fn(),
+  updateWithFetch: jest.fn(),
+  updateWithTree: jest.fn(),
 }
 
-const mockBeagleContext: BeagleContext = {
+const mockViewContentManager: ViewContentManager = {
   getElement: (() => ({ '_beagleComponent_': 'beagle-button', 'id': 'abcd' })),
   getElementId: () => 'abcd',
-  replaceComponent: jest.fn(),
-  append: jest.fn(),
-  prepend: jest.fn(),
-  replace: jest.fn(),
-  getView: jest.fn(),
+  getView: (()=> mockBeagleView),
 }
 
 export function setAndCallHandler(
@@ -47,4 +52,4 @@ export function setAndCallHandler(
   tick()
 }
 
-export default mockBeagleContext
+export default mockViewContentManager

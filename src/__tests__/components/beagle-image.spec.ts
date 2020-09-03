@@ -16,17 +16,13 @@
 
 import { TestBed, async } from '@angular/core/testing'
 import { BeagleImageComponent } from '../../components/beagle-image/beagle-image.component'
-import { ImagePath, ImagePathMode, Accessibility, ImageMode } from '../../components/schemas/image'
+import { ImagePath, ImagePathMode, ImageMode } from '../../components/schemas/image'
 
 let component: BeagleImageComponent
 const imagePathModeMock: ImagePathMode = 'local'
 const pathMock: ImagePath = {
   _beagleImagePath_: imagePathModeMock,
   url: 'http://teste.com.br',
-}
-const accessibilityMock: Accessibility = {
-  accessible: true,
-  accessibilityLabel: '',
 }
 const imageModeMock: ImageMode = 'FIT_CENTER'
 
@@ -42,7 +38,7 @@ describe('BeagleImageComponent', () => {
     const fixture = TestBed.createComponent(BeagleImageComponent)
     component = fixture.componentInstance
     component.path = pathMock
-    spyOn(component, 'ngAfterViewInit').and.callThrough()
+    spyOn(component, 'ngOnInit').and.callThrough()
   }))
 
   it('should match snapshot', () => {
@@ -51,13 +47,13 @@ describe('BeagleImageComponent', () => {
 
   it('should add imageSource', () => {
     expect(component.imageSource).toEqual('')
-    component.ngAfterViewInit()
+    component.ngOnInit()
     expect(component.imageSource).toEqual('http://teste.com.br')
   })
 
   it('should add default mode', () => {
     delete component.mode
-    component.ngAfterViewInit()
+    component.ngOnInit()
     expect(component.mode).toEqual(imageModeMock)
   })
 

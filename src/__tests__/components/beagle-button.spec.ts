@@ -17,7 +17,7 @@
 import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing'
 import { Properties as CSSProperties } from 'csstype'
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component'
-import mockBeagleContext from './mocks/test-mocks.spec'
+import mockViewContentManager from './mocks/test-mocks.spec'
 
 let component: BeagleButtonComponent
 let fixture: ComponentFixture<BeagleButtonComponent>
@@ -37,7 +37,7 @@ describe('BeagleButtonComponent', () => {
     }).compileComponents()
     fixture = TestBed.createComponent(BeagleButtonComponent)
     component = fixture.componentInstance
-    component.getBeagleContext = () => mockBeagleContext
+    component.getViewContentManager = () => mockViewContentManager
     fixture.detectChanges()
   }))
 

@@ -17,7 +17,7 @@
 import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing'
 import { BeagleLazyComponent } from '../../components/beagle-lazy/beagle-lazy.component'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
-import mockBeagleContext from './mocks/test-mocks.spec'
+import mockViewContentManager from './mocks/test-mocks.spec'
 
 let component: BeagleLazyComponent
 let beagleComponent: BeagleComponent
@@ -40,18 +40,13 @@ describe('BeagleLazyComponent', () => {
     beagleComponent = TestBed.get(BeagleComponent)
     component = fixture.componentInstance
     component.path = 'http://test.com.br'
-    component.getBeagleContext = () => mockBeagleContext
+    component.getViewContentManager = () => mockViewContentManager
     fixture.detectChanges()
     spyOn(component, 'ngAfterViewInit').and.callThrough()
   }))
 
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot()
-  })
-
-  it('should call replace component ', () => {
-    component.ngAfterViewInit()
-    expect(component.getBeagleContext().replaceComponent).toHaveBeenCalled()
   })
 
 })

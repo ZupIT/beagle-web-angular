@@ -46,7 +46,7 @@ describe('BeagleTabItemComponent', () => {
     spyOn(tabServiceMock, 'notifySelectedTab').and.callThrough()
     spyOn(tabServiceMock, 'changeSelectedTab').and.callThrough()
     component = fixture.componentInstance
-    component.getBeagleContext = () => mockBeagleContext
+    component.getViewContentManager = () => mockBeagleContext
   }))
 
   it('should match snapshot', () => {
