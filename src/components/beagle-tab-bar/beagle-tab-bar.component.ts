@@ -15,9 +15,12 @@
 */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { BeforeViewSnapshot } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { ItemTitle, BeagleTabBarInterface } from '../schemas/tab-bar'
+import { transformItems } from './beagle-tab-bar.lifecycles'
 
+@BeforeViewSnapshot(transformItems)
 @Component({
   selector: 'beagle-tab-bar',
   templateUrl: './beagle-tab-bar.component.html',

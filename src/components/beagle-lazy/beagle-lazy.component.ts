@@ -15,10 +15,11 @@
 */
 
 import { Component, Input, AfterViewInit } from '@angular/core'
-import { LoadParams } from '@zup-it/beagle-web'
+import { LoadParams, BeagleChildren } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleLazyInterface } from '../schemas/lazy'
 
+@BeagleChildren({ property: 'initialState' })
 @Component({
   selector: 'beagle-lazy',
   templateUrl: './beagle-lazy.component.html',
