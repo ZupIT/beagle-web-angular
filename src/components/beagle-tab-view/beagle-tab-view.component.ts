@@ -19,9 +19,12 @@ import {
   Input, OnInit, ViewEncapsulation, OnDestroy,
 } from '@angular/core'
 import { Subscription } from 'rxjs'
+import { logger, BeforeViewSnapshot } from '@zup-it/beagle-web'
 import { TabsService } from '../services/tabs.service'
 import { BeagleTabViewInterface } from '../schemas/tab-view'
+import { transformItems } from './beagle-tab-view.lifecycles'
 
+@BeforeViewSnapshot(transformItems)
 @Component({
   selector: 'beagle-tab-view',
   templateUrl: './beagle-tab-view.component.html',
@@ -43,7 +46,7 @@ export class BeagleTabViewComponent implements
   constructor(private tabsService: TabsService) { }
 
   ngOnInit() {
-    console.warn(`Tabview is deprecated. This will be removed in a future version.
+    logger.warn(`Tabview is deprecated. This will be removed in a future version.
     Please consider replacing this component for a tabBar with a pageview.`)
     this.listenTabChanges()
   }
