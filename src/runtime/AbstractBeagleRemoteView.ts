@@ -29,6 +29,8 @@ import {
   LoadParams,
   BeagleView,
   IdentifiableBeagleUIElement,
+  NetworkOptions,
+  logger,
 } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
 import { BeagleProvider } from './BeagleProvider.service'
@@ -39,7 +41,13 @@ import beagleMapKeysConfig from './utils/beagle-map-keys-config'
 let nextViewId = 1
 
 export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestroy, OnChanges {
-  loadParams: LoadParams = { path: '' }
+  // component input properties. todo: remove the loadParams with v2.0.
+  route?: string
+  networkOptions?: NetworkOptions
+  controllerId?: string
+  loadParams: Partial<LoadParams> = {}
+
+  // class attributes
   tree: IdentifiableBeagleUIElement<any> | null
   view: BeagleView
   viewId = `${nextViewId++}`
@@ -65,7 +73,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
         'you need to start the beagle provider before using a remote view.',
       )
     }
-    this.view = beagleService.createView()
+    this.view = beagleService.createView(this.networkOptions, this.controllerId)
     this.view.subscribe(this.updateView)
     beagleService.viewContentManagerMap.register(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
@@ -99,6 +107,27 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     return this.viewStaticPromise.promise
   }
 
+  private loadFirstRoute() {
+    // todo: remove legacy code in v2.0
+    const deprecatedKeys = Object.keys(this.loadParams)
+
+    if (deprecatedKeys.length) {
+      logger.warn(`The following properties in the BeagleRemoteView are deprecated and will be removed in v2.0: ${deprecatedKeys.join(', ')}.\nYou should use "route" to specify the path to the first view and "navigationOptions" for further request setup.`)
+      if (this.route) {
+        logger.warn('You shouldn\'t mix the new BeagleRemoteView properties with the deprecated ones. All deprecated properties will be ignored.')
+      } else if (this.loadParams.path) {
+        this.view.fetch(this.loadParams as LoadParams)
+      }
+    }
+    // end of legacy code
+
+    if (this.route) {
+      const navigator = this.view.getNavigator()
+      if (navigator.isEmpty()) navigator.pushView({ url: this.route })
+      else navigator.resetStack({ url: this.route }, this.controllerId)
+    }
+  }
+
   ngAfterViewInit() {
     if (!this.beagleProvider || !this.ngZone || !this.changeDetector) {
       throw new BeagleRuntimeError(
@@ -106,17 +135,19 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
       )
     }
     this.createBeagleView()
-    this.view.fetch(this.loadParams)
+    this.loadFirstRoute()
+  }
+
+  private hasAnyChanged(changes: SimpleChanges, properties: string[]) {
+    return changes && !!properties.find(property => (
+      changes[property]
+      && changes[property].previousValue !== changes[property].currentValue
+    ))
   }
 
   async ngOnChanges(changes: SimpleChanges) {
-    if (changes && changes.loadParams) {
-      if (
-        changes.loadParams.previousValue
-        && changes.loadParams.previousValue !== changes.loadParams.currentValue
-      ) {
-        this.view.fetch(this.loadParams)
-      }
+    if (this.view && this.hasAnyChanged(changes, ['loadParams', 'route'])) {
+      this.loadFirstRoute()
     }
   }
 
