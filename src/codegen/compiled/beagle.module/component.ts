@@ -51,11 +51,12 @@ export function createComponentString(
   ) {
   const queries = createQueries(components, angularVersion)
 
+  // todo: legacy code. Remove the input "loadParams" with v2.0.
   const componentString = `
     @Component({
       selector: '${remoteViewSelector}',
       template,
-      inputs: ['loadParams'],
+      inputs: ['loadParams', 'route', 'networkOptions', 'controllerId'],
       queries: {
         ${queries.join(',\n        ')},
       },
