@@ -36,13 +36,6 @@ describe('BeagleLazyComponent', () => {
       ],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(BeagleLazyComponent)
-    beagleComponent = TestBed.get(BeagleComponent)
-    component = fixture.componentInstance
-    component.path = 'http://test.com.br'
-    component.getViewContentManager = () => mockViewContentManager
-    fixture.detectChanges()
-    spyOn(component, 'ngAfterViewInit').and.callThrough()
   }))
 
   it('should match snapshot', () => {
