@@ -36,6 +36,10 @@ describe('BeagleLazyComponent', () => {
       ],
     }).compileComponents()
 
+    fixture = TestBed.createComponent(BeagleLazyComponent)
+    beagleComponent = TestBed.get(BeagleComponent)
+    component = fixture.componentInstance
+    component.path = 'http://test.com.br'
   }))
 
   it('should match snapshot', () => {
