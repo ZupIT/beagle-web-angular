@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleTouchableComponent should match snapshot 1`] = `
+<beagle-touchable
+  onPress={[Function Function]}
+>
+  <div
+    class="touchable"
+  />
+</beagle-touchable>
+`;
