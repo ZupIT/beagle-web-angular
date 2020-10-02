@@ -33,7 +33,8 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
     `let-${input.propName}="tree.${input.propName}"`).join(' ')
   const componentInputs = inputs.map(input =>
     `[${input.templateName}]="${input.propName}"`).join(' ')
-  const contextDirective = `${viewContentManagerSelector} [_elementId]="beagleId" [_viewId]="viewId"`
+  const contextDirective = `${viewContentManagerSelector} [_elementId]="beagleId" [_viewId]="viewId"
+  #self [_selfReference]="self"`
   const addStyleId = inputs.findIndex((item) => item.propName === 'styleId')
   const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="tree.styleId"'
 
@@ -44,7 +45,6 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
     <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="tree.children"
       let-beagleId="tree.id" ${styleVariable}>
       <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId" 
-      #self [selfReference]="self"
         [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
           <ng-container 

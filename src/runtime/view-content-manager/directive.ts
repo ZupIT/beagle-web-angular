@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Directive, ViewContainerRef, ElementRef, OnInit, Input, Component } from '@angular/core'
+import { Directive, ViewContainerRef, ElementRef, OnInit, Input } from '@angular/core'
 import { logger, ViewContentManagerMap } from '@zup-it/beagle-web'
 import { createBeagleContextFromViewContentManager } from '@zup-it/beagle-web/legacy/beagle-context'
 import { viewContentManagerSelector } from '../../constants'
@@ -27,7 +27,7 @@ import { BeagleComponent } from '../BeagleComponent'
 export class ViewContentManager implements OnInit {
   @Input() _elementId: string
   @Input() _viewId: string
-  @Input() selfReference: any
+  @Input() _selfReference: any
   private contentManagerMap: ViewContentManagerMap
 
   constructor(
@@ -42,8 +42,8 @@ export class ViewContentManager implements OnInit {
 
 
   ngOnInit() {
-    const component = this.selfReference
-
+    const component = this._selfReference
+    
     if (component instanceof BeagleComponent) {
       component.getViewContentManager = () => (
         this.contentManagerMap.get(this._viewId, this._elementId)
