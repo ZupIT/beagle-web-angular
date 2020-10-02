@@ -29,21 +29,22 @@ function kebabToCamelCase(str: string) {
 
 function createTemplateForComponent(selector: string, inputs: ComponentFactory<any>['inputs']) {
   const templateName = kebabToCamelCase(selector)
-  const templateInputs = inputs.map(input => 
+  const templateInputs = inputs.map(input =>
     `let-${input.propName}="tree.${input.propName}"`).join(' ')
   const componentInputs = inputs.map(input =>
     `[${input.templateName}]="${input.propName}"`).join(' ')
   const contextDirective = `${viewContentManagerSelector} [_elementId]="beagleId" [_viewId]="viewId"`
   const addStyleId = inputs.findIndex((item) => item.propName === 'styleId')
   const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="tree.styleId"'
-  
+
   const addStyle = inputs.findIndex((item) => item.propName === 'style')
   const styleVariable = addStyle >= 0 ? '' : 'let-style="tree.style"'
 
   return `
     <ng-template #${templateName} ${templateInputs} ${styleIdVariable} let-children="tree.children"
       let-beagleId="tree.id" ${styleVariable}>
-      <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId"
+      <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId" 
+      #self [selfReference]="self"
         [ngClass]="styleId || ''" [ngStyle]="style">
         <ng-container *ngFor="let child of children; trackBy: elementIdentity">
           <ng-container 
