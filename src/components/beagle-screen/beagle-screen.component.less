@@ -14,9 +14,10 @@
   * limitations under the License.
 */
 
-import * as CSS from 'csstype'
-
-export interface BeagleContainerInterface {
-  onInit?: () => void,
-  style?: CSS.Properties,
+beagle-screen {
+  display: flex;
+  // the default value in beagle is "column"
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
 }
