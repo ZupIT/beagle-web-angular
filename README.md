@@ -1,4 +1,8 @@
 # [Beagle Angular](https://docs.usebeagle.io/v/v1.0-en/get-started/installing-beagle/web#angular)
+
+<a href="CONTRIBUTING.md" alt="Hacktoberfest"><img src="https://badgen.net/badge/hacktoberfest/friendly/pink" /></a>
+ [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ZupIT/beagle-web-react/blob/master/LICENSE)
+
 Beagle Angular is a Zup's open source library for using [Beagle](https://docs.usebeagle.io/v/v1.0-en/) in an [Angular](https://angular.io/) based project.
 
 # Getting started
@@ -94,7 +98,7 @@ export class AppModule { }
 
 ### Step 2: JSON creation to be rendered
 
-Now, you just have to create a JSON to render the components. Usually, this process would be made by an external server that would return de JSON, but for this example we'll create a local file to be accessed for the test.
+Now, you just have to create a JSON to render the components. Usually, this process would be made by an external server that would return the JSON, but for this example we'll create a local file to be accessed for the test.
 
 On your angular project, navigate to the `src/assets` file and create a new file named `payload.json`. Open this new file you just created and copy the content below:
 
@@ -225,5 +229,4 @@ You should see the screen with the text present in the text attribute in the jso
 `Well done, you created your first screen with Beagle!`
 
 # License
-Beagle Angular is Apache licensed.
-<!--[Apache licensed](https://github.com/ZupIT/beagle-web-react/blob/master/LICENSE)-->
+Beagle Angular is developed under [Apache license 2.0](https://github.com/ZupIT/beagle-web-react/blob/master/LICENSE).
