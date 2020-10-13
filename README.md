@@ -227,6 +227,6 @@ After finished this commands, access the local: `http://localhost:4200`
 You should see the screen with the text present in the text attribute in the json above
 
 `Well done, you created your first screen with Beagle!`
-
+ 
 # License
 Beagle Angular is developed under [Apache license 2.0](https://github.com/ZupIT/beagle-web-angular/blob/master/LICENSE).
