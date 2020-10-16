@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleButtonComponent should match snapshot 1`] = `
+<beagle-button
+  getViewContentManager={[Function Function]}
+  type={[Function String]}
+  usefulStyle={[Function Object]}
+>
+  <button
+    type="button"
+  >
+     
+  
+  </button>
+</beagle-button>
+`;

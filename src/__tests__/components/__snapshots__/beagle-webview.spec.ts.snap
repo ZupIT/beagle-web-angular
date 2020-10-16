@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleWebviewComponent should match snapshot 1`] = `
+BeagleWebviewComponent {
+  "sanitizer": DomSanitizerImpl {
+    "_doc": Document {
+      "location": Location {
+        "assign": [Function],
+        "hash": "",
+        "host": "localhost",
+        "hostname": "localhost",
+        "href": "http://localhost/",
+        "origin": "http://localhost",
+        "pathname": "/",
+        "port": "",
+        "protocol": "http:",
+        "reload": [Function],
+        "replace": [Function],
+        "search": "",
+        "toString": [Function],
+      },
+      Symbol(DOM SymbolTree): SymbolTreeNode {
+        "cachedIndex": -1,
+        "cachedIndexVersion": NaN,
+        "childIndexCachedUpTo": null,
+        "childrenVersion": 0,
+        "firstChild": null,
+        "lastChild": null,
+        "nextSibling": null,
+        "parent": null,
+        "previousSibling": null,
+      },
+    },
+  },
+  "url": "http://www.test.com",
+}
+`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleTabItemComponent should match snapshot 1`] = `
+BeagleTabItemComponent {
+  "active": false,
+  "getViewContentManager": [Function],
+  "tabsService": TabsService {
+    "changeSelectedTab": [Function],
+    "notifySelectedTab": [Function],
+    "selectedTab": BehaviorSubject {
+      "_isScalar": false,
+      "_value": "",
+      "closed": false,
+      "hasError": false,
+      "isStopped": false,
+      "observers": Array [],
+      "thrownError": null,
+    },
+  },
+}
+`;

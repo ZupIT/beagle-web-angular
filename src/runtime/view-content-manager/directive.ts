@@ -27,6 +27,7 @@ import { BeagleComponent } from '../BeagleComponent'
 export class ViewContentManager implements OnInit {
   @Input() _elementId: string
   @Input() _viewId: string
+  @Input() _selfReference: any
   private contentManagerMap: ViewContentManagerMap
 
   constructor(
@@ -39,19 +40,10 @@ export class ViewContentManager implements OnInit {
     this.contentManagerMap = beagleService.viewContentManagerMap
   }
 
-  ngOnInit() {
-    let component
 
-    // @ts-ignore
-    if (ng && typeof (ng.getComponent) === 'function') {
-      //IVY provides ng.getComponent function whereas other versions don't
-      // @ts-ignore
-      component = ng.getComponent(this.elementRef.nativeElement)
-    } else {
-      
-      // @ts-ignore
-      component = this.viewContainerRef._data?.componentView?.component
-    }
+  ngOnInit() {
+    const component = this._selfReference
+    
     if (component instanceof BeagleComponent) {
       component.getViewContentManager = () => (
         this.contentManagerMap.get(this._viewId, this._elementId)

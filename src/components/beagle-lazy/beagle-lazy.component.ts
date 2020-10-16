@@ -15,10 +15,11 @@
 */
 
 import { Component, Input, AfterViewInit } from '@angular/core'
-import { LoadParams } from '@zup-it/beagle-web'
+import { BeagleChildren, BeagleUIElement } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleLazyInterface } from '../schemas/lazy'
 
+@BeagleChildren({ property: 'initialState' })
 @Component({
   selector: 'beagle-lazy',
   templateUrl: './beagle-lazy.component.html',
@@ -32,13 +33,32 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
     super()
   }
 
-  ngAfterViewInit() {
-    const params: LoadParams = {
-      path: this.path,
-      shouldShowLoading: false,
-    }
-
-    this.getViewContentManager().replaceComponent(params)
+  private getRelativePath() {
+    return this.path.replace(/^([^\/])/, '/$1')
   }
 
+  private replaceChildren(tree: BeagleUIElement) {
+    const beagleView = this.getViewContentManager().getView()
+    const anchor = this.getViewContentManager().getElementId()
+    beagleView.getRenderer().doFullRender(tree, anchor, 'replace')
+  }
+
+  private fetchLazyView() {
+    /* here we are going to use the viewClient instead of making the request ourselves to take 
+    advantage of the cache system provided by Beagle */
+    const beagleView = this.getViewContentManager().getView()
+    const { urlBuilder, viewClient } = beagleView.getBeagleService()
+    const url = urlBuilder.build(this.getRelativePath())
+    viewClient.load({
+      url,
+      onChangeTree: tree => this.replaceChildren(tree),
+      retry: this.fetchLazyView,
+      shouldShowLoading: false,
+      ...beagleView.getNetworkOptions(),
+    })
+  }
+
+  ngAfterViewInit() {
+    this.fetchLazyView()
+  }
 }

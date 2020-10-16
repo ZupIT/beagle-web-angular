@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleImageComponent should match snapshot 1`] = `
+BeagleImageComponent {
+  "accessibility": Object {
+    "accessibilityLabel": "",
+    "accessible": true,
+  },
+  "imageSource": "",
+  "mode": "FIT_CENTER",
+  "ngOnInit": [Function],
+  "path": Object {
+    "_beagleImagePath_": "local",
+    "url": "http://teste.com.br",
+  },
+}
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleTextAreaComponent should match snapshot 1`] = `
+BeagleTextAreaComponent {
+  "disabled": true,
+  "label": "Label Test",
+  "name": "Label",
+  "onBlur": [MockFunction],
+  "onChange": [MockFunction],
+  "onFocus": [MockFunction],
+  "readonly": true,
+  "value": "Testing",
+}
+`;
