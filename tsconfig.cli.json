@@ -12,6 +12,7 @@
     "target": "ES5",
     "moduleResolution": "node",
     "importHelpers": true,
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -25,5 +26,8 @@
     "./src/cli/operations/view-engine/tsconfig.view-engine.json",
     "./src/codegen/**/*.*",
     "./src/test.ts"
+  ],
+  "exclude": [
+    "./node_modules"
   ]
 }
