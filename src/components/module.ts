@@ -35,7 +35,6 @@ import { TabsService } from './services/tabs.service'
 import { BeagleSimpleFormComponent } from './beagle-simple-form/beagle-simple-form.component'
 import { BeagleInputComponent } from './beagle-input/beagle-input.component'
 import { BeagleTextAreaComponent } from './beagle-text-area/beagle-text-area.component'
-import { BeagleMarkdownComponent } from './beagle-markdown/beagle-markdown.component'
 import {
   BeaglePageIndicatorComponent,
 } from './beagle-page-indicator/beagle-page-indicator.component'
@@ -61,7 +60,6 @@ const components = [
   BeagleModalComponent,
   BeagleInputComponent,
   BeagleTextAreaComponent,
-  BeagleMarkdownComponent,
   BeagleWebviewComponent,
   BeagleTabBarComponent,
 ]

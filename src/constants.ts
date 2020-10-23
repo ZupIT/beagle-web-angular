@@ -32,7 +32,6 @@ import {
   BeagleModalComponent,
   BeagleInputComponent,
   BeagleTextAreaComponent,
-  BeagleMarkdownComponent,
   BeaglePageIndicatorComponent,
   BeagleWebviewComponent,
   BeagleTabBarComponent,
@@ -71,7 +70,6 @@ const beagleDefaultComponents = {
 const webSpecificComponents = {
   'custom:modal': BeagleModalComponent,
   'custom:text-area': BeagleTextAreaComponent,
-  'custom:markdown': BeagleMarkdownComponent,
 }
 
 export const defaultComponents: Record<string, Type<any>> = {
