@@ -72,6 +72,27 @@ describe('BeagleInputComponent', () => {
     expect(component.onBlur).toHaveBeenCalled()
   }))
 
+  it('should call handlers and not set Inputs', fakeAsync(() => {
+    component.disabled = true
+    fixture.detectChanges()
 
+    spyOn(component, 'handleChange').and.callThrough()
+    spyOn(component, 'handleFocus').and.callThrough()
+    spyOn(component, 'handleBlur').and.callThrough()
 
-})
+    setAndCallHandler('input', 'Testing', 'input')
+    setAndCallHandler('input', 'Testing', 'focus')
+    setAndCallHandler('input', 'Testing', 'blur')
+
+    expect(component.onChange).not.toHaveBeenCalled()
+    expect(component.onFocus).not.toHaveBeenCalled()
+    expect(component.onBlur).not.toHaveBeenCalled()
+  }))
+
+  it('should call handlers and set Inputs', fakeAsync(() => {
+    component.value = 'New input text'
+    let opa = fixture.debugElement.nativeElement.querySelector('input');
+    fixture.detectChanges()
+    expect(opa.value).toBe('New input text')
+  }))
+}
