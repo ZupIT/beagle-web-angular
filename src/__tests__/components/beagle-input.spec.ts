@@ -72,7 +72,7 @@ describe('BeagleInputComponent', () => {
     expect(component.onBlur).toHaveBeenCalled()
   }))
 
-  it('should call handlers and not set Inputs', fakeAsync(() => {
+  it('should call handlers of disabled input and not set Inputs', fakeAsync(() => {
     component.disabled = true
     fixture.detectChanges()
 
@@ -88,6 +88,43 @@ describe('BeagleInputComponent', () => {
     expect(component.onFocus).not.toHaveBeenCalled()
     expect(component.onBlur).not.toHaveBeenCalled()
   }))
+
+  it('should call handlers of readonly input and not set Inputs', fakeAsync(() => {
+    component.readOnly = true
+    fixture.detectChanges()
+
+    spyOn(component, 'handleChange').and.callThrough()
+    spyOn(component, 'handleFocus').and.callThrough()
+    spyOn(component, 'handleBlur').and.callThrough()
+
+    setAndCallHandler('input', 'Testing', 'input')
+    setAndCallHandler('input', 'Testing', 'focus')
+    setAndCallHandler('input', 'Testing', 'blur')
+
+    expect(component.onChange).not.toHaveBeenCalled()
+    expect(component.onFocus).not.toHaveBeenCalled()
+    expect(component.onBlur).not.toHaveBeenCalled()
+  }))
+
+
+  it('should call handlers of disabled and readonly input and not set Inputs', fakeAsync(() => {
+    component.disabled = true
+    component.readOnly = true
+    fixture.detectChanges()
+
+    spyOn(component, 'handleChange').and.callThrough()
+    spyOn(component, 'handleFocus').and.callThrough()
+    spyOn(component, 'handleBlur').and.callThrough()
+
+    setAndCallHandler('input', 'Testing', 'input')
+    setAndCallHandler('input', 'Testing', 'focus')
+    setAndCallHandler('input', 'Testing', 'blur')
+
+    expect(component.onChange).not.toHaveBeenCalled()
+    expect(component.onFocus).not.toHaveBeenCalled()
+    expect(component.onBlur).not.toHaveBeenCalled()
+  }))
+
 
   it('should call handlers and set Inputs', fakeAsync(() => {
     component.value = 'New input text'
