@@ -40,14 +40,14 @@ export class BeagleTextAreaComponent implements TextAreaInterface, OnInit {
   }
 
   public handleChange(value) {
-    this.onChange && this.onChange({ value })
+    this.onChange && !this.disabled && !this.readonly && this.onChange({ value })
   }
 
   public handleBlur(event) {
-    this.onBlur && this.onBlur({ value: event.target.value })
+    this.onBlur && !this.disabled && !this.readonly && this.onBlur({ value: event.target.value })
   }
 
   public handleFocus(event) {
-    this.onFocus && this.onFocus({ value: event.target.value })
+    this.onFocus && !this.disabled && !this.readonly && this.onFocus({ value: event.target.value })
   }
 }
