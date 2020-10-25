@@ -132,4 +132,4 @@ describe('BeagleInputComponent', () => {
     fixture.detectChanges()
     expect(opa.value).toBe('New input text')
   }))
-}
+})
