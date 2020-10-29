@@ -15,11 +15,13 @@
 */
 
 import {
-  Component, ViewEncapsulation, AfterViewChecked,
-  Input, ElementRef, NgZone, OnDestroy, Injector,
+  Component,
+  ViewEncapsulation,
+  AfterViewChecked,
+  Input,
+  ElementRef,
+  NgZone,
 } from '@angular/core'
-import { ScreenEvent, Analytics } from '@zup-it/beagle-web'
-import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleContainerInterface } from '../schemas/container'
 
 @Component({
@@ -28,31 +30,19 @@ import { BeagleContainerInterface } from '../schemas/container'
   styleUrls: ['./beagle-container.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleContainerComponent implements BeagleContainerInterface,
-  AfterViewChecked, OnDestroy {
-
+export class BeagleContainerComponent implements BeagleContainerInterface, AfterViewChecked {
   @Input() onInit?: () => void
-  @Input() screenAnalyticsEvent: ScreenEvent
   hasInitialized = false
-  private beagleAnalytics: Analytics | undefined
 
-  constructor(private element: ElementRef, private ngZone: NgZone, injector: Injector) {
-    try {
-      const beagleProvider = injector.get(BeagleProvider)
-      const beagleService = beagleProvider.getBeagleUIService()
-      this.beagleAnalytics = beagleService && beagleService.analytics
-    } catch {}
+  constructor(private element: ElementRef, private ngZone: NgZone) {
+
   }
 
   ngAfterViewChecked() {
-  
-    if (!this.hasInitialized && (this.onInit || this.screenAnalyticsEvent)) {
+    if (!this.hasInitialized && this.onInit) {
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           if (!this.hasInitialized && this.isRendered()) {
-            if (this.screenAnalyticsEvent && this.beagleAnalytics) {
-              this.beagleAnalytics.trackEventOnScreenAppeared(this.screenAnalyticsEvent)
-            }
             this.hasInitialized = true
             this.onInit && this.onInit()
           }
@@ -63,11 +53,5 @@ export class BeagleContainerComponent implements BeagleContainerInterface,
 
   isRendered() {
     return this.element.nativeElement.isConnected
-  }
-
-  ngOnDestroy() {
-    if (this.screenAnalyticsEvent && this.beagleAnalytics) {
-      this.beagleAnalytics.trackEventOnScreenDisappeared(this.screenAnalyticsEvent)
-    }
   }
 }
