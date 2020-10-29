@@ -23,7 +23,7 @@ let component: BeagleButtonComponent
 let fixture: ComponentFixture<BeagleButtonComponent>
 const mockStyle: CSSProperties = {
   height: '100',
-  width: '50',
+  padding: '10'
 }
 
 
@@ -56,7 +56,7 @@ describe('BeagleButtonComponent', () => {
     spyOn(component, 'ngOnInit').and.callThrough()
     component.style = mockStyle
     component.ngOnInit()
-    component.style = { ...mockStyle, margin: '10px' }
+    component.style = { ...mockStyle, padding: '10px' }
     expect(component.usefulStyle).toEqual(mockStyle)
   })
 

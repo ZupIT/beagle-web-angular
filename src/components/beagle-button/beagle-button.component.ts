@@ -34,7 +34,19 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() style?: CSSProperties
   @Input() clickAnalyticsEvent?: ClickEvent
   @Input() disabled?: boolean
+  public usefulStyle: Record<string, any> = {}
   public type = 'button'
+
+  ngOnInit() {
+    if (this.style) {
+      this.usefulStyle = Object.keys(this.style).reduce((styleObject, prop) => {
+        if (!StylesNotToInherit.includes(prop)) {
+          styleObject[prop] = this.style && this.style[prop]
+        }
+        return styleObject
+      }, {})
+    }
+  }
 
   ngAfterViewInit() {
     const element = this.getViewContentManager().getElement()
