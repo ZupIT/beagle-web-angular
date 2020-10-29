@@ -23,7 +23,7 @@ let component: BeagleButtonComponent
 let fixture: ComponentFixture<BeagleButtonComponent>
 const mockStyle: CSSProperties = {
   height: '100',
-  padding: '10'
+  padding: '10',
 }
 
 
