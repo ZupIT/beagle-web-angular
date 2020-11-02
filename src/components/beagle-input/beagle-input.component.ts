@@ -46,14 +46,14 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
   }
 
   public handleChange(value) {
-    this.onChange && !this.disabled  && !this.readOnly&& this.onChange({ value })
+    this.onChange && this.onChange({ value })
   }
 
   public handleBlur(event) {
-    this.onBlur && !this.disabled  && !this.readOnly&& this.onBlur({ value: event.target.value })
+    this.onBlur && this.onBlur({ value: event.target.value })
   }
 
   public handleFocus(event) {
-    this.onFocus && !this.disabled  && !this.readOnly&& this.onFocus({ value: event.target.value })
+    this.onFocus && this.onFocus({ value: event.target.value })
   }
 }
