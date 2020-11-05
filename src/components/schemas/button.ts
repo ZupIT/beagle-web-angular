@@ -27,4 +27,4 @@ export interface BeagleButtonInterface {
 }
 
 export const StylesNotToInherit = ['margin', 'marginTop', 'marginBottom', 'marginRight', 
-  'marginLeft', 'top', 'left', 'right', 'bottom']
+  'marginLeft', 'top', 'left', 'right', 'bottom', 'width']
