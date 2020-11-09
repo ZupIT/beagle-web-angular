@@ -1,4 +1,4 @@
-/*
+<!-- 
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,20 +11,7 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License.
-*/
+  * limitations under the License. 
+-->
 
-import { Properties as CSSProperties } from 'csstype'
-import { ClickEvent } from '@zup-it/beagle-web/types'
-
-export interface BeagleButtonInterface {
-  text: string,
-  styleId?: string,
-  onPress?: () => void,
-  style?: CSSProperties,
-  clickAnalyticsEvent?: ClickEvent,
-  disabled?: boolean,
-}
-
-export const StylesNotToInherit = ['margin', 'marginTop', 'marginBottom', 'marginRight', 
-  'marginLeft', 'top', 'left', 'right', 'bottom', 'width']
+<ng-content></ng-content>

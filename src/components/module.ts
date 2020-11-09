@@ -40,6 +40,7 @@ import {
 } from './beagle-page-indicator/beagle-page-indicator.component'
 import { BeagleWebviewComponent } from './beagle-webview/beagle-webview.component'
 import { BeagleTabBarComponent } from './beagle-tab-bar/beagle-tab-bar.component'
+import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 
 const components = [
   BeagleButtonComponent,
@@ -62,6 +63,7 @@ const components = [
   BeagleTextAreaComponent,
   BeagleWebviewComponent,
   BeagleTabBarComponent,
+  BeagleScreenComponent,
 ]
 
 @NgModule({
