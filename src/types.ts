@@ -25,7 +25,7 @@ export { BeagleContext } from '@zup-it/beagle-web/legacy/beagle-context'
 
 export { ErrorComponentParams }
 
-export interface BeagleAngularConfig<Schema> extends BeagleConfig<Schema> {
+export interface BeagleAngularConfig<Schema> extends Omit<BeagleConfig<Schema>, 'platform'> {
   components: {
     'custom:error'?: Type<{} | ErrorComponentParams>,
     'custom:loading'?: Type<{}>,
