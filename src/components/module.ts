@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { BeagleButtonComponent } from './beagle-button/beagle-button.component'
 import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.component'
-import { BeagleFutureListViewComponent } from './beagle-future-list-view/beagle-list-view.component'
 import { BeagleTextComponent } from './beagle-text/beagle-text.component'
 import { BeagleContainerComponent } from './beagle-container/beagle-container.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
@@ -45,7 +44,6 @@ import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 const components = [
   BeagleButtonComponent,
   BeagleListViewComponent,
-  BeagleFutureListViewComponent,
   BeagleTextComponent,
   BeagleContainerComponent,
   BeaglePageViewComponent,
