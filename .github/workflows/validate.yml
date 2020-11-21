@@ -59,24 +59,17 @@ jobs:
     - name: lint
       run: cd angular && yarn lint
 
-    - name: Jest Annotations & Coverage
-      if: ${{ github.repository_owner == 'ZupIT'}}
-      uses: mattallty/jest-github-action@v1.0.3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        working-directory: "angular"
-        test-command: "yarn test --maxWorkers=2"
+    - name: test
+      run: cd angular && yarn test
 
-    - name: Jest Coverage
-      if: ${{ github.repository_owner != 'ZupIT'}}
+    - name: test and comment
+      continue-on-error: true
       uses: mattallty/jest-github-action@v1.0.3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         working-directory: "angular"
         test-command: "yarn test --maxWorkers=2"
-        coverage-comment: false
     
     - name: build
       run: cd angular && yarn build
