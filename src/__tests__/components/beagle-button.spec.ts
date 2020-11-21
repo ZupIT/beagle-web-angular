@@ -68,14 +68,4 @@ describe('BeagleButtonComponent', () => {
     button.click()
     expect(component.onPress).toHaveBeenCalled();
   })
-
-  it('should trigger handleClick function when is disabled', () => {
-    component.onPress = () => null
-    spyOn(component, 'onPress');
-    component.disabled = true
-    let button = fixture.debugElement.nativeElement.querySelector('button');
-    button.click()
-    expect(component.onPress).not.toHaveBeenCalled();
-  })
-
 })
