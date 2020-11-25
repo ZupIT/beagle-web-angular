@@ -92,7 +92,7 @@ export class BeagleListViewScroll
       this.direction === 'HORIZONTAL'
         ? element.scrollWidth > element.clientWidth
         : element.scrollHeight > element.clientHeight
-      )
+    )
   }
 
   getNodeToListenTo() {
@@ -106,8 +106,7 @@ export class BeagleListViewScroll
   }
 
   runOnScrollEndIfNotScrollable() {
-    const listenTo = this.getNodeToListenTo()
-    if (!this.canScrollContent(listenTo instanceof Window ? document.body : listenTo)) {
+    if (!this.canScrollContent(this.parentNode)) {
       this.callOnScrollEnd()
     }
   }
