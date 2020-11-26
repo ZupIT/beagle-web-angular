@@ -21,7 +21,7 @@ import {
   ErrorComponentParams,
   ViewContentManager as CoreViewContentManager,
 } from '@zup-it/beagle-web'
-import Omit from '@zup-it/beagle-web'
+import { Omit } from '@zup-it/beagle-web/types'
 export { BeagleContext } from '@zup-it/beagle-web/legacy/beagle-context'
 
 export { ErrorComponentParams }
