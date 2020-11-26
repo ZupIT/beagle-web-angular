@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnChanges, Injector, SimpleChanges } from '@angular/core'
+import { Component, Input, OnChanges, Injector } from '@angular/core'
 import { URLBuilder } from '@zup-it/beagle-web'
 import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
