@@ -8,7 +8,7 @@ BeagleImageComponent {
   },
   "imageSource": "",
   "mode": "FIT_CENTER",
-  "ngOnInit": [Function],
+  "ngOnChanges": [Function],
   "path": Object {
     "_beagleImagePath_": "local",
     "url": "http://teste.com.br",

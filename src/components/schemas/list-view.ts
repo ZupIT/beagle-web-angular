@@ -19,7 +19,7 @@ import { Properties as CSSProperties } from 'csstype'
 
 export type Direction = 'VERTICAL' | 'HORIZONTAL'
 
-export interface BeagleFutureListViewInterface {
+export interface BeagleListViewInterface {
   direction: Direction,
   dataSource: any[],
   iteratorName?: string,
@@ -29,8 +29,6 @@ export interface BeagleFutureListViewInterface {
   template: BeagleUIElement,
   useParentScroll?: boolean,
   style?: CSSProperties,
-}
-
-export interface BeagleListViewInterface {
-  direction: Direction,
+  key?: string,
+  __suffix__?: string,
 }

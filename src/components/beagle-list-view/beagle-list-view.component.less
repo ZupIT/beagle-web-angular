@@ -15,14 +15,29 @@
 */
 
 beagle-list-view {
+  display: block;
+
   .beagle-list-view {
     display: flex;
+
     &.VERTICAL {
       flex-direction: column;
     }
 
     &.HORIZONTAL {
       flex-direction: row;
+    }
+  }
+
+  &.hasScroll {
+    overflow: auto;
+
+    &.HORIZONTAL {
+      width: 100%;
+    }
+
+    &.VERTICAL {
+      height: 100%;
     }
   }
 }
