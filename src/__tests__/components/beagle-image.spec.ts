@@ -38,7 +38,7 @@ describe('BeagleImageComponent', () => {
     const fixture = TestBed.createComponent(BeagleImageComponent)
     component = fixture.componentInstance
     component.path = pathMock
-    spyOn(component, 'ngOnInit').and.callThrough()
+    spyOn(component, 'ngOnChanges').and.callThrough()
   }))
 
   it('should match snapshot', () => {
@@ -47,13 +47,13 @@ describe('BeagleImageComponent', () => {
 
   it('should add imageSource', () => {
     expect(component.imageSource).toEqual('')
-    component.ngOnInit()
+    component.ngOnChanges()
     expect(component.imageSource).toEqual('http://teste.com.br')
   })
 
   it('should add default mode', () => {
     delete component.mode
-    component.ngOnInit()
+    component.ngOnChanges()
     expect(component.mode).toEqual(imageModeMock)
   })
 
