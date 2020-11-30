@@ -89,21 +89,26 @@ export class BeagleListViewScroll
 
   canScrollContent (element: HTMLElement) {
     return (
-     this.direction === 'HORIZONTAL'
-       ? element.scrollWidth > element.clientWidth
-       : element.scrollHeight > element.clientHeight
-     )
-   }
+      this.direction === 'HORIZONTAL'
+        ? element.scrollWidth > element.clientWidth
+        : element.scrollHeight > element.clientHeight
+    )
+  }
+
+  getNodeToListenTo() {
+    return this.parentNode.nodeName === 'HTML' ? window : this.parentNode
+  }
 
   createScrollListener() {
     if (this.scrollSubscription) this.scrollSubscription.unsubscribe()
-    const listenTo = this.parentNode.nodeName === 'HTML' ? window : this.parentNode
+    const listenTo = this.getNodeToListenTo()
+    this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(() => this.calcPercentage())
+  }
 
-    if (!this.canScrollContent(listenTo instanceof Window ? document.body : listenTo)) {
+  runOnScrollEndIfNotScrollable() {
+    if (!this.canScrollContent(this.parentNode)) {
       this.callOnScrollEnd()
     }
-    
-    this.scrollSubscription = fromEvent(listenTo, 'scroll').subscribe(() => this.calcPercentage())
   }
 
   calcPercentage() {

@@ -33,6 +33,7 @@ export class BeagleProvider {
     // @ts-ignore // fixme
     this.service = createCoreBeagleUIService<Schema>({
       ...config,
+      platform: 'Angular',
       components: {
         ...defaultComponents,
         ...config.components,

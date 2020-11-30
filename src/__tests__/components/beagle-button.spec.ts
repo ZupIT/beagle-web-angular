@@ -62,10 +62,10 @@ describe('BeagleButtonComponent', () => {
 
   it('should trigger handleClick function', () => {
     component.onPress = () => null
-    fixture.detectChanges();
-    spyOn(component, 'onPress');
-    let button = fixture.debugElement.nativeElement.querySelector('button');
+    fixture.detectChanges()
+    spyOn(component, 'onPress')
+    const button = fixture.debugElement.nativeElement.querySelector('button')
     button.click()
-    expect(component.onPress).toHaveBeenCalled();
+    expect(component.onPress).toHaveBeenCalled()
   })
 })
