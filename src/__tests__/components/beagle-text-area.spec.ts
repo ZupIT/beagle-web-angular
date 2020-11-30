@@ -16,17 +16,13 @@
 
 import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
-import { BeagleTextAreaComponent }
-  from '../../components/beagle-text-area/beagle-text-area.component'
+import { BeagleTextAreaComponent } from '../../components/beagle-text-area/beagle-text-area.component'
 import { setAndCallHandler } from './mocks/test-mocks.spec'
 
 let component: BeagleTextAreaComponent
 let fixture: ComponentFixture<BeagleTextAreaComponent>
 
-
-
 describe('BeagleTextAreaComponent', () => {
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -42,8 +38,6 @@ describe('BeagleTextAreaComponent', () => {
     component.value = 'Testing'
     component.label = 'Label Test'
     component.name = 'Label'
-    component.disabled = true
-    component.readonly = true
     component.onChange = jest.fn()
     component.onFocus = jest.fn()
     component.onBlur = jest.fn()
@@ -67,5 +61,4 @@ describe('BeagleTextAreaComponent', () => {
     expect(component.onFocus).toHaveBeenCalled()
     expect(component.onBlur).toHaveBeenCalled()
   }))
-
 })

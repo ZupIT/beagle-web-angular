@@ -54,11 +54,14 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   handleClick() {
-    const analytics = this.getViewContentManager().getView().getBeagleService().analytics
+    this.onPress && this.type === 'button' && this.onPress()
+
+    const beagleService = this.getViewContentManager().getView().getBeagleService()
+    const analytics = beagleService ? beagleService.analytics : null
+
     if (this.clickAnalyticsEvent && analytics) {
       analytics.trackEventOnClick(this.clickAnalyticsEvent)
     }
-    this.onPress && this.type === 'button' && this.onPress()
   }
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {

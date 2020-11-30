@@ -16,13 +16,18 @@
 
 import { TestBed, async } from '@angular/core/testing'
 import { BeagleImageComponent } from '../../components/beagle-image/beagle-image.component'
-import { ImagePath, ImagePathMode, ImageMode } from '../../components/schemas/image'
+import { ImagePath, ImagePathMode, ImageMode, Accessibility } from '../../components/schemas/image'
 
 let component: BeagleImageComponent
 const imagePathModeMock: ImagePathMode = 'local'
 const pathMock: ImagePath = {
   _beagleImagePath_: imagePathModeMock,
   url: 'http://teste.com.br',
+
+}
+const accessibilityMock: Accessibility = {
+    accessible: true,
+    accessibilityLabel: 'Alt text'
 }
 const imageModeMock: ImageMode = 'FIT_CENTER'
 
@@ -38,6 +43,7 @@ describe('BeagleImageComponent', () => {
     const fixture = TestBed.createComponent(BeagleImageComponent)
     component = fixture.componentInstance
     component.path = pathMock
+    component.accessibility = accessibilityMock
     spyOn(component, 'ngOnChanges').and.callThrough()
   }))
 

@@ -83,7 +83,7 @@ function createReplaceEntryForProject(
     ))
   })
 
-  return hasReplacedGlobal ||  hasReplacedEnv.some(value => value === true)
+  return hasReplacedGlobal || hasReplacedEnv.some(value => value === true)
 }
 
 function createReplaceEntry(
@@ -91,7 +91,7 @@ function createReplaceEntry(
   replace: string,
   replaceWith: string,
 ) {
-  const projects = Object.values(angularJson.projects)
+  const projects = Object.values(angularJson.projects) as Record<string, any>[]
   const hasChangedArray = projects.map(
     project => createReplaceEntryForProject(project, replace, replaceWith),
   )

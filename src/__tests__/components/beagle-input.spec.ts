@@ -72,6 +72,10 @@ describe('BeagleInputComponent', () => {
     expect(component.onBlur).toHaveBeenCalled()
   }))
 
-
-
+  it('should call handlers and set Inputs', fakeAsync(() => {
+    component.value = 'New input text'
+    const nativeInput = fixture.debugElement.nativeElement.querySelector('input')
+    fixture.detectChanges()
+    expect(nativeInput.value).toBe('New input text')
+  }))
 })
