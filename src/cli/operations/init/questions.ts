@@ -57,8 +57,8 @@ async function askUserForApplicationData(): Promise<UserInputValues> {
   const isNpm = (await askAboutDependencyManager()) === 'npm'
   const { beagleModulePath, outputPath, isBeagleModuleCreated } = await setBeagleModule()
   if (isBeagleModuleCreated) return { beagleModulePath, outputPath, isNpm, isBeagleModuleCreated }
-  const  componentsModulePath  =  'src/app/beagle-components.module.ts'
-  const  componentsModuleName  =  'BeagleComponentsModule'
+  const componentsModulePath = 'src/app/beagle-components.module.ts'
+  const componentsModuleName = 'BeagleComponentsModule'
   const baseUrl = "https://api.jsonbin.io/b"
   
   return {
