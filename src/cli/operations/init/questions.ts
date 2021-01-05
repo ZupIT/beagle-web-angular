@@ -44,12 +44,12 @@ function askAboutDependencyManager() {
 }
 
 async function setBeagleModule() {
-  const outputFilename = `.${basename( defaultViewEngineConfig.beagleModulePath).replace(/\.ts$/, '.generated.ts')}`
+  const outputFilename = `.${basename(defaultViewEngineConfig.beagleModulePath).replace(/\.ts$/, '.generated.ts')}`
   
   return {
     beagleModulePath: defaultViewEngineConfig.beagleModulePath,
-    outputPath: `${dirname( defaultViewEngineConfig.beagleModulePath)}/${outputFilename}`,
-    isBeagleModuleCreated: existsSync(`${process.cwd()}/${ defaultViewEngineConfig.beagleModulePath}`),
+    outputPath: `${dirname(defaultViewEngineConfig.beagleModulePath)}/${outputFilename}`,
+    isBeagleModuleCreated: existsSync(`${process.cwd()}/${defaultViewEngineConfig.beagleModulePath}`),
   }
 }
 
@@ -59,7 +59,7 @@ async function askUserForApplicationData(): Promise<UserInputValues> {
   if (isBeagleModuleCreated) return { beagleModulePath, outputPath, isNpm, isBeagleModuleCreated }
   const componentsModulePath = 'src/app/beagle-components.module.ts'
   const componentsModuleName = 'BeagleComponentsModule'
-  const baseUrl = "https://api.jsonbin.io/b"
+  const baseUrl = 'https://api.jsonbin.io/b'
   
   return {
     beagleModulePath,
