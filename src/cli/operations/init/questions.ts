@@ -59,7 +59,7 @@ async function askUserForApplicationData(): Promise<UserInputValues> {
   if (isBeagleModuleCreated) return { beagleModulePath, outputPath, isNpm, isBeagleModuleCreated }
   const componentsModulePath = 'src/app/beagle-components.module.ts'
   const componentsModuleName = 'BeagleComponentsModule'
-  const baseUrl = 'https://api.jsonbin.io/b'
+  const baseUrl = 'http://usebeagle.io.s3-website-sa-east-1.amazonaws.com/start/'
   
   return {
     beagleModulePath,
