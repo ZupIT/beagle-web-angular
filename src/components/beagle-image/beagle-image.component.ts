@@ -29,7 +29,7 @@ export class BeagleImageComponent implements BeagleImageInterface, OnChanges {
   @Input() mode?: ImageMode = 'FIT_CENTER'
   @Input() accessibility?: Accessibility = {
     accessible: true,
-    accessibilityLabel: ''
+    accessibilityLabel: '',
   }
   public imageSource = ''
   private urlBuilder: URLBuilder | undefined
