@@ -14,7 +14,9 @@
   * limitations under the License.
 */
 
-import { Component, ViewEncapsulation } from '@angular/core'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { ErrorComponentParams, SerializableError } from '@zup-it/beagle-web'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
 
 @Component({
   selector: 'beagle-error',
@@ -22,6 +24,9 @@ import { Component, ViewEncapsulation } from '@angular/core'
   styleUrls: ['./beagle-error.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleErrorComponent {
-  
+export class BeagleErrorComponent extends BeagleComponent implements ErrorComponentParams {
+  @Input() public retry: () => void
+  @Input() public errors: SerializableError[]
+
+  public showingDetails: boolean = false
 }

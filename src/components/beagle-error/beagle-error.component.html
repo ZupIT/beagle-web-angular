@@ -15,4 +15,25 @@
 -->
 
 <beagle-text text="Sorry!" textColor="red"></beagle-text>
-<beagle-text text="An unexpected error happened while loading your page."></beagle-text>
+<beagle-text
+  text="An unexpected error happened while loading your page."
+></beagle-text>
+<button type="button" (click)="retry()" class="retry-button">Retry</button>
+<ng-container *ngIf="errors?.length > 0">
+  <button
+    type="button"
+    class="show-details-button"
+    (click)="showingDetails = !showingDetails"
+  >
+    {{ showingDetails ? 'Hide' : 'Show' }} details
+    {{ showingDetails ? '▲' : '▼' }}
+  </button>
+  <section
+    class="errors-detailed-container"
+    [ngClass]="{ show: showingDetails }"
+  >
+    <p *ngFor="let error of errors" class="error-message">
+      <span class="error-indicator">►</span> ERROR: {{ error.message }}
+    </p>
+  </section>
+</ng-container>

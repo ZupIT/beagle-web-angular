@@ -17,38 +17,11 @@
 @import "../assets/default-style.less";
 
 beagle-button {
-  background-color: inherit !important;
-  padding: 0 !important;
-  display: inline-block !important;
-  
-  button {
-    cursor: pointer;
-    border: 1px solid @swampLight;
-    color: inherit;
-    background: transparent;
-    box-sizing: border-box;
-    position: relative;
-    outline: none;
-    display: inline-block;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-    text-align: center;
-    margin: 0;
-    min-width: 70px;
-    width: 100%;
-    line-height: 34px;
-    padding: 0 16px;
-    border-radius: 5px;
-    overflow: visible;
+    background-color: inherit !important;
+    padding: 0 !important;
+    display: inline-block !important;
 
-    &:hover {
-      background-color: @swampTransparent;
+    button {
+        &:extend(.beagle-default-button);
     }
-
-    &:disabled {
-      opacity: 0.4;
-      pointer-events: none;
-    }
-  }
 }
