@@ -28,5 +28,5 @@ export class BeagleErrorComponent extends BeagleComponent implements ErrorCompon
   @Input() public retry: () => void
   @Input() public errors: SerializableError[]
 
-  public showingDetails: boolean = false
+  public showingDetails = false
 }
