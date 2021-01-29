@@ -68,7 +68,7 @@ exports[`BeagleErrorComponent - with errors should match snapshot 1`] = `
     class="show-details-button"
     type="button"
   >
-    Show details ▼
+     Show details ▼ 
   </button><section
     class="errors-detailed-container"
   >
@@ -81,7 +81,7 @@ exports[`BeagleErrorComponent - with errors should match snapshot 1`] = `
       >
         ►
       </span>
-       ERROR: First Message
+       ERROR: First Message 
     </p>
     <p
       class="error-message"
@@ -91,7 +91,7 @@ exports[`BeagleErrorComponent - with errors should match snapshot 1`] = `
       >
         ►
       </span>
-       ERROR: Second Message
+       ERROR: Second Message 
     </p>
   </section>
 </beagle-error>
