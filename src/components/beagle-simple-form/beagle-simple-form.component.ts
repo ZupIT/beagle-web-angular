@@ -34,8 +34,9 @@ export class BeagleSimpleFormComponent implements SimpleFormInterface {
         const children = Array.from(item.children)
         children.map((item) => {
           if (item.nodeName === 'BEAGLE-INPUT') {
-            if (item.getAttribute('ng-reflect-error'))
+            if (item.getAttribute('ng-reflect-error')) {
               return false
+            }
           }
         })
       }
