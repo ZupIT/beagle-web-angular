@@ -35,6 +35,8 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
   @Input() onChange?: InputHandler
   @Input() onBlur?: InputHandler
   @Input() onFocus?: InputHandler
+  @Input() error?: string
+  @Input() showError?: boolean
 
   ngOnInit() {
     this.value = this.value || ''
@@ -43,6 +45,7 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
     this.readOnly = this.readOnly || false
     this.type = this.type || 'TEXT'
     this.hidden = this.hidden || false
+    this.showError = this.showError || false
   }
 
   public handleChange(value) {
@@ -50,6 +53,7 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
   }
 
   public handleBlur(event) {
+    this.showError = true
     this.onBlur && this.onBlur({ value: event.target.value })
   }
 

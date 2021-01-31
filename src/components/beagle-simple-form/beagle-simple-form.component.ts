@@ -14,7 +14,8 @@
   * limitations under the License.
 */
 
-import { Component, Input } from '@angular/core'
+import { AfterContentInit, AfterViewInit, Component, ElementRef, Input, TemplateRef, ViewChild, ViewChildren } from '@angular/core'
+import { BeagleInputComponent } from '../beagle-input/beagle-input.component'
 import { SimpleFormInterface } from '../schemas/simple-form'
 
 @Component({
@@ -22,11 +23,37 @@ import { SimpleFormInterface } from '../schemas/simple-form'
   templateUrl: './beagle-simple-form.component.html',
 })
 export class BeagleSimpleFormComponent implements SimpleFormInterface {
-  
+
   @Input() onSubmit: () => void
+  @Input() onValidationError: () => void
+  @ViewChild('formReference') formReference
+
+  lookUpInputErrors(): boolean {
+    const elements: Element[] = Array.from(this.formReference.nativeElement.children)
+    elements.map((item) => {
+      if (item.children) {
+        const children = Array.from(item.children)
+        children.map((item) => {
+          if (item.nodeName === 'BEAGLE-INPUT') {
+            if (item.getAttribute('ng-reflect-error'))
+              {return false}
+          }
+
+        })
+      }
+    })
+    return true
+  }
 
   handleSubmit(event: Event) {
     event.preventDefault()
-    this.onSubmit && this.onSubmit()
+
+    const canSubmitForm = this.lookUpInputErrors()
+
+    if (canSubmitForm) {
+      this.onSubmit && this.onSubmit()
+    } else {
+      this.onValidationError && this.onValidationError()
+    }
   }
 }
