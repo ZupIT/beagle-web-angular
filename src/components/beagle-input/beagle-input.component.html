@@ -26,7 +26,9 @@
     (ngModelChange)="handleChange($event)"
     (blur)="handleBlur($event)"
     (focus)="handleFocus($event)" 
-    [ngClass]="{'hasError': error && showError}"/>
+    [ngClass]="{'hasError': error && showError}"
+    id="{{error ? '_beagleFormError' : ''}}"
+    />
 
   <beagle-text *ngIf="error && showError" text={{error}} textColor="red"></beagle-text>
 </div>

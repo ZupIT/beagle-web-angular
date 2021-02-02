@@ -28,19 +28,9 @@ export class BeagleSimpleFormComponent implements SimpleFormInterface {
   @ViewChild('formReference') formReference: ElementRef
 
   lookUpInputErrors(): boolean {
-    const elements: Element[] = Array.from(this.formReference.nativeElement.children)
-    elements.map((item) => {
-      if (item.children) {
-        const children = Array.from(item.children)
-        children.map((item) => {
-          if (item.nodeName === 'BEAGLE-INPUT') {
-            if (item.getAttribute('ng-reflect-error')) {
-              return false
-            }
-          }
-        })
-      }
-    })
+    if (document && document.getElementById('_beagleFormError'))
+      {return false}
+
     return true
   }
 
@@ -48,7 +38,7 @@ export class BeagleSimpleFormComponent implements SimpleFormInterface {
     event.preventDefault()
 
     const canSubmitForm = this.lookUpInputErrors()
-
+    
     if (canSubmitForm) {
       this.onSubmit && this.onSubmit()
     } else {
