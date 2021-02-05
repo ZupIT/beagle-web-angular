@@ -45,7 +45,7 @@ describe('BeagleSimpleFormComponent', () => {
   })
 
   it('should trigger on Submit', fakeAsync(() => {
-    component.formReference = {nativeElement:''}
+    component.formReference = { nativeElement:'' }
     spyOn(component, 'handleSubmit').and.callThrough()
     spyOn(component, 'lookUpInputErrors').and.returnValue(false)
     component.handleSubmit(new Event('submit', {}))
