@@ -53,7 +53,6 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
   }
 
   public handleBlur(event) {
-    this.showError = true
     this.onBlur && this.onBlur({ value: event.target.value })
   }
 

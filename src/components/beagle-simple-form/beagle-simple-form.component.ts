@@ -14,7 +14,8 @@
   * limitations under the License.
 */
 
-import { Component, ElementRef, Input, ViewChild } from '@angular/core'
+import { Console } from 'console'
+import { Component, ElementRef, Input, ViewChild, ViewChildren } from '@angular/core'
 import { SimpleFormInterface } from '../schemas/simple-form'
 
 @Component({
@@ -27,22 +28,29 @@ export class BeagleSimpleFormComponent implements SimpleFormInterface {
   @Input() onValidationError: () => void
   @ViewChild('formReference') formReference: ElementRef
 
-  lookUpInputErrors(): boolean {
-    if (document && document.getElementById('_beagleFormError'))
-      {return false}
+  lookUpInputErrors(elementReference): boolean {
+    const children = elementReference.children
 
-    return true
+    for (const item of children) {
+      if (item.nodeName === 'INPUT') {
+        const inputClasses = item.classList
+        if (inputClasses.contains('_beagleFormError')) return true
+      }
+      if (item.children)
+        {if (this.lookUpInputErrors(item)) return true}
+    }
+
+    return false
   }
 
   handleSubmit(event: Event) {
     event.preventDefault()
 
-    const canSubmitForm = this.lookUpInputErrors()
-    
-    if (canSubmitForm) {
-      this.onSubmit && this.onSubmit()
-    } else {
+    const hasError = this.lookUpInputErrors(this.formReference.nativeElement)
+    if (hasError) {
       this.onValidationError && this.onValidationError()
+    } else {
+      this.onSubmit && this.onSubmit()
     }
   }
 }
