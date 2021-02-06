@@ -63,7 +63,8 @@ describe('BeagleErrorComponent - empty', () => {
   })
 
   it('Should call retry function on click', () => {
-    const button = compiledDebug.query(By.css('.retry-button')).componentInstance as BeagleButtonComponent
+    const button = compiledDebug.query(By.css('.retry-button'))
+      .componentInstance as BeagleButtonComponent
     button.handleClick()
     expect(component.retry).toHaveBeenCalled()
   })
@@ -98,7 +99,8 @@ describe('BeagleErrorComponent - with errors', () => {
   })
 
   it('Should call retry function on click', () => {
-    const button = compiledDebug.query(By.css('.retry-button')).componentInstance as BeagleButtonComponent
+    const button = compiledDebug.query(By.css('.retry-button'))
+      .componentInstance as BeagleButtonComponent
     button.handleClick()
     expect(component.retry).toHaveBeenCalled()
   })
@@ -123,7 +125,8 @@ describe('BeagleErrorComponent - with errors', () => {
   })
 
   it('Should add the class when the show more button was clicked', () => {
-    const button = compiledDebug.query(By.css('.show-details-button')).componentInstance as BeagleButtonComponent
+    const button = compiledDebug.query(By.css('.show-details-button'))
+      .componentInstance as BeagleButtonComponent
     button.handleClick()
     fixture.detectChanges()
 
