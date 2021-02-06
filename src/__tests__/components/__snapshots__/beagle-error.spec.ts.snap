@@ -5,6 +5,7 @@ exports[`BeagleErrorComponent - empty should match snapshot 1`] = `
   errors={[Function Array]}
   retry={[Function Function]}
   showingDetails="false"
+  toggleDetails={[Function Function]}
 >
   <beagle-text
     text="Sorry!"
@@ -25,12 +26,17 @@ exports[`BeagleErrorComponent - empty should match snapshot 1`] = `
     >
       An unexpected error happened while loading your page.
     </p>
-  </beagle-text><button
+  </beagle-text><beagle-button
     class="retry-button"
-    type="button"
+    text="Retry"
   >
-    Retry
-  </button>
+    <button
+      type="button"
+    >
+       Retry
+  
+    </button>
+  </beagle-button>
 </beagle-error>
 `;
 
@@ -39,6 +45,7 @@ exports[`BeagleErrorComponent - with errors should match snapshot 1`] = `
   errors={[Function Array]}
   retry={[Function Function]}
   showingDetails="false"
+  toggleDetails={[Function Function]}
 >
   <beagle-text
     text="Sorry!"
@@ -59,17 +66,26 @@ exports[`BeagleErrorComponent - with errors should match snapshot 1`] = `
     >
       An unexpected error happened while loading your page.
     </p>
-  </beagle-text><button
+  </beagle-text><beagle-button
     class="retry-button"
-    type="button"
+    text="Retry"
   >
-    Retry
-  </button><button
+    <button
+      type="button"
+    >
+       Retry
+  
+    </button>
+  </beagle-button><beagle-button
     class="show-details-button"
-    type="button"
   >
-     Show details ▼ 
-  </button><section
+    <button
+      type="button"
+    >
+       Show details ▼
+  
+    </button>
+  </beagle-button><section
     class="errors-detailed-container"
   >
     
