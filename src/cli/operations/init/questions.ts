@@ -43,7 +43,7 @@ function askAboutDependencyManager() {
   })
 }
 
-async function setBeagleModule() {
+async function getBeagleModuleInfo() {
   const outputFilename = `.${basename(defaultViewEngineConfig.beagleModulePath).replace(/\.ts$/, '.generated.ts')}`
   
   return {
@@ -55,7 +55,7 @@ async function setBeagleModule() {
 
 async function askUserForApplicationData(): Promise<UserInputValues> {
   const isNpm = (await askAboutDependencyManager()) === 'npm'
-  const { beagleModulePath, outputPath, isBeagleModuleCreated } = await setBeagleModule()
+  const { beagleModulePath, outputPath, isBeagleModuleCreated } = await getBeagleModuleInfo()
   if (isBeagleModuleCreated) return { beagleModulePath, outputPath, isNpm, isBeagleModuleCreated }
   const componentsModulePath = 'src/app/beagle-components.module.ts'
   const componentsModuleName = 'BeagleComponentsModule'
