@@ -14,8 +14,7 @@
   * limitations under the License.
 */
 
-import { Console } from 'console'
-import { Component, ElementRef, Input, ViewChild, ViewChildren } from '@angular/core'
+import { Component, ElementRef, Input, ViewChild } from '@angular/core'
 import { SimpleFormInterface } from '../schemas/simple-form'
 
 @Component({
