@@ -22,6 +22,7 @@ import {
   ViewEncapsulation,
   NgZone,
   HostBinding,
+  ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
 import { BeagleListViewInterface, Direction } from '../schemas/list-view'
@@ -35,8 +36,7 @@ import { BeagleListViewScroll } from './beagle-list-view.scroll'
 })
 export class BeagleListViewComponent
   extends BeagleListViewScroll
-  implements BeagleListViewInterface, OnChanges
-{
+  implements BeagleListViewInterface, OnChanges {
   @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() iteratorName?: string
@@ -47,7 +47,9 @@ export class BeagleListViewComponent
   @Input() useParentScroll?: boolean
   @Input() key?: string
   @Input() __suffix__?: string
+  @Input() isScrollIndicatorVisible?: boolean
   @HostBinding('class') hasScrollClass = ''
+  @ViewChild('listViewReference') listViewReference: ElementRef
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
@@ -60,6 +62,7 @@ export class BeagleListViewComponent
     super.ngOnInit()
     this.scrollEndThreshold = this.scrollEndThreshold || 100
     this.direction = this.direction || 'VERTICAL'
+    this.isScrollIndicatorVisible = this.isScrollIndicatorVisible || false
   }
 
   ngAfterViewInit() {
@@ -67,6 +70,21 @@ export class BeagleListViewComponent
     if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
+    this.hideScrollbar(this.listViewReference.nativeElement)
+  }
+
+  hideScrollbar(element) {
+    console.log('element', element)
+    const children: Element[] = element.children
+    console.log('CHILDREN', children)
+
+    for (const item of children) {
+      console.log('Name', item.nodeName)
+      if (item.nodeName === 'BEAGLE-LIST-VIEW' && !this.isScrollIndicatorVisible) {
+        item.classList.add('hide-scrollbar')
+      }
+      if (item.children) this.hideScrollbar(item)
+    }
   }
 
   assignIdsToListViewContent(
@@ -94,7 +112,7 @@ export class BeagleListViewComponent
     const contextId = this.getIteratorName()
     const listViewTag = element._beagleComponent_.toLowerCase()
     const listViewId = element.id
-    
+
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
