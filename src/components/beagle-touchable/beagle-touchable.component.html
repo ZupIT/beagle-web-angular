@@ -14,6 +14,10 @@
   * limitations under the License. 
 -->
 
-<div (click)="handleClick()" class="touchable">
+<div class="touchable"
+  [attr.aria-pressed]="isPressed"
+  [beagleAccessibility]="accessibility"
+  (click)="handleClick()"
+  (mousedown)="handleMouseDown()">
   <ng-content></ng-content>
 </div>

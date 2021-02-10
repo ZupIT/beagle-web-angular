@@ -14,9 +14,15 @@
   * limitations under the License.
 */
 
+import { Input } from '@angular/core'
+import { Accessibility } from '../components/schemas/accessibility'
 import { ViewContentManager, BeagleContext } from '../types'
 
-export abstract class BeagleComponent {
+export abstract class BeagleBaseComponent {
+  @Input() accessibility?: Accessibility
+}
+
+export abstract class BeagleComponent extends BeagleBaseComponent {
   /**
    * @deprecated since v1.2. Will be removed in v2.0. You should use `getViewContentManager`
    * instead.

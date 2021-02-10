@@ -16,7 +16,9 @@
 
 import { TestBed, async } from '@angular/core/testing'
 import { BeagleImageComponent } from '../../components/beagle-image/beagle-image.component'
-import { ImagePath, ImagePathMode, ImageMode, Accessibility } from '../../components/schemas/image'
+import { Accessibility } from '../../components/schemas/accessibility'
+import { ImagePath, ImagePathMode, ImageMode } from '../../components/schemas/image'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleImageComponent
 const imagePathModeMock: ImagePathMode = 'local'
@@ -26,19 +28,16 @@ const pathMock: ImagePath = {
 
 }
 const accessibilityMock: Accessibility = {
-    accessible: true,
-    accessibilityLabel: 'Alt text'
+  accessible: true,
+  accessibilityLabel: 'Alt text',
 }
 const imageModeMock: ImageMode = 'FIT_CENTER'
 
 describe('BeagleImageComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleImageComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleImageComponent]))
+      .compileComponents()
 
     const fixture = TestBed.createComponent(BeagleImageComponent)
     component = fixture.componentInstance

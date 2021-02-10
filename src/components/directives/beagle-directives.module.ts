@@ -1,4 +1,4 @@
-<!-- 
+/*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,19 @@
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
--->
+*/
 
-<div 
-  class="beagle-loading"
-  [attr.aria-busy]="true"
-  [beagleAccessibility]="accessibility">
-  <div class="spinner">
-</div>
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { BeagleA11YDirective } from './accessibility.directive'
+
+const directives = [BeagleA11YDirective]
+
+@NgModule({
+  declarations: directives,
+  exports: directives,
+  imports: [
+    CommonModule,
+  ],
+})
+export class BeagleDirectivesModule { }

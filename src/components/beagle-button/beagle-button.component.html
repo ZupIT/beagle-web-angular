@@ -17,9 +17,13 @@
 <button
   [ngClass]="styleId"
   [ngStyle]="usefulStyle"
-  (click)="handleClick()"
   [type]="type"
-  [disabled]="disabled"
+  [disabled]="disabled"  
+  [attr.aria-disabled]="disabled"
+  [attr.aria-pressed]="isPressed"
+  [beagleAccessibility]="accessibility"
+  (click)="handleClick()"
+  (mousedown)="handleMouseDown()"
 >
   {{text}}
 </button>

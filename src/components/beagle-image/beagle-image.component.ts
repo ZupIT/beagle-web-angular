@@ -16,8 +16,9 @@
 
 import { Component, Input, OnChanges, Injector } from '@angular/core'
 import { URLBuilder } from '@zup-it/beagle-web'
+import { Accessibility } from '../../../dist/components/schemas/image'
 import { BeagleProvider } from '../../runtime/BeagleProvider.service'
-import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
+import { BeagleImageInterface, ImageMode, ImagePath } from '../schemas/image'
 
 @Component({
   selector: 'beagle-image',

@@ -15,6 +15,7 @@
 */
 
 import { Component, Input, ViewEncapsulation, ElementRef, OnInit, OnDestroy } from '@angular/core'
+import { BeagleBaseComponent } from '../../runtime/BeagleComponent'
 import { BeagleModalInterface } from '../schemas/modal'
 
 @Component({
@@ -23,11 +24,14 @@ import { BeagleModalInterface } from '../schemas/modal'
   styleUrls: ['./beagle-modal.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleModalComponent implements BeagleModalInterface, OnInit, OnDestroy {
+export class BeagleModalComponent extends BeagleBaseComponent 
+  implements BeagleModalInterface, OnInit, OnDestroy {
   @Input() isOpen: boolean
   @Input() onClose: () => void
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+    super()
+  }
 
   ngOnInit() {
     document.addEventListener('keyup', (event) => this.closeOnEsc(event))

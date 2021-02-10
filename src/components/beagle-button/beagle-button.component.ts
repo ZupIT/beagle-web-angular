@@ -13,11 +13,12 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
+import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core'
+import { ClickEvent, IdentifiableBeagleUIElement } from '@zup-it/beagle-web'
 import { Properties as CSSProperties } from 'csstype'
-import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core'
-import { IdentifiableBeagleUIElement, ClickEvent } from '@zup-it/beagle-web'
-import { BeagleButtonInterface, StylesNotToInherit } from '../schemas/button'
+
 import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { BeagleButtonInterface, StylesNotToInherit } from '../schemas/button'
 
 @Component({
   selector: 'beagle-button',
@@ -36,6 +37,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() disabled?: boolean
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
+  public isPressed = false
 
   ngOnInit() {
     if (this.style) {
@@ -49,19 +51,29 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   ngAfterViewInit() {
-    const element = this.getViewContentManager().getElement()
-    this.type = this.isSubmitButton(element)
+    if (this.getViewContentManager instanceof Function) {
+      const element = this.getViewContentManager().getElement()
+      this.type = this.isSubmitButton(element)
+    }
   }
 
   handleClick() {
+    this.isPressed = false
+
     this.onPress && this.type === 'button' && this.onPress()
 
-    const beagleService = this.getViewContentManager().getView().getBeagleService()
-    const analytics = beagleService ? beagleService.analytics : null
+    if (this.getViewContentManager instanceof Function) {
+        const beagleService = this.getViewContentManager().getView().getBeagleService()
+        const analytics = beagleService ? beagleService.analytics : null
 
-    if (this.clickAnalyticsEvent && analytics) {
-      analytics.trackEventOnClick(this.clickAnalyticsEvent)
-    }
+        if (this.clickAnalyticsEvent && analytics) {
+          analytics.trackEventOnClick(this.clickAnalyticsEvent)
+        }
+    }    
+  }
+
+  handleMouseDown() {
+    this.isPressed = true
   }
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {
@@ -69,5 +81,4 @@ export class BeagleButtonComponent extends BeagleComponent
       element.onPress &&
       element.onPress._beagleAction_ === 'beagle:submitForm' ? 'submit' : 'button'
   }
-
 }
