@@ -46,6 +46,7 @@ export class BeagleButtonComponent extends BeagleComponent
         return styleObject
       }, {})
     }
+    this.enabled = this.enabled === undefined ? false : !this.enabled
   }
 
   ngAfterViewInit() {

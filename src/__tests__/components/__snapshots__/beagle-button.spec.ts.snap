@@ -2,6 +2,7 @@
 
 exports[`BeagleButtonComponent should match snapshot 1`] = `
 <beagle-button
+  enabled="false"
   getViewContentManager={[Function Function]}
   type={[Function String]}
   usefulStyle={[Function Object]}
