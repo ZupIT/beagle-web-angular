@@ -72,7 +72,7 @@ export class BeagleListViewComponent
     this.hasRunAfterInit = true
     setTimeout(() => {
       this.hideScrollbar(this.listViewReference.nativeElement)
-    }, 1000);
+    }, 1000)
   }
 
   hideScrollbar(element) {

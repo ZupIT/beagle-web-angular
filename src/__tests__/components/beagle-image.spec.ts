@@ -27,7 +27,7 @@ const pathMock: ImagePath = {
 }
 const accessibilityMock: Accessibility = {
     accessible: true,
-    accessibilityLabel: 'Alt text'
+    accessibilityLabel: 'Alt text',
 }
 const imageModeMock: ImageMode = 'FIT_CENTER'
 
