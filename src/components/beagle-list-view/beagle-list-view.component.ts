@@ -70,21 +70,20 @@ export class BeagleListViewComponent
     if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
-    this.hideScrollbar(this.listViewReference.nativeElement)
+    setTimeout(() => {
+      this.hideScrollbar(this.listViewReference.nativeElement)
+    }, 1000);
   }
 
   hideScrollbar(element) {
-    console.log('element', element)
-    const children: Element[] = element.children
-    console.log('CHILDREN', children)
-
-    for (const item of children) {
+    const children: Element[] = Array.from(element.children)
+    children.forEach((item: Element) => {
       console.log('Name', item.nodeName)
       if (item.nodeName === 'BEAGLE-LIST-VIEW' && !this.isScrollIndicatorVisible) {
         item.classList.add('hide-scrollbar')
       }
       if (item.children) this.hideScrollbar(item)
-    }
+    })
   }
 
   assignIdsToListViewContent(
