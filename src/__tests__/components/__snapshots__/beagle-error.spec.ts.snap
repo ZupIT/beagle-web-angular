@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BeagleErrorComponent - empty should match snapshot 1`] = `undefined`;
-
-exports[`BeagleErrorComponent - with errors should match snapshot 1`] = `undefined`;
