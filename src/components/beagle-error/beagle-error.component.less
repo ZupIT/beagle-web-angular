@@ -14,15 +14,71 @@
   * limitations under the License.
 */
 
-beagle-error {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin: 2em;
-  font-size: 23px;
-  justify-content: center;
+@import "../assets/default-style.less";
 
-  beagle-text {
-    margin: 4px;
-  }
+beagle-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 2em;
+    font-size: 23px;
+
+    beagle-text {
+        margin: 4px;
+    }
+
+    .retry-button {
+        button {
+          margin: 8px 4px 4px 4px;
+        }
+    }
+    
+    .show-details-button {
+        button {
+          margin: 4px;
+          border: none;
+        }
+    }
+
+    .errors-detailed-container {
+        width: 100%;
+        max-width: 800px;
+        max-height: 0;
+        opacity: 0;
+        overflow: auto;
+        position: relative;
+        margin: 4px;
+        border-radius: 8px;
+        border: 1px solid #FFD7D7;
+        background-color: #FFF0F0;
+        padding: 8px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 8px;
+        transition: all 0.2s ease;
+
+        &.show {
+            max-height: 1024px;
+            opacity: 1;
+        }
+
+        .error-message {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            position: relative;
+            color: #FF0000;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+
+            .error-indicator {
+                color: #414a4c;
+                margin: 0 4px 0 0;
+                font-size: 12px;
+            }
+        }
+    }
 }
