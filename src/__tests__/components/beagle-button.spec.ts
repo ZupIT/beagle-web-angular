@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing'
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { Properties as CSSProperties } from 'csstype'
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component'
 import mockViewContentManager from './mocks/test-mocks.spec'
@@ -25,7 +25,6 @@ const mockStyle: CSSProperties = {
   height: '100',
   padding: '10',
 }
-
 
 describe('BeagleButtonComponent', () => {
   beforeEach(async(() => {
