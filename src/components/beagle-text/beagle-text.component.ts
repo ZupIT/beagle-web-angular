@@ -16,7 +16,7 @@
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { BeagleTextInterface, TextAlignment } from '../schemas/text'
-import { BeagleBaseComponent } from '../../runtime/BeagleComponent'
+import { BaseComponent } from '../../runtime/BaseComponent'
 
 @Component({
   selector: 'beagle-text',
@@ -24,7 +24,7 @@ import { BeagleBaseComponent } from '../../runtime/BeagleComponent'
   styleUrls: ['./beagle-text.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTextComponent extends BeagleBaseComponent 
+export class BeagleTextComponent extends BaseComponent 
   implements BeagleTextInterface, OnInit {
   @Input() text: string
   @Input() styleId?= ''

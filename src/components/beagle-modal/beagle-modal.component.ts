@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, ViewEncapsulation, ElementRef, OnInit, OnDestroy } from '@angular/core'
-import { BeagleBaseComponent } from '../../runtime/BeagleComponent'
+import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleModalInterface } from '../schemas/modal'
 
 @Component({
@@ -24,7 +24,7 @@ import { BeagleModalInterface } from '../schemas/modal'
   styleUrls: ['./beagle-modal.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleModalComponent extends BeagleBaseComponent 
+export class BeagleModalComponent extends BaseComponent 
   implements BeagleModalInterface, OnInit, OnDestroy {
   @Input() isOpen: boolean
   @Input() onClose: () => void

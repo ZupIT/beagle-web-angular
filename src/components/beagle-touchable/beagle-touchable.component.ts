@@ -16,7 +16,7 @@
 
 import { Component, Input, ViewEncapsulation, Injector } from '@angular/core'
 import { ClickEvent, Analytics } from '@zup-it/beagle-web'
-import { BeagleBaseComponent } from '../../runtime/BeagleComponent'
+import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleTouchableInterface } from '../schemas/touchable'
 
@@ -26,7 +26,7 @@ import { BeagleTouchableInterface } from '../schemas/touchable'
   styleUrls: ['./beagle-touchable.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTouchableComponent extends BeagleBaseComponent 
+export class BeagleTouchableComponent extends BaseComponent 
   implements BeagleTouchableInterface {
   @Input() onPress: () => void
   @Input() clickAnalyticsEvent?: ClickEvent

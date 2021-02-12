@@ -15,12 +15,12 @@
 */
 
 import { Component, Input } from '@angular/core'
-import { BeagleBaseComponent } from '../../runtime/BeagleComponent'
+import { BaseComponent } from '../../runtime/BaseComponent'
 
 @Component({
   selector: 'beagle-loading',
   templateUrl: './beagle-loading.component.html',
   styleUrls: ['./beagle-loading.component.less'],
 })
-export class BeagleLoadingComponent extends BeagleBaseComponent  {
+export class BeagleLoadingComponent extends BaseComponent  {
 }

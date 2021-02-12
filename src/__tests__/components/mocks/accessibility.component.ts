@@ -15,13 +15,13 @@
 */
 
 import { Component } from '@angular/core'
-import { BeagleBaseComponent } from '../../../runtime/BeagleComponent'
+import { BaseComponent } from '../../../runtime/BaseComponent'
 
 @Component({
   selector: 'test-beagle-accessibility-directive',
   template: '<p data-test-id="p-element" [beagleAccessibility]="accessibility"></p>',
 })
-export class TestBeagleAccessibilityDirective extends BeagleBaseComponent {
+export class TestBeagleAccessibilityDirective extends BaseComponent {
   constructor() {
     super()
   }
