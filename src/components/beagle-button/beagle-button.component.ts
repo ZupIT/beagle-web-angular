@@ -36,6 +36,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() enabled?: boolean
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
+  public disabled: boolean
 
   ngOnInit() {
     if (this.style) {
@@ -46,7 +47,7 @@ export class BeagleButtonComponent extends BeagleComponent
         return styleObject
       }, {})
     }
-    this.enabled = this.enabled === undefined ? false : !this.enabled
+    this.disabled = this.enabled === undefined ? false : !this.enabled
   }
 
   ngAfterViewInit() {
