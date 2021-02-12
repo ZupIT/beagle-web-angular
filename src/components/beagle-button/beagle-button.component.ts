@@ -37,7 +37,6 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() disabled?: boolean
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
-  public isPressed = false
 
   ngOnInit() {
     if (this.style) {
@@ -58,8 +57,6 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   handleClick() {
-    this.isPressed = false
-
     this.onPress && this.type === 'button' && this.onPress()
 
     if (this.getViewContentManager instanceof Function) {
@@ -70,10 +67,6 @@ export class BeagleButtonComponent extends BeagleComponent
           analytics.trackEventOnClick(this.clickAnalyticsEvent)
         }
     }    
-  }
-
-  handleMouseDown() {
-    this.isPressed = true
   }
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {

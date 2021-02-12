@@ -3,17 +3,19 @@ import { Accessibility } from '../schemas/accessibility'
 
 type A11YAttr = { qualifiedName: string, value: string }
 
+/* WARNING: If one day Beagle's BFF return more Accessibility props, please add here */
+const handlers: Record<keyof Accessibility, (a11y: Accessibility) => A11YAttr | null> = {
+  accessibilityLabel: ({ accessibilityLabel }) => 
+    accessibilityLabel ? { value: accessibilityLabel || '', qualifiedName: 'aria-label' } : null,
+  accessible: () => null,
+  isHeader: ({ isHeader }) => isHeader ? { qualifiedName: 'role', value: 'heading' } : null,
+}
+
+const notAccessible: Accessibility = { accessible: false }
+
 @Directive({ selector: '[beagleAccessibility]' })
 export class BeagleA11YDirective implements OnInit, OnChanges {
   @Input() public beagleAccessibility: Accessibility
-
-  private readonly ariaMap: Record<string, string | A11YAttr> = {
-    accessibilityLabel: 'aria-label',
-    isHeader: {
-      qualifiedName: 'role',
-      value: 'heading',
-    },    
-  }
 
   constructor(
     public element: ElementRef<HTMLElement>, 
@@ -28,27 +30,20 @@ export class BeagleA11YDirective implements OnInit, OnChanges {
     this.updateA11Y(changes.beagleAccessibility.currentValue)
   }
 
-  private updateA11Y(a11y: Accessibility) {
-    if (a11y && a11y.accessible) {
-      const keys = Object.keys(a11y).filter(k => k !== 'accessible')
-      for (const key of keys) {
-        if (a11y[key]) {
-          let qualifiedName: string, value: string
-          const mapped = this.ariaMap[key]
+  private buildAccessibility(a11y: Accessibility): A11YAttr[] {
+    const keys = Object.keys(a11y) as (keyof Accessibility)[]
+    return keys.reduce((result, key) => {
+      const attr = handlers[key](a11y)
+      return attr ? [...result, { qualifiedName: attr.qualifiedName, value: attr.value }] : result
+    }, [])
+  }
 
-          if (mapped) {
-            if ((mapped as A11YAttr).qualifiedName) {
-              qualifiedName = (mapped as A11YAttr).qualifiedName
-              value = (mapped as A11YAttr).value
-            } else {
-              qualifiedName = mapped as string
-              value = a11y[key]
-            }            
+  private updateA11Y(a11y: Accessibility = notAccessible) {
+    if (!a11y.accessible) return {}
 
-            this.renderer.setAttribute(this.element.nativeElement, qualifiedName, value)
-          }
-        }
-      }
-    }
+    const attrs = this.buildAccessibility(a11y)
+    attrs.forEach(a => {
+      this.renderer.setAttribute(this.element.nativeElement, a.qualifiedName, a.value)
+    })
   }
 }
