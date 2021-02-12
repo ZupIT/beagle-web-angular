@@ -35,8 +35,7 @@ export class BeagleSimpleFormComponent implements SimpleFormInterface {
         const inputClasses = item.classList
         if (inputClasses.contains('_beagleFormError')) return true
       }
-      if (item.children)
-        {if (this.lookUpInputErrors(item)) return true}
+      if (item.children && this.lookUpInputErrors(item)) return true
     }
 
     return false
