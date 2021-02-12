@@ -25,7 +25,6 @@ export interface BeagleInputInterface {
   disabled?: boolean,
   readOnly?: boolean,
   type?: InputType,
-  hidden?: boolean,
   styleId?: string,
   style?: CSSProperties,
   onChange?: InputHandler,

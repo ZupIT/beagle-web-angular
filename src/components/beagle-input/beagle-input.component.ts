@@ -31,7 +31,6 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
   @Input() disabled?: boolean
   @Input() readOnly?: boolean
   @Input() type?: InputType
-  @Input() hidden?: boolean
   @Input() onChange?: InputHandler
   @Input() onBlur?: InputHandler
   @Input() onFocus?: InputHandler
@@ -42,7 +41,6 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
     this.disabled = this.disabled || false
     this.readOnly = this.readOnly || false
     this.type = this.type || 'TEXT'
-    this.hidden = this.hidden || false
   }
 
   public handleChange(value) {
