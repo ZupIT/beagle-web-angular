@@ -14,14 +14,20 @@
   * limitations under the License. 
 -->
 
-<input
-  [type]="type"
-  [placeholder]="placeholder"
-  [attr.disabled]="disabled ? '' : null"
-  [readOnly]="readOnly"
-  [hidden]="hidden"
-  [(ngModel)]="value"
-  [value]="value"
-  (ngModelChange)="handleChange($event)"
-  (blur)="handleBlur($event)"
-  (focus)="handleFocus($event)" />
+<div class="wrapper">
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [attr.disabled]="disabled ? '' : null"
+    [readOnly]="readOnly"
+    [hidden]="hidden"
+    [(ngModel)]="value"
+    [value]="value"
+    (ngModelChange)="handleChange($event)"
+    (blur)="handleBlur($event)"
+    (focus)="handleFocus($event)" 
+    [ngClass]="{'hasError': error && showError, '_beagleFormError': error}"
+    />
+
+  <beagle-text *ngIf="error && showError" text={{error}} textColor="red"></beagle-text>
+</div>
