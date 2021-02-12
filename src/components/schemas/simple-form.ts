@@ -20,4 +20,5 @@ export interface SimpleFormInterface {
   style?: CSSProperties,
   styleId?: string,
   onSubmit: () => void,
+  onValidationError?: () => void,
 }
