@@ -33,7 +33,6 @@ export class BeagleInputComponent extends BaseComponent
   @Input() disabled?: boolean
   @Input() readOnly?: boolean
   @Input() type?: InputType
-  @Input() hidden?: boolean
   @Input() onChange?: InputHandler
   @Input() onBlur?: InputHandler
   @Input() onFocus?: InputHandler
@@ -46,7 +45,6 @@ export class BeagleInputComponent extends BaseComponent
     this.disabled = this.disabled || false
     this.readOnly = this.readOnly || false
     this.type = this.type || 'TEXT'
-    this.hidden = this.hidden || false
     this.showError = this.showError || false
   }
 
