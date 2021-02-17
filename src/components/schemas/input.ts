@@ -31,4 +31,6 @@ export interface BeagleInputInterface {
   onChange?: InputHandler,
   onBlur?: InputHandler,
   onFocus?: InputHandler,
+  error?: string,
+  showError?: boolean,
 }

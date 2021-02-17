@@ -107,7 +107,6 @@ function setupAngularJson(beagleModulePath: string, outputPath: string) {
 function logViewEngineInfo(isNpm: boolean) {
   const runScript = isNpm ? 'npm run' : 'yarn'
   const runCli = isNpm ? 'npx' : 'yarn'
-  console.log('\nBeagle detected you\'re using ViewEngine.')
   log(
     'From now on, please never execute "ng build" or "ng serve" directly. For Beagle to work properly, you should always use ',
     { text: ` ${runScript} build `, background: 'yellow', color: 'gray' },
@@ -115,8 +114,6 @@ function logViewEngineInfo(isNpm: boolean) {
     { text: ` ${runScript} serve `, background: 'yellow', color: 'gray' },
     ' instead.',
   )
-  logSuccess(`If you upgrade Angular to use Ivy, don\'t forget to run "
-    ${runCli} beagle init" again.`)
 }
 
 
