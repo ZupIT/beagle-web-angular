@@ -41,3 +41,11 @@ beagle-list-view {
     }
   }
 }
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox 64 */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
+  &::-webkit-scrollbar { /** WebKit */
+    display: none;
+  }
+}
