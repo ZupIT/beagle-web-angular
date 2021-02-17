@@ -43,7 +43,6 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
     this.disabled = this.disabled || false
     this.readOnly = this.readOnly || false
     this.type = this.type || 'TEXT'
-    this.hidden = this.hidden || false
     this.showError = this.showError || false
   }
 
