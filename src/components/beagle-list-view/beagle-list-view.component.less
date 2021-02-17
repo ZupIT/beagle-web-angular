@@ -42,6 +42,10 @@ beagle-list-view {
   }
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox 64 */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
+  &::-webkit-scrollbar { /** WebKit */
+    display: none;
+  }
 }

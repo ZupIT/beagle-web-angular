@@ -16,6 +16,7 @@ BeagleListViewComponent {
   "hasInitialized": false,
   "hasRunAfterInit": false,
   "hasScrollClass": "",
+  "hideScrollBar": "",
   "ngZone": NgZone {
     "_inner": Zone {
       "_name": "angular",

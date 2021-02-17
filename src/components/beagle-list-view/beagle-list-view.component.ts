@@ -49,7 +49,7 @@ export class BeagleListViewComponent
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
   @HostBinding('class') hasScrollClass = ''
-  @ViewChild('listViewReference') listViewReference: ElementRef
+  @HostBinding('class.hide-scrollbar') hideScrollBar = ''
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
@@ -62,7 +62,6 @@ export class BeagleListViewComponent
     super.ngOnInit()
     this.scrollEndThreshold = this.scrollEndThreshold || 100
     this.direction = this.direction || 'VERTICAL'
-    this.isScrollIndicatorVisible = this.isScrollIndicatorVisible || false
   }
 
   ngAfterViewInit() {
@@ -70,20 +69,6 @@ export class BeagleListViewComponent
     if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
-    setTimeout(() => {
-      this.hideScrollbar(this.listViewReference.nativeElement)
-    }, 1000)
-  }
-
-  hideScrollbar(element) {
-    const children: Element[] = Array.from(element.children)
-    children.forEach((item: Element) => {
-      console.log('Name', item.nodeName)
-      if (item.nodeName === 'BEAGLE-LIST-VIEW' && !this.isScrollIndicatorVisible) {
-        item.classList.add('hide-scrollbar')
-      }
-      if (item.children) this.hideScrollbar(item)
-    })
   }
 
   assignIdsToListViewContent(
