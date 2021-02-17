@@ -62,5 +62,4 @@ describe('BeagleImageComponent', () => {
     component.ngOnChanges()
     expect(component.mode).toEqual(imageModeMock)
   })
-
 })
