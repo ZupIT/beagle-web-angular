@@ -13,8 +13,8 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
 */
-
-import { Component, ViewEncapsulation } from '@angular/core'
+import { Component, Input, ViewEncapsulation } from '@angular/core'
+import { ErrorComponentParams, SerializableError } from '@zup-it/beagle-web'
 
 @Component({
   selector: 'beagle-error',
@@ -22,6 +22,13 @@ import { Component, ViewEncapsulation } from '@angular/core'
   styleUrls: ['./beagle-error.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleErrorComponent {
-  
+export class BeagleErrorComponent implements ErrorComponentParams {
+  @Input() public retry: () => void
+  @Input() public errors: SerializableError[]
+
+  public showingDetails = false
+
+  public toggleDetails = (): void => {
+    this.showingDetails = !this.showingDetails
+  }
 }

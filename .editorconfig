@@ -25,5 +25,5 @@ indent_size = 2
 end_of_line = crlf
 charset = utf-8
 trim_trailing_whitespace = false
-insert_final_newline = false
-quote_type=single
+insert_final_newline = true
+quote_type = single
