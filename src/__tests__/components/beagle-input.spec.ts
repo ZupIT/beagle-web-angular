@@ -18,8 +18,8 @@ import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core
 import { FormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
 import { BeagleInputComponent } from '../../components/beagle-input/beagle-input.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
-
 
 let component: BeagleInputComponent
 let fixture: ComponentFixture<BeagleInputComponent>
@@ -38,15 +38,9 @@ function setAndCallHandler(selector: string, value: string, event: string) {
 describe('BeagleInputComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-      ],
-      declarations: [
-        BeagleInputComponent,
-        BeagleTextComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(
+      buildBeagleTestModuleMetadata([BeagleInputComponent, BeagleTextComponent], [FormsModule]))
+      .compileComponents()
 
     fixture = TestBed.createComponent(BeagleInputComponent)
     component = fixture.componentInstance

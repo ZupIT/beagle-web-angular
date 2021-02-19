@@ -17,9 +17,11 @@
 <button
   [ngClass]="styleId"
   [ngStyle]="usefulStyle"
-  (click)="handleClick()"
   [type]="type"
-  [disabled]="disabled"
+  [disabled]="disabled"  
+  [attr.aria-disabled]="disabled"
+  [beagleAccessibility]="accessibility"
+  (click)="handleClick()"
 >
   {{text}}
 </button>

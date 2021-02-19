@@ -15,6 +15,7 @@
 */
 
 import { Properties as CSSProperties } from 'csstype'
+import { Accessibility } from './accessibility'
 
 export type ImageMode = 'FIT_XY' | 'FIT_CENTER' | 'CENTER_CROP' | 'CENTER'
 
@@ -23,11 +24,6 @@ export type ImagePathMode = 'local' | 'remote'
 export interface ImagePath {
   _beagleImagePath_: ImagePathMode,
   url: string,
-}
-
-export interface Accessibility {
-  accessible: boolean,
-  accessibilityLabel?: string,
 }
 
 export interface BeagleImageInterface {

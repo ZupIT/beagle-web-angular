@@ -22,6 +22,7 @@ import {
   ElementRef,
   NgZone,
 } from '@angular/core'
+import { Accessibility } from '../schemas/accessibility'
 import { BeagleContainerInterface } from '../schemas/container'
 
 @Component({
@@ -31,6 +32,8 @@ import { BeagleContainerInterface } from '../schemas/container'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleContainerComponent implements BeagleContainerInterface, AfterViewChecked {
+  @Input() accessibility?: Accessibility
+
   @Input() onInit?: () => void
   hasInitialized = false
 

@@ -22,6 +22,7 @@ import {
   ViewEncapsulation,
   NgZone,
   HostBinding,
+  ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
 import { BeagleListViewInterface, Direction } from '../schemas/list-view'
@@ -35,8 +36,7 @@ import { BeagleListViewScroll } from './beagle-list-view.scroll'
 })
 export class BeagleListViewComponent
   extends BeagleListViewScroll
-  implements BeagleListViewInterface, OnChanges
-{
+  implements BeagleListViewInterface, OnChanges {
   @Input() direction: Direction
   @Input() dataSource: any[]
   @Input() iteratorName?: string
@@ -47,7 +47,9 @@ export class BeagleListViewComponent
   @Input() useParentScroll?: boolean
   @Input() key?: string
   @Input() __suffix__?: string
+  @Input() isScrollIndicatorVisible?: boolean
   @HostBinding('class') hasScrollClass = ''
+  @HostBinding('class.hide-scrollbar') hideScrollBar = ''
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
@@ -94,7 +96,7 @@ export class BeagleListViewComponent
     const contextId = this.getIteratorName()
     const listViewTag = element._beagleComponent_.toLowerCase()
     const listViewId = element.id
-    
+
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
