@@ -8,6 +8,7 @@ exports[`BeagleButtonComponent should match snapshot 1`] = `
   usefulStyle={[Function Object]}
 >
   <button
+    aria-disabled="false"
     type="button"
   >
      
