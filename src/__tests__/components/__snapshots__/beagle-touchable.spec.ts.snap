@@ -2,9 +2,11 @@
 
 exports[`BeagleTouchableComponent should match snapshot 1`] = `
 <beagle-touchable
+  isPressed="false"
   onPress={[Function Function]}
 >
   <div
+    aria-pressed="false"
     class="touchable"
   />
 </beagle-touchable>

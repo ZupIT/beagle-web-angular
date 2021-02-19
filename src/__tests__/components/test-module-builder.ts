@@ -14,23 +14,17 @@
   * limitations under the License.
 */
 
-beagle-input {
-  display: flex;
+import { TestModuleMetadata } from '@angular/core/testing'
+import { BeagleDirectivesModule } from '../../components/directives/beagle-directives.module'
 
-  input {
-    flex: 1;
+export function buildBeagleTestModuleMetadata(
+    declarations: any[], 
+    imports?: any[] | undefined): TestModuleMetadata {
+  return {
+    declarations,
+    imports: [
+      BeagleDirectivesModule,
+      ...(imports || []),
+    ],
   }
-
-  .hasError{
-    outline: solid #FF0000;
-    outline-width: thin;
-    border: #FF0000;
-    margin-bottom: 5px;
-  }
-}
-
-.wrapper {
-  display: flex;
-  flex-flow: column;
-  width: -webkit-fill-available;
 }

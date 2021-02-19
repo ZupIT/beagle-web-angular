@@ -17,13 +17,15 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { TextAreaInterface } from '../schemas/text-area'
 import { InputHandler } from '../schemas/input-handler'
+import { BaseComponent } from '../../runtime/BaseComponent'
 
 @Component({
   selector: 'beagle-text-area',
   templateUrl: './beagle-text-area.component.html',
   styleUrls: ['./beagle-text-area.component.less'],
 })
-export class BeagleTextAreaComponent implements TextAreaInterface, OnInit {
+export class BeagleTextAreaComponent extends BaseComponent 
+  implements TextAreaInterface, OnInit {
   @Input() value?: string
   @Input() label?: string
   @Input() name?: string

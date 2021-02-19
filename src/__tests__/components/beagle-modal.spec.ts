@@ -16,6 +16,7 @@
 
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleModalComponent } from '../../components/beagle-modal/beagle-modal.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleModalComponent
 let fixture: ComponentFixture<BeagleModalComponent>
@@ -24,11 +25,8 @@ let fixture: ComponentFixture<BeagleModalComponent>
 describe('BeagleModalComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleModalComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleModalComponent]))
+      .compileComponents()
 
     fixture = TestBed.createComponent(BeagleModalComponent)
     component = fixture.componentInstance

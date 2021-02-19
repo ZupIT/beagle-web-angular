@@ -2,8 +2,10 @@
 
 exports[`BeagleInputComponent should match snapshot 1`] = `
 BeagleInputComponent {
+  "error": "Jest test",
   "onBlur": [MockFunction],
   "onChange": [MockFunction],
   "onFocus": [MockFunction],
+  "showError": false,
 }
 `;

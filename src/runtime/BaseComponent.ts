@@ -14,23 +14,9 @@
   * limitations under the License.
 */
 
-beagle-input {
-  display: flex;
+import { Input } from '@angular/core'
+import { Accessibility } from '../components/schemas/accessibility'
 
-  input {
-    flex: 1;
-  }
-
-  .hasError{
-    outline: solid #FF0000;
-    outline-width: thin;
-    border: #FF0000;
-    margin-bottom: 5px;
-  }
-}
-
-.wrapper {
-  display: flex;
-  flex-flow: column;
-  width: -webkit-fill-available;
+export abstract class BaseComponent {
+  @Input() accessibility?: Accessibility
 }

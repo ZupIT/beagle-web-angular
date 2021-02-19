@@ -18,7 +18,8 @@ import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core
 import { FormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
 import { BeagleInputComponent } from '../../components/beagle-input/beagle-input.component'
-
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
+import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
 
 let component: BeagleInputComponent
 let fixture: ComponentFixture<BeagleInputComponent>
@@ -28,7 +29,7 @@ function setAndCallHandler(selector: string, value: string, event: string) {
   fixture.detectChanges()
   tick()
 
-  const input = fixture.debugElement.query(By.all()).nativeElement
+  const input = fixture.debugElement.query(By.css('input')).nativeElement
   input.value = value
   input.dispatchEvent(new Event(event))
   tick()
@@ -37,21 +38,17 @@ function setAndCallHandler(selector: string, value: string, event: string) {
 describe('BeagleInputComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-      ],
-      declarations: [
-        BeagleInputComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(
+      buildBeagleTestModuleMetadata([BeagleInputComponent, BeagleTextComponent], [FormsModule]))
+      .compileComponents()
 
     fixture = TestBed.createComponent(BeagleInputComponent)
     component = fixture.componentInstance
     component.onFocus = jest.fn()
     component.onChange = jest.fn()
     component.onBlur = jest.fn()
-
+    component.error = 'Jest test',
+    component.showError = false
   }))
 
   it('should match snapshot', () => {

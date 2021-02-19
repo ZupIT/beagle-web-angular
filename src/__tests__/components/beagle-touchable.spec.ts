@@ -18,6 +18,7 @@ import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testi
 import { BeagleTouchableComponent }
   from '../../components/beagle-touchable/beagle-touchable.component'
 import { setAndCallHandler } from './mocks/test-mocks.spec'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleTouchableComponent
 let fixture: ComponentFixture<BeagleTouchableComponent>
@@ -26,11 +27,9 @@ describe('BeagleTouchableComponent', () => {
 
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleTouchableComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleTouchableComponent]))
+      .compileComponents()
+      
     fixture = TestBed.createComponent(BeagleTouchableComponent)
     component = fixture.componentInstance
     component.onPress = jest.fn()

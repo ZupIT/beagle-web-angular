@@ -14,23 +14,17 @@
   * limitations under the License.
 */
 
-beagle-input {
-  display: flex;
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { BeagleA11YDirective } from './accessibility.directive'
 
-  input {
-    flex: 1;
-  }
+const directives = [BeagleA11YDirective]
 
-  .hasError{
-    outline: solid #FF0000;
-    outline-width: thin;
-    border: #FF0000;
-    margin-bottom: 5px;
-  }
-}
-
-.wrapper {
-  display: flex;
-  flex-flow: column;
-  width: -webkit-fill-available;
-}
+@NgModule({
+  declarations: directives,
+  exports: directives,
+  imports: [
+    CommonModule,
+  ],
+})
+export class BeagleDirectivesModule { }

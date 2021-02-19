@@ -17,6 +17,7 @@
 import { TestBed, async } from '@angular/core/testing'
 import { SafeResourceUrl } from '@angular/platform-browser'
 import { BeagleWebviewComponent } from '../../components/beagle-webview/beagle-webview.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleWebviewComponent
 interface SafeUrl extends SafeResourceUrl {
@@ -26,11 +27,9 @@ describe('BeagleWebviewComponent', () => {
 
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleWebviewComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleWebviewComponent]))
+      .compileComponents()
+      
     const fixture = TestBed.createComponent(BeagleWebviewComponent)
     component = fixture.componentInstance
     component.url = 'http://www.test.com'

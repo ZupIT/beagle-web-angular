@@ -25,10 +25,11 @@ export interface BeagleInputInterface {
   disabled?: boolean,
   readOnly?: boolean,
   type?: InputType,
-  hidden?: boolean,
   styleId?: string,
   style?: CSSProperties,
   onChange?: InputHandler,
   onBlur?: InputHandler,
   onFocus?: InputHandler,
+  error?: string,
+  showError?: boolean,
 }

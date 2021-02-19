@@ -14,23 +14,15 @@
   * limitations under the License.
 */
 
-beagle-input {
-  display: flex;
+import { Component } from '@angular/core'
+import { BaseComponent } from '../../../runtime/BaseComponent'
 
-  input {
-    flex: 1;
+@Component({
+  selector: 'test-beagle-accessibility-directive',
+  template: '<p data-test-id="p-element" [beagleAccessibility]="accessibility"></p>',
+})
+export class TestBeagleAccessibilityDirective extends BaseComponent {
+  constructor() {
+    super()
   }
-
-  .hasError{
-    outline: solid #FF0000;
-    outline-width: thin;
-    border: #FF0000;
-    margin-bottom: 5px;
-  }
-}
-
-.wrapper {
-  display: flex;
-  flex-flow: column;
-  width: -webkit-fill-available;
 }

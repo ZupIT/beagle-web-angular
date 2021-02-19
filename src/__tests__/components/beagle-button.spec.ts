@@ -17,6 +17,7 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { Properties as CSSProperties } from 'csstype'
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 import mockViewContentManager from './mocks/test-mocks.spec'
 
 let component: BeagleButtonComponent
@@ -29,11 +30,9 @@ const mockStyle: CSSProperties = {
 describe('BeagleButtonComponent', () => {
   beforeEach(async(() => {
     jest.autoMockOn()
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleButtonComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleButtonComponent]))
+      .compileComponents()
+
     fixture = TestBed.createComponent(BeagleButtonComponent)
     component = fixture.componentInstance
     component.getViewContentManager = () => mockViewContentManager

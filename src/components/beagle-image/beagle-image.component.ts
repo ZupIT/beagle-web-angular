@@ -16,8 +16,9 @@
 
 import { Component, Input, OnChanges, Injector } from '@angular/core'
 import { URLBuilder } from '@zup-it/beagle-web'
+import { Accessibility } from '../schemas/accessibility'
 import { BeagleProvider } from '../../runtime/BeagleProvider.service'
-import { BeagleImageInterface, Accessibility, ImageMode, ImagePath } from '../schemas/image'
+import { BeagleImageInterface, ImageMode, ImagePath } from '../schemas/image'
 
 @Component({
   selector: 'beagle-image',
@@ -30,6 +31,7 @@ export class BeagleImageComponent implements BeagleImageInterface, OnChanges {
   @Input() accessibility?: Accessibility = {
     accessible: true,
     accessibilityLabel: '',
+    isHeader: false,
   }
   public imageSource = ''
   private urlBuilder: URLBuilder | undefined

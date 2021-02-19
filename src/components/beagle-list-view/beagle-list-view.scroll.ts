@@ -27,14 +27,15 @@ import { BeagleListViewOnInit } from './beagle-list-view.on-init'
 
 export class BeagleListViewScroll
   extends BeagleListViewOnInit
-  implements AfterViewInit, OnInit, OnDestroy
-{
+  implements AfterViewInit, OnInit, OnDestroy {
   direction: Direction
   dataSource: any[]
   onScrollEnd?: () => void
   scrollEndThreshold?: number
   useParentScroll?: boolean
   hasScrollClass = ''
+  isScrollIndicatorVisible?: boolean
+  hideScrollBar = ''
 
   private scrollSubscription: Subscription
   private parentNode: HTMLElement
@@ -46,12 +47,12 @@ export class BeagleListViewScroll
 
   ngOnInit() {
     this.hasScrollClass = this.useParentScroll ? '' : 'hasScroll'
+    this.hideScrollBar = this.isScrollIndicatorVisible === false ? 'hide-scrollbar' : ''   
   }
 
   ngAfterViewInit() {
     this.setParentNode()
     this.createScrollListener()
-
     if (this.scrollEndThreshold === 0) this.callOnScrollEnd()
   }
 
@@ -87,7 +88,7 @@ export class BeagleListViewScroll
     }
   }
 
-  canScrollContent (element: HTMLElement) {
+  canScrollContent(element: HTMLElement) {
     return (
       this.direction === 'HORIZONTAL'
         ? element.scrollWidth > element.clientWidth

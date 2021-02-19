@@ -15,6 +15,7 @@
 */
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleInputInterface, InputType } from '../schemas/input'
 import { InputHandler } from '../schemas/input-handler'
 
@@ -24,17 +25,19 @@ import { InputHandler } from '../schemas/input-handler'
   styleUrls: ['./beagle-input.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleInputComponent implements BeagleInputInterface, OnInit {
+export class BeagleInputComponent extends BaseComponent 
+  implements BeagleInputInterface, OnInit {
 
   @Input() value?: string
   @Input() placeholder?: string
   @Input() disabled?: boolean
   @Input() readOnly?: boolean
   @Input() type?: InputType
-  @Input() hidden?: boolean
   @Input() onChange?: InputHandler
   @Input() onBlur?: InputHandler
   @Input() onFocus?: InputHandler
+  @Input() error?: string
+  @Input() showError?: boolean
 
   ngOnInit() {
     this.value = this.value || ''
@@ -42,7 +45,7 @@ export class BeagleInputComponent implements BeagleInputInterface, OnInit {
     this.disabled = this.disabled || false
     this.readOnly = this.readOnly || false
     this.type = this.type || 'TEXT'
-    this.hidden = this.hidden || false
+    this.showError = this.showError || false
   }
 
   public handleChange(value) {
