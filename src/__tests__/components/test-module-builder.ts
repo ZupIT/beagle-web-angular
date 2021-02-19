@@ -1,4 +1,4 @@
-<!-- 
+/*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,19 @@
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
--->
+*/
 
-<div 
-  class="beagle-loading"
-  [attr.aria-busy]="true"
-  [beagleAccessibility]="accessibility">
-  <div class="spinner">
-</div>
+import { TestModuleMetadata } from '@angular/core/testing'
+import { BeagleDirectivesModule } from '../../components/directives/beagle-directives.module'
+
+export function buildBeagleTestModuleMetadata(
+    declarations: any[], 
+    imports?: any[] | undefined): TestModuleMetadata {
+  return {
+    declarations,
+    imports: [
+      BeagleDirectivesModule,
+      ...(imports || []),
+    ],
+  }
+}

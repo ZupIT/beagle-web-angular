@@ -1,4 +1,4 @@
-<!-- 
+/*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,17 @@
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
--->
+*/
 
-<div 
-  class="beagle-loading"
-  [attr.aria-busy]="true"
-  [beagleAccessibility]="accessibility">
-  <div class="spinner">
-</div>
+import { Component } from '@angular/core'
+import { BaseComponent } from '../../../runtime/BaseComponent'
+
+@Component({
+  selector: 'test-beagle-accessibility-directive',
+  template: '<p data-test-id="p-element" [beagleAccessibility]="accessibility"></p>',
+})
+export class TestBeagleAccessibilityDirective extends BaseComponent {
+  constructor() {
+    super()
+  }
+}

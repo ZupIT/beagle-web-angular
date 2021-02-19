@@ -15,8 +15,9 @@
 */
 
 import { ViewContentManager, BeagleContext } from '../types'
+import { BaseComponent } from './BaseComponent'
 
-export abstract class BeagleComponent {
+export abstract class BeagleComponent extends BaseComponent {
   /**
    * @deprecated since v1.2. Will be removed in v2.0. You should use `getViewContentManager`
    * instead.

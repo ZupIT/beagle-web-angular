@@ -14,9 +14,12 @@
   * limitations under the License. 
 -->
 <div class="page-indicator">
-  <ol>
+  <ol [attr.aria-setsize]="totalPages?.length || 0">
     <li *ngFor="let item of totalPages; index as i"
       [ngStyle]="{'background-color': i === currentPage ? selectedColor : unselectedColor}"
-      [ngClass]="i === currentPage ? 'active' : 'inactive'"></li>
+      [ngClass]="i === currentPage ? 'active' : 'inactive'"
+      [attr.aria-colindex]="i"
+      [attr.aria-posinset]="i + 1"
+      [attr.aria-selected]="i === currentPage"></li>
   </ol>
 </div>

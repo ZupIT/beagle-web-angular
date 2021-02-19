@@ -40,6 +40,7 @@ import {
 import { BeagleWebviewComponent } from './beagle-webview/beagle-webview.component'
 import { BeagleTabBarComponent } from './beagle-tab-bar/beagle-tab-bar.component'
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
+import { BeagleDirectivesModule } from './directives/beagle-directives.module'
 
 const components = [
   BeagleButtonComponent,
@@ -67,7 +68,7 @@ const components = [
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BeagleDirectivesModule],
   providers: [TabsService],
 })
 export class BeagleDefaultComponentsModule { }
