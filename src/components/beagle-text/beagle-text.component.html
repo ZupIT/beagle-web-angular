@@ -15,8 +15,4 @@
 -->
 
 <!-- it is important that there's no space between the end of the "p" tag and the text -->
-<p class='beagle-text' 
-   [ngStyle]="{color: textColor, 'text-align': alignment && alignment.toLowerCase()}"
-   [beagleAccessibility]="accessibility">
-   {{renderedText}}
-</p>
+<p class="beagle-text" [ngStyle]="{color: textColor,'text-align': alignment && alignment.toLowerCase()}" [beagleAccessibility]="accessibility">{{ renderedText }}</p>
