@@ -16,6 +16,7 @@
 
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core'
 import { logger } from '@zup-it/beagle-web'
+import { Accessibility } from '../../components/schemas/accessibility'
 import { BeagleTextInterface, TextAlignment } from '../schemas/text'
 import { BaseComponent } from '../../runtime/BaseComponent'
 
@@ -25,11 +26,12 @@ import { BaseComponent } from '../../runtime/BaseComponent'
   styleUrls: ['./beagle-text.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTextComponent implements BeagleTextInterface, OnInit, OnChanges {
+export class BeagleTextComponent implements BeagleTextInterface, BaseComponent, OnInit, OnChanges {
   @Input() text: unknown = ''
   @Input() styleId? = ''
   @Input() textColor? = 'inherit'
   @Input() alignment?: TextAlignment = 'INHERIT'
+  @Input() accessibility?: Accessibility
 
   public renderedText = ''
   
