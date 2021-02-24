@@ -15,6 +15,7 @@
 */
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleInputInterface, InputType } from '../schemas/input'
 import { InputHandler } from '../schemas/input-handler'
 
@@ -24,7 +25,8 @@ import { InputHandler } from '../schemas/input-handler'
   styleUrls: ['./beagle-input.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleInputComponent implements BeagleInputInterface, OnInit {
+export class BeagleInputComponent extends BaseComponent 
+  implements BeagleInputInterface, OnInit {
 
   @Input() value?: string
   @Input() placeholder?: string

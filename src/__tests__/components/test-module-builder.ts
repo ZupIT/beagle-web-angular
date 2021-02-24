@@ -1,4 +1,4 @@
-<!-- 
+/*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,12 +11,20 @@
   * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
-  * limitations under the License. 
--->
+  * limitations under the License.
+*/
 
-<!-- it is important that there's no space between the end of the "p" tag and the text -->
-<p class='beagle-text' 
-   [ngStyle]="{color: textColor, 'text-align': alignment && alignment.toLowerCase()}"
-   [beagleAccessibility]="accessibility">
-   {{renderedText}}
-</p>
+import { TestModuleMetadata } from '@angular/core/testing'
+import { BeagleDirectivesModule } from '../../components/directives/beagle-directives.module'
+
+export function buildBeagleTestModuleMetadata(
+    declarations: any[], 
+    imports?: any[] | undefined): TestModuleMetadata {
+  return {
+    declarations,
+    imports: [
+      BeagleDirectivesModule,
+      ...(imports || []),
+    ],
+  }
+}

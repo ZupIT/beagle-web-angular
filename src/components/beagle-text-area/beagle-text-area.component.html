@@ -15,7 +15,17 @@
 -->
 <label class="label">
   <p class="label-text">{{label}}</p>
-  <textarea class="beagle-text-area" [attr.disabled]="disabled ? '' : null" [readOnly]="readonly" [(ngModel)]="value" [value]="value"
-    (ngModelChange)="handleChange($event)" (blur)="handleBlur($event)" [name]="name" (focus)="handleFocus($event)">
+  <textarea class="beagle-text-area" 
+    [name]="name" 
+    [(ngModel)]="value" 
+    [value]="value"
+    [readOnly]="readonly" 
+    [attr.disabled]="disabled ? '' : null" 
+    [attr.aria-disabled]="disabled"
+    [attr.aria-readonly]="readonly"
+    [beagleAccessibility]="accessibility"
+    (ngModelChange)="handleChange($event)" 
+    (blur)="handleBlur($event)" 
+    (focus)="handleFocus($event)">
   </textarea>
 </label>

@@ -17,6 +17,7 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleListViewComponent }
   from '../../components/beagle-list-view/beagle-list-view.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleListViewComponent
 let fixture: ComponentFixture<BeagleListViewComponent>
@@ -25,11 +26,8 @@ let fixture: ComponentFixture<BeagleListViewComponent>
 describe('BeagleListViewComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleListViewComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleListViewComponent]))
+      .compileComponents()
 
     fixture = TestBed.createComponent(BeagleListViewComponent)
     component = fixture.componentInstance

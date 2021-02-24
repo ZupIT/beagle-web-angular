@@ -14,11 +14,13 @@
   * limitations under the License.
 */
 
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
+import { BaseComponent } from '../../runtime/BaseComponent'
 
 @Component({
   selector: 'beagle-loading',
   templateUrl: './beagle-loading.component.html',
   styleUrls: ['./beagle-loading.component.less'],
 })
-export class BeagleLoadingComponent { }
+export class BeagleLoadingComponent extends BaseComponent  {
+}

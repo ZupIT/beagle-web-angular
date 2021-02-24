@@ -16,6 +16,7 @@
 
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 describe('BeagleTextComponent', () => {
   let component: BeagleTextComponent
@@ -24,11 +25,8 @@ describe('BeagleTextComponent', () => {
   const initialText = 'Test'
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleTextComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleTextComponent]))
+      .compileComponents()
   }))
 
   beforeEach(() => {

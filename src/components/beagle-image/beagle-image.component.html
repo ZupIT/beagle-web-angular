@@ -15,5 +15,10 @@
 -->
 
 <figure>
-  <img [src]="imageSource" [ngClass]="mode" [alt]="accessibility?.accessibilityLabel">
+  <img 
+    [src]="imageSource" 
+    [ngClass]="mode" 
+    role="img"
+    [alt]="accessibility?.accessibilityLabel"
+    [beagleAccessibility]="accessibility">
 </figure>

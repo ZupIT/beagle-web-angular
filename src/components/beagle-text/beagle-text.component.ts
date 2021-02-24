@@ -17,6 +17,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core'
 import { logger } from '@zup-it/beagle-web'
 import { BeagleTextInterface, TextAlignment } from '../schemas/text'
+import { BaseComponent } from '../../runtime/BaseComponent'
 
 @Component({
   selector: 'beagle-text',

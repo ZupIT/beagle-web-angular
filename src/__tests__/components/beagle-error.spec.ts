@@ -20,6 +20,7 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleErrorComponent } from '../../components/beagle-error/beagle-error.component'
 import { BeagleButtonComponent } from '../../components/beagle-button/beagle-button.component'
 import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleErrorComponent
 let fixture: ComponentFixture<BeagleErrorComponent>
@@ -28,13 +29,11 @@ let compiledDebug: DebugElement
 
 describe('BeagleErrorComponent - empty', () => {
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleTextComponent,
-        BeagleButtonComponent,
-        BeagleErrorComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([
+      BeagleTextComponent, 
+      BeagleButtonComponent, 
+      BeagleErrorComponent,
+    ])).compileComponents()
   }))
 
   beforeEach(() => {
@@ -72,13 +71,11 @@ describe('BeagleErrorComponent - empty', () => {
 
 describe('BeagleErrorComponent - with errors', () => {
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleTextComponent,
-        BeagleButtonComponent,
-        BeagleErrorComponent,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([
+      BeagleTextComponent, 
+      BeagleButtonComponent, 
+      BeagleErrorComponent,
+    ])).compileComponents()
   }))
 
   beforeEach(() => {

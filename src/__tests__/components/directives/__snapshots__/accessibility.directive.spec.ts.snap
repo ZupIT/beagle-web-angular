@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeagleA11YDirective should match snapshot 1`] = `
+<test-beagle-accessibility-directive>
+  <p
+    data-test-id="p-element"
+  />
+</test-beagle-accessibility-directive>
+`;

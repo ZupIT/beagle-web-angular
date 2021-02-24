@@ -18,6 +18,7 @@ import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testi
 import { FormsModule } from '@angular/forms'
 import { BeagleTextAreaComponent } from '../../components/beagle-text-area/beagle-text-area.component'
 import { setAndCallHandler } from './mocks/test-mocks.spec'
+import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleTextAreaComponent
 let fixture: ComponentFixture<BeagleTextAreaComponent>
@@ -25,14 +26,10 @@ let fixture: ComponentFixture<BeagleTextAreaComponent>
 describe('BeagleTextAreaComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        BeagleTextAreaComponent,
-      ],
-      imports: [
-        FormsModule,
-      ],
-    }).compileComponents()
+    TestBed.configureTestingModule(
+      buildBeagleTestModuleMetadata([BeagleTextAreaComponent], [FormsModule]))
+      .compileComponents()
+      
     fixture = TestBed.createComponent(BeagleTextAreaComponent)
     component = fixture.componentInstance
     component.value = 'Testing'

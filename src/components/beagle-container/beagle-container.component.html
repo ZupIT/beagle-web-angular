@@ -14,4 +14,6 @@
   * limitations under the License. 
 -->
 
-<ng-content></ng-content>
+<div aria-live="polite" [beagleAccessibility]="accessibility">
+  <ng-content></ng-content>
+</div>

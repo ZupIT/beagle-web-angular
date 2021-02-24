@@ -14,7 +14,12 @@
   * limitations under the License. 
 -->
 
-<div class="tab-item" *ngFor="let item of items; index as i">
+<div *ngFor="let item of items; index as i" 
+  class="tab-item"
+  [attr.aria-colindex]="i"
+  [attr.aria-posinset]="i + 1"
+  [attr.aria-selected]="currentTab === i"
+  [beagleAccessibility]="accessibility">
   <div class="tab-item-content" (click)="changeSelectedTab(i)">
     <img *ngIf="item.icon" class="icon" [src]="item.icon.url" />
     {{item.title}}

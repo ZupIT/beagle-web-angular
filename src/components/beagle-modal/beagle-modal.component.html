@@ -14,7 +14,11 @@
   * limitations under the License. 
 -->
 
-<div class="modal" [hidden]="!isOpen">
+<div 
+  class="modal" 
+  [hidden]="!isOpen"
+  [attr.aria-modal]="true"
+  [beagleAccessibility]="accessibility">
   <div class="modal-background">
     <div class="modal-content">
       <ng-content></ng-content>
