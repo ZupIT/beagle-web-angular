@@ -19,7 +19,7 @@ import { Properties as CSSProperties } from 'csstype'
 export type TextAlignment = 'LEFT' | 'CENTER' | 'RIGHT' | 'INHERIT'
 
 export interface BeagleTextInterface {
-  text: string,
+  text: unknown,
   textColor?: string,
   alignment?: TextAlignment,
   styleId?: string,
