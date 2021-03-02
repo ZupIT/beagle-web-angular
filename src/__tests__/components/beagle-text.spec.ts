@@ -89,7 +89,7 @@ describe('BeagleTextComponent', () => {
     expect(p?.innerHTML).toBe(JSON.stringify(arr))
   })
 
-  it('should render an function as empty string', () => {
+  it('should render a function as empty string', () => {
     const p = fixture.debugElement.nativeElement.querySelector('p')
 
     component.text = function test() { return true }
