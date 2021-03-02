@@ -46,7 +46,7 @@ describe('BeagleTextComponent', () => {
     expect(p?.innerHTML).toBe(initialText)
   })
 
-  it('should render not render any text when text is null', () => {
+  it('should not render any text when text is null', () => {
     const p = fixture.debugElement.nativeElement.querySelector('p')
 
     component.text = null
