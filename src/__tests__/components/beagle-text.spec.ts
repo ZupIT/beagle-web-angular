@@ -54,7 +54,7 @@ describe('BeagleTextComponent', () => {
     expect(p?.innerHTML.length).toBe(0)
   })
 
-  it('should render not render any text when text is undefined', () => {
+  it('should not render any text when text is undefined', () => {
     const p = fixture.debugElement.nativeElement.querySelector('p')
 
     component.text = undefined
