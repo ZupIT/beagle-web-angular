@@ -14,7 +14,9 @@
   * limitations under the License.
 */
 
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core'
+import { logger } from '@zup-it/beagle-web'
+import { Accessibility } from '../../components/schemas/accessibility'
 import { BeagleTextInterface, TextAlignment } from '../schemas/text'
 import { BaseComponent } from '../../runtime/BaseComponent'
 
@@ -24,15 +26,36 @@ import { BaseComponent } from '../../runtime/BaseComponent'
   styleUrls: ['./beagle-text.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleTextComponent extends BaseComponent 
-  implements BeagleTextInterface, OnInit {
-  @Input() text: string
-  @Input() styleId?= ''
-  @Input() textColor?=  'inherit'
+export class BeagleTextComponent implements BeagleTextInterface, BaseComponent, OnInit, OnChanges {
+  @Input() text: unknown = ''
+  @Input() styleId? = ''
+  @Input() textColor? = 'inherit'
   @Input() alignment?: TextAlignment = 'INHERIT'
+  @Input() accessibility?: Accessibility
 
-  ngOnInit() { 
+  public renderedText = ''
+  
+  public ngOnInit(): void { 
     this.textColor = this.textColor || 'inherit'
     this.alignment = this.alignment || 'INHERIT'
+
+    this.formatRenderedText(this.text)
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.text.previousValue != changes.text.currentValue) {
+      this.formatRenderedText(changes.text.currentValue)
+    }
+  }
+
+  private formatRenderedText(text: unknown): void {
+    try {
+      if (text && (typeof text === 'object')) {
+        this.renderedText = JSON.stringify(text)
+      } else this.renderedText = ((text && typeof text !== 'function') ? String(text) : '')
+    } catch (error) {
+      logger.error(error)
+      this.renderedText = ''
+    }
   }
 }
