@@ -14,23 +14,86 @@
   * limitations under the License.
 */
 
-import { TestBed, async } from '@angular/core/testing'
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleTextComponent } from '../../components/beagle-text/beagle-text.component'
 import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 describe('BeagleTextComponent', () => {
   let component: BeagleTextComponent
+  let fixture: ComponentFixture<BeagleTextComponent>
+
+  const initialText = 'Test'
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleTextComponent]))
       .compileComponents()
-      
-    const fixture = TestBed.createComponent(BeagleTextComponent)
-    component = fixture.componentInstance
-    component.text = 'Teste'
   }))
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BeagleTextComponent)
+    component = fixture.componentInstance    
+  })
 
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot()
+  })
+
+  it('should render the string as initialized', () => {
+    component.text = initialText
+    fixture.detectChanges()
+
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+    expect(p?.innerHTML).toBe(initialText)
+  })
+
+  it('should not render any text when text is null', () => {
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+
+    component.text = null
+    fixture.detectChanges()
+    expect(p?.innerHTML.length).toBe(0)
+  })
+
+  it('should not render any text when text is undefined', () => {
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+
+    component.text = undefined
+    fixture.detectChanges()
+    expect(p?.innerHTML.length).toBe(0)
+  })
+
+  it('should render numbers as strings', () => {
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+    const value = 123.45
+
+    component.text = value
+    fixture.detectChanges()
+    expect(p?.innerHTML).toBe(String(value))
+  })
+
+  it('should render an object as stringfied json object', () => {
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+    const obj = { my: 'test' }
+
+    component.text = obj
+    fixture.detectChanges()
+    expect(p?.innerHTML).toBe(JSON.stringify(obj))
+  })
+
+  it('should render an array as stringfied json array', () => {
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+    const arr = [{ my: 'test' }, 'test', 123.45]
+
+    component.text = arr
+    fixture.detectChanges()
+    expect(p?.innerHTML).toBe(JSON.stringify(arr))
+  })
+
+  it('should render a function as empty string', () => {
+    const p = fixture.debugElement.nativeElement.querySelector('p')
+
+    component.text = function test() { return true }
+    fixture.detectChanges()
+    expect(p?.innerHTML).toBe('')
   })
 })
