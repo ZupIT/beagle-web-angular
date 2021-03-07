@@ -21,7 +21,7 @@ function createBoilerplate(isIvy: boolean, moduleName: string) {
     import { NgModule } from '@angular/core'
     // import all the components you're going to use with beagle
     
-    const components = [
+    const components: any[] = [
       // your components
     ]
     
