@@ -18,10 +18,10 @@ import { removeExtraIndentation } from '../utils/formatting'
 
 function createBoilerplate(isIvy: boolean, moduleName: string) {
   const code = `
-    import { NgModule } from '@angular/core'
+    import { NgModule, Type } from '@angular/core'
     // import all the components you're going to use with beagle
     
-    const components: any[] = [
+    const components: Type<any>[] = [
       // your components
     ]
     
