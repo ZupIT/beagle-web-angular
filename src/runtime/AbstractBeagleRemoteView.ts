@@ -127,7 +127,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
 
     if (this.route) {
       if (typeof this.route === 'string')
-        this.route = { url: this.route }
+        {this.route = { url: this.route }}
       const navigator = this.view.getNavigator()
       if (navigator.isEmpty()) navigator.pushView(this.route)
       else navigator.resetStack(this.route, this.controllerId)
