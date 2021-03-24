@@ -30,7 +30,12 @@ export class BeagleInputComponent extends BaseComponent
 
   @Input() value?: string
   @Input() placeholder?: string
+  /**
+  * @Deprecated It was deprecated in version 1.7.0 and will be removed in a future version.
+  *  Use field enabled to control is enabled or not in this layout.
+  */
   @Input() disabled?: boolean
+  @Input() enabled?: boolean
   @Input() readOnly?: boolean
   @Input() type?: InputType
   @Input() onChange?: InputHandler
@@ -42,10 +47,18 @@ export class BeagleInputComponent extends BaseComponent
   ngOnInit() {
     this.value = this.value || ''
     this.placeholder = this.placeholder || ''
-    this.disabled = this.disabled || false
+    this.disabled = this.disabled
+    this.enabled = this.enabled
     this.readOnly = this.readOnly || false
     this.type = this.type || 'TEXT'
     this.showError = this.showError || false
+  }
+  
+  public get inputEnabled(): boolean {
+    if(this.disabled !== undefined){
+      return !this.disabled
+    } 
+    return this.enabled === undefined ? true : this.enabled  
   }
 
   public handleChange(value) {
