@@ -55,7 +55,7 @@ export class BeagleInputComponent extends BaseComponent
   }
   
   public get inputEnabled(): boolean {
-    if(this.disabled !== undefined){
+    if (this.disabled !== undefined){
       return !this.disabled
     } 
     return this.enabled === undefined ? true : this.enabled  
