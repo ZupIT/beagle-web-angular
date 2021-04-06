@@ -31,8 +31,8 @@ export class BeagleInputComponent extends BaseComponent
   @Input() value?: string
   @Input() placeholder?: string
   /**
-  * @Deprecated It was deprecated in version 1.7.0 and will be removed in a future version.
-  *  Use field enabled to control is enabled or not in this layout.
+  * @deprecated since version 1.7.0.
+  * Use field `enabled` to control whether the button is enabled or not in the layout
   */
   @Input() disabled?: boolean
   @Input() enabled?: boolean
@@ -55,10 +55,7 @@ export class BeagleInputComponent extends BaseComponent
   }
   
   public get inputEnabled(): boolean {
-    if (this.disabled !== undefined){
-      return !this.disabled
-    } 
-    return this.enabled === undefined ? true : this.enabled  
+    return this.enabled !== false && this.disabled !== true
   }
 
   public handleChange(value) {
