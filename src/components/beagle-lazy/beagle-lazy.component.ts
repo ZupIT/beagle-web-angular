@@ -33,10 +33,6 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
     super()
   }
 
-  private getRelativePath() {
-    return this.path.replace(/^([^\/])/, '/$1')
-  }
-
   private replaceChildren(tree: BeagleUIElement) {
     const beagleView = this.getViewContentManager().getView()
     const anchor = this.getViewContentManager().getElementId()
@@ -48,7 +44,7 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
     advantage of the cache system provided by Beagle */
     const beagleView = this.getViewContentManager().getView()
     const { urlBuilder, viewClient } = beagleView.getBeagleService()
-    const url = urlBuilder.build(this.getRelativePath())
+    const url = urlBuilder.build(this.path)
     viewClient.load({
       url,
       onChangeTree: tree => this.replaceChildren(tree),
