@@ -17,10 +17,7 @@
 import { BeagleUIElement } from '@zup-it/beagle-web'
 import { Properties as CSSProperties } from 'csstype'
 
-export type Direction = 'VERTICAL' | 'HORIZONTAL'
-
-export interface BeagleListViewInterface {
-  direction: Direction,
+interface DynamicList{
   dataSource: any[],
   iteratorName?: string,
   onInit?: () => void,
@@ -31,4 +28,14 @@ export interface BeagleListViewInterface {
   style?: CSSProperties,
   key?: string,
   __suffix__?: string,
+}
+
+export interface BeagleGridViewInterface extends DynamicList {  
+  numColumns?: number,
+}
+
+export type Direction = 'VERTICAL' | 'HORIZONTAL'
+
+export interface BeagleListViewInterface extends DynamicList{
+  direction: Direction,
 }

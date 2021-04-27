@@ -8,7 +8,7 @@ import {
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
 import { DynamicListScroll } from '../dynamic-list.scroll'
-import { BeagleGridViewInterface } from '../../schemas/grid-view'
+import { BeagleGridViewInterface } from '../../schemas/dynamic-list'
 
 @Component({
   selector: 'beagle-grid-view',
@@ -67,7 +67,7 @@ assignIdsToListViewContent(
   })
 }
 
-getColumnsQuantity(){
+getColumnsQuantityStyle(){
   return `repeat(${this.numColumns}, auto)`
 }
 

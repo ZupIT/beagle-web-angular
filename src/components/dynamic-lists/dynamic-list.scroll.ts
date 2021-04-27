@@ -22,7 +22,7 @@ import {
   OnDestroy,
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
-import { Direction } from '../schemas/list-view'
+import { Direction } from '../schemas/dynamic-list'
 import { DynamicListOnInit } from './dynamic-list.on-init'
 
 export class DynamicListScroll

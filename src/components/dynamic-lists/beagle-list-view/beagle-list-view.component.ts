@@ -25,7 +25,7 @@ import {
   ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import { BeagleListViewInterface, Direction } from '../../schemas/list-view'
+import { BeagleListViewInterface, Direction } from '../../schemas/dynamic-list'
 import { DynamicListScroll } from '../dynamic-list.scroll'
 
 @Component({
