@@ -16,7 +16,7 @@
 
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { BeagleListViewComponent }
-  from '../../components/beagle-list-view/beagle-list-view.component'
+  from '../../components/dynamic-lists/beagle-list-view/beagle-list-view.component'
 import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
 let component: BeagleListViewComponent
