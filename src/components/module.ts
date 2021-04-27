@@ -64,7 +64,7 @@ const components = [
   BeagleWebviewComponent,
   BeagleTabBarComponent,
   BeagleScreenComponent,
-  BeagleGridViewComponent
+  BeagleGridViewComponent,
 ]
 
 @NgModule({

@@ -13,7 +13,7 @@ import { BeagleGridViewInterface } from '../../schemas/grid-view'
 @Component({
   selector: 'beagle-grid-view',
   templateUrl: './beagle-grid-view.component.html',
-  styleUrls: ['./beagle-grid-view.component.less']
+  styleUrls: ['./beagle-grid-view.component.less'],
 })
 export class BeagleGridViewComponent extends DynamicListScroll
 implements BeagleGridViewInterface, OnChanges {

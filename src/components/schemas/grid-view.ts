@@ -28,5 +28,5 @@ export interface BeagleGridViewInterface {
   style?: CSSProperties,
   key?: string,
   __suffix__?: string,
-  numColumns?: number
+  numColumns?: number,
 }
