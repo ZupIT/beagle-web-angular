@@ -31,6 +31,7 @@ import {
   IdentifiableBeagleUIElement,
   NetworkOptions,
   logger,
+  RemoteView,
 } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
 import { BeagleProvider } from './BeagleProvider.service'
@@ -42,7 +43,10 @@ let nextViewId = 1
 
 export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestroy, OnChanges {
   // component input properties. todo: remove the loadParams with v2.0.
-  route?: string
+  route?: string | RemoteView
+  /**
+ * @deprecated since 1.7.0 prefer using the HttpAdditionalData in your Route properties instead
+ */
   networkOptions?: NetworkOptions
   controllerId?: string
   loadParams: Partial<LoadParams> = {}
@@ -122,9 +126,11 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     // end of legacy code
 
     if (this.route) {
+      if (typeof this.route === 'string')
+        {this.route = { url: this.route }}
       const navigator = this.view.getNavigator()
-      if (navigator.isEmpty()) navigator.pushView({ url: this.route })
-      else navigator.resetStack({ url: this.route }, this.controllerId)
+      if (navigator.isEmpty()) navigator.pushView(this.route)
+      else navigator.resetStack(this.route, this.controllerId)
     }
   }
 
