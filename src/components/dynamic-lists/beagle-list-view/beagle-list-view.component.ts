@@ -25,8 +25,8 @@ import {
   ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import { BeagleListViewInterface, Direction } from '../schemas/list-view'
-import { BeagleListViewScroll } from './beagle-list-view.scroll'
+import { BeagleListViewInterface, Direction } from '../../schemas/list-view'
+import { DynamicListScroll } from '../dynamic-list.scroll'
 
 @Component({
   selector: 'beagle-list-view',
@@ -35,7 +35,7 @@ import { BeagleListViewScroll } from './beagle-list-view.scroll'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent
-  extends BeagleListViewScroll
+  extends DynamicListScroll
   implements BeagleListViewInterface, OnChanges {
   @Input() direction: Direction
   @Input() dataSource: any[]
@@ -48,8 +48,10 @@ export class BeagleListViewComponent
   @Input() key?: string
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
+  @Input() numColumns?: number
   @HostBinding('class') hasScrollClass = ''
   @HostBinding('class.hide-scrollbar') hideScrollBar = ''
+  @HostBinding('class.grid') gridView = ''
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false

@@ -35,6 +35,7 @@ import {
   BeagleWebviewComponent,
   BeagleTabBarComponent,
   BeagleScreenComponent,
+  BeagleGridViewComponent,
 } from './components'
 
 export const viewIdAttributeName = '__beagle_view_id'
@@ -64,6 +65,7 @@ const beagleDefaultComponents = {
   'beagle:pageindicator': BeaglePageIndicatorComponent,
   'beagle:textInput': BeagleInputComponent,
   'beagle:webview': BeagleWebviewComponent,
+  'beagle:gridview': BeagleGridViewComponent
 }
 
 const webSpecificComponents = {

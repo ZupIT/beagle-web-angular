@@ -18,7 +18,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { BeagleButtonComponent } from './beagle-button/beagle-button.component'
-import { BeagleListViewComponent } from './beagle-list-view/beagle-list-view.component'
+import { BeagleListViewComponent } from './dynamic-lists/beagle-list-view/beagle-list-view.component'
 import { BeagleTextComponent } from './beagle-text/beagle-text.component'
 import { BeagleContainerComponent } from './beagle-container/beagle-container.component'
 import { BeaglePageViewComponent } from './beagle-page-view/beagle-page-view.component'
@@ -41,6 +41,7 @@ import { BeagleWebviewComponent } from './beagle-webview/beagle-webview.componen
 import { BeagleTabBarComponent } from './beagle-tab-bar/beagle-tab-bar.component'
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeagleDirectivesModule } from './directives/beagle-directives.module'
+import { BeagleGridViewComponent } from './dynamic-lists/beagle-grid-view/beagle-grid-view.component'
 
 const components = [
   BeagleButtonComponent,
@@ -63,6 +64,7 @@ const components = [
   BeagleWebviewComponent,
   BeagleTabBarComponent,
   BeagleScreenComponent,
+  BeagleGridViewComponent
 ]
 
 @NgModule({

@@ -23,10 +23,10 @@ import {
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
 import { Direction } from '../schemas/list-view'
-import { BeagleListViewOnInit } from './beagle-list-view.on-init'
+import { DynamicListOnInit } from './dynamic-list.on-init'
 
-export class BeagleListViewScroll
-  extends BeagleListViewOnInit
+export class DynamicListScroll
+  extends DynamicListOnInit
   implements AfterViewInit, OnInit, OnDestroy {
   direction: Direction
   dataSource: any[]
@@ -47,7 +47,7 @@ export class BeagleListViewScroll
 
   ngOnInit() {
     this.hasScrollClass = this.useParentScroll ? '' : 'hasScroll'
-    this.hideScrollBar = this.isScrollIndicatorVisible === false ? 'hide-scrollbar' : ''   
+    this.hideScrollBar = this.isScrollIndicatorVisible === false ? 'hide-scrollbar' : ''
   }
 
   ngAfterViewInit() {

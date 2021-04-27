@@ -17,7 +17,7 @@
 import { ElementRef, NgZone, AfterViewChecked } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 
-export class BeagleListViewOnInit extends BeagleComponent implements AfterViewChecked {
+export class DynamicListOnInit extends BeagleComponent implements AfterViewChecked {
   element: ElementRef
   ngZone: NgZone
   onInit?: () => void
