@@ -51,7 +51,6 @@ export class BeagleListViewComponent
   @Input() numColumns?: number
   @HostBinding('class') hasScrollClass = ''
   @HostBinding('class.hide-scrollbar') hideScrollBar = ''
-  @HostBinding('class.grid') gridView = ''
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false

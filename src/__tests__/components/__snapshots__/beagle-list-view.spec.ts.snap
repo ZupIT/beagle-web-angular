@@ -13,7 +13,6 @@ BeagleListViewComponent {
       />
     </div>,
   },
-  "gridView": "",
   "hasInitialized": false,
   "hasRunAfterInit": false,
   "hasScrollClass": "",
