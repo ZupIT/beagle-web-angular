@@ -23,7 +23,7 @@ import { BeagleUIElement } from '@zup-it/beagle-web'
 export class PrioritizePositionPipe implements PipeTransform {
     transform(elements: BeagleUIElement[]) {
         if (!elements.some(e => e.style?.positionType &&
-            (['fixed', 'absolute'].some(p => p === (e?.style?.positionType.toLowerCase() || '')))
+            (['fixed', 'absolute'].some(p => p === (e?.style?.positionType.toLowerCase() || ''),))
         )) {
             return elements
         }
