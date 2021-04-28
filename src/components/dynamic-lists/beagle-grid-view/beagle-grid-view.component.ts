@@ -40,7 +40,7 @@ constructor(element: ElementRef, ngZone: NgZone) {
 
 ngOnInit() {
   super.ngOnInit()
-  this.dataSource = []
+  this.dataSource = this.dataSource || []
   this.scrollEndThreshold = this.scrollEndThreshold || 100
 }
 
