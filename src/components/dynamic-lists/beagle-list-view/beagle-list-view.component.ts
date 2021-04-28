@@ -61,7 +61,7 @@ export class BeagleListViewComponent
 
   ngOnInit() {
     super.ngOnInit()
-    this.dataSource = []
+    this.dataSource = this.dataSource || []
     this.scrollEndThreshold = this.scrollEndThreshold || 100
     this.direction = this.direction || 'VERTICAL'
   }
