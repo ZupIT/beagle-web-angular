@@ -15,14 +15,15 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core'
-import { BeagleUIElement } from '@zup-it/beagle-web';
+import { BeagleUIElement } from '@zup-it/beagle-web'
 
 @Pipe({
     name: 'prioritizePosition'
 })
 export class PrioritizePositionPipe implements PipeTransform {
     transform(elements: BeagleUIElement[]) {
-        if (!elements.some(e => e.style?.positionType && (['fixed', 'absolute'].some(p => p === (e?.style?.positionType.toLowerCase() || ''))))) {
+        if (!elements.some(e => e.style?.positionType && 
+            (['fixed', 'absolute'].some(p => p === (e?.style?.positionType.toLowerCase() || ''))))) {
             return elements
         }
 

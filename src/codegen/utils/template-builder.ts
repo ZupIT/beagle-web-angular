@@ -46,7 +46,7 @@ function createTemplateForComponent(selector: string, inputs: ComponentFactory<a
       let-beagleId="tree.id" ${styleVariable}>
       <${selector} ${componentInputs} ${contextDirective} [attr.data-beagle-id]="beagleId" 
         [ngClass]="styleId || ''" [ngStyle]="style">
-        <ng-container *ngFor="let child of children | prioritizePosition; trackBy: elementIdentity" >
+        <ng-container *ngFor="let child of children | prioritizePosition; trackBy: elementIdentity">
           <ng-container 
             *ngTemplateOutlet="getTemplate(child._beagleComponent_);context:{tree: child}">
           </ng-container>
