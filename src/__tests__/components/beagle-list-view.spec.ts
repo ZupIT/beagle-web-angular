@@ -27,7 +27,8 @@ let fixture: ComponentFixture<BeagleListViewComponent>
 describe('BeagleListViewComponent', () => {
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleListViewComponent, DynamicListComponent]))
+    TestBed.configureTestingModule(buildBeagleTestModuleMetadata(
+      [BeagleListViewComponent, DynamicListComponent]))
       .compileComponents()
 
     fixture = TestBed.createComponent(BeagleListViewComponent)
