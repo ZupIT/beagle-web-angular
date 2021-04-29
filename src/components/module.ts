@@ -42,6 +42,7 @@ import { BeagleTabBarComponent } from './beagle-tab-bar/beagle-tab-bar.component
 import { BeagleScreenComponent } from './beagle-screen/beagle-screen.component'
 import { BeagleDirectivesModule } from './directives/beagle-directives.module'
 import { BeagleGridViewComponent } from './dynamic-lists/beagle-grid-view/beagle-grid-view.component'
+import { DynamicListComponent } from './dynamic-lists/dynamic-list.component'
 
 const components = [
   BeagleButtonComponent,
@@ -65,6 +66,7 @@ const components = [
   BeagleTabBarComponent,
   BeagleScreenComponent,
   BeagleGridViewComponent,
+  DynamicListComponent
 ]
 
 @NgModule({

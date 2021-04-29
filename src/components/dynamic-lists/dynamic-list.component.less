@@ -14,12 +14,39 @@
   * limitations under the License.
 */
 
-.beagle-grid-view {
-    display: grid;
-    grid-row-gap: 10px;
-    justify-content: space-evenly;
+beagle-list-view {
+  display: block;
+
+  .beagle-list-view {
+    display: flex;
+
+    &.VERTICAL {
+      flex-direction: column;
+    }
+
+    &.HORIZONTAL {
+      flex-direction: row;
+    }
+  }
+
+  &.hasScroll {
+    overflow: auto;
+
+    &.HORIZONTAL {
+      width: 100%;
+    }
+
+    &.VERTICAL {
+      height: 100%;
+    }
+  }
 }
-  
+
+.beagle-grid-view {
+  display: grid;
+  grid-row-gap: 10px;
+  justify-content: space-evenly;
+}
 
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox 64 */

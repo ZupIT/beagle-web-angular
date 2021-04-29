@@ -141,6 +141,8 @@ export class DynamicListScroll
   }
 
   callOnScrollEnd() {
+    console.log('ScrollENd', this.onScrollEnd)
+    console.log('ScrollENd', this.direction)
     if (this.allowedOnScrollEnd && this.onScrollEnd) this.onScrollEnd()
     this.allowedOnScrollEnd = false
   }
