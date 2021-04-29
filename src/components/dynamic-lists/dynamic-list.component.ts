@@ -25,8 +25,7 @@ import {
   ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import { BeagleComponent } from '../../runtime/BeagleComponent'
-import { BeagleListViewInterface, Direction, DynamicListInterface, ListType } from '../schemas/dynamic-list'
+import { Direction, DynamicListInterface, ListType } from '../schemas/dynamic-list'
 import { DynamicListScroll } from './dynamic-list.scroll'
 
 @Component({
@@ -51,7 +50,6 @@ export class DynamicListComponent
   @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
   @Input() type: ListType
-  @Input() beagleComponent: BeagleComponent
   @HostBinding('class') hasScrollClass = ''
   @HostBinding('class.hide-scrollbar') hideScrollBar = ''
 
@@ -98,7 +96,7 @@ export class DynamicListComponent
 
   getClassForType() {
     if (this.type === 'GRID')
-      return 'beagle-grid-view'
+      {return 'beagle-grid-view'}
 
     return `beagle-list-view ${this.direction}`
   }
@@ -108,11 +106,7 @@ export class DynamicListComponent
   }
 
   renderDataSource() {
-    console.log('Render Data Source', this)
-    if (!this.getViewContentManager && this.beagleComponent)
-      this.getViewContentManager = this.beagleComponent.getViewContentManager
-    console.log('View Content Manager', this.getViewContentManager)
-    console.log('this DataSource', this.dataSource)
+    if (!this.getViewContentManager) return
     const element = this.getViewContentManager().getElement()
     const contextId = this.getIteratorName()
     const listViewTag = element._beagleComponent_.toLowerCase()
@@ -126,8 +120,6 @@ export class DynamicListComponent
       this.assignIdsToListViewContent(child, iterationKey, listViewId, listViewTag)
       return child
     })
-
-    console.log('Element', element)
 
     this.currentlyRendered = JSON.stringify(this.dataSource)
     this.getViewContentManager().getView().getRenderer().doFullRender(element, element.id)

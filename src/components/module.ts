@@ -66,7 +66,7 @@ const components = [
   BeagleTabBarComponent,
   BeagleScreenComponent,
   BeagleGridViewComponent,
-  DynamicListComponent
+  DynamicListComponent,
 ]
 
 @NgModule({

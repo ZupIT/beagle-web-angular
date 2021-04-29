@@ -30,7 +30,7 @@ import { DynamicListComponent } from '../dynamic-list.component'
   templateUrl: './beagle-list-view.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent extends DynamicListComponent 
+export class BeagleListViewComponent extends DynamicListComponent
   implements BeagleListViewInterface {
   @Input() direction: Direction
   @Input() dataSource: any[]
@@ -46,9 +46,5 @@ export class BeagleListViewComponent extends DynamicListComponent
 
   constructor(element: ElementRef, ngZone: NgZone) {
     super(element, ngZone)
-  }
-
-  ngOnInit() {
-    console.log('ListView Component', this)
   }
 }

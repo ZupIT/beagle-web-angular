@@ -17,11 +17,10 @@
 import {
   Component,
   Input,
-  HostBinding,
   ElementRef,
   NgZone,
 } from '@angular/core'
-import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
+import { BeagleUIElement } from '@zup-it/beagle-web'
 import { BeagleGridViewInterface } from '../../schemas/dynamic-list'
 import { DynamicListComponent } from '../dynamic-list.component'
 
@@ -45,9 +44,5 @@ export class BeagleGridViewComponent extends DynamicListComponent
 
   constructor(element: ElementRef, ngZone: NgZone) {
     super(element, ngZone)
-  }
-
-  ngOnInit() {
-    console.log('GridView Component', this)
   }
 }

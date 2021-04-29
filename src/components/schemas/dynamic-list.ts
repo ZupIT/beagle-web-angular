@@ -43,5 +43,5 @@ export interface BeagleListViewInterface extends DynamicListBaseInterface{
 export type ListType = 'LIST' | 'GRID'
 
 export interface DynamicListInterface extends BeagleGridViewInterface, BeagleGridViewInterface{
-  type: ListType
+  type: ListType,
 }
