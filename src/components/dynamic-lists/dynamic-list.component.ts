@@ -100,14 +100,14 @@ export class DynamicListComponent
 
   getRowCount() {
     if (this.type === 'LIST') 
-      return this.direction === 'VERTICAL' ? this.dataSource.length : 1
+      {return this.direction === 'VERTICAL' ? this.dataSource.length : 1}
 
     return this.numColumns && Math.round(this.dataSource.length / this.numColumns)
   }
 
   getColCount() {
     if (this.type === 'LIST') 
-      return this.direction === 'VERTICAL' ? 1 : this.dataSource.length
+      {return this.direction === 'VERTICAL' ? 1 : this.dataSource.length}
 
     return this.numColumns ? this.numColumns : 1
   }
