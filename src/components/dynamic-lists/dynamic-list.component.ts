@@ -22,7 +22,6 @@ import {
   ViewEncapsulation,
   NgZone,
   HostBinding,
-  ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
 import { Direction, DynamicListInterface, ListType } from '../schemas/dynamic-list'
@@ -95,10 +94,22 @@ export class DynamicListComponent
   }
 
   getClassForType() {
-    if (this.type === 'GRID')
-      {return 'beagle-grid-view'}
+    return this.type === 'GRID' ? 'beagle-grid-view' :
+      `beagle-list-view ${this.direction}`
+  }
 
-    return `beagle-list-view ${this.direction}`
+  getRowCount() {
+    if (this.type === 'LIST') 
+      return this.direction === 'VERTICAL' ? this.dataSource.length : 1
+
+    return this.numColumns && Math.round(this.dataSource.length / this.numColumns)
+  }
+
+  getColCount() {
+    if (this.type === 'LIST') 
+      return this.direction === 'VERTICAL' ? 1 : this.dataSource.length
+
+    return this.numColumns ? this.numColumns : 1
   }
 
   getIteratorName() {

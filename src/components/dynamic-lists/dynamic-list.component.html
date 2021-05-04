@@ -16,9 +16,9 @@
 
 <div 
   [ngClass]= getClassForType()
-  [ngStyle]="{'grid-template-columns': type === 'GRID' && getColumnsQuantityStyle()}" 
-  [attr.aria-colcount]="type === 'LIST' && (direction === 'VERTICAL' ? 1 : dataSource.length)"
-  [attr.aria-rowcount]="type === 'LIST' && (direction === 'VERTICAL' ? this.dataSource.length : 1)"
-  [beagleAccessibility]="accessibility">
+  [ngStyle]= "{'grid-template-columns': type === 'GRID' && getColumnsQuantityStyle()}" 
+  [attr.aria-colcount]= getColCount()
+  [attr.aria-rowcount]= getRowCount()
+  [beagleAccessibility]= "accessibility">
   <ng-content></ng-content>
 </div>
