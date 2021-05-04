@@ -30,6 +30,10 @@ import { BeagleContainerInterface } from '../schemas/container'
   templateUrl: './beagle-container.component.html',
   styleUrls: ['./beagle-container.component.less'],
   encapsulation: ViewEncapsulation.None,
+  host: {
+    'aria-live': 'polite',
+    'beagleAccessibility': 'accessibility',
+  },
 })
 export class BeagleContainerComponent implements BeagleContainerInterface, AfterViewChecked {
   @Input() accessibility?: Accessibility
