@@ -48,6 +48,9 @@ export class BeagleButtonComponent extends BeagleComponent
         return styleObject
       }, {})
     }
+  }
+
+  ngOnChanges() {
     this.disabled = this.enabled === undefined ? false : !this.enabled
   }
 
