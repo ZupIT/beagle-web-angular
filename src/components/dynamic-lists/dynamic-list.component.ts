@@ -24,7 +24,8 @@ import {
   HostBinding,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import { Direction, DynamicListInterface, ListType } from '../schemas/dynamic-list'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { ListDirection, DynamicListInterface, ListType } from '../schemas/dynamic-list'
 import { DynamicListScroll } from './dynamic-list.scroll'
 
 @Component({
@@ -36,7 +37,7 @@ import { DynamicListScroll } from './dynamic-list.scroll'
 export class DynamicListComponent
   extends DynamicListScroll
   implements DynamicListInterface, OnChanges {
-  @Input() direction: Direction
+  @Input() direction: ListDirection
   @Input() dataSource: any[]
   @Input() iteratorName?: string
   @Input() template: BeagleUIElement
@@ -49,7 +50,7 @@ export class DynamicListComponent
   @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
   @Input() type: ListType
-  @Input() parentReference: any
+  @Input() parentReference: BeagleComponent
   @HostBinding('class') hasScrollClass = ''
   @HostBinding('class.hide-scrollbar') hideScrollBar = ''
 
@@ -65,7 +66,7 @@ export class DynamicListComponent
     super.ngOnInit()
     this.dataSource = this.dataSource || []
     this.scrollEndThreshold = this.scrollEndThreshold || 100
-    this.direction = this.direction || 'VERTICAL'
+    this.direction = this.direction || ListDirection.Vertical
   }
 
   ngAfterViewInit() {
@@ -96,18 +97,22 @@ export class DynamicListComponent
   }
 
   getClassForType() {
-    return this.type === 'GRID' ? 'beagle-grid-view' :
+    return this.type === ListType.Grid ? 'beagle-grid-view' :
       `beagle-list-view ${this.direction}`
   }
 
   getRowCount() {
-    if (this.type === 'LIST') { return this.direction === 'VERTICAL' ? this.dataSource.length : 1 }
+    if (this.type === ListType.List) { 
+      return this.direction === ListDirection.Vertical ? this.dataSource.length : 1 
+    }
 
     return this.numColumns && Math.round(this.dataSource.length / this.numColumns)
   }
 
   getColCount() {
-    if (this.type === 'LIST') { return this.direction === 'VERTICAL' ? 1 : this.dataSource.length }
+    if (this.type === ListType.List) { 
+      return this.direction === ListDirection.Vertical ? 1 : this.dataSource.length 
+    }
 
     return this.numColumns ? this.numColumns : 1
   }

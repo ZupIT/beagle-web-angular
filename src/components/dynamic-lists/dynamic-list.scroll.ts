@@ -22,13 +22,13 @@ import {
   OnDestroy,
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
-import { Direction } from '../schemas/dynamic-list'
+import { ListDirection } from '../schemas/dynamic-list'
 import { DynamicListOnInit } from './dynamic-list.on-init'
 
 export class DynamicListScroll
   extends DynamicListOnInit
   implements AfterViewInit, OnInit, OnDestroy {
-  direction: Direction
+  direction: ListDirection
   dataSource: any[]
   onScrollEnd?: () => void
   scrollEndThreshold?: number
@@ -70,9 +70,9 @@ export class DynamicListScroll
 
     const { hasYScroll: hasYScroll, hasXScroll: hasXScroll } = this.allowedScroll(node)
 
-    if ((this.direction === 'VERTICAL' &&
+    if ((this.direction === ListDirection.Vertical &&
       (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight || !hasYScroll)) ||
-      (this.direction === 'HORIZONTAL' &&
+      (this.direction === ListDirection.Horizontal &&
         (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXScroll))
     ) {
       return this.getParentNode(node.parentNode as HTMLElement)
@@ -90,7 +90,7 @@ export class DynamicListScroll
 
   canScrollContent(element: HTMLElement) {
     return (
-      this.direction === 'HORIZONTAL'
+      this.direction === ListDirection.Horizontal
         ? element.scrollWidth > element.clientWidth
         : element.scrollHeight > element.clientHeight
     )
@@ -114,7 +114,7 @@ export class DynamicListScroll
 
   calcPercentage() {
     let screenPercentage: number
-    if (this.direction === 'VERTICAL') {
+    if (this.direction === ListDirection.Vertical) {
       const scrollPosition = this.parentNode.scrollTop
       const diff = this.parentNode?.scrollHeight - this.parentNode?.clientHeight
       screenPercentage = (scrollPosition / diff) * 100

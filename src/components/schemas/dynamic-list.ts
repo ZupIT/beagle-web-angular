@@ -17,6 +17,16 @@
 import { BeagleUIElement } from '@zup-it/beagle-web'
 import { Properties as CSSProperties } from 'csstype'
 
+export enum ListDirection {
+  Vertical= 'VERTICAL',
+  Horizontal= 'HORIZONTAL'
+}
+
+export enum ListType {
+  Grid= 'GRID',
+  List= 'LIST'
+}
+
 interface DynamicListBaseInterface{
   dataSource: any[],
   iteratorName?: string,
@@ -34,13 +44,9 @@ export interface BeagleGridViewInterface extends DynamicListBaseInterface {
   numColumns?: number,
 }
 
-export type Direction = 'VERTICAL' | 'HORIZONTAL'
-
 export interface BeagleListViewInterface extends DynamicListBaseInterface{
-  direction: Direction,
+  direction: ListDirection,
 }
-
-export type ListType = 'LIST' | 'GRID'
 
 export interface DynamicListInterface extends BeagleGridViewInterface, BeagleGridViewInterface{
   type: ListType,
