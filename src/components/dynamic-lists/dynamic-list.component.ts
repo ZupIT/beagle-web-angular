@@ -55,6 +55,7 @@ export class DynamicListComponent
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
+  private idIncrement = 0
 
   constructor(element: ElementRef, ngZone: NgZone) {
     super(element, ngZone)
@@ -76,18 +77,18 @@ export class DynamicListComponent
 
   assignIdsToListViewContent(
     content: BeagleUIElement,
-    iterationKey: string,
     listViewId: string,
     listViewTag: string,
   ) {
     Tree.forEach(content, (component, componentIndex) => {
       const suffix = this.__suffix__ || ''
       const baseId = component.id ? `${component.id}${suffix}` : `${listViewId}:${componentIndex}`
-      component.id = `${baseId}:${iterationKey}`
+      component.id = `${baseId}:${this.idIncrement}`
       if (component._beagleComponent_.toLowerCase() === listViewTag) {
-        component.__suffix__ = `${suffix}:${iterationKey}`
+        component.__suffix__ = `${suffix}:${this.idIncrement}`
       }
     })
+    this.idIncrement++
   }
 
   getColumnsQuantityStyle() {
@@ -100,15 +101,13 @@ export class DynamicListComponent
   }
 
   getRowCount() {
-    if (this.type === 'LIST') 
-      {return this.direction === 'VERTICAL' ? this.dataSource.length : 1}
+    if (this.type === 'LIST') { return this.direction === 'VERTICAL' ? this.dataSource.length : 1 }
 
     return this.numColumns && Math.round(this.dataSource.length / this.numColumns)
   }
 
   getColCount() {
-    if (this.type === 'LIST') 
-      {return this.direction === 'VERTICAL' ? 1 : this.dataSource.length}
+    if (this.type === 'LIST') { return this.direction === 'VERTICAL' ? 1 : this.dataSource.length }
 
     return this.numColumns ? this.numColumns : 1
   }
@@ -118,8 +117,9 @@ export class DynamicListComponent
   }
 
   renderDataSource() {
-    if (!this.getViewContentManager)
-    {this.getViewContentManager = this.parentReference.getViewContentManager}
+    if (!this.getViewContentManager) { 
+      this.getViewContentManager = this.parentReference.getViewContentManager 
+    }
     const element = this.getViewContentManager().getElement()
     const contextId = this.getIteratorName()
     const listViewTag = element._beagleComponent_.toLowerCase()
@@ -128,9 +128,8 @@ export class DynamicListComponent
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
-      const iterationKey = this.key && item[this.key] !== undefined ? item[this.key] : index
       child._implicitContexts_ = [{ id: contextId, value: item }]
-      this.assignIdsToListViewContent(child, iterationKey, listViewId, listViewTag)
+      this.assignIdsToListViewContent(child, listViewId, listViewTag)
       return child
     })
 
