@@ -128,7 +128,6 @@ export class DynamicListScroll
       this.scrollEndThreshold
       && Math.ceil(screenPercentage) >= this.scrollEndThreshold
     )
-
     if (isOverThreshold) this.callOnScrollEnd()
   }
 
@@ -141,8 +140,11 @@ export class DynamicListScroll
   }
 
   callOnScrollEnd() {
-    if (this.allowedOnScrollEnd && this.onScrollEnd) this.onScrollEnd()
+    if (this.allowedOnScrollEnd && this.onScrollEnd) {
+      this.onScrollEnd()
+    }
     this.allowedOnScrollEnd = false
+
   }
 
   allowOnScrollEnd() {

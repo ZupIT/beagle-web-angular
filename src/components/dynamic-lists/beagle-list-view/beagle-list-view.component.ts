@@ -43,8 +43,4 @@ export class BeagleListViewComponent extends DynamicListComponent
   @Input() key?: string
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
-
-  constructor(element: ElementRef, ngZone: NgZone) {
-    super(element, ngZone)
-  }
 }

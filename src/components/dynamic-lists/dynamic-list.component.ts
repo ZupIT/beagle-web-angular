@@ -49,6 +49,7 @@ export class DynamicListComponent
   @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
   @Input() type: ListType
+  @Input() parentReference: any
   @HostBinding('class') hasScrollClass = ''
   @HostBinding('class.hide-scrollbar') hideScrollBar = ''
 
@@ -117,7 +118,8 @@ export class DynamicListComponent
   }
 
   renderDataSource() {
-    if (!this.getViewContentManager) return
+    if (!this.getViewContentManager)
+    {this.getViewContentManager = this.parentReference.getViewContentManager}
     const element = this.getViewContentManager().getElement()
     const contextId = this.getIteratorName()
     const listViewTag = element._beagleComponent_.toLowerCase()
@@ -145,9 +147,11 @@ export class DynamicListComponent
   }
 
   ngOnChanges() {
+    const changedElement = this.element.nativeElement.nodeName
     if (!this.hasRunAfterInit || !Array.isArray(this.dataSource)) return
     const dataSourceStr = JSON.stringify(this.dataSource)
     if (dataSourceStr === this.currentlyRendered) return
+    if (changedElement != 'BEAGLE-DYNAMIC-LIST') return
     this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
   }
