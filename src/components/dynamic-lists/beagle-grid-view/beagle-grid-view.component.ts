@@ -17,11 +17,9 @@
 import {
   Component,
   Input,
-  ElementRef,
-  NgZone,
 } from '@angular/core'
 import { BeagleUIElement } from '@zup-it/beagle-web'
-import { BeagleGridViewInterface, ListType } from '../../schemas/dynamic-list'
+import { BeagleGridViewInterface } from '../../schemas/dynamic-list'
 import { DynamicListComponent } from '../dynamic-list.component'
 
 @Component({
@@ -41,5 +39,4 @@ export class BeagleGridViewComponent extends DynamicListComponent
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
-  public listType = ListType
 }

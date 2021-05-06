@@ -70,9 +70,9 @@ export class DynamicListScroll
 
     const { hasYScroll: hasYScroll, hasXScroll: hasXScroll } = this.allowedScroll(node)
 
-    if ((this.direction === ListDirection.Vertical &&
+    if ((this.direction === 'VERTICAL' &&
       (node.clientHeight === 0 || node.scrollHeight <= node.clientHeight || !hasYScroll)) ||
-      (this.direction === ListDirection.Horizontal &&
+      (this.direction === 'HORIZONTAL' &&
         (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth || !hasXScroll))
     ) {
       return this.getParentNode(node.parentNode as HTMLElement)
@@ -90,7 +90,7 @@ export class DynamicListScroll
 
   canScrollContent(element: HTMLElement) {
     return (
-      this.direction === ListDirection.Horizontal
+      this.direction === 'HORIZONTAL'
         ? element.scrollWidth > element.clientWidth
         : element.scrollHeight > element.clientHeight
     )
@@ -114,7 +114,7 @@ export class DynamicListScroll
 
   calcPercentage() {
     let screenPercentage: number
-    if (this.direction === ListDirection.Vertical) {
+    if (this.direction === 'VERTICAL') {
       const scrollPosition = this.parentNode.scrollTop
       const diff = this.parentNode?.scrollHeight - this.parentNode?.clientHeight
       screenPercentage = (scrollPosition / diff) * 100

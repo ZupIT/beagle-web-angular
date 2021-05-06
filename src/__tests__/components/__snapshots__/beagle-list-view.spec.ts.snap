@@ -8,7 +8,9 @@ BeagleListViewComponent {
     "nativeElement": <div
       id="root0"
     >
-      <beagle-dynamic-list>
+      <beagle-dynamic-list
+        type="LIST"
+      >
         <div />
       </beagle-dynamic-list>
     </div>,
@@ -17,11 +19,6 @@ BeagleListViewComponent {
   "hasRunAfterInit": false,
   "hasScrollClass": "",
   "hideScrollBar": "",
-  "idIncrement": 0,
-  "listType": Object {
-    "Grid": "GRID",
-    "List": "LIST",
-  },
   "ngZone": NgZone {
     "_inner": Zone {
       "_name": "angular",

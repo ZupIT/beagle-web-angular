@@ -56,7 +56,6 @@ export class DynamicListComponent
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
-  private idIncrement = 0
 
   constructor(element: ElementRef, ngZone: NgZone) {
     super(element, ngZone)
@@ -66,7 +65,7 @@ export class DynamicListComponent
     super.ngOnInit()
     this.dataSource = this.dataSource || []
     this.scrollEndThreshold = this.scrollEndThreshold || 100
-    this.direction = this.direction || ListDirection.Vertical
+    this.direction = this.direction || 'VERTICAL'
   }
 
   ngAfterViewInit() {
@@ -78,18 +77,18 @@ export class DynamicListComponent
 
   assignIdsToListViewContent(
     content: BeagleUIElement,
+    iterationKey: string,
     listViewId: string,
-    listViewTag: string,
   ) {
+    const DYNAMIC_COMPONENTS = ['beagle:listview', 'beagle:gridview']
     Tree.forEach(content, (component, componentIndex) => {
       const suffix = this.__suffix__ || ''
       const baseId = component.id ? `${component.id}${suffix}` : `${listViewId}:${componentIndex}`
-      component.id = `${baseId}:${this.idIncrement}`
-      if (component._beagleComponent_.toLowerCase() === listViewTag) {
-        component.__suffix__ = `${suffix}:${this.idIncrement}`
+      component.id = `${baseId}:${iterationKey}`
+      if (DYNAMIC_COMPONENTS.includes(component._beagleComponent_.toLowerCase())) {
+        component.__suffix__ = `${suffix}:${iterationKey}`
       }
     })
-    this.idIncrement++
   }
 
   getColumnsQuantityStyle() {
@@ -97,21 +96,21 @@ export class DynamicListComponent
   }
 
   getClassForType() {
-    return this.type === ListType.Grid ? 'beagle-grid-view' :
+    return this.type === 'GRID' ? 'beagle-grid-view' :
       `beagle-list-view ${this.direction}`
   }
 
   getRowCount() {
-    if (this.type === ListType.List) { 
-      return this.direction === ListDirection.Vertical ? this.dataSource.length : 1 
+    if (this.type === 'LIST') {
+      return this.direction === 'VERTICAL' ? this.dataSource.length : 1
     }
 
-    return this.numColumns && Math.round(this.dataSource.length / this.numColumns)
+    return this.numColumns && Math.ceil(this.dataSource.length / this.numColumns)
   }
 
   getColCount() {
-    if (this.type === ListType.List) { 
-      return this.direction === ListDirection.Vertical ? 1 : this.dataSource.length 
+    if (this.type === 'LIST') {
+      return this.direction === 'VERTICAL' ? 1 : this.dataSource.length
     }
 
     return this.numColumns ? this.numColumns : 1
@@ -122,19 +121,19 @@ export class DynamicListComponent
   }
 
   renderDataSource() {
-    if (!this.getViewContentManager) { 
-      this.getViewContentManager = this.parentReference.getViewContentManager 
+    if (!this.getViewContentManager) {
+      this.getViewContentManager = this.parentReference.getViewContentManager
     }
     const element = this.getViewContentManager().getElement()
     const contextId = this.getIteratorName()
-    const listViewTag = element._beagleComponent_.toLowerCase()
     const listViewId = element.id
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item, index) => {
       const child = Tree.clone(this.template)
+      const iterationKey = this.key && item[this.key] !== undefined ? item[this.key] : index
       child._implicitContexts_ = [{ id: contextId, value: item }]
-      this.assignIdsToListViewContent(child, listViewId, listViewTag)
+      this.assignIdsToListViewContent(child, iterationKey, listViewId)
       return child
     })
 
@@ -155,7 +154,7 @@ export class DynamicListComponent
     if (!this.hasRunAfterInit || !Array.isArray(this.dataSource)) return
     const dataSourceStr = JSON.stringify(this.dataSource)
     if (dataSourceStr === this.currentlyRendered) return
-    if (changedElement != 'BEAGLE-DYNAMIC-LIST') return
+    if (changedElement !== 'BEAGLE-DYNAMIC-LIST') return
     this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
   }

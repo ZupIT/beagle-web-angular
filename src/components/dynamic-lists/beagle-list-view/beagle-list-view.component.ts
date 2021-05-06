@@ -20,7 +20,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core'
 import { BeagleUIElement } from '@zup-it/beagle-web'
-import { BeagleListViewInterface, ListDirection, ListType } from '../../schemas/dynamic-list'
+import { BeagleListViewInterface, ListDirection } from '../../schemas/dynamic-list'
 import { DynamicListComponent } from '../dynamic-list.component'
 
 @Component({
@@ -41,5 +41,4 @@ export class BeagleListViewComponent extends DynamicListComponent
   @Input() key?: string
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
-  public listType = ListType
 }
