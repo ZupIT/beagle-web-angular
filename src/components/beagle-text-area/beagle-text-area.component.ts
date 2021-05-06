@@ -19,6 +19,10 @@ import { TextAreaInterface } from '../schemas/text-area'
 import { InputHandler } from '../schemas/input-handler'
 import { BaseComponent } from '../../runtime/BaseComponent'
 
+/**
+ * @deprecate since version 1.8.0.
+ * This component will be removed in a future version.
+*/
 @Component({
   selector: 'beagle-text-area',
   templateUrl: './beagle-text-area.component.html',

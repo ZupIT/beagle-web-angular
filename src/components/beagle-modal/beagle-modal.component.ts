@@ -18,14 +18,20 @@ import { Component, Input, ViewEncapsulation, ElementRef, OnInit, OnDestroy } fr
 import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleModalInterface } from '../schemas/modal'
 
+/**
+ * @deprecate since version 1.8.0.
+ * This component will be removed in a future version.
+*/
 @Component({
   selector: 'beagle-modal',
   templateUrl: './beagle-modal.component.html',
   styleUrls: ['./beagle-modal.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
+
 export class BeagleModalComponent extends BaseComponent 
   implements BeagleModalInterface, OnInit, OnDestroy {
+  
   @Input() isOpen: boolean
   @Input() onClose: () => void
 
@@ -60,3 +66,4 @@ export class BeagleModalComponent extends BaseComponent
     }
   }
 }
+
