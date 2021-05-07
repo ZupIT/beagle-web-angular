@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
-import { logger } from '@zup-it/beagle-web';
+import { logger } from '@zup-it/beagle-web'
 import { TextAreaInterface } from '../schemas/text-area'
 import { InputHandler } from '../schemas/input-handler'
 import { BaseComponent } from '../../runtime/BaseComponent'

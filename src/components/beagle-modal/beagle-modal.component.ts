@@ -16,7 +16,7 @@
 */
 
 import { Component, Input, ViewEncapsulation, ElementRef, OnInit, OnDestroy } from '@angular/core'
-import { logger } from '@zup-it/beagle-web';
+import { logger } from '@zup-it/beagle-web'
 import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleModalInterface } from '../schemas/modal'
 
