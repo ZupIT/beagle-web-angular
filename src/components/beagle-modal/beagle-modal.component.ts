@@ -1,3 +1,4 @@
+
 /*
   * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
@@ -15,11 +16,13 @@
 */
 
 import { Component, Input, ViewEncapsulation, ElementRef, OnInit, OnDestroy } from '@angular/core'
+import { logger } from '@zup-it/beagle-web';
 import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleModalInterface } from '../schemas/modal'
 
+
 /**
- * @deprecate since version 1.8.0.
+ * @deprecated since version 1.8.0.
  * This component will be removed in a future version.
 */
 @Component({
@@ -31,7 +34,7 @@ import { BeagleModalInterface } from '../schemas/modal'
 
 export class BeagleModalComponent extends BaseComponent 
   implements BeagleModalInterface, OnInit, OnDestroy {
-  
+ 
   @Input() isOpen: boolean
   @Input() onClose: () => void
 
@@ -42,6 +45,7 @@ export class BeagleModalComponent extends BaseComponent
   ngOnInit() {
     document.addEventListener('keyup', (event) => this.closeOnEsc(event))
     this.elementRef.nativeElement.addEventListener('click', el => this.closeOnClick(el))
+    logger.warn('This component is deprecated since version 1.8.0 and will be removed in a future version.')
   }
 
   ngOnDestroy() {
