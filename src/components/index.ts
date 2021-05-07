@@ -15,7 +15,8 @@
 */
 
 export * from './beagle-button/beagle-button.component'
-export * from './beagle-list-view/beagle-list-view.component'
+export * from './dynamic-lists/beagle-list-view/beagle-list-view.component'
+export * from './dynamic-lists/beagle-grid-view/beagle-grid-view.component'
 export * from './beagle-text/beagle-text.component'
 export * from './beagle-container/beagle-container.component'
 export * from './beagle-page-view/beagle-page-view.component'

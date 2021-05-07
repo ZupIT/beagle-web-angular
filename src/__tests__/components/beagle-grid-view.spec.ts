@@ -15,23 +15,23 @@
 */
 
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
-import { BeagleListViewComponent }
-  from '../../components/dynamic-lists/beagle-list-view/beagle-list-view.component'
+import { BeagleGridViewComponent }
+  from '../../components/dynamic-lists/beagle-grid-view/beagle-grid-view.component'
 import { DynamicListComponent } from '../../components/dynamic-lists/dynamic-list.component'
 import { buildBeagleTestModuleMetadata } from './test-module-builder'
 
-let component: BeagleListViewComponent
-let fixture: ComponentFixture<BeagleListViewComponent>
+let component: BeagleGridViewComponent
+let fixture: ComponentFixture<BeagleGridViewComponent>
 
 
-describe('BeagleListViewComponent', () => {
+describe('BeagleGridViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(buildBeagleTestModuleMetadata(
-      [BeagleListViewComponent, DynamicListComponent]))
+      [BeagleGridViewComponent, DynamicListComponent]))
       .compileComponents()
 
-    fixture = TestBed.createComponent(BeagleListViewComponent)
+    fixture = TestBed.createComponent(BeagleGridViewComponent)
     component = fixture.componentInstance
   }))
 

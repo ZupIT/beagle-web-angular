@@ -15,10 +15,10 @@
 -->
 
 <div 
-  class="beagle-list-view" 
-  [ngClass]="direction" 
-  [attr.aria-colcount]="direction === 'VERTICAL' ? 1 : dataSource.length"
-  [attr.aria-rowcount]="direction === 'VERTICAL' ? this.dataSource.length : 1"
-  [beagleAccessibility]="accessibility">
+  [ngClass] = "getClassForType()"
+  [ngStyle] = "{'grid-template-columns': type === 'GRID' && getColumnsQuantityStyle()}" 
+  [attr.aria-colcount] = "getColCount()"
+  [attr.aria-rowcount] = "getRowCount()"
+  [beagleAccessibility] = "accessibility">
   <ng-content></ng-content>
 </div>
