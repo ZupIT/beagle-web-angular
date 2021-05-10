@@ -97,10 +97,11 @@ export class BeagleListViewComponent
     const contextId = this.getIteratorName()
     const listViewTag = element._beagleComponent_.toLowerCase()
     const listViewId = element.id
+    const renderer = this.getViewContentManager().getView().getRenderer()
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
     element.children = this.dataSource.map((item, index) => {
-      const child = Tree.clone(this.template)
+      const child = renderer.preProcess(Tree.clone(this.template))
       const iterationKey = this.key && item[this.key] !== undefined ? item[this.key] : index
       child._implicitContexts_ = [{ id: contextId, value: item }]
       this.assignIdsToListViewContent(child, iterationKey, listViewId, listViewTag)
@@ -108,7 +109,7 @@ export class BeagleListViewComponent
     })
 
     this.currentlyRendered = JSON.stringify(this.dataSource)
-    this.getViewContentManager().getView().getRenderer().doFullRender(element, element.id)
+    renderer.doFullRender(element, element.id)
 
     /* If the dataSource comes from a context, it might be initially empty, so the closes
     scroll is one, when the data actually comes, the closes scroll may change, so to guarantee
