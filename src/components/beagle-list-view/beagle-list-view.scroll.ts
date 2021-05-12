@@ -33,9 +33,9 @@ export class BeagleListViewScroll
   onScrollEnd?: () => void
   scrollEndThreshold?: number
   useParentScroll?: boolean
-  hasScrollClass = ''
+  hasScrollClass = true
   isScrollIndicatorVisible?: boolean
-  hideScrollBar = ''
+  hideScrollBar = false
 
   private scrollSubscription: Subscription
   private parentNode: HTMLElement
@@ -46,8 +46,8 @@ export class BeagleListViewScroll
   }
 
   ngOnInit() {
-    this.hasScrollClass = this.useParentScroll ? '' : 'hasScroll'
-    this.hideScrollBar = this.isScrollIndicatorVisible === false ? 'hide-scrollbar' : ''   
+    this.hasScrollClass = !this.useParentScroll
+    this.hideScrollBar = this.isScrollIndicatorVisible === false 
   }
 
   ngAfterViewInit() {

@@ -48,8 +48,10 @@ export class BeagleListViewComponent
   @Input() key?: string
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
-  @HostBinding('class') hasScrollClass = ''
-  @HostBinding('class.hide-scrollbar') hideScrollBar = ''
+  @HostBinding('class.has-scroll') hasScrollClass = true
+  @HostBinding('class.VERTICAL') verticalClass = false
+  @HostBinding('class.HORIZONTAL') horizontalClass = false
+  @HostBinding('class.hide-scrollbar') hideScrollBar = false
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
@@ -63,6 +65,8 @@ export class BeagleListViewComponent
     this.dataSource = this.dataSource || []
     this.scrollEndThreshold = this.scrollEndThreshold || 100
     this.direction = this.direction || 'VERTICAL'
+    this.verticalClass = this.direction === 'VERTICAL'
+    this.horizontalClass = this.direction === 'HORIZONTAL'
   }
 
   ngAfterViewInit() {
