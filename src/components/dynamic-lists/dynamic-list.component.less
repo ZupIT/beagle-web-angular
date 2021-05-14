@@ -14,49 +14,43 @@
   * limitations under the License.
 */
 
-figure {
-  width: inherit;
-  height: inherit;
-  min-width: inherit;
-  min-height: inherit;
-  max-width: inherit;
-  max-height: inherit;
-  border-radius: inherit;
-  margin: 0px;
+beagle-dynamic-list {
+  display: block;
 
-  .FIT_XY,
-  .FIT_CENTER,
-  .CENTER_CROP,
-  .CENTER {
-    img {
-      width: inherit;
-      height: inherit;
+  .beagle-list-view {
+    display: flex;
+
+    &.VERTICAL {
+      flex-direction: column;
+    }
+
+    &.HORIZONTAL {
+      flex-direction: row;
     }
   }
 
-  .FIT_XY {
-    object-fit: fill
-  }
+  &.hasScroll {
+    overflow: auto;
 
-  .FIT_CENTER {
-    object-fit: cover;
-  }
+    &.HORIZONTAL {
+      width: 100%;
+    }
 
-  .CENTER_CROP {
-    object-fit: none;
+    &.VERTICAL {
+      height: 100%;
+    }
   }
+}
 
-  .CENTER {
-    object-fit: contain;
-  }
+.beagle-grid-view {
+  display: grid;
+  justify-content: space-evenly;
+}
 
-  img {
-    width: inherit;
-    height: inherit;
-    min-width: inherit;
-    min-height: inherit;
-    max-width: inherit;
-    max-height: inherit;
-    border-radius: inherit;
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox 64 */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
+  &::-webkit-scrollbar { /** WebKit */
+    display: none;
   }
 }
