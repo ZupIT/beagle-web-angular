@@ -22,13 +22,13 @@ import {
   OnDestroy,
 } from '@angular/core'
 import { fromEvent, Subscription } from 'rxjs'
-import { Direction } from '../schemas/list-view'
-import { BeagleListViewOnInit } from './beagle-list-view.on-init'
+import { ListDirection } from '../schemas/dynamic-list'
+import { DynamicListOnInit } from './dynamic-list.on-init'
 
-export class BeagleListViewScroll
-  extends BeagleListViewOnInit
+export class DynamicListScroll
+  extends DynamicListOnInit
   implements AfterViewInit, OnInit, OnDestroy {
-  direction: Direction
+  direction: ListDirection
   dataSource: any[]
   onScrollEnd?: () => void
   scrollEndThreshold?: number
@@ -128,7 +128,6 @@ export class BeagleListViewScroll
       this.scrollEndThreshold
       && Math.ceil(screenPercentage) >= this.scrollEndThreshold
     )
-
     if (isOverThreshold) this.callOnScrollEnd()
   }
 
@@ -141,8 +140,11 @@ export class BeagleListViewScroll
   }
 
   callOnScrollEnd() {
-    if (this.allowedOnScrollEnd && this.onScrollEnd) this.onScrollEnd()
+    if (this.allowedOnScrollEnd && this.onScrollEnd) {
+      this.onScrollEnd()
+    }
     this.allowedOnScrollEnd = false
+
   }
 
   allowOnScrollEnd() {
