@@ -15,10 +15,15 @@
 */
 
 import { Component, Input, OnInit } from '@angular/core'
+import { logger } from '@zup-it/beagle-web'
 import { TextAreaInterface } from '../schemas/text-area'
 import { InputHandler } from '../schemas/input-handler'
 import { BaseComponent } from '../../runtime/BaseComponent'
 
+/**
+ * @deprecated since version 1.8.0.
+ * This component will be removed in a future version.
+*/
 @Component({
   selector: 'beagle-text-area',
   templateUrl: './beagle-text-area.component.html',
@@ -39,6 +44,7 @@ export class BeagleTextAreaComponent extends BaseComponent
     this.label = this.label || ''
     this.disabled = this.disabled || false
     this.readonly = this.readonly || false
+    logger.warn('This component is deprecated since version 1.8.0 and will be removed in a future version.')
   }
 
   public handleChange(value) {
