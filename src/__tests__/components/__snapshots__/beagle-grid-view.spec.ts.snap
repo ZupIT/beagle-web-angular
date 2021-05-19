@@ -17,8 +17,9 @@ BeagleGridViewComponent {
   },
   "hasInitialized": false,
   "hasRunAfterInit": false,
-  "hasScrollClass": "",
-  "hideScrollBar": "",
+  "hasScrollClass": true,
+  "hideScrollBar": false,
+  "horizontalClass": false,
   "ngZone": NgZone {
     "_inner": Zone {
       "_name": "angular",
@@ -9942,5 +9943,6 @@ BeagleGridViewComponent {
     },
     "shouldCoalesceEventChangeDetection": false,
   },
+  "verticalClass": false,
 }
 `;
