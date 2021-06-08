@@ -96,7 +96,7 @@ export class DynamicListComponent
   }
 
   getColumnsQuantityStyle() {
-    return `repeat(${this.numColumns}, auto)`
+    return this.numColumns && `repeat(${this.numColumns}, 1fr)`
   }
 
   getClassForType() {
