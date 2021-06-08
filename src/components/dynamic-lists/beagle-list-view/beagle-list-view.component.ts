@@ -26,6 +26,7 @@ import { DynamicListComponent } from '../dynamic-list.component'
 @Component({
   selector: 'beagle-list-view',
   templateUrl: './beagle-list-view.component.html',
+  styleUrls: ['./beagle-list-view.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent extends DynamicListComponent
