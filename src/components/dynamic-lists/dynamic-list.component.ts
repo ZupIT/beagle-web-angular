@@ -92,8 +92,7 @@ export class DynamicListComponent
   }
 
   getColumnsQuantityStyle() {
-    const screenSize = document.body.clientWidth
-    return this.numColumns && `repeat(${this.numColumns}, ${screenSize/this.numColumns}px)`
+    return this.numColumns && `repeat(${this.numColumns}, 1fr)`
   }
 
   getClassForType() {
