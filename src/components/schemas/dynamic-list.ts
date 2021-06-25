@@ -21,7 +21,8 @@ export type ListDirection = 'VERTICAL' | 'HORIZONTAL'
 
 export type ListType = 'GRID' | 'LIST'
 
-interface DynamicListBaseInterface{
+export interface DynamicListBaseInterface{
+  direction: ListDirection,
   dataSource: any[],
   iteratorName?: string,
   onInit?: () => void,
@@ -34,14 +35,15 @@ interface DynamicListBaseInterface{
   __suffix__?: string,
 }
 
-export interface BeagleGridViewInterface extends DynamicListBaseInterface {  
+export interface BeagleGridViewInterface extends DynamicListBaseInterface { 
+  /**
+   * @deprecated Since version 1.8.2. Will be deleted in version 2.0.
+   * Use spanCount instead.
+  */ 
   numColumns?: number,
+  spanCount?: number,
 }
 
-export interface BeagleListViewInterface extends DynamicListBaseInterface{
-  direction: ListDirection,
-}
-
-export interface DynamicListInterface extends BeagleGridViewInterface, BeagleGridViewInterface{
+export interface DynamicListInterface extends BeagleGridViewInterface{
   type: ListType,
 }

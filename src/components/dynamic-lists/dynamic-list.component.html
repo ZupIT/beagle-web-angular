@@ -16,7 +16,8 @@
 
 <div 
   [ngClass] = "getClassForType()"
-  [ngStyle] = "{'grid-template-columns': type === 'GRID' && getColumnsQuantityStyle()}" 
+  [ngStyle] = "{'grid-template-columns': type === 'GRID' && direction === 'VERTICAL' && getSpanCountQuantityStyle(),
+  'grid-template-rows': type === 'GRID' && direction === 'HORIZONTAL' && getSpanCountQuantityStyle()}" 
   [attr.aria-colcount] = "getColCount()"
   [attr.aria-rowcount] = "getRowCount()"
   [beagleAccessibility] = "accessibility">
