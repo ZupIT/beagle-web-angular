@@ -46,11 +46,15 @@ beagle-dynamic-list {
 
 .beagle-grid-view {
   display: grid;
-  justify-content: space-evenly;
-}
 
-.beagle-grid-view-flow {
-  grid-auto-flow: column;
+  &.VERTICAL {
+    justify-content: space-evenly;
+  }
+
+  &.HORIZONTAL {
+    grid-auto-flow: column;
+  }
+
 }
 
 .hide-scrollbar {

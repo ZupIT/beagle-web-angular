@@ -102,11 +102,7 @@ export class DynamicListComponent
   }
 
   getClassForType() {
-    const gridClass = this.direction === 'VERTICAL'
-      ? 'beagle-grid-view'
-      : 'beagle-grid-view beagle-grid-view-flow'
-
-    return this.type === 'GRID' ? gridClass :
+    return this.type === 'GRID' ? `beagle-grid-view ${this.direction}` :
       `beagle-list-view ${this.direction}`
   }
 
