@@ -14,4 +14,11 @@
   * limitations under the License. 
 -->
 
+<div 
+  [ngClass] = "getClassForType()"
+  [ngStyle] = "{'grid-template-columns': type === 'GRID' && getColumnsQuantityStyle()}" 
+  [attr.aria-colcount] = "getColCount()"
+  [attr.aria-rowcount] = "getRowCount()"
+  [beagleAccessibility] = "accessibility">
   <ng-content></ng-content>
+</div>

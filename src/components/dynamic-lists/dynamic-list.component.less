@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-beagle-list-view {
+beagle-dynamic-list {
   display: block;
 
   .beagle-list-view {
@@ -22,24 +22,31 @@ beagle-list-view {
 
     &.VERTICAL {
       flex-direction: column;
+      height: 100%;
     }
 
     &.HORIZONTAL {
       flex-direction: row;
+      width: 100%; 
     }
   }
 
-  &.hasScroll {
+  &.has-scroll {
     overflow: auto;
-
-    &.HORIZONTAL {
-      width: 100%;
-    }
-
-    &.VERTICAL {
-      height: 100%;
-    }
   }
+
+  &.HORIZONTAL {
+    width: 100%;
+  }
+
+  &.VERTICAL {
+    height: 100%;
+  }
+}
+
+.beagle-grid-view {
+  display: grid;
+  justify-content: space-evenly;
 }
 
 .hide-scrollbar {

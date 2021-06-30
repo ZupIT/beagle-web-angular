@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BeagleListViewComponent should match snapshot 1`] = `
-BeagleListViewComponent {
+exports[`BeagleGridViewComponent should match snapshot 1`] = `
+BeagleGridViewComponent {
   "allowedOnScrollEnd": true,
   "currentlyRendered": "[]",
   "element": ElementRef {
@@ -9,7 +9,7 @@ BeagleListViewComponent {
       id="root0"
     >
       <beagle-dynamic-list
-        type="LIST"
+        type="GRID"
       >
         <div />
       </beagle-dynamic-list>

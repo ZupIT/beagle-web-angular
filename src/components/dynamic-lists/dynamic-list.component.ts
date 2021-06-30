@@ -22,22 +22,22 @@ import {
   ViewEncapsulation,
   NgZone,
   HostBinding,
-  ViewChild,
 } from '@angular/core'
 import { BeagleUIElement, Tree } from '@zup-it/beagle-web'
-import { BeagleListViewInterface, Direction } from '../schemas/list-view'
-import { BeagleListViewScroll } from './beagle-list-view.scroll'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { ListDirection, DynamicListInterface, ListType } from '../schemas/dynamic-list'
+import { DynamicListScroll } from './dynamic-list.scroll'
 
 @Component({
-  selector: 'beagle-list-view',
-  templateUrl: './beagle-list-view.component.html',
-  styleUrls: ['./beagle-list-view.component.less'],
+  selector: 'beagle-dynamic-list',
+  templateUrl: './dynamic-list.component.html',
+  styleUrls: ['./dynamic-list.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleListViewComponent
-  extends BeagleListViewScroll
-  implements BeagleListViewInterface, OnChanges {
-  @Input() direction: Direction
+export class DynamicListComponent
+  extends DynamicListScroll
+  implements DynamicListInterface, OnChanges {
+  @Input() direction: ListDirection
   @Input() dataSource: any[]
   @Input() iteratorName?: string
   @Input() template: BeagleUIElement
@@ -48,8 +48,13 @@ export class BeagleListViewComponent
   @Input() key?: string
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
-  @HostBinding('class') hasScrollClass = ''
-  @HostBinding('class.hide-scrollbar') hideScrollBar = ''
+  @Input() numColumns?: number
+  @Input() type: ListType
+  @Input() parentReference: BeagleComponent
+  @HostBinding('class.has-scroll') hasScrollClass = true
+  @HostBinding('class.VERTICAL') verticalClass = false
+  @HostBinding('class.HORIZONTAL') horizontalClass = false
+  @HostBinding('class.hide-scrollbar') hideScrollBar = false
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
@@ -60,9 +65,11 @@ export class BeagleListViewComponent
 
   ngOnInit() {
     super.ngOnInit()
-    this.dataSource = []
+    this.dataSource = this.dataSource || []
     this.scrollEndThreshold = this.scrollEndThreshold || 100
     this.direction = this.direction || 'VERTICAL'
+    this.verticalClass = this.direction === 'VERTICAL'
+    this.horizontalClass = this.direction === 'HORIZONTAL'
   }
 
   ngAfterViewInit() {
@@ -76,16 +83,41 @@ export class BeagleListViewComponent
     content: BeagleUIElement,
     iterationKey: string,
     listViewId: string,
-    listViewTag: string,
   ) {
+    const DYNAMIC_COMPONENTS = ['beagle:listview', 'beagle:gridview']
     Tree.forEach(content, (component, componentIndex) => {
       const suffix = this.__suffix__ || ''
       const baseId = component.id ? `${component.id}${suffix}` : `${listViewId}:${componentIndex}`
       component.id = `${baseId}:${iterationKey}`
-      if (component._beagleComponent_.toLowerCase() === listViewTag) {
+      if (DYNAMIC_COMPONENTS.includes(component._beagleComponent_.toLowerCase())) {
         component.__suffix__ = `${suffix}:${iterationKey}`
       }
     })
+  }
+
+  getColumnsQuantityStyle() {
+    return this.numColumns && `repeat(${this.numColumns}, 1fr)`
+  }
+
+  getClassForType() {
+    return this.type === 'GRID' ? 'beagle-grid-view' :
+      `beagle-list-view ${this.direction}`
+  }
+
+  getRowCount() {
+    if (this.type === 'LIST') {
+      return this.direction === 'VERTICAL' ? this.dataSource.length : 1
+    }
+
+    return this.numColumns && Math.ceil(this.dataSource.length / this.numColumns)
+  }
+
+  getColCount() {
+    if (this.type === 'LIST') {
+      return this.direction === 'VERTICAL' ? 1 : this.dataSource.length
+    }
+
+    return this.numColumns ? this.numColumns : 1
   }
 
   getIteratorName() {
@@ -93,9 +125,11 @@ export class BeagleListViewComponent
   }
 
   renderDataSource() {
+    if (!this.getViewContentManager) {
+      this.getViewContentManager = this.parentReference.getViewContentManager
+    }
     const element = this.getViewContentManager().getElement()
     const contextId = this.getIteratorName()
-    const listViewTag = element._beagleComponent_.toLowerCase()
     const listViewId = element.id
 
     // @ts-ignore: at this point, element.children won't have ids and it's ok.
@@ -103,7 +137,7 @@ export class BeagleListViewComponent
       const child = Tree.clone(this.template)
       const iterationKey = this.key && item[this.key] !== undefined ? item[this.key] : index
       child._implicitContexts_ = [{ id: contextId, value: item }]
-      this.assignIdsToListViewContent(child, iterationKey, listViewId, listViewTag)
+      this.assignIdsToListViewContent(child, iterationKey, listViewId)
       return child
     })
 
@@ -116,12 +150,15 @@ export class BeagleListViewComponent
     is changed */
     this.verifyChangedParent()
     this.allowOnScrollEnd()
+
   }
 
   ngOnChanges() {
+    const changedElement = this.element.nativeElement.nodeName
     if (!this.hasRunAfterInit || !Array.isArray(this.dataSource)) return
     const dataSourceStr = JSON.stringify(this.dataSource)
     if (dataSourceStr === this.currentlyRendered) return
+    if (changedElement !== 'BEAGLE-DYNAMIC-LIST') return
     this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
   }

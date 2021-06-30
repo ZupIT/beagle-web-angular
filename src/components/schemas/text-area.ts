@@ -17,6 +17,10 @@
 import { Properties as CSSProperties } from 'csstype'
 import { InputHandler } from './input-handler'
 
+/**
+ * @deprecated since version 1.8.0.
+ * This interface will be removed in a future version.
+*/
 export interface TextAreaInterface {
   value?: string,
   label?: string,
