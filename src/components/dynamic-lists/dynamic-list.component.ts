@@ -102,13 +102,14 @@ export class DynamicListComponent
   }
 
   getStyleForType() {
-    if (this.type === 'GRID' && this.direction === 'HORIZONTAL')
+    if (this.type === 'GRID' && this.direction === 'HORIZONTAL') {
       return {
-        'grid-template-rows': this.getSpanCountQuantityStyle()
+        'grid-template-rows': this.getSpanCountQuantityStyle(),
       }
+    }
 
     return {
-      'grid-template-columns': this.getSpanCountQuantityStyle()
+      'grid-template-columns': this.getSpanCountQuantityStyle(),
     }
   }
 
