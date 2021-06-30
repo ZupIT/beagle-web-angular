@@ -101,6 +101,17 @@ export class DynamicListComponent
     return this.spanCount && `repeat(${this.spanCount}, 1fr)`
   }
 
+  getStyleForType() {
+    if (this.type === 'GRID' && this.direction === 'HORIZONTAL')
+      return {
+        'grid-template-rows': this.getSpanCountQuantityStyle()
+      }
+
+    return {
+      'grid-template-columns': this.getSpanCountQuantityStyle()
+    }
+  }
+
   getClassForType() {
     return this.type === 'GRID' ? `beagle-grid-view ${this.direction}` :
       `beagle-list-view ${this.direction}`
@@ -112,7 +123,7 @@ export class DynamicListComponent
     }
 
     if (this.direction === 'HORIZONTAL') {
-      return this.spanCount ? this.spanCount : 1
+      return this.spanCount || 1
     }
 
     return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
@@ -128,7 +139,7 @@ export class DynamicListComponent
       return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
     }
 
-    return this.spanCount ? this.spanCount : 1
+    return this.spanCount || 1
   }
 
   getIteratorName() {

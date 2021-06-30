@@ -37,7 +37,7 @@ export interface DynamicListBaseInterface{
 
 export interface BeagleGridViewInterface extends DynamicListBaseInterface { 
   /**
-   * @deprecated Since version 1.8.2. Will be deleted in version 2.0.
+   * @deprecated Since version 1.9.0. Will be deleted in version 2.0.
    * Use spanCount instead.
   */ 
   numColumns?: number,
