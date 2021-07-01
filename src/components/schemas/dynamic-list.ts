@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { BeagleUIElement } from '@zup-it/beagle-web'
+import { BeagleUIElement, TemplateManagerItem } from '@zup-it/beagle-web'
 import { Properties as CSSProperties } from 'csstype'
 
 export type ListDirection = 'VERTICAL' | 'HORIZONTAL'
@@ -27,7 +27,11 @@ interface DynamicListBaseInterface{
   onInit?: () => void,
   onScrollEnd?: () => void,
   scrollEndThreshold?: number,
-  template: BeagleUIElement,
+  /**
+   * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
+  */
+  template?: BeagleUIElement,
+  templates?: TemplateManagerItem[],
   useParentScroll?: boolean,
   style?: CSSProperties,
   key?: string,

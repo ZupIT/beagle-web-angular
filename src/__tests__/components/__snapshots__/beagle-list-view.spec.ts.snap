@@ -19,7 +19,10 @@ BeagleListViewComponent {
   "hasRunAfterInit": false,
   "hasScrollClass": true,
   "hideScrollBar": false,
-  "horizontalClass": false,
+  "isGrid": false,
+  "isHorizontal": false,
+  "isList": false,
+  "isVertical": false,
   "ngZone": NgZone {
     "_inner": Zone {
       "_name": "angular",
@@ -9943,6 +9946,5 @@ BeagleListViewComponent {
     },
     "shouldCoalesceEventChangeDetection": false,
   },
-  "verticalClass": false,
 }
 `;

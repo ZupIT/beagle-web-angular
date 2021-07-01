@@ -15,10 +15,10 @@
 -->
 
 <div 
-  [ngClass] = "getClassForType()"
-  [ngStyle] = "{'grid-template-columns': type === 'GRID' && getColumnsQuantityStyle()}" 
-  [attr.aria-colcount] = "getColCount()"
-  [attr.aria-rowcount] = "getRowCount()"
-  [beagleAccessibility] = "accessibility">
+  [ngClass]="getClassForType()"
+  [ngStyle]="{'grid-template-columns': isGrid && getColumnsQuantityStyle()}" 
+  [attr.aria-colcount]="getColCount()"
+  [attr.aria-rowcount]="getRowCount()"
+  [beagleAccessibility]="accessibility">
   <ng-content></ng-content>
 </div>
