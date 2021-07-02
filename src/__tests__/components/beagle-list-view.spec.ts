@@ -23,9 +23,7 @@ import { buildBeagleTestModuleMetadata } from './test-module-builder'
 let component: BeagleListViewComponent
 let fixture: ComponentFixture<BeagleListViewComponent>
 
-
 describe('BeagleListViewComponent', () => {
-
   beforeEach(async(() => {
     TestBed.configureTestingModule(buildBeagleTestModuleMetadata(
       [BeagleListViewComponent, DynamicListComponent]))
@@ -38,5 +36,4 @@ describe('BeagleListViewComponent', () => {
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot()
   })
-
 })
