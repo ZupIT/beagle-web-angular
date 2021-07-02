@@ -22,7 +22,7 @@ export type ListDirection = 'VERTICAL' | 'HORIZONTAL'
 export type ListType = 'GRID' | 'LIST'
 
 export interface TemplateItem {
-  case?: string,
+  case?: string | boolean,
   view: BeagleUIElement,
 }
 
