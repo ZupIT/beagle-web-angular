@@ -49,6 +49,7 @@ export class DynamicListComponent
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
+  @Input() spanCount?: number
   @Input() type: ListType
   @Input() parentReference: BeagleComponent
   @HostBinding('class.has-scroll') hasScrollClass = true
@@ -70,6 +71,7 @@ export class DynamicListComponent
     this.direction = this.direction || 'VERTICAL'
     this.verticalClass = this.direction === 'VERTICAL'
     this.horizontalClass = this.direction === 'HORIZONTAL'
+    this.spanCount = this.spanCount || this.numColumns
   }
 
   ngAfterViewInit() {
@@ -95,12 +97,24 @@ export class DynamicListComponent
     })
   }
 
-  getColumnsQuantityStyle() {
-    return this.numColumns && `repeat(${this.numColumns}, 1fr)`
+  getSpanCountQuantityStyle() {
+    return this.spanCount && `repeat(${this.spanCount}, 1fr)`
+  }
+
+  getStyleForType() {
+    if (this.type === 'GRID' && this.direction === 'HORIZONTAL') {
+      return {
+        'grid-template-rows': this.getSpanCountQuantityStyle(),
+      }
+    }
+
+    return {
+      'grid-template-columns': this.getSpanCountQuantityStyle(),
+    }
   }
 
   getClassForType() {
-    return this.type === 'GRID' ? 'beagle-grid-view' :
+    return this.type === 'GRID' ? `beagle-grid-view ${this.direction}` :
       `beagle-list-view ${this.direction}`
   }
 
@@ -109,7 +123,12 @@ export class DynamicListComponent
       return this.direction === 'VERTICAL' ? this.dataSource.length : 1
     }
 
-    return this.numColumns && Math.ceil(this.dataSource.length / this.numColumns)
+    if (this.direction === 'HORIZONTAL') {
+      return this.spanCount || 1
+    }
+
+    return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
+
   }
 
   getColCount() {
@@ -117,7 +136,11 @@ export class DynamicListComponent
       return this.direction === 'VERTICAL' ? 1 : this.dataSource.length
     }
 
-    return this.numColumns ? this.numColumns : 1
+    if (this.direction === 'HORIZONTAL') {
+      return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
+    }
+
+    return this.spanCount || 1
   }
 
   getIteratorName() {
