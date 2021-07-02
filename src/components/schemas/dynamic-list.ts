@@ -14,12 +14,17 @@
   * limitations under the License.
 */
 
-import { BeagleUIElement, TemplateManagerItem } from '@zup-it/beagle-web'
+import { BeagleUIElement } from '@zup-it/beagle-web'
 import { Properties as CSSProperties } from 'csstype'
 
 export type ListDirection = 'VERTICAL' | 'HORIZONTAL'
 
 export type ListType = 'GRID' | 'LIST'
+
+export interface TemplateItem {
+  case?: string,
+  view: BeagleUIElement,
+}
 
 interface DynamicListBaseInterface{
   dataSource: any[],
@@ -31,7 +36,7 @@ interface DynamicListBaseInterface{
    * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
   */
   template?: BeagleUIElement,
-  templates?: TemplateManagerItem[],
+  templates?: TemplateItem[],
   useParentScroll?: boolean,
   style?: CSSProperties,
   key?: string,

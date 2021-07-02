@@ -132,19 +132,18 @@ export class DynamicListComponent
     const element = viewContentManager.getElement()
     if (!element) return logger.error('The beagle:listView element was not found.')
 
-    const templatesRaw: BeagleListViewInterface['templates'] = 
-        viewContentManager.getElement().templates
-    if (!this.template && 
-        (!templatesRaw || !Array.isArray(templatesRaw) || templatesRaw.length === 0)) {
+    const templatesRaw: BeagleListViewInterface['templates'] = element.templates
+    const hasTemplate = this.template || 
+      (templatesRaw && Array.isArray(templatesRaw) && templatesRaw.length)
+    if (!hasTemplate) {
       return logger.error('The beagle:listView requires a template or multiple templates to be rendered!')
     }
 
     const componentTag = element._beagleComponent_.toLowerCase()
-    const deprecatedTemplate = { case: false, view: this.template }
-    const templateItems = [...templatesRaw || [], deprecatedTemplate].filter(t => t.view) as { 
-      case: boolean, 
-      view: BeagleUIElement<Record<string, Record<string, any>>>, 
-    }[]
+    const templateItems = [
+      ...templatesRaw || [], 
+      ...(this.template ? [{ view: this.template }] : []),
+    ] as TemplateManagerItem[]
     const defaultTemplate = templateItems.find(t => !t.case)
     const manageableTemplates = templateItems.filter(t => t.case) || []
     const suffix = this.__suffix__ || ''
@@ -160,6 +159,7 @@ export class DynamicListComponent
       const baseId = component.id ? `${component.id}${suffix}` : `${element.id}:${index}`
       const hasSuffix = ['beagle:listview', 'beagle:gridview'].includes(componentTag)
       return {
+        ...component,
         id: `${baseId}:${iterationKey}`,
         key: this.getIteratorName(),
         ...(hasSuffix ? { __suffix__: `${suffix}:${iterationKey}` } : {}),
