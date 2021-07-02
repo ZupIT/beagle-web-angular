@@ -31,8 +31,9 @@ import {
   TemplateManager, 
   TemplateManagerItem,
 } from '@zup-it/beagle-web'
+import { BeagleListViewInterface } from '../../../dist/components/schemas/dynamic-list'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
-import { ListDirection, DynamicListInterface, ListType, BeagleListViewInterface } from '../schemas/dynamic-list'
+import { ListDirection, DynamicListInterface, ListType } from '../schemas/dynamic-list'
 import { DynamicListScroll } from './dynamic-list.scroll'
 
 @Component({
@@ -46,7 +47,7 @@ export class DynamicListComponent
   implements DynamicListInterface, OnChanges {
   @Input() direction: ListDirection
   @Input() dataSource: any[]
-  @Input() iteratorName?: string
+  @Input() iteratorName?: string = 'item'
   /**
    * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
   */
@@ -59,6 +60,7 @@ export class DynamicListComponent
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
+  @Input() spanCount?: number
   @Input() type: ListType
   @Input() parentReference: BeagleComponent
   @HostBinding('class.has-scroll') hasScrollClass = true
@@ -81,15 +83,14 @@ export class DynamicListComponent
     this.dataSource = this.dataSource || []
     this.scrollEndThreshold = this.scrollEndThreshold || 100
     this.direction = this.direction || 'VERTICAL'
-    this.isVertical = this.direction === 'VERTICAL'
     this.isHorizontal = this.direction === 'HORIZONTAL'
     this.isList = this.type === 'LIST'
     this.isGrid = this.type === 'GRID'
+    this.spanCount = this.spanCount || this.numColumns
   }
 
   ngAfterViewInit() {
     super.ngAfterViewInit()
-    if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
   }
@@ -99,25 +100,39 @@ export class DynamicListComponent
   }
 
   getClassForType() {
-    return this.isGrid ? 'beagle-grid-view' : `beagle-list-view ${this.direction}`
+    return `beagle-${this.isGrid ? 'grid' : 'list'}-view ${this.direction}`
+  }
+
+  getSpanCountQuantityStyle() {
+    return this.spanCount && `repeat(${this.spanCount}, 1fr)`
+  }
+
+  getStyleForType() {
+    return {
+      [`grid-template-${this.isGrid && this.isHorizontal ? 'rows' : 'columns'}`]: 
+        this.getSpanCountQuantityStyle(),
+    }
   }
 
   getRowCount() {
     if (this.isList) {
       return this.isVertical ? this.dataSource.length : 1
     }
-    return this.numColumns && Math.ceil(this.dataSource.length / this.numColumns)
+    if (this.isHorizontal) {
+      return this.spanCount || 1
+    }
+    return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
   }
 
   getColCount() {
     if (this.isList) {
       return this.isVertical ? 1 : this.dataSource.length
     }
-    return this.numColumns ? this.numColumns : 1
-  }
+    if (this.isHorizontal) {
+      return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
+    }
 
-  getIteratorName() {
-    return this.iteratorName || 'item'
+    return this.spanCount || 1
   }
 
   renderDataSource() {
@@ -144,7 +159,7 @@ export class DynamicListComponent
       ...templatesRaw || [], 
       ...(this.template ? [{ view: this.template }] : []),
     ] as TemplateManagerItem[]
-    const defaultTemplate = templateItems.find(t => !t.case)
+    const defaultTemplate = templateItems.find(t => t.case === undefined)
     const manageableTemplates = templateItems.filter(t => t.case) || []
     const suffix = this.__suffix__ || ''
     const renderer = viewContentManager.getView().getRenderer()
@@ -161,12 +176,12 @@ export class DynamicListComponent
       return {
         ...component,
         id: `${baseId}:${iterationKey}`,
-        key: this.getIteratorName(),
+        key: this.iteratorName,
         ...(hasSuffix ? { __suffix__: `${suffix}:${iterationKey}` } : {}),
       }
     }
     const contexts: DataContext[][] = this.dataSource
-      .map(item => [{ id: this.getIteratorName(), value: item }])
+      .map(item => [{ id: this.iteratorName as string, value: item }])
     this.currentlyRendered = JSON.stringify(this.dataSource)
     
     renderer.doTemplateRender(manager, element.id, contexts, componentManager)

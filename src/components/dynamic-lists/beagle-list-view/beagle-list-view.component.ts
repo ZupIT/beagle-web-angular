@@ -20,7 +20,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core'
 import { BeagleUIElement } from '@zup-it/beagle-web'
-import { BeagleListViewInterface, ListDirection } from '../../schemas/dynamic-list'
+import { DynamicListBaseInterface, ListDirection } from '../../schemas/dynamic-list'
 import { DynamicListComponent } from '../dynamic-list.component'
 
 @Component({
@@ -30,7 +30,7 @@ import { DynamicListComponent } from '../dynamic-list.component'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleListViewComponent extends DynamicListComponent
-  implements BeagleListViewInterface {
+  implements DynamicListBaseInterface {
   @Input() direction: ListDirection
   @Input() dataSource: any[]
   @Input() iteratorName?: string
