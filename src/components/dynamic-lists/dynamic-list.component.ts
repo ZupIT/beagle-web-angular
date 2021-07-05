@@ -47,8 +47,8 @@ export class DynamicListComponent
   @Input() direction: ListDirection
   @Input() dataSource: any[]
   
-  private _iteratorName_: string
-  @Input() set iteratorName(value: string) {
+  private _iteratorName_: string | undefined
+  @Input() set iteratorName(value: string | undefined) {
     this._iteratorName_ = value
   }
   get iteratorName() {
@@ -187,7 +187,7 @@ export class DynamicListComponent
       }
     }
     const contexts: DataContext[][] = this.dataSource
-      .map(item => [{ id: this.iteratorName, value: item }])
+      .map(item => [{ id: this.iteratorName as string, value: item }])
     this.currentlyRendered = JSON.stringify(this.dataSource)
     
     renderer.doTemplateRender(manager, element.id, contexts, componentManager)
