@@ -135,6 +135,10 @@ export class DynamicListComponent
     return this.spanCount || 1
   }
 
+  getIteratorName(): string {
+    return this.iteratorName || 'item'
+  }
+
   renderDataSource() {
     if (!this.getViewContentManager) {
       this.getViewContentManager = this.parentReference.getViewContentManager
@@ -175,12 +179,12 @@ export class DynamicListComponent
       return {
         ...component,
         id: `${baseId}:${iterationKey}`,
-        key: this.iteratorName,
+        key: this.getIteratorName(),
         ...(hasSuffix ? { __suffix__: `${suffix}:${iterationKey}` } : {}),
       }
     }
     const contexts: DataContext[][] = this.dataSource
-      .map(item => [{ id: this.iteratorName as string, value: item }])
+      .map(item => [{ id: this.getIteratorName(), value: item }])
     this.currentlyRendered = JSON.stringify(this.dataSource)
     
     renderer.doTemplateRender(manager, element.id, contexts, componentManager)
