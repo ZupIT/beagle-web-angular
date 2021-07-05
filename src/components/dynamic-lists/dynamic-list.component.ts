@@ -46,7 +46,16 @@ export class DynamicListComponent
   implements DynamicListInterface, OnChanges {
   @Input() direction: ListDirection
   @Input() dataSource: any[]
-  @Input() iteratorName?: string
+  
+  private _iteratorName_: string
+  @Input() set iteratorName(value: string) {
+    this._iteratorName_ = value
+  }
+
+  get iteratorName() {
+    return this._iteratorName_ || 'item'
+  }
+
   /**
    * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
   */
@@ -135,10 +144,6 @@ export class DynamicListComponent
     return this.spanCount || 1
   }
 
-  getIteratorName() {
-    return this.iteratorName || 'item'
-  }
-
   renderDataSource() {
     if (!this.getViewContentManager) {
       this.getViewContentManager = this.parentReference.getViewContentManager
@@ -178,12 +183,12 @@ export class DynamicListComponent
       return {
         ...component,
         id: `${baseId}:${iterationKey}`,
-        key: this.getIteratorName(),
+        key: this.iteratorName,
         ...(hasSuffix ? { __suffix__: `${suffix}:${iterationKey}` } : {}),
       }
     }
     const contexts: DataContext[][] = this.dataSource
-      .map(item => [{ id: this.getIteratorName(), value: item }])
+      .map(item => [{ id: this.iteratorName, value: item }])
     
     this.currentlyRendered = JSON.stringify(this.dataSource)
     
