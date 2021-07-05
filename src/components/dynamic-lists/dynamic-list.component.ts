@@ -51,7 +51,6 @@ export class DynamicListComponent
   @Input() set iteratorName(value: string) {
     this._iteratorName_ = value
   }
-
   get iteratorName() {
     return this._iteratorName_ || 'item'
   }
@@ -99,7 +98,6 @@ export class DynamicListComponent
 
   ngAfterViewInit() {
     super.ngAfterViewInit()
-    if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
   }
@@ -148,6 +146,7 @@ export class DynamicListComponent
     if (!this.getViewContentManager) {
       this.getViewContentManager = this.parentReference.getViewContentManager
     }
+
     if (!Array.isArray(this.dataSource)) return
 
     const viewContentManager = this.getViewContentManager()
@@ -160,14 +159,14 @@ export class DynamicListComponent
     if (!hasTemplate) {
       return logger.error('The beagle:listView requires a template or multiple templates to be rendered!')
     }
-
+    
     const componentTag = element._beagleComponent_.toLowerCase()
-    const templateItems = [
+    const templates = [
       ...templatesRaw || [], 
       ...(this.template ? [{ view: this.template }] : []),
     ] as TemplateManagerItem[]
-    const defaultTemplate = templateItems.find(t => t.case === undefined)
-    const manageableTemplates = templateItems.filter(t => t.case) || []
+    const defaultTemplate = templates.find(t => t.case === undefined)
+    const manageableTemplates = templates.filter(t => t.case) || []
     const suffix = this.__suffix__ || ''
     const renderer = viewContentManager.getView().getRenderer()
     const manager: TemplateManager = {
@@ -189,7 +188,6 @@ export class DynamicListComponent
     }
     const contexts: DataContext[][] = this.dataSource
       .map(item => [{ id: this.iteratorName, value: item }])
-    
     this.currentlyRendered = JSON.stringify(this.dataSource)
     
     renderer.doTemplateRender(manager, element.id, contexts, componentManager)
