@@ -31,7 +31,6 @@ import {
   TemplateManager, 
   TemplateManagerItem,
 } from '@zup-it/beagle-web'
-import { BeagleListViewInterface } from '../../../dist/components/schemas/dynamic-list'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { ListDirection, DynamicListInterface, ListType } from '../schemas/dynamic-list'
 import { DynamicListScroll } from './dynamic-list.scroll'
@@ -47,7 +46,8 @@ export class DynamicListComponent
   implements DynamicListInterface, OnChanges {
   @Input() direction: ListDirection
   @Input() dataSource: any[]
-  @Input() iteratorName?: string = 'item'
+  @Input() iteratorName?: string
+
   /**
    * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
   */
@@ -96,7 +96,7 @@ export class DynamicListComponent
   }
 
   getColumnsQuantityStyle() {
-    return this.numColumns && `repeat(${this.numColumns}, 1fr)`
+    return this.spanCount && `repeat(${this.spanCount}, 1fr)`
   }
 
   getClassForType() {
@@ -135,6 +135,10 @@ export class DynamicListComponent
     return this.spanCount || 1
   }
 
+  getIteratorName(): string {
+    return this.iteratorName || 'item'
+  }
+
   renderDataSource() {
     if (!this.getViewContentManager) {
       this.getViewContentManager = this.parentReference.getViewContentManager
@@ -143,24 +147,23 @@ export class DynamicListComponent
     if (!Array.isArray(this.dataSource)) return
 
     const viewContentManager = this.getViewContentManager()
-
     const element = viewContentManager.getElement()
     if (!element) return logger.error('The beagle:listView element was not found.')
 
-    const templatesRaw: BeagleListViewInterface['templates'] = element.templates
+    const templatesRaw: DynamicListInterface['templates'] = element.templates
     const hasTemplate = this.template || 
       (templatesRaw && Array.isArray(templatesRaw) && templatesRaw.length)
     if (!hasTemplate) {
       return logger.error('The beagle:listView requires a template or multiple templates to be rendered!')
     }
-
+    
     const componentTag = element._beagleComponent_.toLowerCase()
-    const templateItems = [
+    const templates = [
       ...templatesRaw || [], 
       ...(this.template ? [{ view: this.template }] : []),
     ] as TemplateManagerItem[]
-    const defaultTemplate = templateItems.find(t => t.case === undefined)
-    const manageableTemplates = templateItems.filter(t => t.case) || []
+    const defaultTemplate = templates.find(t => t.case === undefined)
+    const manageableTemplates = templates.filter(t => t.case) || []
     const suffix = this.__suffix__ || ''
     const renderer = viewContentManager.getView().getRenderer()
     const manager: TemplateManager = {
@@ -176,12 +179,12 @@ export class DynamicListComponent
       return {
         ...component,
         id: `${baseId}:${iterationKey}`,
-        key: this.iteratorName,
+        key: this.getIteratorName(),
         ...(hasSuffix ? { __suffix__: `${suffix}:${iterationKey}` } : {}),
       }
     }
     const contexts: DataContext[][] = this.dataSource
-      .map(item => [{ id: this.iteratorName as string, value: item }])
+      .map(item => [{ id: this.getIteratorName(), value: item }])
     this.currentlyRendered = JSON.stringify(this.dataSource)
     
     renderer.doTemplateRender(manager, element.id, contexts, componentManager)
