@@ -21,14 +21,23 @@ export type ListDirection = 'VERTICAL' | 'HORIZONTAL'
 
 export type ListType = 'GRID' | 'LIST'
 
-export interface DynamicListBaseInterface{
+export interface TemplateItem {
+  case?: string | boolean,
+  view: BeagleUIElement,
+}
+
+export interface DynamicListBaseInterface {
   direction: ListDirection,
   dataSource: any[],
   iteratorName?: string,
   onInit?: () => void,
   onScrollEnd?: () => void,
   scrollEndThreshold?: number,
-  template: BeagleUIElement,
+  /**
+   * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
+  */
+  template?: BeagleUIElement,
+  templates?: TemplateItem[],
   useParentScroll?: boolean,
   style?: CSSProperties,
   key?: string,

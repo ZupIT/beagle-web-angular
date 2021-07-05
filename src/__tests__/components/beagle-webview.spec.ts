@@ -24,8 +24,6 @@ interface SafeUrl extends SafeResourceUrl {
   changingThisBreaksApplicationSecurity: string,
 }
 describe('BeagleWebviewComponent', () => {
-
-
   beforeEach(async(() => {
     TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleWebviewComponent]))
       .compileComponents()
@@ -45,5 +43,4 @@ describe('BeagleWebviewComponent', () => {
     const safe: SafeUrl = { changingThisBreaksApplicationSecurity: 'http://www.test.com' }
     expect(component.iframeUrl).toEqual(safe)
   })
-
 })
