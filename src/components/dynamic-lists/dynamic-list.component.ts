@@ -46,14 +46,7 @@ export class DynamicListComponent
   implements DynamicListInterface, OnChanges {
   @Input() direction: ListDirection
   @Input() dataSource: any[]
-  
-  private _iteratorName_: string | undefined
-  @Input() set iteratorName(value: string | undefined) {
-    this._iteratorName_ = value
-  }
-  get iteratorName() {
-    return this._iteratorName_ || 'item'
-  }
+  @Input() iteratorName?: string
 
   /**
    * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
