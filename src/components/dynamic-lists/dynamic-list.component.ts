@@ -91,6 +91,7 @@ export class DynamicListComponent
 
   ngAfterViewInit() {
     super.ngAfterViewInit()
+    if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
   }
