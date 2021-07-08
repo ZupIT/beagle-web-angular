@@ -22,7 +22,6 @@ import {
   ViewEncapsulation,
   NgZone,
   HostBinding,
-  OnDestroy,
 } from '@angular/core'
 import { 
   BeagleUIElement, 
