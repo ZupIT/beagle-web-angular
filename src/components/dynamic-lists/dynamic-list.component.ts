@@ -87,11 +87,14 @@ export class DynamicListComponent
     this.isList = this.type === 'LIST'
     this.isGrid = this.type === 'GRID'
     this.spanCount = this.spanCount || this.numColumns
+
+    if (Array.isArray(this.dataSource) && this.dataSource.length && this.parentReference) {
+      this.renderDataSource()
+    }
   }
 
   ngAfterViewInit() {
     super.ngAfterViewInit()
-    if (Array.isArray(this.dataSource) && this.dataSource.length) this.renderDataSource()
     this.runOnScrollEndIfNotScrollable()
     this.hasRunAfterInit = true
   }
@@ -141,13 +144,13 @@ export class DynamicListComponent
   }
 
   renderDataSource() {
-    if (!this.getViewContentManager) {
-      this.getViewContentManager = this.parentReference.getViewContentManager
-    }
-
     if (!Array.isArray(this.dataSource)) return
 
-    const viewContentManager = this.getViewContentManager()
+    const viewContentManager = (
+      (this.getViewContentManager && this.getViewContentManager()) || 
+      this.parentReference.getViewContentManager()
+    )
+    
     const element = viewContentManager.getElement()
     if (!element) return logger.error('The beagle:listView element was not found.')
 
@@ -186,8 +189,8 @@ export class DynamicListComponent
     }
     const contexts: DataContext[][] = this.dataSource
       .map(item => [{ id: this.getIteratorName(), value: item }])
+
     this.currentlyRendered = JSON.stringify(this.dataSource)
-    
     renderer.doTemplateRender(manager, element.id, contexts, componentManager)
 
     /* If the dataSource comes from a context, it might be initially empty, so the closes
