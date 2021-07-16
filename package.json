@@ -35,7 +35,7 @@
   "sideEffects": false,
   "private": false,
   "dependencies": {
-    "@zup-it/beagle-web": "1.9.0",
+    "@zup-it/beagle-web": "1.9.1",
     "csstype": "^2.6.10"
   },
   "peerDependencies": {

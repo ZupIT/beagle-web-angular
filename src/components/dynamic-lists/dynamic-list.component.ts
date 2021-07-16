@@ -144,7 +144,7 @@ export class DynamicListComponent
   }
 
   renderDataSource() {
-    if (!Array.isArray(this.dataSource) || this.dataSource.length === 0) return
+    if (!Array.isArray(this.dataSource)) return
 
     const viewContentManager = (
       (this.getViewContentManager && this.getViewContentManager()) || 
