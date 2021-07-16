@@ -88,9 +88,7 @@ export class DynamicListComponent
     this.isGrid = this.type === 'GRID'
     this.spanCount = this.spanCount || this.numColumns
 
-    if (Array.isArray(this.dataSource) && this.dataSource.length && this.parentReference) {
-      this.renderDataSource()
-    }
+    if (Array.isArray(this.dataSource) && this.parentReference) this.renderDataSource()
   }
 
   ngAfterViewInit() {
