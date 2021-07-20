@@ -1,6 +1,6 @@
 <!--
 Please make sure you've read and understood our contributing guidelines;
-https://github.com/ZupIT/beagle-web-angular/blob/master/CONTRIBUTING.md
+https://github.com/ZupIT/beagle-web-angular/blob/main/CONTRIBUTING.md
 
 Please provide the following information:
 -->
