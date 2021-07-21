@@ -37,6 +37,7 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() enabled?: boolean
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
+  
   public disabled: boolean
 
   ngOnInit() {
