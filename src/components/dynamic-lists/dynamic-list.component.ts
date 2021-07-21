@@ -30,6 +30,7 @@ import {
   logger, 
   TemplateManager, 
   TemplateManagerItem,
+  Tree,
 } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { ListDirection, DynamicListInterface, ListType } from '../schemas/dynamic-list'
@@ -173,17 +174,20 @@ export class DynamicListComponent
       templates: manageableTemplates,
     }
     const componentManager = (component: IdentifiableBeagleUIElement, index: number) => {
-      const iterationKey = this.key && this.dataSource[index][this.key] 
+      Tree.forEach(component, (treeComponent, componentIndex) => {
+        const iterationKey = this.key && this.dataSource[index][this.key] 
         ? this.dataSource[index][this.key] 
         : index
-      const baseId = component.id ? `${component.id}${suffix}` : `${element.id}:${index}`
-      const hasSuffix = ['beagle:listview', 'beagle:gridview'].includes(componentTag)
-      return {
-        ...component,
-        id: `${baseId}:${iterationKey}`,
-        key: this.getIteratorName(),
-        ...(hasSuffix ? { __suffix__: `${suffix}:${iterationKey}` } : {}),
-      }
+        const baseId = treeComponent.id 
+          ? `${treeComponent.id}${suffix}` 
+          : `${element.id}:${componentIndex}`
+        const hasSuffix = ['beagle:listview', 'beagle:gridview'].includes(componentTag)
+        treeComponent.id = `${baseId}:${iterationKey}`
+        if (hasSuffix) {
+          treeComponent.__suffix__ = `${suffix}:${iterationKey}`
+        }
+      })
+      return component
     }
     const contexts: DataContext[][] = this.dataSource
       .map(item => [{ id: this.getIteratorName(), value: item }])
