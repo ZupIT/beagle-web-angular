@@ -59,7 +59,7 @@ export class DynamicListComponent
   @Input() useParentScroll?: boolean
   @Input() key?: string
   @Input() __suffix__?: string
-  @Input() isScrollIndicatorVisible?: boolean
+  @Input() isScrollIndicatorVisible = true
   @Input() numColumns?: number
   @Input() spanCount?: number
   @Input() type: ListType
