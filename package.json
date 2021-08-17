@@ -39,8 +39,8 @@
     "csstype": "^2.6.10"
   },
   "peerDependencies": {
-    "@angular/common": ">= 7 <= 12",
-    "@angular/core": ">= 7 <= 12"
+    "@angular/common": ">= 7 <= 12.2",
+    "@angular/core": ">= 7 <= 12.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.901.12",
