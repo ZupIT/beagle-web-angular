@@ -111,9 +111,9 @@ export class DynamicListComponent
   }
 
   getStyleForType() {
+    const templateDirection = this.isGrid && this.isHorizontal ? 'rows' : 'columns'
     return {
-      [`grid-template-${this.isGrid && this.isHorizontal ? 'rows' : 'columns'}`]: 
-        this.getSpanCountQuantityStyle(),
+      [`grid-template-${templateDirection}`]: this.getSpanCountQuantityStyle(),
     }
   }
 
@@ -134,7 +134,6 @@ export class DynamicListComponent
     if (this.isHorizontal) {
       return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
     }
-
     return this.spanCount || 1
   }
 
@@ -145,10 +144,8 @@ export class DynamicListComponent
   renderDataSource() {
     if (!Array.isArray(this.dataSource)) return
 
-    const viewContentManager = (
-      (this.getViewContentManager && this.getViewContentManager()) || 
+    const viewContentManager = (this.getViewContentManager && this.getViewContentManager()) || 
       this.parentReference.getViewContentManager()
-    )
     
     const element = viewContentManager.getElement()
     if (!element) return logger.error('The beagle:listView element was not found.')
@@ -173,14 +170,20 @@ export class DynamicListComponent
       default: defaultTemplate && defaultTemplate.view,
       templates: manageableTemplates,
     }
+
+    const getIterationKey = (index: number) => 
+      this.key && this.dataSource[index][this.key] ? this.dataSource[index][this.key] : index
+
+    const getBaseId = (
+      component: IdentifiableBeagleUIElement, 
+      componentIndex: number, 
+      suffix: string,
+    ) => component.id ? `${component.id}${suffix}` : `${element.id}:${componentIndex}`
+
     const componentManager = (component: IdentifiableBeagleUIElement, index: number) => {
       Tree.forEach(component, (treeComponent, componentIndex) => {
-        const iterationKey = this.key && this.dataSource[index][this.key] 
-        ? this.dataSource[index][this.key] 
-        : index
-        const baseId = treeComponent.id 
-          ? `${treeComponent.id}${suffix}` 
-          : `${element.id}:${componentIndex}`
+        const iterationKey = getIterationKey(index)
+        const baseId = getBaseId(treeComponent, componentIndex, suffix)
         const hasSuffix = ['beagle:listview', 'beagle:gridview'].includes(componentTag)
         treeComponent.id = `${baseId}:${iterationKey}`
         if (hasSuffix) {
@@ -189,6 +192,7 @@ export class DynamicListComponent
       })
       return component
     }
+
     const contexts: DataContext[][] = this.dataSource
       .map(item => [{ id: this.getIteratorName(), value: item }])
 
