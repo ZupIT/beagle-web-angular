@@ -22,7 +22,6 @@ BeagleListViewComponent {
   "isGrid": false,
   "isHorizontal": false,
   "isList": false,
-  "isScrollIndicatorVisible": true,
   "isVertical": false,
   "ngZone": NgZone {
     "_inner": Zone {
