@@ -41,5 +41,5 @@ export class BeagleListViewComponent extends DynamicListComponent
   @Input() useParentScroll?: boolean
   @Input() key?: string
   @Input() __suffix__?: string
-  @Input() isScrollIndicatorVisible = true
+  @Input() isScrollIndicatorVisible?: boolean
 }

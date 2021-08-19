@@ -37,7 +37,7 @@ export class BeagleGridViewComponent extends DynamicListComponent
   @Input() useParentScroll?: boolean
   @Input() key?: string
   @Input() __suffix__?: string
-  @Input() isScrollIndicatorVisible = true
+  @Input() isScrollIndicatorVisible?: boolean
   @Input() numColumns?: number
   @Input() spanCount?: number
   @Input() direction: ListDirection

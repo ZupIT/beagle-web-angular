@@ -34,7 +34,7 @@ export class DynamicListScroll
   scrollEndThreshold?: number
   useParentScroll?: boolean
   hasScrollClass = true
-  isScrollIndicatorVisible = true
+  isScrollIndicatorVisible?: boolean
   hideScrollBar = false
 
   private scrollSubscription: Subscription
@@ -47,7 +47,7 @@ export class DynamicListScroll
 
   ngOnInit() {
     this.hasScrollClass = !this.useParentScroll
-    this.hideScrollBar = !this.isScrollIndicatorVisible
+    this.hideScrollBar = this.isScrollIndicatorVisible === false
   }
 
   ngAfterViewInit() {
