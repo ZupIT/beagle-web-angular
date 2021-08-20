@@ -21,7 +21,7 @@ import { ensurePathExistence, getEnvironmentPaths } from '../../utils/object'
 import { getPackageVersion } from '../../utils/packages'
 import { logWarning } from '../../utils/styledLogger'
 
-const SUPPORTED_ANGULAR_VERSIONS = { min: 6, max: 10.03 }
+const SUPPORTED_ANGULAR_VERSIONS = { min: 7, max: 12.2 }
 
 export function validateAngularVersion() {
   const version = getPackageVersion('@angular/core')
