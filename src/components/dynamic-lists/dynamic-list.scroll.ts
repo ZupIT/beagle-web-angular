@@ -47,7 +47,7 @@ export class DynamicListScroll
 
   ngOnInit() {
     this.hasScrollClass = !this.useParentScroll
-    this.hideScrollBar = this.isScrollIndicatorVisible === false 
+    this.hideScrollBar = this.isScrollIndicatorVisible === false
   }
 
   ngAfterViewInit() {
