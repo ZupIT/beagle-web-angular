@@ -28,9 +28,7 @@ import {
   BeagleLoadingComponent,
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
-  BeagleModalComponent,
   BeagleInputComponent,
-  BeagleTextAreaComponent,
   BeaglePageIndicatorComponent,
   BeagleWebviewComponent,
   BeagleTabBarComponent,
@@ -69,13 +67,7 @@ const beagleDefaultComponents = {
   'beagle:pullToRefresh': BeagleContainerComponent,
 }
 
-const webSpecificComponents = {
-  'custom:modal': BeagleModalComponent,
-  'custom:text-area': BeagleTextAreaComponent,
-}
-
 export const defaultComponents: Record<string, Type<any>> = {
   ...libRequiredComponents,
   ...beagleDefaultComponents,
-  ...webSpecificComponents,
 }

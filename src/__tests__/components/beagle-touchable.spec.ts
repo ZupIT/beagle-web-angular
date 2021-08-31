@@ -24,8 +24,6 @@ let component: BeagleTouchableComponent
 let fixture: ComponentFixture<BeagleTouchableComponent>
 
 describe('BeagleTouchableComponent', () => {
-
-
   beforeEach(async(() => {
     TestBed.configureTestingModule(buildBeagleTestModuleMetadata([BeagleTouchableComponent]))
       .compileComponents()
