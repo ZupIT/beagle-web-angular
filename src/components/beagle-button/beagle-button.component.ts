@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core'
-import { ClickEvent, IdentifiableBeagleUIElement } from '@zup-it/beagle-web'
+import { IdentifiableBeagleUIElement } from '@zup-it/beagle-web'
 import { Properties as CSSProperties } from 'csstype'
 
 import { BeagleComponent } from '../../runtime/BeagleComponent'
@@ -33,7 +33,6 @@ export class BeagleButtonComponent extends BeagleComponent
   @Input() styleId?: string
   @Input() onPress?: () => void
   @Input() style?: CSSProperties
-  @Input() clickAnalyticsEvent?: ClickEvent
   @Input() enabled?: boolean
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
@@ -62,16 +61,7 @@ export class BeagleButtonComponent extends BeagleComponent
   }
 
   handleClick() {
-    this.onPress && this.type === 'button' && this.onPress()
-
-    if (this.getViewContentManager instanceof Function) {
-        const beagleService = this.getViewContentManager().getView().getBeagleService()
-        const analytics = beagleService ? beagleService.analytics : null
-
-        if (this.clickAnalyticsEvent && analytics) {
-          analytics.trackEventOnClick(this.clickAnalyticsEvent)
-        }
-    }    
+    this.onPress && this.type === 'button' && this.onPress()  
   }
 
   private isSubmitButton(element: IdentifiableBeagleUIElement<any> | null) {

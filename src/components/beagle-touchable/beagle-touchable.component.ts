@@ -15,7 +15,6 @@
 */
 
 import { Component, Input, ViewEncapsulation, Injector } from '@angular/core'
-import { ClickEvent, Analytics } from '@zup-it/beagle-web'
 import { BaseComponent } from '../../runtime/BaseComponent'
 import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleTouchableInterface } from '../schemas/touchable'
@@ -29,8 +28,6 @@ import { BeagleTouchableInterface } from '../schemas/touchable'
 export class BeagleTouchableComponent extends BaseComponent 
   implements BeagleTouchableInterface {
   @Input() onPress: () => void
-  @Input() clickAnalyticsEvent?: ClickEvent
-  beagleAnalytics: Analytics | undefined
   public isPressed = false
 
   constructor(injector: Injector) {
@@ -39,16 +36,11 @@ export class BeagleTouchableComponent extends BaseComponent
     try {
       const beagleProvider = injector.get(BeagleProvider)
       const beagleService = beagleProvider.getBeagleUIService()
-      this.beagleAnalytics = beagleService && beagleService.analytics
     } catch {}
   }
 
   handleClick() {
     this.isPressed = false
-
-    if (this.clickAnalyticsEvent && this.beagleAnalytics) {
-      this.beagleAnalytics.trackEventOnClick(this.clickAnalyticsEvent)
-    }
     if (this.onPress) this.onPress()
   }
 

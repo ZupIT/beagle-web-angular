@@ -17,13 +17,8 @@
 import {
   Component,
   ViewEncapsulation,
-  Input,
-  OnDestroy,
-  Injector,
-  OnInit,
 } from '@angular/core'
-import { ScreenEvent, Analytics } from '@zup-it/beagle-web'
-import { BeagleProvider } from '../../runtime/BeagleProvider.service'
+
 import { BeagleScreenInterface } from '../schemas/screen'
 
 @Component({
@@ -32,28 +27,7 @@ import { BeagleScreenInterface } from '../schemas/screen'
   styleUrls: ['./beagle-screen.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleScreenComponent implements BeagleScreenInterface, OnDestroy, OnInit {
-  @Input() screenAnalyticsEvent: ScreenEvent
+export class BeagleScreenComponent implements BeagleScreenInterface {
   hasInitialized = false
-  private beagleAnalytics: Analytics | undefined
 
-  constructor(injector: Injector) {
-    try {
-      const beagleProvider = injector.get(BeagleProvider)
-      const beagleService = beagleProvider.getBeagleUIService()
-      this.beagleAnalytics = beagleService && beagleService.analytics
-    } catch {}
-  }
-
-  ngOnInit() {
-    if (this.screenAnalyticsEvent && this.beagleAnalytics) {
-      this.beagleAnalytics.trackEventOnScreenAppeared(this.screenAnalyticsEvent)
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.screenAnalyticsEvent && this.beagleAnalytics) {
-      this.beagleAnalytics.trackEventOnScreenDisappeared(this.screenAnalyticsEvent)
-    }
-  }
 }
