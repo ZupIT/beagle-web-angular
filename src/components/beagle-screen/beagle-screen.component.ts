@@ -19,15 +19,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core'
 
-import { BeagleScreenInterface } from '../schemas/screen'
-
 @Component({
   selector: 'beagle-screen',
   templateUrl: './beagle-screen.component.html',
   styleUrls: ['./beagle-screen.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BeagleScreenComponent implements BeagleScreenInterface {
-  hasInitialized = false
-
+export class BeagleScreenComponent {
+  hasInitialized = false;
 }
