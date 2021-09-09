@@ -26,5 +26,4 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BeagleScreenComponent {
-  hasInitialized = false;
 }

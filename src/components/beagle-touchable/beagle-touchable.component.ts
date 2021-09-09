@@ -30,15 +30,6 @@ export class BeagleTouchableComponent extends BaseComponent
   @Input() onPress: () => void
   public isPressed = false
 
-  constructor(injector: Injector) {
-    super()
-
-    try {
-      const beagleProvider = injector.get(BeagleProvider)
-      const beagleService = beagleProvider.getBeagleUIService()
-    } catch {}
-  }
-
   handleClick() {
     this.isPressed = false
     if (this.onPress) this.onPress()
