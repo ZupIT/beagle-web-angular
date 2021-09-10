@@ -33,10 +33,6 @@ export interface DynamicListBaseInterface {
   onInit?: () => void,
   onScrollEnd?: () => void,
   scrollEndThreshold?: number,
-  /**
-   * @deprecated since v1.9.0 Will be removed in 2.0. Use `templates` attribute instead.
-  */
-  template?: BeagleUIElement,
   templates?: TemplateItem[],
   useParentScroll?: boolean,
   style?: CSSProperties,
@@ -45,11 +41,6 @@ export interface DynamicListBaseInterface {
 }
 
 export interface BeagleGridViewInterface extends DynamicListBaseInterface { 
-  /**
-   * @deprecated Since version 1.9.0. Will be deleted in version 2.0.
-   * Use spanCount instead.
-  */ 
-  numColumns?: number,
   spanCount?: number,
 }
 

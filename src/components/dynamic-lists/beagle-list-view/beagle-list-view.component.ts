@@ -19,8 +19,7 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core'
-import { BeagleUIElement } from '@zup-it/beagle-web'
-import { DynamicListBaseInterface, ListDirection } from '../../schemas/dynamic-list'
+import { DynamicListBaseInterface, ListDirection, TemplateItem } from '../../schemas/dynamic-list'
 import { DynamicListComponent } from '../dynamic-list.component'
 
 @Component({
@@ -34,7 +33,7 @@ export class BeagleListViewComponent extends DynamicListComponent
   @Input() direction: ListDirection
   @Input() dataSource: any[]
   @Input() iteratorName?: string
-  @Input() template: BeagleUIElement
+  @Input() templates: TemplateItem[]
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void
   @Input() scrollEndThreshold?: number

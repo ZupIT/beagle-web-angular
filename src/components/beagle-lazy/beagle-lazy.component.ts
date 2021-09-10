@@ -50,7 +50,6 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
       onChangeTree: tree => this.replaceChildren(tree),
       retry: this.fetchLazyView,
       shouldShowLoading: false,
-      ...beagleView.getNetworkOptions(),
     })
   }
 

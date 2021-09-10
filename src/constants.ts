@@ -22,16 +22,12 @@ import {
   BeaglePageViewComponent,
   BeagleImageComponent,
   BeagleLazyComponent,
-  BeagleTabViewComponent,
   BeagleTabItemComponent,
   BeagleErrorComponent,
   BeagleLoadingComponent,
   BeagleTouchableComponent,
   BeagleSimpleFormComponent,
-  BeagleModalComponent,
   BeagleInputComponent,
-  BeagleTextAreaComponent,
-  BeaglePageIndicatorComponent,
   BeagleWebviewComponent,
   BeagleTabBarComponent,
   BeagleScreenComponent,
@@ -55,27 +51,19 @@ const beagleDefaultComponents = {
   'beagle:screencomponent': BeagleScreenComponent,
   'beagle:pageview': BeaglePageViewComponent,
   'beagle:image': BeagleImageComponent,
-  'beagle:tabview': BeagleTabViewComponent,
   'beagle:tabitem': BeagleTabItemComponent,
   'beagle:tabbar': BeagleTabBarComponent,
   'beagle:scrollview': BeagleContainerComponent,
   'beagle:touchable': BeagleTouchableComponent,
   'beagle:lazycomponent': BeagleLazyComponent,
   'beagle:simpleform': BeagleSimpleFormComponent,
-  'beagle:pageindicator': BeaglePageIndicatorComponent,
   'beagle:textInput': BeagleInputComponent,
   'beagle:webview': BeagleWebviewComponent,
   'beagle:gridview': BeagleGridViewComponent,
   'beagle:pullToRefresh': BeagleContainerComponent,
 }
 
-const webSpecificComponents = {
-  'custom:modal': BeagleModalComponent,
-  'custom:text-area': BeagleTextAreaComponent,
-}
-
 export const defaultComponents: Record<string, Type<any>> = {
   ...libRequiredComponents,
   ...beagleDefaultComponents,
-  ...webSpecificComponents,
 }
