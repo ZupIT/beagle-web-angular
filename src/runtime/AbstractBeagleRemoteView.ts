@@ -29,8 +29,6 @@ import {
   LoadParams,
   BeagleView,
   IdentifiableBeagleUIElement,
-  NetworkOptions,
-  logger,
   RemoteView,
 } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
@@ -44,10 +42,6 @@ let nextViewId = 1
 export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestroy, OnChanges {
   // component input properties. todo: remove the loadParams with v2.0.
   route?: string | RemoteView
-  /**
- * @deprecated since 1.7.0 prefer using the HttpAdditionalData in your Route properties instead
- */
-  networkOptions?: NetworkOptions
   controllerId?: string
   loadParams: Partial<LoadParams> = {}
 
@@ -77,7 +71,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
         'you need to start the beagle provider before using a remote view.',
       )
     }
-    this.view = beagleService.createView(this.networkOptions, this.controllerId)
+    this.view = beagleService.createView(this.controllerId)
     this.view.subscribe(this.updateView)
     beagleService.viewContentManagerMap.register(`${this.viewId}`, this.view)
     this.viewStaticPromise.resolve(this.view)
@@ -112,19 +106,7 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   private loadFirstRoute() {
-    // todo: remove legacy code in v2.0
-    const deprecatedKeys = Object.keys(this.loadParams)
-
-    if (deprecatedKeys.length) {
-      logger.warn(`The following properties in the BeagleRemoteView are deprecated and will be removed in v2.0: ${deprecatedKeys.join(', ')}.\nYou should use "route" to specify the path to the first view and "navigationOptions" for further request setup.`)
-      if (this.route) {
-        logger.warn('You shouldn\'t mix the new BeagleRemoteView properties with the deprecated ones. All deprecated properties will be ignored.')
-      } else if (this.loadParams.path) {
-        this.view.fetch(this.loadParams as LoadParams)
-      }
-    }
-    // end of legacy code
-
+  
     if (this.route) {
       if (typeof this.route === 'string')
         {this.route = { url: this.route }}

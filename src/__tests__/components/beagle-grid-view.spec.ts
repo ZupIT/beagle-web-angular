@@ -23,7 +23,6 @@ import { buildBeagleTestModuleMetadata } from './test-module-builder'
 let component: BeagleGridViewComponent
 let fixture: ComponentFixture<BeagleGridViewComponent>
 
-
 describe('BeagleGridViewComponent', () => {
 
   beforeEach(async(() => {

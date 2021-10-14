@@ -18,8 +18,7 @@ import {
   Component,
   Input,
 } from '@angular/core'
-import { BeagleUIElement } from '@zup-it/beagle-web'
-import { BeagleGridViewInterface, ListDirection } from '../../schemas/dynamic-list'
+import { BeagleGridViewInterface, ListDirection, TemplateItem } from '../../schemas/dynamic-list'
 import { DynamicListComponent } from '../dynamic-list.component'
 
 @Component({
@@ -30,7 +29,7 @@ export class BeagleGridViewComponent extends DynamicListComponent
   implements BeagleGridViewInterface {
   @Input() dataSource: any[]
   @Input() iteratorName?: string
-  @Input() template: BeagleUIElement
+  @Input() templates: TemplateItem[]
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void
   @Input() scrollEndThreshold?: number
@@ -38,7 +37,6 @@ export class BeagleGridViewComponent extends DynamicListComponent
   @Input() key?: string
   @Input() __suffix__?: string
   @Input() isScrollIndicatorVisible?: boolean
-  @Input() numColumns?: number
   @Input() spanCount?: number
   @Input() direction: ListDirection
 }

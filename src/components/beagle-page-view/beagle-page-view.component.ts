@@ -22,7 +22,6 @@ import {
   OnInit,
 } from '@angular/core'
 import { BeaglePageViewInterface } from '../schemas/page-view'
-import { PageIndicatorInterface } from '../schemas/page-indicator'
 
 @Component({
   selector: 'beagle-page-view',
@@ -31,11 +30,6 @@ import { PageIndicatorInterface } from '../schemas/page-indicator'
   encapsulation: ViewEncapsulation.None,
 })
 export class BeaglePageViewComponent implements BeaglePageViewInterface, OnInit {
-  /**
-   * @deprecated Since version 1.1. Will be deleted in version 2.0.
-   * Use pageIndicator as a component instead.
-  */
-  @Input() pageIndicator?: PageIndicatorInterface
   @Input() onPageChange?: (index: number) => void
   @Input() currentPage?: number
   @Input() showArrow?: boolean
@@ -47,12 +41,6 @@ export class BeaglePageViewComponent implements BeaglePageViewInterface, OnInit 
   ngOnInit() {
     this.currentPage = this.currentPage || 0
     this.showArrow = this.showArrow !== undefined ? this.showArrow : true 
-    
-    if (this.pageIndicator) {
-      console.warn(`The way you are using page view is deprecated. 
-      This will be removed in a future version; please refactor this component 
-      using new context features.`)
-    }
   }
 
   ngAfterViewInit() {
