@@ -1,7 +1,7 @@
 # [Beagle Angular](https://docs.usebeagle.io/v/v1.0-en/get-started/installing-beagle/web#angular)
-
 <a href="CONTRIBUTING.md" alt="Hacktoberfest"><img src="https://badgen.net/badge/hacktoberfest/friendly/pink" /></a>
  [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ZupIT/beagle-web-angular/blob/main/LICENSE)
+ [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/5392/badge)](https://bestpractices.coreinfrastructure.org/projects/5392)
 
 Beagle Angular is a Zup's open source library for using [Beagle](https://docs.usebeagle.io/v/v1.0-en/) in an [Angular](https://angular.io/) based project.
 
