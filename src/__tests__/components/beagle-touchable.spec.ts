@@ -45,5 +45,4 @@ describe('BeagleTouchableComponent', () => {
 
     expect(component.onPress).toHaveBeenCalled()
   }))
-
 })

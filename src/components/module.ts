@@ -63,7 +63,13 @@ const components = [
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [CommonModule, FormsModule, BeagleDirectivesModule],
-  providers: [TabsService],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    BeagleDirectivesModule,
+  ],
+  providers: [
+    TabsService,
+  ],
 })
 export class BeagleDefaultComponentsModule { }

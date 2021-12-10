@@ -16,7 +16,6 @@
 
 import { Component, Input, ViewEncapsulation, Injector } from '@angular/core'
 import { BaseComponent } from '../../runtime/BaseComponent'
-import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleTouchableInterface } from '../schemas/touchable'
 
 @Component({

@@ -26,66 +26,84 @@ import {
   EventEmitter,
 } from '@angular/core'
 import {
-  LoadParams,
   BeagleView,
   IdentifiableBeagleUIElement,
   RemoteView,
 } from '@zup-it/beagle-web'
 import { replaceToUnderline } from '../codegen/utils/formatting'
 import { BeagleProvider } from './BeagleProvider.service'
+import { BeagleAngularNavigatorService, ViewWidget } from './BeagleAngularNavigatorService.service'
 import { createStaticPromise } from './utils/promise'
 import BeagleRuntimeError from './errors'
 import beagleMapKeysConfig from './utils/beagle-map-keys-config'
 
-let nextViewId = 1
-
 export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestroy, OnChanges {
-  // component input properties. todo: remove the loadParams with v2.0.
-  route?: string | RemoteView
-  controllerId?: string
-  loadParams: Partial<LoadParams> = {}
+  public route: string | RemoteView
+  public controllerId?: string
 
   // class attributes
-  tree: IdentifiableBeagleUIElement<any> | null
-  view: BeagleView
-  viewId = `${nextViewId++}`
-  ngZone: NgZone
-  changeDetector: ChangeDetectorRef
-  viewStaticPromise = createStaticPromise<BeagleView>()
+  public tree: IdentifiableBeagleUIElement<any> | null = null
+  public view: BeagleView
+  public viewId = ''
+  public ngZone: NgZone
+  public changeDetector: ChangeDetectorRef
+  public viewStaticPromise = createStaticPromise<BeagleView>()
 
   @Output() onCreateBeagleView: EventEmitter<BeagleView> = new EventEmitter<BeagleView>()
 
   constructor(
     private beagleProvider: BeagleProvider,
+    private navigatorService: BeagleAngularNavigatorService,
     ngZone?: NgZone,
     changeDetector?: ChangeDetectorRef,
   ) {
     if (ngZone) this.ngZone = ngZone
     if (changeDetector) this.changeDetector = changeDetector
+    this.navigatorService.onChange.subscribe(this.onNavigatorChange)
   }
 
-  createBeagleView() {
-    const beagleService = this.beagleProvider.getBeagleUIService()
-    if (!beagleService) {
-      throw new BeagleRuntimeError(
-        'you need to start the beagle provider before using a remote view.',
+  ngAfterViewInit() {
+    if (!this.beagleProvider || !this.ngZone || !this.changeDetector) {
+      throw new BeagleRuntimeError(`
+        "beagleProvider", "ngZone" and "changeDetector" must be set before the AfterViewInit runs. 
+        Use the constructor or the component instance to set their values.`,
       )
     }
-    this.view = beagleService.createView(this.controllerId)
-    this.view.subscribe(this.updateView)
-    beagleService.viewContentManagerMap.register(`${this.viewId}`, this.view)
-    this.viewStaticPromise.resolve(this.view)
-    this.onCreateBeagleView.emit(this.view)
+    this.loadRoute()
+  }
+  
+  async ngOnChanges(changes: SimpleChanges) {
+    if (this.view && this.hasAnyChanged(changes, ['route'])) {
+      this.loadRoute()
+    }
   }
 
+  ngOnDestroy() {
+    this.view.destroy()
+    this.beagleProvider.getBeagleUIService()!.viewContentManagerMap.unregister(this.viewId)
+  }
+
+  private onNavigatorChange = (widget: ViewWidget) => {
+    const { id, view } = widget
+    this.viewId = id    
+    this.view = view
+    this.view.onChange(this.updateView)
+
+    const beagleService = this.beagleProvider.getBeagleUIService()!
+    beagleService.viewContentManagerMap.register(this.viewId, this.view)
+
+    this.viewStaticPromise.resolve(this.view)
+    this.onCreateBeagleView.emit(this.view)
+
+    this.view.getRenderer().doFullRender(this.view.getTree())
+  }
+
+  // methods
   getTemplate(componentName: IdentifiableBeagleUIElement<any>['type']): TemplateRef<any> {
     const component = beagleMapKeysConfig.getComponent(componentName)
     const normalizedComponentName = replaceToUnderline(component)
-
     if (!this[normalizedComponentName]) {
-      console.warn(
-        `Beagle: the component ${componentName} was not declared in Beagle's configuration.`,
-      )
+      console.warn(`Beagle: the component ${componentName} was not declared in Beagle's configuration.`)
     }
     return this[normalizedComponentName]
   }
@@ -97,50 +115,20 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
     })
   }
 
-  elementIdentity(index: number, element: IdentifiableBeagleUIElement<any>) {
-    return element.id
-  }
+  elementIdentity = (index: number, element: IdentifiableBeagleUIElement<any>) => element.id
 
-  getView() {
-    return this.viewStaticPromise.promise
-  }
+  getView = () => this.viewStaticPromise.promise
 
-  private loadFirstRoute() {
-  
+  private loadRoute() {
     if (this.route) {
-      if (typeof this.route === 'string')
-        {this.route = { url: this.route }}
-      const navigator = this.view.getNavigator()
-      if (navigator.isEmpty()) navigator.pushView(this.route)
-      else navigator.resetStack(this.route, this.controllerId)
+      const remote: RemoteView = typeof this.route === 'string' ? { url: this.route } : this.route
+      this.navigatorService.pushStack(remote, this.viewId)
     }
-  }
-
-  ngAfterViewInit() {
-    if (!this.beagleProvider || !this.ngZone || !this.changeDetector) {
-      throw new BeagleRuntimeError(
-        '"beagleProvider", "ngZone" and "changeDetector" must be set before the AfterViewInit runs. Use the constructor or the component instance to set their values.',
-      )
-    }
-    this.createBeagleView()
-    this.loadFirstRoute()
   }
 
   private hasAnyChanged(changes: SimpleChanges, properties: string[]) {
     return changes && !!properties.find(property => (
-      changes[property]
-      && changes[property].previousValue !== changes[property].currentValue
-    ))
-  }
-
-  async ngOnChanges(changes: SimpleChanges) {
-    if (this.view && this.hasAnyChanged(changes, ['loadParams', 'route'])) {
-      this.loadFirstRoute()
-    }
-  }
-
-  ngOnDestroy() {
-    this.view.destroy()
-    this.beagleProvider.getBeagleUIService()!.viewContentManagerMap.unregister(this.viewId)
-  }
+      changes[property] && changes[property].previousValue !== changes[property].currentValue),
+    )
+  }  
 }

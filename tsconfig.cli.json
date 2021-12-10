@@ -24,6 +24,7 @@
     "./src/cli/**/*.*",
     "./src/cli/operations/view-engine/tsconfig.view-engine.json",
     "./src/codegen/**/*.*",
+    "./src/runtime/**/*.*",
     "./src/test.ts"
   ]
 }

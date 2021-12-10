@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { ViewContentManager, BeagleContext } from '../types'
+import { ViewContentManager } from '../types'
 import { BaseComponent } from './BaseComponent'
 
 export abstract class BeagleComponent extends BaseComponent {

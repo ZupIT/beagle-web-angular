@@ -23,7 +23,6 @@ import {
 import { getComponentAnnotations } from '../../utils/metadata'
 import { remoteViewSelector } from '../../../constants'
 
-
 function createViewChildString(name: string, templateName: string, angularVersion: number): string {
   const componentName = replaceToUnderline(name)
 
@@ -46,17 +45,15 @@ function createQueries(components: Record<string, Type<any>>, angularVersion: nu
 
 
 export function createComponentString(
-    components: Record<string, Type<any>>,
-    angularVersion: number,
-  ) {
+  components: Record<string, Type<any>>,
+  angularVersion: number,
+) {
   const queries = createQueries(components, angularVersion)
-
-  // todo: legacy code. Remove the input "loadParams" with v2.0.
   const componentString = `
     @Component({
       selector: '${remoteViewSelector}',
       template,
-      inputs: ['loadParams', 'route', 'networkOptions', 'controllerId'],
+      inputs: ['route', 'networkOptions', 'controllerId'],
       queries: {
         ${queries.join(',\n        ')},
       },
@@ -64,11 +61,12 @@ export function createComponentString(
     export class BeagleRemoteView extends AbstractBeagleRemoteView {
       constructor(
         beagleProvider: BeagleProvider,
+        navigatorService: BeagleAngularNavigatorService,
         ngZone: NgZone,
         changeDetector: ChangeDetectorRef,
       ) {
         // @ts-ignore
-        super(beagleProvider, ngZone, changeDetector)
+        super(beagleProvider, navigatorService, ngZone, changeDetector)
       }
     }
   `

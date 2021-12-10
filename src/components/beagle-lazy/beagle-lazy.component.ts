@@ -15,7 +15,7 @@
 */
 
 import { Component, Input, AfterViewInit } from '@angular/core'
-import { BeagleChildren, BeagleUIElement } from '@zup-it/beagle-web'
+import { BeagleChildren, BeagleUIElement, ErrorComponentParams } from '@zup-it/beagle-web'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { BeagleLazyInterface } from '../schemas/lazy'
 
@@ -24,9 +24,8 @@ import { BeagleLazyInterface } from '../schemas/lazy'
   selector: 'beagle-lazy',
   templateUrl: './beagle-lazy.component.html',
 })
-export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyInterface,
+export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyInterface, 
   AfterViewInit {
-
   @Input() path: string
 
   constructor() {
@@ -39,21 +38,28 @@ export class BeagleLazyComponent extends BeagleComponent implements BeagleLazyIn
     beagleView.getRenderer().doFullRender(tree, anchor, 'replace')
   }
 
-  private fetchLazyView() {
+  private async fetchLazyView() {
     /* here we are going to use the viewClient instead of making the request ourselves to take 
     advantage of the cache system provided by Beagle */
-    const beagleView = this.getViewContentManager().getView()
-    const { urlBuilder, viewClient } = beagleView.getBeagleService()
-    const url = urlBuilder.build(this.path)
-    viewClient.load({
-      url,
-      onChangeTree: tree => this.replaceChildren(tree),
-      retry: this.fetchLazyView,
-      shouldShowLoading: false,
-    })
+    const beagleView = this.getViewContentManager()!.getView()
+    const { viewClient } = beagleView.getBeagleService()
+    try {
+      const view = await viewClient.fetch({ url: this.path })
+      this.replaceChildren(view)
+    } catch (error) {
+      const errorView: BeagleUIElement & ErrorComponentParams = {
+        _beagleComponent_: 'custom:error',
+        errors: [error as any],
+        retry: this.fetchLazyView,
+      }
+      this.replaceChildren(errorView)
+    }
   }
 
-  ngAfterViewInit() {
-    this.fetchLazyView()
+  async ngAfterViewInit() {
+    if (!this.getViewContentManager()) {
+      throw new Error('Can\'t use the LazyComponent outside the context of Beagle.')
+    }
+    await this.fetchLazyView()
   }
 }

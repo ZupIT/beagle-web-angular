@@ -18,7 +18,11 @@ import { NgModule } from '@angular/core'
 import { ViewContentManager } from './directive'
 
 @NgModule({
-  declarations: [ViewContentManager],
-  exports: [ViewContentManager],
+  declarations: [
+    ViewContentManager,
+  ],
+  exports: [
+    ViewContentManager,
+  ],
 })
 export class ViewContentManagerModule {}

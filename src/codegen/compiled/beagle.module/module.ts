@@ -23,23 +23,41 @@ interface Params {
   hasDefaultModule: boolean,
 }
 
-export function createModuleString({ componentsModuleName, beagleModuleName,
-  hasDefaultModule }: Params) {
+export function createModuleString({ 
+  componentsModuleName, 
+  beagleModuleName, 
+  hasDefaultModule,
+}: Params) {
   const defaultModule = hasDefaultModule ? ', BeagleDefaultComponentsModule' : ''
   const moduleString = `
     @NgModule({
-      declarations: [BeagleRemoteView],
-      exports: [BeagleRemoteView${defaultModule}],
-      imports: [CommonModule, ViewContentManagerModule, ${componentsModuleName} ${defaultModule}],
-      providers: [BeagleProvider],
+      declarations: [
+        BeagleRemoteView,
+      ],
+      exports: [
+        BeagleRemoteView${defaultModule},
+      ],
+      imports: [
+        CommonModule, 
+        ViewContentManagerModule, 
+        ${componentsModuleName} ${defaultModule},
+      ],
+      providers: [
+        BeagleProvider, 
+        { 
+          provide: BeagleAngularNavigatorService, 
+          deps: [BeagleProvider],
+        },
+      ],
     })
     export class ${beagleModuleName} {
-      constructor(provider: BeagleProvider) {
+      constructor(provider: BeagleProvider, navigatorService: BeagleAngularNavigatorService) {
         const config = getBeagleConfigMetadata(${originalBeagleModuleName})
         provider.start(config)
+        navigatorService.create()
       }
     }
   `
-
+  
   return removeExtraIndentation(moduleString, 4)
 }

@@ -15,6 +15,7 @@
 */
 
 export * from './runtime/AbstractBeagleRemoteView'
+export * from './runtime/BeagleAngularNavigatorService.service'
 export * from './runtime/BeagleProvider.service'
 export * from './runtime/view-content-manager/module'
 export * from './components/module'
