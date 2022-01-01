@@ -36,7 +36,7 @@
   "private": false,
   "dependencies": {
     "@zup-it/beagle-web": "1.10.2",
-    "csstype": "^2.6.10"
+    "csstype": "^3.0.10"
   },
   "peerDependencies": {
     "@angular/common": ">= 7 <= 12.2",
