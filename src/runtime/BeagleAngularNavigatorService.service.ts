@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 import { EventEmitter, Injectable, Output } from '@angular/core'
-import { BeagleNavigator, BeagleView, DefaultWebNavigator, NavigationType, Route } from '@zup-it/beagle-web'
+import { BeagleNavigator, BeagleView, DefaultWebNavigator, NavigationContext, NavigationType, Route } from '@zup-it/beagle-web'
 import { BeagleProvider } from './BeagleProvider.service'
 import BeagleRuntimeError from './errors'
 
@@ -53,24 +53,35 @@ export class BeagleAngularNavigatorService {
     return widget
   }
 
-  pushStack = (route: Route, controllerId?: string) => this.navigator.pushStack(route, controllerId)
+  pushStack = (route: Route, controllerId?: string, navigationContext?: NavigationContext) => 
+    this.navigator.pushStack({ route, controllerId, navigationContext })
   
-  popStack = () => this.navigator.popStack()
+  popStack = (navigationContext?: NavigationContext) => 
+    this.navigator.popStack({ navigationContext })
   
-  pushView = (route: Route) => this.navigator.pushView(route)
+  pushView = (route: Route, navigationContext?: NavigationContext) => 
+    this.navigator.pushView({ route, navigationContext })
   
-  popView = () => this.navigator.popView()
+  popView = (navigationContext?: NavigationContext) => this.navigator.popView({ navigationContext })
   
-  popToView = (route: string) => this.navigator.popToView(route)
+  popToView = (route: string, navigationContext?: NavigationContext) => 
+    this.navigator.popToView({ route, navigationContext })
   
-  resetStack = (route: Route, controllerId?: string) => 
-    this.navigator.resetStack(route, controllerId)
+  resetStack = (route: Route, controllerId?: string, navigationContext?: NavigationContext) => 
+    this.navigator.resetStack({ route, controllerId, navigationContext })
   
-  resetApplication = (route: Route, controllerId?: string) => 
-    this.navigator.resetApplication(route, controllerId)
+  resetApplication = (
+    route: Route, 
+    controllerId?: string, 
+    navigationContext?: NavigationContext) => 
+    this.navigator.resetApplication({ route, controllerId, navigationContext })
 
-  navigate = (type: NavigationType, route?: Route | string, controllerId?: string) => 
-    this.navigator.navigate(type, route, controllerId)
+  navigate = (
+    type: NavigationType, 
+    route?: Route | string, 
+    controllerId?: string, 
+    navigationContext?: NavigationContext) => 
+    this.navigator.navigate(type, route, controllerId, navigationContext)
   
   isEmpty = () => this.navigator.isEmpty()
   

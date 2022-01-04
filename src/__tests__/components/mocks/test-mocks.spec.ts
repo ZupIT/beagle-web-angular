@@ -20,11 +20,12 @@ import { By } from '@angular/platform-browser'
 
 const mockBeagleView: BeagleView = {
    onChange: jest.fn(),
+   getLocalContexts: jest.fn(),
    getRenderer: jest.fn(),
    getTree: jest.fn(),
    getNavigator: jest.fn(),
    getBeagleService: jest.fn(),
-   destroy: jest.fn(),
+   destroy: jest.fn(),   
 }
 
 const mockViewContentManager: ViewContentManager = {
