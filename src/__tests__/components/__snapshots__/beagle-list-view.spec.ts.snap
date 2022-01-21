@@ -15,7 +15,6 @@ BeagleListViewComponent {
       </beagle-dynamic-list>
     </div>,
   },
-  "hasInitialized": false,
   "hasRunAfterInit": false,
   "hasScrollClass": true,
   "hideScrollBar": false,

@@ -19,9 +19,10 @@ import {
   ViewEncapsulation,
   AfterViewChecked,
   Input,
-  ElementRef,
   NgZone,
 } from '@angular/core'
+import { verifyCallingOnInit } from '../state-management'
+import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { Accessibility } from '../schemas/accessibility'
 import { BeagleContainerInterface } from '../schemas/container'
 
@@ -35,30 +36,19 @@ import { BeagleContainerInterface } from '../schemas/container'
     'beagleAccessibility': 'accessibility',
   },
 })
-export class BeagleContainerComponent implements BeagleContainerInterface, AfterViewChecked {
+export class BeagleContainerComponent extends BeagleComponent
+  implements BeagleContainerInterface, AfterViewChecked {
   @Input() accessibility?: Accessibility
 
   @Input() onInit?: () => void
-  hasInitialized = false
 
-  constructor(private element: ElementRef, private ngZone: NgZone) {
-
+  constructor(private ngZone: NgZone) {
+    super()
   }
 
   ngAfterViewChecked() {
-    if (!this.hasInitialized && this.onInit) {
-      this.ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          if (!this.hasInitialized && this.isRendered()) {
-            this.hasInitialized = true
-            this.onInit && this.onInit()
-          }
-        }, 5)
-      })
-    }
+    const viewContentManager = (this.getViewContentManager && this.getViewContentManager())
+    this.onInit ? verifyCallingOnInit(viewContentManager, this.ngZone, this.onInit) : null
   }
 
-  isRendered() {
-    return this.element.nativeElement.isConnected
-  }
 }

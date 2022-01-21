@@ -25,13 +25,16 @@ const mockBeagleView: BeagleView = {
    getTree: jest.fn(),
    getNavigator: jest.fn(),
    getBeagleService: jest.fn(),
-   destroy: jest.fn(),   
+   destroy: jest.fn(),
+   getState: jest.fn(),
 }
 
 const mockViewContentManager: ViewContentManager = {
   getElement: (() => ({ '_beagleComponent_': 'beagle-button', 'id': 'abcd' })),
   getElementId: () => 'abcd',
-  getView: (()=> mockBeagleView),
+  getView: (() => mockBeagleView),
+  setState: (() => mockBeagleView),
+  getState: (() => mockBeagleView),
 }
 
 export function setAndCallHandler(
