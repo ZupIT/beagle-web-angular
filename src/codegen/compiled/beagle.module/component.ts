@@ -53,7 +53,7 @@ export function createComponentString(
     @Component({
       selector: '${remoteViewSelector}',
       template,
-      inputs: ['route', 'networkOptions', 'controllerId'],
+      inputs: ['route', 'controllerId'],
       queries: {
         ${queries.join(',\n        ')},
       },
