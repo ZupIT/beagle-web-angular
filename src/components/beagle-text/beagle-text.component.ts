@@ -52,7 +52,10 @@ export class BeagleTextComponent implements BeagleTextInterface, BaseComponent, 
     try {
       if (text && (typeof text === 'object')) {
         this.renderedText = JSON.stringify(text)
-      } else this.renderedText = ((text && typeof text !== 'function') ? String(text) : '')
+      } else {
+        this.renderedText = ((text !== null && text !== undefined && typeof text !== 'function') ?
+          String(text) : '')
+      }
     } catch (error) {
       logger.error(error)
       this.renderedText = ''
