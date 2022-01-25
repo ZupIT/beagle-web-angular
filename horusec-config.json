@@ -1,0 +1,11 @@
+{
+  "horusecCliFilesOrPathsToIgnore": [
+    "**/__tests__/**"
+  ],
+  "horusecCliFalsePositiveHashes": [
+    "6f8e5de55a37fc27e1c793bd67967051e145b27ee69aff06a4177ed89535e608",
+    "bbfbb5a0a995a25ae07b053bff3eaed555b8de1d58489357a9b2039c83e38057",
+    "3aeb3f1cf5c31f7e093810edb51c3d9923a516d1bc4e3adb35bcdd434b6e9d5d",
+    "97a887af31ff815d313fc4eb7a010b33c3dcf505f66d03a37c7fc43d7901c906"
+  ]
+} 
