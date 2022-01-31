@@ -14,15 +14,16 @@
   * limitations under the License.
 */
 
-import { Component } from '@angular/core'
-import { BaseComponent } from '../../../runtime/BaseComponent'
+import { NgZone } from '@angular/core'
+import { ViewContentManager } from '../../types'
 
-@Component({
-  selector: 'test-beagle-accessibility-directive',
-  template: '<p data-test-id="p-element" [beagleAccessibility]="accessibility"></p>',
-})
-export class TestBeagleAccessibilityDirective extends BaseComponent {
-  constructor() {
-    super()
-  }
+export function verifyCallingOnInit(
+  viewContentManager: ViewContentManager,
+  ngZone: NgZone,
+  onInit: (() => void)) {
+  ngZone.runOutsideAngular(() => {
+    if (!viewContentManager || viewContentManager.getState('hasLoaded')) return
+    viewContentManager.setState('hasLoaded', true)
+    onInit()
+  })
 }

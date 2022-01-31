@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -19,23 +19,22 @@ import { By } from '@angular/platform-browser'
 
 
 const mockBeagleView: BeagleView = {
-  fetch: jest.fn(),
-  addErrorListener: jest.fn(),
-  destroy: jest.fn(),
-  getNavigator: jest.fn(),
-  getNetworkOptions: jest.fn(),
-  getBeagleService: jest.fn(),
-  getRenderer: jest.fn(),
-  getTree: jest.fn(),
-  subscribe: jest.fn(),
-  updateWithFetch: jest.fn(),
-  updateWithTree: jest.fn(),
+   onChange: jest.fn(),
+   getLocalContexts: jest.fn(),
+   getRenderer: jest.fn(),
+   getTree: jest.fn(),
+   getNavigator: jest.fn(),
+   getBeagleService: jest.fn(),
+   destroy: jest.fn(),
+   getState: jest.fn(),
 }
 
 const mockViewContentManager: ViewContentManager = {
   getElement: (() => ({ '_beagleComponent_': 'beagle-button', 'id': 'abcd' })),
   getElementId: () => 'abcd',
-  getView: (()=> mockBeagleView),
+  getView: (() => mockBeagleView),
+  setState: (() => mockBeagleView),
+  getState: (() => mockBeagleView),
 }
 
 export function setAndCallHandler(

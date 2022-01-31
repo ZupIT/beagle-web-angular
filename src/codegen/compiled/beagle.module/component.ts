@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import {
 import { getComponentAnnotations } from '../../utils/metadata'
 import { remoteViewSelector } from '../../../constants'
 
-
 function createViewChildString(name: string, templateName: string, angularVersion: number): string {
   const componentName = replaceToUnderline(name)
 
@@ -46,17 +45,15 @@ function createQueries(components: Record<string, Type<any>>, angularVersion: nu
 
 
 export function createComponentString(
-    components: Record<string, Type<any>>,
-    angularVersion: number,
-  ) {
+  components: Record<string, Type<any>>,
+  angularVersion: number,
+) {
   const queries = createQueries(components, angularVersion)
-
-  // todo: legacy code. Remove the input "loadParams" with v2.0.
   const componentString = `
     @Component({
       selector: '${remoteViewSelector}',
       template,
-      inputs: ['loadParams', 'route', 'networkOptions', 'controllerId'],
+      inputs: ['route', 'controllerId'],
       queries: {
         ${queries.join(',\n        ')},
       },
@@ -64,11 +61,12 @@ export function createComponentString(
     export class BeagleRemoteView extends AbstractBeagleRemoteView {
       constructor(
         beagleProvider: BeagleProvider,
+        navigatorService: BeagleAngularNavigatorService,
         ngZone: NgZone,
         changeDetector: ChangeDetectorRef,
       ) {
         // @ts-ignore
-        super(beagleProvider, ngZone, changeDetector)
+        super(beagleProvider, navigatorService, ngZone, changeDetector)
       }
     }
   `

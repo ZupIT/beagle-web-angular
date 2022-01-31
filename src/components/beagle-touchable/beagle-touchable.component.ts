@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 import { Component, Input, ViewEncapsulation, Injector } from '@angular/core'
 import { BaseComponent } from '../../runtime/BaseComponent'
-import { BeagleProvider } from '../../runtime/BeagleProvider.service'
 import { BeagleTouchableInterface } from '../schemas/touchable'
 
 @Component({

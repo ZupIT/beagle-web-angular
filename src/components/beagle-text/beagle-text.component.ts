@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -52,7 +52,10 @@ export class BeagleTextComponent implements BeagleTextInterface, BaseComponent, 
     try {
       if (text && (typeof text === 'object')) {
         this.renderedText = JSON.stringify(text)
-      } else this.renderedText = ((text && typeof text !== 'function') ? String(text) : '')
+      } else {
+        this.renderedText = ((text !== null && text !== undefined && typeof text !== 'function') ?
+          String(text) : '')
+      }
     } catch (error) {
       logger.error(error)
       this.renderedText = ''

@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -50,6 +50,7 @@ export function createImportsString({
     import {
       AbstractBeagleRemoteView,
       BeagleProvider,
+      BeagleAngularNavigatorService,
       ViewContentManagerModule,
       getBeagleConfigMetadata,
     } from '@zup-it/beagle-angular'

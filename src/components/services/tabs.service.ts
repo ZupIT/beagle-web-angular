@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 */
 
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject'
+import { BehaviorSubject } from 'rxjs'
 
 @Injectable()
 export class TabsService {

@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -23,21 +23,15 @@ interface ComponentInfo {
   inputs: ComponentFactory<any>['inputs'],
 }
 
-function kebabToCamelCase(str: string) {
-  return str.replace(/-\w/g, ([_, letter]) => letter.toUpperCase())
-}
+const kebabToCamelCase = (str: string) => str.replace(/-\w/g, ([_, letter]) => letter.toUpperCase())
 
 function createTemplateForComponent(selector: string, inputs: ComponentFactory<any>['inputs']) {
   const templateName = kebabToCamelCase(selector)
-  const templateInputs = inputs.map(input =>
-    `let-${input.propName}="tree.${input.propName}"`).join(' ')
-  const componentInputs = inputs.map(input =>
-    `[${input.templateName}]="${input.propName}"`).join(' ')
-  const contextDirective = `${viewContentManagerSelector} [_elementId]="beagleId" [_viewId]="viewId"
-  #self [_selfReference]="self"`
+  const templateInputs = inputs.map(input => `let-${input.propName}="tree.${input.propName}"`).join(' ')
+  const componentInputs = inputs.map(input => `[${input.templateName}]="${input.propName}"`).join(' ')
+  const contextDirective = `${viewContentManagerSelector} [_elementId]="beagleId" [_viewId]="viewId" #self [_selfReference]="self"`
   const addStyleId = inputs.findIndex((item) => item.propName === 'styleId')
   const styleIdVariable = addStyleId >= 0 ? '' : 'let-styleId="tree.styleId"'
-
   const addStyle = inputs.findIndex((item) => item.propName === 'style')
   const styleVariable = addStyle >= 0 ? '' : 'let-style="tree.style"'
 
@@ -76,5 +70,10 @@ export function createRemoteViewTemplate(components: ComponentInfo[]) {
     [component.beagleType]: kebabToCamelCase(component.selector),
   }), {})
 
-  return { fullTemplate, ngTemplateIds, componentTemplates, containerTemplate }
+  return { 
+    fullTemplate, 
+    ngTemplateIds, 
+    componentTemplates, 
+    containerTemplate,
+  }
 }

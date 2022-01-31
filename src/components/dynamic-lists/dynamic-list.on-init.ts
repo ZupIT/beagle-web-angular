@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 import { ElementRef, NgZone, AfterViewChecked } from '@angular/core'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
+import { verifyCallingOnInit } from '../state-management'
 
 export class DynamicListOnInit extends BeagleComponent implements AfterViewChecked {
   element: ElementRef
   ngZone: NgZone
   onInit?: () => void
-  private hasInitialized = false
 
   constructor(element: ElementRef, ngZone: NgZone) {
     super()
@@ -30,25 +30,8 @@ export class DynamicListOnInit extends BeagleComponent implements AfterViewCheck
   }
 
   ngAfterViewChecked() {
-    if (!this.hasInitialized && this.onInit) {
-      this.ngZone.runOutsideAngular(() => {
-        setTimeout(() => {
-          this.verifyCallingOnInit()
-        }, 5)
-      })
-    }
+    const viewContentManager = (this.getViewContentManager && this.getViewContentManager())
+    this.onInit ? verifyCallingOnInit(viewContentManager, this.ngZone, this.onInit) : null
   }
 
-  verifyCallingOnInit() {
-    if (!this.hasInitialized && this.isRendered()) {
-      this.hasInitialized = true
-      if (this.onInit) {
-        this.onInit()
-      }
-    }
-  }
-
-  isRendered() {
-    return this.element.nativeElement.isConnected
-  }
 }

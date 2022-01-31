@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
   * limitations under the License.
 */
 
-import { ViewContentManager, BeagleContext } from '../types'
+import { ViewContentManager } from '../types'
 import { BaseComponent } from './BaseComponent'
 
 export abstract class BeagleComponent extends BaseComponent {

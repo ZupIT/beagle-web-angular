@@ -1,5 +1,5 @@
 /*
-  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+  * Copyright 2020, 2022 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
   *
   * Licensed under the Apache License, Version 2.0 (the "License");
   * you may not use this file except in compliance with the License.
@@ -55,6 +55,5 @@ export function generateViewEngineCode({
     hasDefaultModule,
   })
 
-  return `${commentary}\n\n${importString}\n\n${templateString}
-    \n\n${componentString}\n\n${moduleString}\n`
+  return `${commentary}\n\n${importString}\n\n${templateString}\n\n${componentString}\n\n${moduleString}\n`
 }
