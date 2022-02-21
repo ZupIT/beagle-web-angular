@@ -15,6 +15,7 @@
     "importHelpers":true,
     "target":"es2015",
     "strictNullChecks":true,
+    "skipLibCheck":true,
     "typeRoots":[
       "node_modules/@types"
     ],
