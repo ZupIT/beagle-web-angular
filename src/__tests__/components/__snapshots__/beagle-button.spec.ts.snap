@@ -2,6 +2,7 @@
 
 exports[`BeagleButtonComponent should match snapshot 1`] = `
 <beagle-button
+  JSON={[Function Object]}
   getViewContentManager={[Function Function]}
   type={[Function String]}
   usefulStyle={[Function Object]}
