@@ -1,6 +1,7 @@
 {
   "horusecCliFilesOrPathsToIgnore": [
-    "**/__tests__/**"
+    "**/__tests__/**",
+    "**/bin/**"
   ],
   "horusecCliFalsePositiveHashes": [
     "6f8e5de55a37fc27e1c793bd67967051e145b27ee69aff06a4177ed89535e608",
