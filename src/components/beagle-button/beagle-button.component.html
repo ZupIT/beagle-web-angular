@@ -23,5 +23,5 @@
   [beagleAccessibility]="accessibility"
   (click)="handleClick()"
 >
-  {{text}}
+  {{isString(text) ? text : JSON.stringify(text)}}
 </button>

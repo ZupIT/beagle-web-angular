@@ -37,6 +37,9 @@ export class BeagleButtonComponent extends BeagleComponent
   public usefulStyle: Record<string, any> = {}
   public type = 'button'
   public disabled: boolean
+  JSON: JSON = JSON
+
+  isString(text: any): boolean { return typeof text === 'string'}
 
   ngOnInit() {
     if (this.style) {
