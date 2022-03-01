@@ -67,7 +67,7 @@
     "amd-loader": "^0.0.8",
     "codelyzer": "^5.1.2",
     "copy-dir": "^1.2.0",
-    "eslint": "^6.8.0",
+    "eslint": "^8.10.0",
     "eslint-plugin-import": "^2.20.2",
     "glob": "^7.2.0",
     "glob-promise": "^4.2.2",
