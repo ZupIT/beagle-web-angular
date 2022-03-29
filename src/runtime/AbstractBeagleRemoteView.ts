@@ -109,10 +109,12 @@ export abstract class AbstractBeagleRemoteView implements AfterViewInit, OnDestr
   }
 
   updateView = (uiTree: IdentifiableBeagleUIElement<any>) => {
-    this.ngZone.run(() => {
-      this.tree = uiTree && Object.keys(uiTree).length > 0 ? uiTree : null
-      this.changeDetector.detectChanges()
-    })
+    if (!this.changeDetector['destroyed']) {
+      this.ngZone.run(() => {
+        this.tree = uiTree && Object.keys(uiTree).length > 0 ? uiTree : null
+        this.changeDetector.detectChanges()
+      })
+    }    
   }
 
   elementIdentity = (index: number, element: IdentifiableBeagleUIElement<any>) => element.id

@@ -46,6 +46,7 @@ export function createModuleString({
         BeagleProvider, 
         { 
           provide: BeagleAngularNavigatorService, 
+          useFactory: (provider: BeagleProvider) => new BeagleAngularNavigatorService(provider),
           deps: [BeagleProvider],
         },
       ],
