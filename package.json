@@ -38,7 +38,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.178",
     "@zup-it/beagle-web": "2.0.0",
-    "csstype": "^2.6.10",
+    "csstype": "^3.0.11",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
