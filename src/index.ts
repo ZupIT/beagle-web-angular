@@ -24,12 +24,3 @@ export * from './runtime/BeagleComponent'
 export * from './types'
 export * from './decorator'
 export * from './runtime/AngularHttpClientConfig.service'
-
-
-type Corner = 'all' | 'topRight' | 'topLeft' | 'bottomLeft' | 'bottomRight'
-type CornerRadius = { value: number, corners: Corner[] } 
-
-interface MyComponent {
-  cornerRadius?: CornerRadius,
-}
-
