@@ -180,50 +180,10 @@ After you created the JSON, you need to add a local inside the application, wher
 
 1. Open the file **`app.component.html`** and replace all the content with this code:
 ```
-<beagle-remote-view [loadParams]="loadParams"></beagle-remote-view>
-```
-
-2. The component above needs to receive a **`loadParams`** mandatory propriety.Open the **`app.component.ts`** file and import LoadParams as the following example:
-
-`import { LoadParams } from '@zup-it/beagle-web';`
-
-3. State the variable that will be used on the template:
-
-```
-loadParams: LoadParams;
-
-constructor() {
-  this.loadParams = {
-    path: '/payload.json'
-  };
-}
+<beagle-remote-view route="/payload.json"></beagle-remote-view>
 ```
 
 > In this path, we use the **/payload.json** value that will be associated to the baseUrl from the previous step, to create a path to access our JSON files.
-
-At the end of this process, the content of your app.component.ts file must be similar to this code below:
-
-```
-import { Component } from '@angular/core';
-import { LoadParams } from '@zup-it/beagle-web';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
-})
-export class AppComponent {
-  title = 'beagle-web-app';
-
-  loadParams: LoadParams;
-
-  constructor() {
-    this.loadParams = {
-      path: '/payload.json'
-    };
-  }
-}
-```
 
 ### **Test the application**
 Run one of the commands below to initialize the application: 

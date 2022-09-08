@@ -45,7 +45,6 @@ export function createImportsString({
       ViewChild,
       NgZone,
       ChangeDetectorRef,
-      Injectable,
     } from '@angular/core'
     import {
       AbstractBeagleRemoteView,
