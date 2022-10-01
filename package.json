@@ -53,7 +53,7 @@
     "@angular/common": "~9.0.0",
     "@angular/compiler": "~9.0.0",
     "@angular/compiler-cli": "~9.0.0",
-    "@angular/core": "~9.0.0",
+    "@angular/core": "~11.2.14",
     "@angular/forms": "~9.0.0",
     "@angular/language-service": "~9.0.0",
     "@angular/platform-browser": "~9.0.0",
