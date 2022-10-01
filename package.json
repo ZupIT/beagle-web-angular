@@ -71,7 +71,7 @@
     "eslint-plugin-import": "^2.20.2",
     "glob": "^7.2.0",
     "glob-promise": "^4.2.2",
-    "husky": "^4.2.5",
+    "husky": "^8.0.1",
     "jest": "26.1.0",
     "jest-preset-angular": "8.2.1",
     "ncp": "^2.0.0",
