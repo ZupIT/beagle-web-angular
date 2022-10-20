@@ -37,7 +37,7 @@
   "private": false,
   "dependencies": {
     "@types/lodash": "^4.14.178",
-    "@zup-it/beagle-web": "2.0.1",
+    "@zup-it/beagle-web": "2.0.2",
     "csstype": "^2.6.10",
     "lodash": "^4.17.21"
   },
