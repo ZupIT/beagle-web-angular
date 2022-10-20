@@ -23,15 +23,17 @@ import {
   NgZone,
   HostBinding,
 } from '@angular/core'
-import { 
-  BeagleUIElement, 
-  DataContext, 
-  IdentifiableBeagleUIElement, 
-  logger, 
-  TemplateManager, 
+import {
+  DataContext,
+  IdentifiableBeagleUIElement,
+  ImplicitDataContext,
+  logger,
+  TemplateManager,
   TemplateManagerItem,
   Tree,
 } from '@zup-it/beagle-web'
+import { isContextExpression } from '@zup-it/beagle-web/utils/expression'
+import setContext from '@zup-it/beagle-web/action/set-context'
 import { BeagleComponent } from '../../runtime/BeagleComponent'
 import { ListDirection, DynamicListInterface, ListType, TemplateItem } from '../schemas/dynamic-list'
 import { DynamicListScroll } from './dynamic-list.scroll'
@@ -48,6 +50,7 @@ export class DynamicListComponent
   @Input() direction: ListDirection
   @Input() dataSource: any[]
   @Input() iteratorName?: string
+  @Input() indexName?: string
   @Input() templates: TemplateItem[]
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void
@@ -66,7 +69,9 @@ export class DynamicListComponent
 
   private currentlyRendered = '[]'
   private hasRunAfterInit = false
-  
+
+  private shouldRenderDataSource = true
+
   public isList = false
   public isGrid = false
 
@@ -82,7 +87,7 @@ export class DynamicListComponent
     this.isHorizontal = this.direction === 'HORIZONTAL'
     this.isList = this.type === 'LIST'
     this.isGrid = this.type === 'GRID'
-    this.spanCount = this.spanCount 
+    this.spanCount = this.spanCount
 
     if (Array.isArray(this.dataSource) && this.parentReference) this.renderDataSource()
   }
@@ -112,36 +117,45 @@ export class DynamicListComponent
     }
   }
 
-  getRowCount() {
-    if (this.isList) {
-      return this.isVertical ? this.dataSource.length : 1
-    }
-    if (this.isHorizontal) {
-      return this.spanCount || 1
-    }
+  getCalculatedSpanCount() {
     return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
   }
 
-  getColCount() {
-    if (this.isList) {
-      return this.isVertical ? 1 : this.dataSource.length
-    }
-    if (this.isHorizontal) {
-      return this.spanCount && Math.ceil(this.dataSource.length / this.spanCount)
-    }
+  getOppositeAxisSpanCount() {
     return this.spanCount || 1
+  }
+
+  getRowCount() {
+    if (this.isList) return this.isVertical ? this.dataSource.length : 1
+    else if (this.isHorizontal) return this.getOppositeAxisSpanCount()
+    return this.getCalculatedSpanCount()
+  }
+
+  getColCount() {
+    if (this.isList) return this.isVertical ? 1 : this.dataSource.length
+    else if (this.isHorizontal) return this.getCalculatedSpanCount()
+    return this.getOppositeAxisSpanCount()
   }
 
   getIteratorName(): string {
     return this.iteratorName || 'item'
   }
 
+  getIndexName(): string {
+    return this.indexName || 'index'
+  }
+
   renderDataSource() {
+    if (!this.shouldRenderDataSource) {
+      this.shouldRenderDataSource = true
+      return
+    }
+
     if (!Array.isArray(this.dataSource)) return
 
-    const viewContentManager = (this.getViewContentManager && this.getViewContentManager()) || 
+    const viewContentManager = (this.getViewContentManager && this.getViewContentManager()) ||
       this.parentReference.getViewContentManager()
-    
+
     const element = viewContentManager.getElement()
     if (!element) return logger.error('The beagle:listView element was not found.')
 
@@ -150,11 +164,9 @@ export class DynamicListComponent
     if (!hasTemplate) {
       return logger.error('The beagle:listView requires a template or multiple templates to be rendered!')
     }
-    
+
     const componentTag = element._beagleComponent_.toLowerCase()
-    const templates = [
-      ...templatesRaw || [], 
-    ] as TemplateManagerItem[]
+    const templates = [...templatesRaw || []] as TemplateManagerItem[]
     const defaultTemplate = templates.find(t => t.case === undefined)
     const manageableTemplates = templates.filter(t => t.case) || []
     const suffix = this.__suffix__ || ''
@@ -164,12 +176,15 @@ export class DynamicListComponent
       templates: manageableTemplates,
     }
 
-    const getIterationKey = (index: number) => 
-      this.key && this.dataSource[index][this.key] ? this.dataSource[index][this.key] : index
+    const getIterationKey = (index: number) => (
+      this.key && this.dataSource[index][this.key]
+        ? this.dataSource[index][this.key]
+        : index
+    )
 
     const getBaseId = (
-      component: IdentifiableBeagleUIElement, 
-      componentIndex: number, 
+      component: IdentifiableBeagleUIElement,
+      componentIndex: number,
       suffix: string,
     ) => component.id ? `${component.id}${suffix}` : `${element.id}:${componentIndex}`
 
@@ -186,11 +201,39 @@ export class DynamicListComponent
       return component
     }
 
-    const contexts: DataContext[][] = this.dataSource
-      .map(item => [{ id: this.getIteratorName(), value: item }])
+    const beagleView = viewContentManager.getView()
+    const anchorElement = Tree.findById(beagleView.getTree(), element.id)
+    const dataSourceInfo = isContextExpression(anchorElement!['dataSource'], beagleView)
+    const contexts: ImplicitDataContext[][] = this.dataSource.map((item, index) => [{
+      id: this.iteratorName || 'item',
+      value: item,
+      ...(dataSourceInfo.isContext
+        ? {
+          onChange: (newValue: any) => {
+            const { contextId, contextPath } = dataSourceInfo
+            this.dataSource[index] = newValue
+            this.shouldRenderDataSource = false
+            setContext({
+              action: {
+                _beagleAction_: 'beagle:setContext',
+                contextId: contextId,
+                ...(contextPath ? { path: contextPath } : {}),
+                value: this.dataSource,
+              },
+              beagleView,
+              element: anchorElement!,
+              // eslint-disable-next-line arrow-body-style
+              executeAction: () => { return },
+            })
+            this.currentlyRendered = JSON.stringify(this.dataSource)
+          },
+        }
+        : {}
+      ),
+    }])
 
     this.currentlyRendered = JSON.stringify(this.dataSource)
-    renderer.doTemplateRender(manager, element.id, contexts, componentManager)
+    renderer.doTemplateRender(manager, element.id, contexts, this.indexName, componentManager)
 
     /* If the dataSource comes from a context, it might be initially empty, so the closes
     scroll is one, when the data actually comes, the closes scroll may change, so to guarantee
