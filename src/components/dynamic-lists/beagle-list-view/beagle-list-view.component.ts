@@ -33,6 +33,7 @@ export class BeagleListViewComponent extends DynamicListComponent
   @Input() direction: ListDirection
   @Input() dataSource: any[]
   @Input() iteratorName?: string
+  @Input() indexName?: string
   @Input() templates: TemplateItem[]
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void

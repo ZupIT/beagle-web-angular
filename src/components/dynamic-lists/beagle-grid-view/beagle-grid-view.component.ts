@@ -29,6 +29,7 @@ export class BeagleGridViewComponent extends DynamicListComponent
   implements BeagleGridViewInterface {
   @Input() dataSource: any[]
   @Input() iteratorName?: string
+  @Input() indexName?: string
   @Input() templates: TemplateItem[]
   @Input() onInit?: () => void
   @Input() onScrollEnd?: () => void

@@ -9945,5 +9945,6 @@ BeagleGridViewComponent {
     },
     "shouldCoalesceEventChangeDetection": false,
   },
+  "shouldRenderDataSource": true,
 }
 `;

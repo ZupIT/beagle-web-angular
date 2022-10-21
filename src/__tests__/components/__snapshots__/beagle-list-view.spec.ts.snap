@@ -9945,5 +9945,6 @@ BeagleListViewComponent {
     },
     "shouldCoalesceEventChangeDetection": false,
   },
+  "shouldRenderDataSource": true,
 }
 `;
